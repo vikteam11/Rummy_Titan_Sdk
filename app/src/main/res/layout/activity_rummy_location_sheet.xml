@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.google.android.material.bottomsheet.BottomSheetBehavior" />
+
+
+        <variable
+            name="viewModel"
+            type="com.rummytitans.playcashrummyonline.cardgame.games.locationBottomSheet.LocationViewModel" />
+
+        <import type="android.graphics.Color" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/loadingLogin"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_white_progress"
+            android:elevation="10dp"
+            android:padding="@dimen/margin_min"
+            android:theme="@style/ProgressBar"
+            android:visibility="gone" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#3000"
+            android:onClick="@{()->viewModel.navigator.goBack()}"
+            android:visibility="@{viewModel.bottomSheetStateEvent==BottomSheetBehavior.STATE_HIDDEN?View.GONE:View.VISIBLE}"
+            tools:visibility="visible" />
+
+        <include
+            android:id="@+id/bottomSheet"
+            layout="@layout/bottom_sheet_location_rummy"
+            android:elevation="@dimen/margin_min"
+            bind:viewModel="@{viewModel}" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

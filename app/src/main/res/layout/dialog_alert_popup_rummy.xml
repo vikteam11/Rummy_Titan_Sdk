@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+        <import type="android.text.TextUtils"/>
+
+        <variable
+            name="alertModel"
+            type="com.rummytitans.playcashrummyonline.cardgame.utils.alertDialog.AlertdialogModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutBottomSheetJoin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="15dp"
+            tools:visibility="visible"
+            android:background="@drawable/box_with_grey_border8"
+            android:backgroundTint="@color/text_color5">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/btnClose"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_cross_new"
+                    app:tint="@color/text_color8"
+                    android:visibility="@{alertModel.showClose ? View.VISIBLE : View.GONE}"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+                <ImageView
+                    android:id="@+id/imgIcon"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="16dp"
+                    android:visibility="@{!TextUtils.isEmpty(alertModel.imgUrl) || alertModel.imgRes > 0? View.VISIBLE :View.GONE}"
+                    app:setImage="@{alertModel.imgRes}"
+                    app:setImageUrl="@{alertModel.imgUrl}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:fontFamily="@font/rubik_medium"
+                    android:gravity="center"
+                    android:text="@{alertModel.title}"
+                    android:textColor="@color/text_color8"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imgIcon" />
+
+                <TextView
+                    android:id="@+id/txtDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_regular"
+                    android:padding="13dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:gravity="center"
+                    android:text="@{alertModel.description}"
+                    android:textColor="@color/text_color2"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txtitle" />
+
+                <View
+                    android:id="@+id/viewDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grayBorder"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btnNegative"
+                    app:layout_constraintTop_toBottomOf="@+id/txtDesc"/>
+                <TextView
+                    android:id="@+id/btnNegative"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:fontFamily="@font/rubik_medium"
+                    android:gravity="center"
+                    android:text="@{alertModel.negativeText}"
+                    android:textColor="@color/bluey_grey"
+                    android:textSize="12sp"
+                    android:textAllCaps="true"
+                    tools:visibility="gone"
+                    android:visibility="@{TextUtils.isEmpty(alertModel.negativeText) ? View.GONE : View.VISIBLE}"
+                    app:layout_constraintBottom_toBottomOf="@id/btnPositive"
+                    app:layout_constraintEnd_toStartOf="@id/btnPositive"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/btnPositive" />
+
+                <Button
+                    android:id="@+id/btnPositive"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/bg_primary_box"
+                    android:backgroundTint="@color/maingreen"
+                    android:fontFamily="@font/rubik_medium"
+                    android:text="@{alertModel.positiveText}"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textAllCaps="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btnNegative"
+                    app:layout_constraintTop_toBottomOf="@+id/viewDivider" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
+</layout>

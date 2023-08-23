@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--CoachMark Button Ids-->
+<resources>
+    <item name="Coach_Skip" type="id"/>
+    <item name="Coach_Cancel" type="id"/>
+    <item name="Coach_Next" type="id"/>
+
+    <item name="verifyEmail" type="id"/>
+    <item name="verifyMobile" type="id"/>
+    <item name="verifyPan" type="id"/>
+    <item name="verifyBank" type="id"/>
+    <item name="verifyAddress" type="id"/>
+</resources>

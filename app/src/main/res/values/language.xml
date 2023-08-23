@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="english_lan_hindi" translatable="false">Hindi</string>
+    <string name="english_lan_english" translatable="false">English</string>
+    <string name="english_lan_gujrati" translatable="false">Gujrati</string>
+    <string name="english_lan_marathi" translatable="false">Marathi</string>
+    <string name="english_lan_tamil" translatable="false">Tamil</string>
+    <string name="english_lan_telgu" translatable="false">Telgu</string>
+    <string name="english_lan_kannada" translatable="false">Kannada</string>
+    <string name="english_lan_malayalam" translatable="false">Malayalam</string>
+    <string name="english_lan_bangali" translatable="false">Bangali</string>
+
+    <string name="hindi" translatable="false">हिन्दी</string>
+    <string name="english" translatable="false">English</string>
+    <string name="gujrati" translatable="false">ગુજરાતી</string>
+    <string name="marathi" translatable="false">मराठी</string>
+    <string name="tamil" translatable="false">தமிழ்</string>
+    <string name="telgu" translatable="false">తెలుగు</string>
+    <string name="kannada" translatable="false">ಕನ್ನಡ</string>
+    <string name="malayalam" translatable="false">മലയാളം</string>
+    <string name="bangali" translatable="false">বাংলা</string>
+
+
+    <string name="hindi_code" translatable="false">hi</string>
+    <string name="english_code" translatable="false">en</string>
+    <string name="gujrati_code" translatable="false">gu</string>
+    <string name="marathi_code" translatable="false">mr</string>
+    <string name="tamil_code" translatable="false">ta</string>
+    <string name="telgu_code" translatable="false">te</string>
+    <string name="kannada_code" translatable="false">kn</string>
+    <string name="malayalam_code" translatable="false">ml</string>
+    <string name="bangali_code" translatable="false">bn</string>
+
+
+    <string-array name="language_names">
+        <item>@string/hindi</item>
+        <item>@string/english</item>
+        <item>@string/tamil</item>
+        <item>@string/telgu</item>
+        <item>@string/gujrati</item>
+        <item>@string/malayalam</item>
+        <item>@string/bangali</item>
+        <item>@string/marathi</item>
+        <item>@string/kannada</item>
+    </string-array>
+
+    <string-array name="language_names_english">
+        <item>@string/english_lan_hindi</item>
+        <item>@string/english_lan_english</item>
+        <item>@string/english_lan_tamil</item>
+        <item>@string/english_lan_telgu</item>
+        <item>@string/english_lan_gujrati</item>
+        <item>@string/english_lan_malayalam</item>
+        <item>@string/english_lan_bangali</item>
+        <item>@string/english_lan_marathi</item>
+        <item>@string/english_lan_kannada</item>
+    </string-array>
+
+    <string-array name="language_code">
+        <item>@string/hindi_code</item>
+        <item>@string/english_code</item>
+        <item>@string/tamil_code</item>
+        <item>@string/telgu_code</item>
+        <item>@string/gujrati_code</item>
+        <item>@string/malayalam_code</item>
+        <item>@string/bangali_code</item>
+        <item>@string/marathi_code</item>
+        <item>@string/kannada_code</item>
+    </string-array>
+
+</resources>

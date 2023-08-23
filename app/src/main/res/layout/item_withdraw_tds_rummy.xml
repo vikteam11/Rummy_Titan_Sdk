@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View"/>
+        <import type="android.text.TextUtils"/>
+        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+
+        <variable
+            name="tdsModel"
+            type="com.rummytitans.playcashrummyonline.cardgame.models.WithdrawalTdsModel" />
+        <variable
+            name="isFinalAmount"
+            type="Boolean" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="6dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <View
+        android:id="@+id/divTds"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grayBorder"
+        android:visibility="@{isFinalAmount ? View.VISIBLE : View.GONE}"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="6dp"/>
+
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/rubik_regular"
+        android:textSize="14sp"
+        app:layout_marginTop="@{isFinalAmount ? 32f : 0f}"
+        android:textColor="@color/text_color2"
+        android:text="@{tdsModel.title}"
+        tools:text="With sdgshdg "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divTds"/>
+
+    <View
+        android:id="@+id/toolTip"
+        android:elevation="4dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/txtTitle"
+        app:layout_constraintEnd_toEndOf="@id/ivToolTip"
+        app:layout_constraintStart_toEndOf="@id/txtTitle"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
+
+    <ImageView
+        android:id="@+id/ivToolTip"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:visibility="@{TextUtils.isEmpty(tdsModel.toolTip) ? View.GONE : View.VISIBLE}"
+        app:setSrcCompact="@{@drawable/ic_info_outline}"
+        app:tint="@color/text_color2"
+        android:layout_marginStart="4dp"
+        tools:visibility="visible"
+        app:layout_constraintStart_toEndOf="@id/txtTitle"
+        app:layout_constraintTop_toTopOf="@id/txtTitle"
+        app:layout_constraintBottom_toBottomOf="@id/txtTitle"/>
+
+    <TextView
+        android:id="@+id/txtValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/rubik_regular"
+        android:textColor="@color/text_color8"
+        tools:text="441"
+        app:setAmountFormat="@{tdsModel.amount}"
+        app:placeHolder="@{tdsModel.isNegative?`-`+@string/rupees:@string/rupees}"
+        app:placeHolderAtStart="@{true}"
+        app:setTextFont="@{isFinalAmount ? R.font.rubik_medium :  R.font.rubik_regular}"
+        app:setTextSize="@{isFinalAmount ? 16f : 14f}"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/txtTitle"/>
+
+    <TextView
+        android:id="@+id/txtNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/rubik_regular"
+        android:textSize="12sp"
+        android:textColor="@color/text_color1"
+        android:text="@{tdsModel.note}"
+        tools:text="With sdgshdg "
+        android:visibility="@{TextUtils.isEmpty(tdsModel.note) ? View.GONE : View.VISIBLE}"
+        app:layout_constraintStart_toStartOf="@id/txtTitle"
+        app:layout_constraintTop_toBottomOf="@id/txtTitle"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

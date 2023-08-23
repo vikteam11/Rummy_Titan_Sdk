@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <import type="android.text.TextUtils"/>
+
+        <variable
+            name="alertModel"
+            type="com.rummytitans.playcashrummyonline.cardgame.utils.alertDialog.AlertdialogModel" />
+
+        <import type="android.graphics.Color" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutBottomSheetJoin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="15dp"
+        tools:visibility="visible"
+        android:background="@drawable/bottom_button_8dp"
+        android:backgroundTint="@color/text_color6">
+
+        <ImageView
+            android:id="@+id/imgSlideDownIndicator"
+            android:layout_width="25dp"
+            android:layout_height="3dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgSlideDownIndicator">
+
+            <ImageView
+                android:id="@+id/ivClose"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_cross_new"
+                app:tint="@color/text_color8"
+                android:onClick="@{()->alertModel.onCloseClick.invoke()}"
+                android:visibility="@{alertModel.showClose ? View.VISIBLE : View.GONE}"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageView
+                android:id="@+id/imgIcon"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="16dp"
+                android:visibility="@{!TextUtils.isEmpty(alertModel.imgUrl) || alertModel.imgRes > 0? View.VISIBLE :View.GONE}"
+                app:setImage="@{alertModel.imgRes}"
+                app:setImageUrl="@{alertModel.imgUrl}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/rubik_medium"
+                android:gravity="center"
+                android:text="@{alertModel.title}"
+                android:textColor="@color/text_color8"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imgIcon" />
+
+            <TextView
+                android:id="@+id/txtDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rubik_regular"
+                android:padding="13dp"
+                android:gravity="center"
+                android:text="@{alertModel.description}"
+                android:textColor="@color/text_color2"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtitle" />
+
+
+
+            <TextView
+                android:id="@+id/txCancel"
+                android:layout_width="140dp"
+                android:layout_height="32dp"
+                android:fontFamily="@font/rubik_medium"
+                android:gravity="center"
+                android:text="@{alertModel.negativeText}"
+                android:textColor="@color/text_color2"
+                android:textSize="12sp"
+                android:textAllCaps="true"
+                android:visibility="@{TextUtils.isEmpty(alertModel.negativeText) ? View.GONE : View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="@id/btnContinue"
+                app:layout_constraintEnd_toStartOf="@id/btnContinue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/btnContinue" />
+
+            <Button
+                android:id="@+id/btnContinue"
+                android:layout_width="140dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/bg_primary_box"
+                android:fontFamily="@font/rubik_medium"
+                android:text="@{alertModel.positiveText}"
+                android:textColor="@color/text_color8"
+                android:textSize="12sp"
+                android:textAllCaps="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/txCancel"
+                app:layout_constraintTop_toBottomOf="@+id/txtDesc" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

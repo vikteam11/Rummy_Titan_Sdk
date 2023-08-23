@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+            android:id="@+id/snackbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/rummy_colorPrimary"
+            android:layout_margin="@dimen/margin_normal"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+        <TextView
+                android:id="@+id/snackbar_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start"
+                android:ellipsize="end"
+                android:padding="16dp"
+                android:maxLines="4"
+                android:textColor="@color/white"
+                android:textAlignment="viewStart"/>
+
+        <Button
+                android:id="@+id/snackbar_action"
+                style="?borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|end"
+                android:paddingHorizontal="@dimen/margin_normal"
+                android:visibility="gone"
+                tools:targetApi="o"/>
+
+    </LinearLayout>
+
+</merge>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_my_profile">My Profile</string>
+
+    <string-array name="side_menu_title">
+        <item>@string/menu_my_profile</item>
+        <item>@string/frag_refer_refer_amp_earn</item>
+        <item>@string/golden_ticket</item>
+        <item>@string/leaderboard</item>
+        <item>@string/sportstiger</item>
+        <item>@string/frag_more_support</item>
+        <item>@string/frag_more_poll</item>
+        <item>@string/frag_more_feedback</item>
+        <item>@string/frag_more_follow_us</item>
+        <item>@string/live_chat</item>
+        <item>@string/setting</item>
+    </string-array>
+</resources>

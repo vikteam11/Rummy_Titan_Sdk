@@ -1,0 +1,192 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+
+        <import type="android.graphics.Color" />
+
+        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+        <import type="com.rummytitans.playcashrummyonline.cardgame.utils.MyConstants"/>
+
+        <import type="com.google.android.material.bottomsheet.BottomSheetBehavior"/>
+        <variable
+            name="viewmodel"
+            type="com.rummytitans.playcashrummyonline.cardgame.ui.verifications.viewmodels.AddressVerificationViewModel" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/toolbarLayout"
+                android:elevation="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/rummy_toolBarColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <View
+                    android:id="@+id/view4"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/icBack"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="8dp"
+                    android:visibility="visible"
+                    android:rotation="180"
+                    android:onClick="@{()->viewmodel.navigator.goBack()}"
+                    app:srcCompat="@drawable/ic_arrow_dropdown"
+                    app:layout_constraintBottom_toBottomOf="@+id/view4"
+                    app:layout_constraintStart_toStartOf="@+id/view4"
+                    app:layout_constraintTop_toTopOf="@+id/view4"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/txtTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@{viewmodel.toolbarTitle}"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@+id/icBack"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintTop_toTopOf="@+id/view4"
+                    app:layout_constraintBottom_toBottomOf="@+id/view4"/>
+
+                <ImageView
+                    android:id="@+id/icSupport"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="4dp"
+                    android:padding="5dp"
+                    android:visibility="@{viewmodel.toolbarTitle.equals(@string/information_update)? View.GONE :View.VISIBLE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/view4"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_support_left"
+                    app:tint="@color/white" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clWaring"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/warnTxtBackColor"
+                android:visibility="gone"
+                android:elevation="1dp"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="12dp"
+                app:layout_constraintTop_toBottomOf="@id/toolbarLayout">
+
+                <TextView
+                    android:id="@+id/tvWarningText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_regular"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
+                    android:layout_marginStart="4dp"
+                    android:textColor="@color/compare_red"
+                    android:textSize="10sp"
+                    android:text="@{viewmodel.warningMessage}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/viewBg"
+                    app:layout_constraintStart_toEndOf="@id/ivAlert"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="" />
+
+                <ImageView
+                    android:id="@+id/ivAlert"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintVertical_bias="0"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
+                    app:layout_constraintBottom_toBottomOf="@id/tvWarningText"
+                    app:layout_constraintEnd_toStartOf="@id/tvWarningText"
+                    app:layout_constraintStart_toStartOf="@id/viewBg"
+                    app:layout_constraintTop_toTopOf="@id/tvWarningText"
+                    app:srcCompat="@drawable/ic_warning_outline"
+                    app:tint="@color/tomato_red" />
+
+                <View
+                    android:id="@+id/viewBg"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/bg_withdraw_error"
+                    app:layout_constraintBottom_toBottomOf="@id/tvWarningText"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tvWarningText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/clWaring"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+            <FrameLayout
+                android:id="@+id/loading"
+                android:clickable="true"
+                android:focusable="true"
+                android:visibility="@{viewmodel.isProgressLoading() ? View.VISIBLE : View.GONE}"
+                android:background="@color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ProgressBar
+                    android:id="@+id/loadingLogin"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_white_progress"
+                    android:elevation="10dp"
+                    android:padding="@dimen/margin_min"
+                    android:layout_gravity="center"
+                    android:theme="@style/ProgressBar" />
+            </FrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

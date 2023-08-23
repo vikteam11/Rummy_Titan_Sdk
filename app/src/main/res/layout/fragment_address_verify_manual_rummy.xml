@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+
+        <import type="android.graphics.Color" />
+
+        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+        <import type="com.rummytitans.playcashrummyonline.cardgame.utils.MyConstants"/>
+
+        <import type="com.google.android.material.bottomsheet.BottomSheetBehavior"/>
+
+        <variable
+            name="viewmodel"
+            type="com.rummytitans.playcashrummyonline.cardgame.ui.verifications.viewmodels.AddressVerificationViewModel" />
+
+    </data>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?android:windowBackground">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ScrollView
+                android:id="@+id/scrollView"
+                android:scrollbars="none"
+                android:clipToPadding="false"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="4dp"
+                android:fillViewport="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:paddingBottom="80dp"
+                    android:clipToPadding="false"
+                    android:id="@+id/layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cvContentView"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardUseCompatPadding="true"
+                        android:elevation="@dimen/dimen_5"
+                        app:cardCornerRadius="8dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:background="@drawable/box_with_grey_border8"
+                            android:paddingHorizontal="18dp"
+                            android:paddingBottom="16dp">
+
+                            <FrameLayout
+                                android:id="@+id/frame"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <include
+                                    android:id="@+id/layoutAadhaar"
+                                    layout="@layout/layout_aadhaar_verify_rummy"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    tools:visibility="visible"
+                                    app:viewmodel="@{viewmodel}"/>
+
+                                <include
+                                    android:id="@+id/layoutDl"
+                                    layout="@layout/layout_dl_verify_rummy"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    tools:visibility="gone"
+                                    app:viewmodel="@{viewmodel}"/>
+
+                            </FrameLayout>
+
+                            <TextView
+                                android:id="@+id/btnSubmitDetails"
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:gravity="center"
+                                android:layout_marginTop="20dp"
+                                android:background="@drawable/bg_primary_box"
+                                android:backgroundTint="@{viewmodel.isButtonEnabled ?@color/maingreen:@color/cool_grey}"
+                                android:fontFamily="@font/rubik_medium"
+                                android:text="@string/submit"
+                                tools:visibility="visible"
+                                android:textAllCaps="true"
+                                android:onClick="@{()->viewmodel.submitDetails()}"
+                                android:textColor="@color/white"
+                                android:textSize="14sp"
+                                app:layout_constraintTop_toBottomOf="@id/frame"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent" />
+
+                            <TextView
+                                android:id="@+id/lb_note"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_10"
+                                android:gravity="center"
+                                app:plainText="@{@string/address_verification_note_text}"
+                                app:plainTextColor="@{@color/text_color2}"
+                                app:textArray="@{viewmodel.colorTextArray}"
+                                app:colorsArray="@{viewmodel.colorArray}"
+                                app:textSizeArray="@{viewmodel.textSizeArray}"
+                                app:fontArray="@{viewmodel.fontArray}"
+                                tools:textColor="@color/text_color2"
+                                android:textSize="12sp"
+                                tools:text="@string/address_verification_note_text"
+                                app:layout_constraintEnd_toEndOf="@+id/btnSubmitDetails"
+                                app:layout_constraintStart_toStartOf="@id/btnSubmitDetails"
+                                app:layout_constraintTop_toBottomOf="@+id/btnSubmitDetails" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cvNotes"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/cvContentView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardUseCompatPadding="true"
+                        android:visibility="gone"
+                        app:cardCornerRadius="8dp"
+                        android:layout_marginTop="8dp">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvNotes"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clipToPadding="false"
+                            android:padding="16dp"
+                            android:background="@color/brown_grey_15"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+                        <LinearLayout
+                            android:background="@color/brown_grey_15"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            android:padding="16dp">
+
+                            <CheckBox
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:gravity="start"
+                                android:fontFamily="@font/rubik_regular"
+                                android:paddingHorizontal="8dp"
+                                android:text="@string/user_must_be_18_years_of_age_"
+                                android:textColor="@color/gray2"
+                                android:textSize="11sp"
+                                android:enabled="false"
+                                android:button="@drawable/ic_check_square_normal"/>
+
+                            <CheckBox
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:gravity="start"
+                                android:fontFamily="@font/rubik_regular"
+                                android:paddingHorizontal="8dp"
+                                android:text="@string/user_must_not_be_a_resident"
+                                android:textColor="@color/gray2"
+                                android:textSize="11sp"
+                                android:enabled="false"
+                                android:button="@drawable/ic_check_square_normal"/>
+
+                            <CheckBox
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:gravity="start"
+                                android:fontFamily="@font/rubik_regular"
+                                android:paddingHorizontal="8dp"
+                                android:text="@string/i_hereby_confirm_that_my_attached"
+                                android:textColor="@color/gray2"
+                                android:textSize="11sp"
+                                android:enabled="false"
+                                android:button="@drawable/ic_check_square_normal"/>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </ScrollView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

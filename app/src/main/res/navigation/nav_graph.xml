@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/blockUserReasonFragment">
+
+    <fragment
+        android:id="@+id/blockUserReasonFragment"
+        tools:layout="@layout/fragment_block_user_reasons"
+        android:name="com.rummytitans.playcashrummyonline.cardgame.ui.blockuser.BlockUserReasonFragment"
+        android:label="BlockUserReasonFragment" >
+        <action
+            android:id="@+id/action_to_RequestFragment"
+            app:destination="@id/blockUserRequestFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/blockUserRequestFragment"
+        android:name="com.rummytitans.playcashrummyonline.cardgame.ui.blockuser.BlockUserRequestFragment"
+        tools:layout="@layout/fragment_block_user_request"
+        android:label="BlockUserRequestFragment" />
+</navigation>

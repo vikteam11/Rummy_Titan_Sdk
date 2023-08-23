@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="onbording_titles">
+
+        <item>@string/onbording_title_select_sport</item>
+        <item>@string/onbording_title_select_match</item>
+        <item>@string/onbording_title_create_team</item>
+        <item>@string/onbording_title_join_league</item>
+        <item>@string/onbording_title_win_money</item>
+
+    </string-array>
+
+    <string-array name="onbording_desc">
+        <item>@string/onbording_desc_select_sport</item>
+        <item>@string/onbording_desc_select_match</item>
+        <item>@string/onbording_desc_create_team</item>
+        <item>@string/onbording_desc_join_league</item>
+        <item>@string/onbording_desc_win_money</item>
+
+    </string-array>
+
+
+    <string name="onbording_title_select_sport">Select your favorite sport</string>
+    <string name="onbording_title_select_match">Select a match</string>
+    <string name="onbording_title_create_team">Create your fantasy team</string>
+    <string name="onbording_title_join_league">Join league</string>
+    <string name="onbording_title_win_money">Win money</string>
+
+
+    <string name="onbording_desc_select_sport">Don’t stay confined to a single sport explore your favorite among
+        Cricket, Football, Kabaddi.
+    </string>
+    <string name="onbording_desc_select_match">Plenty of Matches, Several Chances to WIN. Select the one you wish to
+        join.
+    </string>
+    <string name="onbording_desc_create_team">Choose your players, chase your opponents. Create your team to play &amp;
+        Win
+    </string>
+    <string name="onbording_desc_join_league">Join the game with your team to prove your skills.</string>
+    <string name="onbording_desc_win_money">Victory is nothing without Prize. Play to win real money as prize.</string>
+
+</resources>

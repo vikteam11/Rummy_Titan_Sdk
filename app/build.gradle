@@ -1,0 +1,202 @@
+apply plugin: 'com.android.library'
+//apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+//apply plugin: 'com.google.firebase.crashlytics'
+//apply plugin: 'com.google.gms.google-services'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'dagger.hilt.android.plugin'
+
+
+android {
+    compileSdkVersion 31
+    defaultConfig {
+        minSdkVersion 22
+        targetSdkVersion 31
+        versionCode 29
+        versionName '1.2.9'
+        //applicationId "com.rummytitans.playcashrummyonline.cardgame"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+        buildConfigField "int", "isPlayStoreApk", "0"
+        buildConfigField "int","VERSION_CODE","29"
+        buildConfigField "String", "VERSION_NAME", "\"1.2.9\""
+    }
+    buildFeatures {
+        dataBinding true
+    }
+    signingConfigs {
+        release {
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+    buildTypes {
+
+        release {
+            // shrinkResources true
+            multiDexKeepProguard file('multidex-config.pro')
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    flavorDimensions "releaseApk"
+    productFlavors {
+        playStoreApp{
+            buildConfigField "int", "isPlayStoreApk", "1"
+        }
+        legacyApp{
+            buildConfigField "int", "isPlayStoreApk", "0"
+        }
+    }
+
+}
+
+repositories {
+    maven { url 'https://artifacts.netcore.co.in/artifactory/android' }
+}
+
+configurations { natives }
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+
+//kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+
+//Android
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'androidx.core:core-ktx:1.5.0-beta01'
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
+    implementation "com.google.android.material:material:$rootProject.materialVersion"
+
+// Architecture Components
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion"
+    kapt "androidx.lifecycle:lifecycle-compiler:$rootProject.lifecycleVersion"
+
+
+// Dagger
+    implementation "com.google.dagger:dagger-android:$rootProject.dagger"
+    implementation "com.google.dagger:dagger-android-support:$rootProject.dagger"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.dagger"
+    kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger"
+
+//firebase
+    implementation platform('com.google.firebase:firebase-bom:31.0.2')
+    //implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-iid:21.1.0'
+    implementation 'com.google.firebase:firebase-analytics'
+
+    configurations.all {
+        resolutionStrategy {
+            implementation 'com.google.firebase:firebase-ml-vision:23.0.0'
+        }
+    }
+
+    //graph
+    implementation "com.github.PhilJay:MPAndroidChart:$rootProject.chartVersion"
+
+// Glide
+    implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+    kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
+
+// Utils
+    implementation "androidx.core:core-ktx:$rootProject.ktxVersion"
+    implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
+
+// OkHttp
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpVersion"
+
+//Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+
+//RxJava2
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.2.0'
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rxjavaAdapter"
+
+//Google Play Services
+    implementation "com.google.android.gms:play-services-auth:20.3.0"
+    implementation 'com.google.android.gms:play-services-analytics:18.0.2'
+
+//VIEWS
+    implementation "io.github.chaosleung:pinview:$pinviewVersion"
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.tapadoo.android:alerter:4.0.2'
+    implementation 'com.loopeer.lib:shadow:0.0.4-beta3'
+
+
+// Instrumentation tests
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$rootProject.espressoVersion"
+    androidTestImplementation "androidx.test:runner:$rootProject.runnerVersion"
+    androidTestImplementation "androidx.test:rules:$rootProject.rulesVersion"
+
+// Local unit tests
+    testImplementation "junit:junit:$rootProject.junitVersion"
+    testImplementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
+    testImplementation "com.nhaarman:mockito-kotlin:$rootProject.mockitoKotlinVersion"
+    testImplementation "org.hamcrest:hamcrest-library:$rootProject.hamcrestVersion"
+
+
+    //appsflyer
+    implementation 'com.appsflyer:af-android-sdk:6.2.3'
+
+    //tooltip
+    implementation 'com.github.florent37:viewtooltip:1.2.2'
+    implementation 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:3.0.0-RC2'
+
+    //GMS Location
+    implementation "com.google.android.gms:play-services-location:18.0.0"
+
+    //lottie
+    implementation 'com.airbnb.android:lottie:4.1.0'
+
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
+    implementation 'com.tbuonomo:dotsindicator:4.2'
+    //Android Fast Networking (implementation call)
+    api "com.amitshekhar.android:rx2-android-networking:$androidNetworkingLibVersion"
+    //paging
+    implementation "androidx.paging:paging-rxjava2:$rx_paging"
+    annotationProcessor "com.google.dagger:dagger-android-processor:2.24"
+
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+     // hilt
+    implementation 'com.google.dagger:hilt-android:2.38.1'
+    kapt 'com.google.dagger:hilt-android-compiler:2.38.1'
+    kapt 'androidx.hilt:hilt-compiler:1.0.0'
+
+    //juspay
+    implementation 'in.juspay:hypersdk:2.1.7'
+
+
+}
+

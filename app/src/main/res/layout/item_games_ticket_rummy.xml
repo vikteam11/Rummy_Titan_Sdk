@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.rummytitans.playcashrummyonline.cardgame.R"/>
+        <import type="android.view.View"/>
+        <variable
+            name="isUsed"
+            type="Boolean" />
+        <variable
+            name="model"
+            type="com.rummytitans.playcashrummyonline.cardgame.models.GameTicketModel.TicketsItemModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:clipToPadding="false"
+        android:elevation="8dp"
+        android:background="@drawable/bg_games_ticket"
+        android:backgroundTint="@color/rummy_black_3"
+        android:layout_margin="1dp">
+
+
+        <ImageView
+            android:id="@+id/gameIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:setImageUrl="@{model.image}"
+            app:setPlaceHolder="@{R.drawable.notiicon}" />
+
+        <View
+            android:id="@+id/dash"
+            android:layout_marginStart="30dp"
+            android:layout_marginVertical="10dp"
+            android:layout_width="50dp"
+            android:layout_height="0dp"
+            android:rotation="90"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/gameIcon"
+            app:layout_constraintTop_toTopOf="parent"
+            android:backgroundTint="@color/steel_grey"
+            android:background="@drawable/dash_line" />
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/rubik_medium"
+            android:text="@{model.name}"
+            android:textColor="@color/text_color8"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/txtCount"
+            app:layout_constraintStart_toEndOf="@+id/gameIcon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="this is it" />
+
+
+        <TextView
+            android:id="@+id/txtCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_regular"
+            android:text="@{model.TicketMessaage}"
+            android:textColor="@color/steel_grey"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="@+id/txtTitle"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle"
+            tools:text="this is it" />
+
+        <TextView
+            android:id="@+id/txtValidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="6dp"
+            android:fontFamily="@font/rubik_medium"
+            android:text="@{model.expiredMessage}"
+            android:textColor="@{isUsed?model.IsExpired?@color/redVariant1:@color/maingreen:@color/maingreen}"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/txtTitle"
+            app:layout_constraintTop_toBottomOf="@+id/txtCount"
+            tools:text="this is it"
+            tools:textColor="@color/maingreen" />
+
+        <Button
+            android:id="@+id/btnRedeem"
+            android:layout_width="66dp"
+            android:layout_height="26dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_primary_box"
+            android:backgroundTint="@color/maingreen"
+            android:elevation="3dp"
+            android:fontFamily="@font/rubik_medium"
+            android:gravity="center"
+            android:text="@string/only_redeem"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:layout_marginBottom="16dp"
+            android:visibility="@{isUsed?View.GONE:View.VISIBLE,default=gone}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:alpha=".6"
+            android:visibility="@{isUsed ? View.VISIBLE : View.GONE,default=gone}"
+            android:background="@drawable/bg_games_ticket"
+            android:backgroundTint="@color/rummy_black_3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

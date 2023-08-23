@@ -1,0 +1,735 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.graphics.Color" />
+
+        <import type="android.view.View" />
+
+        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+
+        <variable
+            name="viewmodel"
+            type="com.rummytitans.playcashrummyonline.cardgame.ui.wallet.viewmodel.AddCashViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:background="@color/rummy_mainColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:background="@color/rummy_mainColor">
+
+
+                <ImageView
+                    android:id="@+id/icBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15dp"
+                    android:padding="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_newback" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/rubik_medium"
+                    android:gravity="center_vertical"
+                    android:text="@string/add_cash"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/icBack"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <ImageView
+                    android:id="@+id/ivSupport"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    android:padding="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/white"
+                    app:srcCompat="@drawable/ic_support_left" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/icon_size_large"
+                android:elevation="@dimen/margin_min"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/constraintLayout"
+               >
+
+                <TextView
+                    android:id="@+id/txtWalletBalance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="15dp"
+                    android:fontFamily="@font/rubik_medium"
+                    android:gravity="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_color8"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:setDoublePrice='@{viewmodel.currentBalance}'
+                    tools:text="50000" />
+
+                <TextView
+                    android:id="@+id/textView87"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/rubik_regular"
+                    android:text="@string/total_balance_available"
+                    android:textColor="@color/text_color8"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/scrollView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:clipToPadding="false"
+                android:fillViewport="true"
+                android:paddingBottom="60dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cl2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/viewPagerOffers"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="10dp"
+                        android:visibility="@{viewmodel.mBannerOffer.isEmpty()?View.GONE:View.VISIBLE}" />
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tabHeaders"
+                        android:layout_width="40dp"
+                        android:layout_height="8dp"
+                        android:elevation="3dp"
+                        app:layout_collapseMode="pin"
+                        android:layout_marginTop="4dp"
+                        app:tabBackground="@drawable/tab_selector"
+                        app:tabIndicatorHeight="0dp"
+                        app:tabMode="scrollable"
+                        app:tabGravity="center"
+                        app:tabIndicator="@null"
+                        app:tabMaxWidth="10dp"
+                        android:layout_gravity="bottom|center_horizontal"/>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/btnMyRecentTransactions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:elevation="@dimen/margin_min"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="10dp"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cornerRadius="4dp"
+                        app:layout_constraintTop_toBottomOf="@+id/btnRedeem"
+                        app:cardCornerRadius="4dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="16dp"
+                            android:background="@drawable/box_with_grey_border">
+
+                            <TextView
+                                android:id="@+id/txtCash"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_min"
+                                android:layout_marginTop="12dp"
+                                android:fontFamily="@font/rubik_regular"
+                                android:text="Amount to add"
+                                android:textColor="@color/silver_two"
+                                android:textSize="10sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/textView81"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_min"
+                                android:fontFamily="@font/rubik_medium"
+                                android:text='@{""+@string/rupees}'
+                                android:textColor="@color/text_color8"
+                                android:textSize="14sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintBottom_toBottomOf="@+id/textView83"
+                                app:layout_constraintTop_toTopOf="@+id/textView83" />
+
+                            <EditText
+                                android:id="@+id/edtAddAmmount"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="1dp"
+                                android:layout_marginEnd="@dimen/margin_min"
+                                android:background="@color/transparent"
+                                android:fontFamily="@font/rubik_medium"
+                                android:hint="0"
+                                android:imeOptions="actionDone"
+                                android:inputType="numberDecimal"
+                                android:maxLength="7"
+                                android:digits="1234567890."
+                                android:paddingEnd="10dp"
+                                android:singleLine="true"
+                                android:textColor="@color/text_color8"
+                                android:textColorHint="@color/text_color2"
+                                android:textSize="14sp"
+                                app:layout_constraintBottom_toBottomOf="@+id/textView83"
+                                app:layout_constraintEnd_toStartOf="@+id/textView83"
+                                app:layout_constraintStart_toEndOf="@+id/textView81"
+                                app:layout_constraintTop_toTopOf="@+id/textView83" />
+
+                            <ImageView
+                                android:id="@+id/ivClear"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:background="@drawable/circle_border"
+                                android:padding="1dp"
+                                android:backgroundTint="@color/grayBorder"
+                                android:src="@drawable/ic_close"
+                                app:tint="@color/grayBorder"
+                                android:layout_marginEnd="@dimen/margin_min"
+                                android:visibility="@{viewmodel.addCashAmmount > 0.0 ? View.VISIBLE :View.GONE}"
+                                app:layout_constraintEnd_toStartOf="@+id/textView83"
+                                app:layout_constraintTop_toTopOf="@+id/textView83"
+                                app:layout_constraintBottom_toBottomOf="@+id/textView83"/>
+                            <TextView
+                                android:id="@+id/txtTotalAmmount"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_min"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="@dimen/margin_min"
+                                android:fontFamily="@font/rubik_medium"
+                                android:gravity="end"
+                                android:visibility="gone"
+                                android:text='@{""+@string/rupees+viewmodel.getStringFromDouble(viewmodel.currentBalance)+" + "+@string/rupees+viewmodel.getStringFromDouble(viewmodel.addCashAmmount)+" = "+@string/rupees+(viewmodel.getStringFromDouble(viewmodel.currentBalance+viewmodel.addCashAmmount))}'
+                                android:textColor="@color/gunmetal"
+                                android:textSize="10sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/textView82"
+                                app:layout_constraintTop_toBottomOf="@+id/view26"
+                                tools:text="555 + 100 = 655" />
+
+                            <androidx.constraintlayout.widget.Group
+                                android:id="@+id/group"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <androidx.constraintlayout.widget.Group
+                                android:id="@+id/group2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <View
+                                android:id="@+id/view26"
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_marginStart="@dimen/margin_min"
+                                android:layout_marginTop="7dp"
+                                android:layout_marginEnd="@dimen/margin_min"
+                                android:background="@color/grayBorder"
+                                app:layout_constraintEnd_toStartOf="@+id/textView83"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintBottom_toBottomOf="@+id/textView83" />
+
+                            <TextView
+                                android:id="@+id/textView82"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_min"
+                                android:fontFamily="@font/rubik_regular"
+                                android:text="@string/activity_addcash_total_available_balance_after_add_cash"
+                                android:textColor="@color/steel_grey"
+                                android:textSize="10sp"
+                                android:visibility="gone"
+                                app:layout_constraintBottom_toBottomOf="@+id/txtTotalAmmount"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/txtTotalAmmount" />
+
+                            <TextView
+                                android:id="@+id/textView83"
+                                android:layout_width="80dp"
+                                android:layout_height="@dimen/dimen_32"
+                                android:background="@drawable/box_grey_border"
+                                android:layout_marginEnd="@dimen/margin_min"
+                                android:fontFamily="@font/rubik_medium"
+                                android:foreground="?selectableItemBackground"
+                                android:gravity="center"
+                                android:onClick="@{()->viewmodel.addCustomAmount(100)}"
+                                android:text='@{""+@string/rupees+100}'
+                                android:textColor="@color/text_color8"
+                                android:textSize="12sp"
+                                app:layout_constraintEnd_toStartOf="@+id/textView84"
+                                app:layout_constraintTop_toTopOf="@+id/textView84" />
+
+                            <TextView
+                                android:id="@+id/textView84"
+                                android:layout_width="80dp"
+                                android:layout_height="@dimen/dimen_32"
+                                android:layout_marginEnd="@dimen/margin_min"
+                                android:background="@drawable/box_grey_border"
+                                android:fontFamily="@font/rubik_medium"
+                                android:foreground="?selectableItemBackground"
+                                android:gravity="center"
+                                android:onClick="@{()->viewmodel.addCustomAmount(500)}"
+                                android:text='@{""+@string/rupees+500}'
+                                android:textColor="@color/text_color8"
+                                android:textSize="12sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/txtCash" />
+
+                            <TextView
+                                android:id="@+id/textView85"
+                                android:layout_width="@dimen/dimen_104"
+                                android:layout_height="@dimen/dimen_32"
+                                android:layout_marginStart="@dimen/margin_min"
+                                android:background="@drawable/box_grey_border"
+                                android:fontFamily="@font/rubik_medium"
+                                android:foreground="?selectableItemBackground"
+                                android:gravity="center"
+                                android:onClick="@{()->viewmodel.addCustomAmount(1000)}"
+                                android:text='@{""+@string/rupees+1000}'
+                                android:textColor="@color/text_color8"
+                                android:textSize="12sp"
+                                android:visibility="gone"
+                                app:layout_constraintEnd_toEndOf="@+id/txtTotalAmmount"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintStart_toEndOf="@+id/textView84"
+                                app:layout_constraintTop_toTopOf="@+id/textView84" />
+
+                            <TextView
+                                android:id="@+id/textView86"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:onClick="@{()->viewmodel.showSheet()}"
+                                android:text="Have a redeem code?"
+                                android:textColor="?colorPrimary"
+                                android:textSize="11sp"
+                                android:visibility="gone"
+                                app:layout_constraintBottom_toBottomOf="@+id/edtAddAmmount"
+                                app:layout_constraintEnd_toEndOf="@+id/edtAddAmmount"
+                                app:layout_constraintTop_toTopOf="@+id/edtAddAmmount" />
+
+
+                            <View
+                                android:id="@+id/view260"
+                                android:layout_width="0dp"
+                                android:layout_height="0.5dp"
+                                android:layout_marginTop="1dp"
+                                android:background="?colorPrimary"
+                                android:visibility="gone"
+                                app:layout_constraintEnd_toEndOf="@id/textView86"
+                                app:layout_constraintStart_toStartOf="@id/textView86"
+                                app:layout_constraintTop_toBottomOf="@id/textView86" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <com.loopeer.shadow.ShadowView
+                        android:id="@+id/btnWeekendDhamaka"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:elevation="@dimen/margin_min"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:visibility="gone"
+                        app:cornerRadius="4dp"
+                        app:layout_constraintTop_toBottomOf="@+id/btnMyRecentTransactions"
+                       >
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/icInfo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="5dp"
+                                android:padding="5dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_info_gray" />
+
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:padding="4dp"
+                                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/icInfo"
+                                app:spanCount="2" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.loopeer.shadow.ShadowView>
+
+                    <com.loopeer.shadow.ShadowView
+                        android:id="@+id/btnRedeemCoupan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:elevation="@dimen/margin_min"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:visibility="gone"
+                        app:cornerRadius="4dp"
+                        app:layout_constraintTop_toBottomOf="@+id/btnWeekendDhamaka"
+                      >
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:viewBorder="@{viewmodel.isRedeemCoupon ? @color/light_olive_green : @color/white}">
+
+                            <ImageView
+                                android:id="@+id/icRedeemCoupan"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="@dimen/margin_min"
+                                android:layout_marginEnd="5dp"
+                                android:padding="5dp"
+                                app:layout_constraintBottom_toBottomOf="@id/tvCoupan"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/tvRedeemCoupan"
+                                app:srcCompat="@drawable/ic_redeem_coupon" />
+
+                            <TextView
+                                android:id="@+id/tvRedeemCoupan"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_min"
+                                android:layout_marginTop="16dp"
+                                android:fontFamily="@font/rubik_medium"
+                                android:text="Redeem Coupan"
+                                android:textColor="@color/gunmetal"
+                                android:textSize="12sp"
+                                app:layout_constraintStart_toEndOf="@+id/icRedeemCoupan"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/tvCoupan"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_min"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginBottom="16dp"
+                                android:fontFamily="@font/rubik_regular"
+                                android:text="@{viewmodel.isRedeemCoupon ? `` : `Redeem your MyTeam11 Coupon`}"
+                                android:textColor="@{viewmodel.isRedeemCoupon ? @color/light_olive_green : @color/steel_grey }"
+                                android:textSize="12sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/icRedeemCoupan"
+                                app:layout_constraintTop_toBottomOf="@+id/tvRedeemCoupan" />
+
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/icArrow"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="5dp"
+                                android:rotation="90"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:setSrcCompact="@{viewmodel.isRedeemCoupon ? @drawable/ic_remove : @drawable/ic_arrow_up}" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.loopeer.shadow.ShadowView>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:fontFamily="@font/rubik_medium"
+                        android:text="Available Offers"
+                        android:layout_marginTop="16dp"
+                        android:textColor="@color/text_color8"
+                        android:textSize="12sp"
+                        android:visibility="@{viewmodel.isOfferListEmpty ? View.GONE : View.VISIBLE}" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="8dp"
+                        app:cardCornerRadius="4dp"
+                        android:visibility="@{viewmodel.isOfferListEmpty ? View.GONE : View.VISIBLE}" >
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="12dp"
+                            android:background="@drawable/box_with_grey_border">
+
+                            <TextView
+                                android:id="@+id/tvTitle"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_min"
+                                android:layout_marginEnd="@dimen/margin_min"
+                                android:fontFamily="@font/rubik_bold"
+                                android:gravity="center"
+                                android:text="@{viewmodel.offerTitle}"
+                                android:textColor="@color/text_color8"
+                                android:textSize="12sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="Weekend Dhamaaka" />
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:layout_marginStart="4dp"
+                                android:src="@drawable/ic_level_info"
+                                android:visibility="gone"
+                                app:layout_constraintBottom_toBottomOf="@id/tvTitle"
+                                app:layout_constraintStart_toEndOf="@+id/tvTitle"
+                                app:layout_constraintTop_toTopOf="@id/tvTitle"
+                                app:tint="@color/gunmetal" />
+
+                            <TextView
+                                android:id="@+id/tvDescription"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_min"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="@dimen/margin_min"
+                                android:fontFamily="@font/rubik_regular"
+                                android:text="@{viewmodel.offerDescription}"
+                                android:textColor="@color/text_color2"
+                                android:textSize="10sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+                                tools:text="Get Up to ₹250 cash back on the 1st &amp; 3rd deposit." />
+
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="16dp"
+                                android:layout_marginTop="8dp"
+                                android:background="@drawable/box_grey_border"
+                                app:layout_constraintTop_toBottomOf="@+id/tvDescription">
+
+                                <androidx.constraintlayout.widget.Guideline
+                                    android:id="@+id/guide30"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    app:layout_constraintGuide_percent="0.35" />
+
+                                <TextView
+                                    android:id="@+id/tvAmountHeader"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="@font/rubik_medium"
+                                    android:text="Amount"
+                                    android:textColor="@color/text_color8"
+                                    android:textSize="12sp"
+                                    app:layout_constraintEnd_toStartOf="@+id/guide30"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/rvCashBonus"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="@font/rubik_medium"
+                                    android:text="@string/credit_bonus"
+                                    android:textColor="@color/text_color8"
+                                    android:textSize="12sp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toEndOf="@+id/guide30"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/rvOffers"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    android:layout_width="0dp"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:orientation="vertical"
+                                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                    app:layout_constraintTop_toBottomOf="@+id/tvAmountHeader"
+                                    tools:itemCount="2"
+                                    tools:listitem="@layout/item_offers_rummy"/>
+
+
+                                <TextView
+                                    android:id="@+id/tvSelectAll"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/rubik_medium"
+                                    android:text="Select All"
+                                    android:onClick="@{()->viewmodel.selectAllOffer()}"
+                                    android:layout_marginEnd="12dp"
+                                    android:textColor="@color/text_color2"
+                                    android:textSize="12dp"
+                                    android:visibility="@{viewmodel.mAddCashOffer.size() > 1 ? View.VISIBLE : View.GONE}"
+                                    app:layout_constraintBottom_toBottomOf="@+id/checkboxSelectAll"
+                                    app:layout_constraintEnd_toStartOf="@+id/checkboxSelectAll"
+                                    app:layout_constraintTop_toTopOf="@+id/checkboxSelectAll" />
+
+                                <CheckBox
+                                    android:id="@+id/checkboxSelectAll"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:button="@drawable/bg_checkbox_green"
+                                    android:fontFamily="@font/rubik_medium"
+                                    android:text=""
+                                    android:textColor="@color/gunmetal"
+                                    android:textSize="12sp"
+                                    android:visibility="@{viewmodel.mAddCashOffer.size() > 1 ? View.VISIBLE : View.GONE}"
+                                    android:checked="@{viewmodel.isAllOfferSelected}"
+                                    android:onClick="@{()->viewmodel.selectAllOffer()}"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/rvOffers" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/rubik_medium"
+                        android:text="@string/available_coupons"
+                        android:textColor="@color/text_color8"
+                        android:textSize="12sp"
+                        android:visibility="@{viewmodel.isCouponsListEmpty ? View.GONE : View.VISIBLE}" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvAvailableCoupon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:clipToPadding="false"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginHorizontal="16dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="2"
+                        tools:listitem="@layout/item_available_coupons_rummy" />
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+
+            <Button
+                android:id="@+id/btnAddCash"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                tools:visibility="visible"
+                android:layout_marginStart="@dimen/dimen_16"
+                android:layout_marginEnd="@dimen/dimen_16"
+                android:layout_marginBottom="@dimen/dimen_16"
+                android:background="@drawable/bg_primary_box"
+                android:backgroundTint="@color/maingreen"
+                android:fontFamily="@font/rubik_medium"
+                android:foreground="?selectableItemBackground"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:setAmountFormat="@{viewmodel.addCashAmmount}"
+                app:placeHolder='@{@string/add_cash+" "+@string/rupees}'
+                app:placeHolderAtStart="@{true}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:background="@color/colorPrimary" />
+
+            <include
+                layout="@layout/layout_progress_dialog_rummy"
+                app:visible="@{viewmodel.isLoading()}"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/bgView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#5000"
+            android:onClick="@{()->viewmodel.hideSheet()}"
+            android:visibility="@{viewmodel.isBottomSheetVisible()==true? View.VISIBLE:View.GONE}"
+            tools:visibility="gone" />
+
+
+        <!--        <include-->
+        <!--            android:id="@+id/bottomSheetRedeemCode"-->
+        <!--            layout="@layout/bottomsheet_redeem_code"-->
+        <!--            bind:color="@{viewmodel.selectedColor}"-->
+        <!--            bind:isBottomSheetVisible="@{viewmodel.isBottomSheetVisible()}"-->
+        <!--            bind:redeemClick="@{()->viewmodel.redeemCode()}"-->
+        <!--            bind:textChanged="@{viewmodel::onCodeChanged}"-->
+        <!--            tools:visibility="gone" />-->
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+</layout>

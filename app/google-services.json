@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "365484678723",
+    "project_id": "rummytitans",
+    "storage_bucket": "rummytitans.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:365484678723:android:fe500c057bd5ba073cbef6",
+        "android_client_info": {
+          "package_name": "com.rummytitans.playcashrummyonline.cardgame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "365484678723-ngo693pb66ch4ui1cjr1frmnql362iom.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtm_KBCWTbdEhFXVclgGAoX1SfiH8rTik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "365484678723-ngo693pb66ch4ui1cjr1frmnql362iom.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.graphics.Color" />
+
+        <variable
+            name="model"
+            type="com.rummytitans.playcashrummyonline.cardgame.ui.settings.adapter.MatchTimeTimeModel" />
+    </data>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/selection"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@{model.isSelected()? @drawable/selcted_radio_btn :@drawable/unselected_radio_btn }"
+            android:layout_centerVertical="true"
+            android:backgroundTint="@{model.isSelected()? Color.parseColor(model.textColor)  :@color/cool_grey}" />
+
+        <TextView
+            android:id="@+id/time_type"
+            android:text="@{model.text}"
+            android:textColor="@{model.isSelected()? Color.parseColor(model.textColor) :@color/cool_grey}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/selection"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+</layout>

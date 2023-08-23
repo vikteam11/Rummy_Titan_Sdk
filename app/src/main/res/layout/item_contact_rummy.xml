@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="colorCode"
+            type="String" />
+
+        <import type="android.graphics.Color" />
+
+        <variable
+            name="onClick"
+            type="com.rummytitans.playcashrummyonline.cardgame.ui.contectList.OnItemClickListener" />
+
+        <variable
+            name="model"
+            type="com.rummytitans.playcashrummyonline.cardgame.models.ContactModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:onClick="@{()->onClick.onItemSelect()}"
+        android:layout_height="60dp">
+
+        <TextView
+            android:id="@+id/firstleter"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/circle"
+            android:backgroundTint="@color/text_color5"
+            android:gravity="center"
+            android:text="@{``+model.name.charAt(0)}"
+            android:textColor="@color/cool_grey"
+            android:textSize="20sp"
+            android:fontFamily="@font/rubik_medium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:text="@{model.name}"
+            android:textSize="14sp"
+            android:textColor="@color/text_color8"
+            android:fontFamily="@font/rubik_medium"
+            app:layout_constraintBottom_toTopOf="@id/contactNo"
+            app:layout_constraintEnd_toStartOf="@+id/add"
+            app:layout_constraintStart_toEndOf="@+id/firstleter"
+            app:layout_constraintTop_toTopOf="@+id/firstleter"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/contactNo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:text="@{model.mobile}"
+            android:textSize="12sp"
+            android:textColor="@color/text_color2"
+            android:fontFamily="@font/rubik_regular"
+            app:layout_constraintBottom_toBottomOf="@+id/firstleter"
+            app:layout_constraintEnd_toStartOf="@+id/add"
+            app:layout_constraintStart_toEndOf="@+id/firstleter"
+            app:layout_constraintTop_toBottomOf="@id/name"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <CheckBox
+            android:id="@+id/add"
+            android:layout_width="@dimen/icon_size_24"
+            android:layout_height="@dimen/icon_size_24"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
+            android:button="@drawable/bg_checkbox_teamlist"
+            android:checked="@{model.isSelected}"
+            android:onClick="@{()->onClick.onItemSelect()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
+
+

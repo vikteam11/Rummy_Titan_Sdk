@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="showcase_profile_home">Profile</string>
+    <string name="showcase_profile_home_description">Check your profile here.</string>
+
+
+    <string name="showcase_sports">Select Your Favourite Sport!</string>
+    <string name="showcase_sports_description">Pick your favourite sport from this tab to participate in various matches &amp; contests.</string>
+
+
+    <string name="showcase_match">Select Your Match!</string>
+    <string name="showcase_match_description">Choose your preferred match &amp; participate in different contests &amp; enjoy big winnings</string>
+    <string name="showcase_live_match_description">Now create your teams even during the LIVE match.</string>
+
+
+    <string name="Live_Match_Inning_tab_Title_description">Select your Live Fantasy slots here</string>
+
+    <string name="Contest_tabs">Contest</string>
+    <string name="Contest_tabs_description">Here is the list of contests you can join in the league
+    </string>
+
+    <string name="showcase_legue_info">League Info</string>
+    <string name="showcase_legue_info_description">Check out leaderboard info, winnings breakup &amp; join your contest
+    </string>
+
+
+    <string name="Create_Team_title">Create Team</string>
+    <string name="Create_Team_description">Create your fantasy teams here to enjoy big winnings.</string>
+
+
+
+
+    <string name="showcase_withdrawal">Withdrawal</string>
+    <string name="showcase_withdrawal_description">Withdraw your earnings from here after completing KYC.</string>
+
+
+    <string name="showcase_profile_verify">Verification</string>
+    <string name="showcase_profile_verify_description">Verify your profile &amp; bank details for successful withdrawals </string>
+
+    <string name="showcase_profile_status">Profile Stats</string>
+    <string name="showcase_profile_status_description">Check Your Profile Stats here.</string>
+
+    <string name="showcase_profile_level">Profile Levels</string>
+    <string name="showcase_profile_level_description">Check Your Level here &amp; level-up to earn more rewards.</string>
+
+
+
+
+
+
+    <string name="showcase_fixture">Fixture Bar</string>
+    <string name="showcase_fixture_description">Upcoming, on-going and completed contest all at one place.</string>
+
+
+    <string name="showcase_all_contest">View All Contests</string>
+    <string name="showcase_all_contest_description">Take a quick glance at all the contest, at one place.</string>
+
+    <string name="showcase_contest_sorting">All Contest</string>
+    <string name="showcase_contest_sorting_description">Easy sorting of Contest by winning, teams, winners or entry fee.
+        Set it from lowest to highest or vice-versa.
+    </string>
+
+    <string name="showcase_player_type">Player Roles</string>
+    <string name="showcase_player_type_description">Choose a well-balanced Playing XI, picking the right players with
+        different roles.
+    </string>
+
+    <string name="showcase_select_player" translatable="false">Select Player</string>
+    <string name="showcase_select_player_description">Tap on any player to add in your Team.</string>
+
+    <string name="showcase_add_cash">Add Cash</string>
+    <string name="showcase_add_cash_description">Make playing more interesting, add money from here &amp; continue
+        playing.
+    </string>
+
+
+
+</resources>

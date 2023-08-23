@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+
+        <import type="android.graphics.Color" />
+
+        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+        <import type="com.rummytitans.playcashrummyonline.cardgame.utils.MyConstants"/>
+
+        <import type="com.google.android.material.bottomsheet.BottomSheetBehavior"/>
+
+        <variable
+            name="viewmodel"
+            type="com.rummytitans.playcashrummyonline.cardgame.ui.verifications.viewmodels.AddressVerificationViewModel" />
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/viewDl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:visibility="visible"
+        android:visibility="@{viewmodel.selectedDocument == 2 ? View.VISIBLE : View.GONE}"
+        android:paddingVertical="16dp">
+
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_medium"
+            android:textSize="14sp"
+            android:textColor="@color/aadharTitleColor"
+            android:gravity="center_horizontal"
+            android:text="@string/upload_dl_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/txtNoteColor"
+            android:fontFamily="@font/rubik_regular"
+            android:textSize="12sp"
+            android:layout_marginTop="2dp"
+            android:text="@string/upload_dl_desc"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtTitle"/>
+
+
+        <TextView
+            android:id="@+id/hintDlNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_medium"
+            android:textSize="12sp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/txtNoteColor"
+            android:gravity="center_horizontal"
+            android:text="@string/driving_license_number"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtDesc"/>
+
+
+        <TextView
+            android:id="@+id/txtQuickGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_medium"
+            android:textSize="12sp"
+            android:textColor="@color/quickGuideColor"
+            android:gravity="center_horizontal"
+            android:text="@string/quick_guide"
+            app:setUnderline="@{true}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_dl"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_dl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:hintEnabled="false"
+            app:TextInputTintColor="@{@color/text_color2}"
+            android:theme="@style/Widget.MyTeam11.TextInputLayoutActivate"
+            app:hintTextAppearance="@style/TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hintDlNumber">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editDLNumber"
+                android:backgroundTint="@color/text_color3"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:fontFamily="@font/rubik_medium"
+                android:hint="RJ1420225678880"
+                android:textSize="14sp"
+                android:textColorHint="@color/optionSelectColor"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:textAllCaps="true"
+                android:paddingBottom="18dp"
+                android:textColor="@color/drivEditTxtColor"
+                android:maxLength="20"
+                android:maxLines="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/hintDob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_medium"
+            android:layout_marginTop="14dp"
+            android:textSize="12sp"
+            android:textColor="@color/aadharTitleColor"
+            android:gravity="center_horizontal"
+            android:text="@string/frag_pan_date_of_birth"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_dl"/>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_dob"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:hintEnabled="false"
+            app:TextInputTintColor="@{@color/text_color2}"
+            android:theme="@style/Widget.MyTeam11.TextInputLayoutActivate"
+            app:hintTextAppearance="@style/TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hintDob">
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/editDob"
+                android:backgroundTint="@color/text_color3"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:fontFamily="@font/rubik_medium"
+                android:hint="YYYY-MM-DD"
+                android:editable="false"
+                android:focusable="false"
+                android:textSize="14sp"
+                android:paddingBottom="18dp"
+                android:textColorHint="@color/optionSelectColor"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:textColor="@color/drivEditTxtColor"
+                android:maxLength="10"
+                android:maxLines="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/calendar"
+            app:tint="@color/text_color8"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="18dp"
+            app:layout_constraintEnd_toEndOf="@id/input_dob"
+            app:layout_constraintTop_toTopOf="@id/input_dob"
+            app:layout_constraintBottom_toBottomOf="@id/input_dob"/>
+
+        <TextView
+            android:id="@+id/btnSubmitDetails"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_primary_box"
+            android:fontFamily="@font/rubik_medium"
+            android:text="@string/submit"
+            android:textAllCaps="true"
+            android:onClick="@{()->viewmodel.submitDetails()}"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/input_dob"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/txtNoteHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_medium"
+            android:layout_marginTop="14dp"
+            android:textSize="12sp"
+            android:textColor="@color/text_color8"
+            android:gravity="center_horizontal"
+            android:text="Note :  "
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnSubmitDetails"/>
+
+        <TextView
+            android:id="@+id/txtNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_regular"
+            android:layout_marginTop="14dp"
+            android:textSize="12sp"
+            android:visibility="gone"
+            android:textColor="@color/text_color2"
+            android:gravity="start|center_horizontal"
+            android:text="Once a document is submitted, it cannot be used on any other account."
+            app:layout_constraintStart_toEndOf="@id/txtNoteHint"
+            app:layout_constraintTop_toBottomOf="@id/btnSubmitDetails"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

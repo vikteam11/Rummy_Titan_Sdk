@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <import type="kotlin.Unit"/>
+        <import type="android.graphics.Color"/>
+        <variable
+            name="color"
+            type="String" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:background="@drawable/bottom_button"
+        android:backgroundTint="@color/text_color6">
+
+        <ImageView
+            android:id="@+id/imgCross"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_cross_new"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/txtMsg1"
+            android:layout_alignBottom="@+id/txtMsg1"
+            app:layout_constraintBottom_toBottomOf="@id/txtMsg1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/text_color8" />
+
+        <TextView
+            android:id="@+id/txtMsg1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_medium"
+            android:textSize="12sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/text_color8"
+            android:lineSpacingExtra="10sp"
+            android:text='@{@string/quick_guide+":"}'
+            android:layout_alignParentStart="true"/>
+
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:minHeight="400dp"
+            android:layout_marginTop="50dp"
+            app:layout_constraintTop_toBottomOf="@+id/imgCross"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <FrameLayout
+                android:id="@+id/loading"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ProgressBar
+                    android:id="@+id/loadingLogin"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_white_progress"
+                    android:elevation="10dp"
+                    android:padding="@dimen/margin_min"
+                    android:layout_gravity="center"
+                    android:indeterminateTint="@{Color.parseColor(color)}"
+                    android:theme="@style/ProgressBar" />
+            </FrameLayout>
+
+        </WebView>
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,1 @@
+# MyteamRummy Standlone application

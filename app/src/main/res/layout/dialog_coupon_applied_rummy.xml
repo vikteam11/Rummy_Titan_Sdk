@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.graphics.Color"/>
+
+        <variable
+            name="description"
+            type="String" />
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="color"
+            type="String" />
+    </data>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/margin_micro"
+        android:background="@drawable/bg_squre_shape"
+        android:backgroundTint="@color/rummy_black_3"
+        android:orientation="vertical"
+        android:paddingBottom="24dp">
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animDone"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            android:layout_marginTop="24dp"
+            app:lottie_rawRes="@raw/successfully_apply_coupon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView34"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="8dp"
+            android:text="@{title}"
+            android:textColor="@color/text_color8"
+            android:fontFamily="@font/rubik_medium"
+            android:textSize="12sp"
+            android:textAppearance="@style/TextAppearance.MyTeam11.Large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/animDone" />
+
+        <TextView
+            android:id="@+id/textView35"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:gravity="center"
+            android:textColor="@color/text_color2"
+            android:fontFamily="@font/rubik_regular"
+            android:textSize="10sp"
+            android:text="@{description}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView34" />
+
+        <TextView
+            android:id="@+id/txtStart"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_squre_shape"
+            android:backgroundTint="@color/maingreen"
+            android:elevation="@dimen/margin_micro"
+            android:gravity="center"
+            android:text="@string/ok"
+            android:textAppearance="@style/TextAppearance.MyTeam11.Medium"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView35" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
+</layout>

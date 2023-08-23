@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+
+        <import type="android.view.View" />
+
+        <import type="android.graphics.Color" />
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="colorCode"
+            type="String" />
+
+        <variable
+            name="date"
+            type="androidx.databinding.ObservableField&lt;String&gt;" />
+        <variable
+            name="pincode"
+            type="androidx.databinding.ObservableField&lt;String&gt;" />
+        </data>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/linParent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:animateLayoutChanges="true"
+        android:background="@drawable/bg_white_box"
+        app:cardCornerRadius="16dp">
+
+        <LinearLayout
+            android:animateLayoutChanges="true"
+            android:layout_margin="16dp"
+            android:orientation="vertical"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rubik_medium"
+                android:text="@string/little_more"
+                android:textColor="@color/gunmetal"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtMessage1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/rubik_regular"
+                android:text="We need a little more information, before Add Cash."
+                android:textColor="@color/cool_grey"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/inputLayout1"
+                app:layout_constraintStart_toStartOf="@+id/inputLayout1"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+
+<!--
+            <FrameLayout
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_gravity="end|center"
+                    android:backgroundTint="@{viewmodel.txtTeamNameIconOk?@color/turtle_Green : @color/red}"
+                    android:background="@drawable/circle"
+                    app:tint="@color/white"
+                    android:layout_marginEnd="5dp"
+                    android:padding="4dp"
+                    android:elevation="4dp"
+                    android:layout_marginTop="5dp"
+                    android:visibility="@{viewmodel.isTextAvailable?View.VISIBLE:View.GONE}"
+                    app:setSrcCompact="@{viewmodel.txtTeamNameIconOk?@drawable/ic_check_correct:@drawable/ic_check_incorrect}"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inputteamname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/Widget.MyTeam11.TextInputLayout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtMessage1">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/editTeamName"
+                        android:paddingEnd="30dp"
+                        android:paddingStart="0dp"
+                        style="@style/Widget.MyTeam11.BorderEditTextV2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/rubik_medium"
+                        android:hint="@string/teamname"
+                        android:imeOptions="actionDone"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textAllCaps="true"
+                        android:textSize="16sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </FrameLayout>
+&lt;!&ndash;            android:visibility="@{viewmodel.isTextAvailable?View.VISIBLE:View.GONE}"&ndash;&gt;
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtTeamName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{viewmodel.txtTeamName}"
+                android:textColor="@{viewmodel.txtTeamNameIconOk?@color/turtle_Green : @color/red}"
+                android:textSize="10sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline5"
+                app:layout_constraintTop_toBottomOf="@+id/editTeamName"/>-->
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputdob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:TextInputTintColor="@{Color.parseColor(colorCode)}"
+                app:errorTextColor="@{date.empty?@color/error_code:@color/silver_two}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtMessage1">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/editDOB"
+                    android:focusable="false"
+                    style="@style/Widget.MyTeam11.BorderEditTextV2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/your_date_of_birth"
+                    android:imeOptions="actionDone"
+                    android:maxLength="12"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textAllCaps="true"
+                    android:textSize="16sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputpinCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:TextInputTintColor="@{Color.parseColor(colorCode)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtMessage1">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/editPincode"
+                    style="@style/Widget.MyTeam11.BorderEditTextV2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="PinCode"
+                    android:imeOptions="actionDone"
+                    android:maxLines="1"
+                    android:maxLength="6"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textAllCaps="true"
+                    android:textSize="16sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:text="@string/not_available_state_msg"
+                android:textColor="@color/silver_two"
+                android:textSize="12sp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/rubik_regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/txtNo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_medium"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="@string/cancel"
+                    android:textAllCaps="true"
+                    android:textColor="@color/cool_grey"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/txtYes"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <Button
+                    android:id="@+id/txtYes"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:backgroundTint="@{Color.parseColor(colorCode)}"
+                    android:background="@drawable/bg_primary_box"
+                    android:fontFamily="@font/rubik_medium"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="@string/add_cash"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/txtNo"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <View
+                    android:elevation="4dp"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:background="@color/alpha_white"
+                    android:visibility="@{!pincode.empty &amp; !date.empty ?View.GONE:View.VISIBLE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/txtNo"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+</layout>

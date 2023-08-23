@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="onboarding_titles">
+        <item name="onboarding_title1">Lowest Platform Fee</item>
+        <item name="onboarding_title3">Refer &amp; Earn</item>
+        <item name="onboarding_title2">Instant Withdrawal</item>
+        <item name="onboarding_title4">RakeBack Program</item>
+</string-array>
+
+    <string-array name="onboarding_descriptions">
+        <item name="onboarding_description1">Across All Rummy Platforms In India\nPay Minimal Fee &amp; Enjoy Big Winnings</item>
+        <item name="onboarding_description3">Enjoy Rummy With Your Friend &amp; Family &amp; Get Up To ₹15,000 On Every Successful Referral</item>
+        <item name="onboarding_description2">Fastest Amount Withdrawal To Your Account</item>
+        <item name="onboarding_description4">Stop waiting and withdraw your winnings instantly only on MyTeam11!</item>
+    </string-array>
+
+</resources>
