@@ -15,6 +15,7 @@ object MyConstants {
     const val STAGING_URL = "https://api.goteam11.com/"
     const val REDIS_URL = "https://redis.goteam11.com/"
     const val N2_URL = "https://n2.myteam11.com/"
+    var CURRENT_APP_TYPE = 8
     const val SPLASH_URL =  "https://api.myteam11.com"//"https://app2.goteam11.com"//
     const val APP_CURRENT_URL = PRODUCTION_URL
     //const val APP_CURRENT_URL2 = "http://15.207.63.62:7000/"

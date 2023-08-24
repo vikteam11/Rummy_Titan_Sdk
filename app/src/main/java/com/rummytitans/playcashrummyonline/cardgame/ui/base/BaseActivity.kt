@@ -71,8 +71,8 @@ open class BaseActivity : AppCompatActivity(), BaseNavigator {
                        .putExtra("deepLink", deeplink))
            }
         }*/
-        setTheme(R.style.RummyAppTheme)
         super.onCreate(savedInstanceState)
+        setTheme(R.style.RummyAppTheme)
         supportActionBar?.hide()
         registerReceiver(
             clearActivityStack,

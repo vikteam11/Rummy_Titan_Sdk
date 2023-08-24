@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.JsonObject
@@ -14,8 +15,10 @@ import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
 import com.rummytitans.playcashrummyonline.cardgame.models.LoginResponse
 import com.rummytitans.playcashrummyonline.cardgame.models.VersionModel
 import com.rummytitans.playcashrummyonline.cardgame.models.WalletBalanceModel
+import com.rummytitans.playcashrummyonline.cardgame.models.WalletInfoModel
 import com.rummytitans.playcashrummyonline.cardgame.utils.ConnectionDetector
 import com.rummytitans.playcashrummyonline.cardgame.utils.MyConstants
+import com.rummytitans.playcashrummyonline.cardgame.widget.MyDialog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -27,7 +30,7 @@ class MainViewModel @Inject constructor(
     val apiInterface: APIInterface,
     val connectionDetector: ConnectionDetector, val analyticsHelper: AnalyticsHelper
 ) : BaseViewModel<ActiveGameNavigator>() {
-
+    var myDialog: MyDialog? = null
     var isLoading = ObservableBoolean(false)
     var regularColor = prefs.regularColor
     var safeColor = prefs.safeColor
@@ -39,7 +42,14 @@ class MainViewModel @Inject constructor(
     var versionResp: VersionModel = gson.fromJson(prefs.splashResponse, VersionModel::class.java)
     val displayHome = ObservableBoolean(false)
     var isAddressVerified = true
+    var walletLoading = ObservableBoolean(false)
     private val _walletBalance = MutableLiveData<WalletBalanceModel>()
+    val walletBalance:LiveData<WalletBalanceModel> = _walletBalance
+    private val _walletInfo = MutableLiveData<WalletInfoModel>()
+    val walletInfo: LiveData<WalletInfoModel>
+        get() = _walletInfo
+    var isGraphVisible = ObservableBoolean(false)
+    var isMiniWalletOpen = ObservableBoolean(false)
     init {
        // fetchVerificationData()
     }
@@ -114,6 +124,49 @@ class MainViewModel @Inject constructor(
                 }))
         )
     }*/
+
+    fun toggleMiniWallet(){
+        isMiniWalletOpen.set(!isMiniWalletOpen.get())
+    }
+    fun fetchWalletData() {
+        if (!connectionDetector.isConnected) {
+            myDialog?.noInternetDialog {
+                fetchWalletData()
+            }
+            walletLoading.set(false)
+            return
+        }
+        walletLoading.set(true)
+        compositeDisposable.add(
+            apiInterface.getWalletIno(
+                loginResponse.UserId.toString(),
+                loginResponse.ExpireToken,
+                loginResponse.AuthExpire,
+                prefs.seletedLanguage ?: "en"
+            )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(({
+                    walletLoading.set(false)
+                    if (it.Status) {
+                        if (it.Response is WalletInfoModel) {
+                            val apiData = it.Response as WalletInfoModel
+                            apiData.Offer = apiData.Offer.filter { it1 -> it1.IsShow }
+                            _walletInfo.value = apiData
+                        }
+                    } else {
+                        navigator.showError(it.Message)
+                    }
+                }), ({
+                    walletLoading.set(false)
+                    navigator.handleError(it)
+                }))
+        )
+    }
+
+    fun addCashListener() {
+        navigatorAct.sendToAddCash()
+    }
 
     fun getWalletDetail() {
         //remove fetchWalletData when we get isAddressVerified in getWalletDetail APi
@@ -201,4 +254,5 @@ class MainViewModel @Inject constructor(
 
 interface ActiveGameNavigator {
     fun onFindActiveGame(webUrl: String)
+    fun sendToAddCash()
 }

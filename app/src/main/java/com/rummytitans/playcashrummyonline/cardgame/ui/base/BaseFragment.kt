@@ -18,9 +18,7 @@ open class BaseFragment : Fragment() {
 
     var localInflater: LayoutInflater? = null
 
-    fun setTheme(inflater: LayoutInflater) {
-
-    }
+    fun setTheme(inflater: LayoutInflater) {}
 
      fun changeActivityOrientation(target: Int) {
         requireActivity().apply {

@@ -245,5 +245,33 @@
                     app:menu="@menu/navigation_rummy" />
             </FrameLayout>
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/toolBar">
+
+                <View
+                    android:id="@+id/viewBgMiniWallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:visibility="@{viewModel.isMiniWalletOpen ? View.VISIBLE : View.GONE,default=visible}"
+                    android:background="#2D000000"/>
+
+                <LinearLayout
+                    android:id="@+id/layout_miniWallet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{viewModel.isMiniWalletOpen() ? View.VISIBLE :View.GONE}">
+
+                    <include
+                        android:id="@+id/bottomSheetMiniWallet"
+                        layout="@layout/layout_rummy_mini_wallet"
+                        app:addCashListener="@{()-> viewModel.addCashListener()}"
+                        app:isDataLoading="@{viewModel.walletLoading}"
+                        app:isGraphVisible="@{viewModel.isGraphVisible}"
+                        app:walletInfo="@{viewModel.walletInfo}" />
+                </LinearLayout>
+            </FrameLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
