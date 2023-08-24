@@ -10,7 +10,7 @@ abstract class CurrentLocationBaseActivity : BaseActivity() {
     private var requestLocationCount=0
 
     fun showAllowBottomSheet(){
-        //RequestGPSActivity.startActivityForResultGetLatLong(this)
+        RequestGPSActivity.startActivityForResultGetLatLong(this)
     }
 
    abstract fun onLocationFound(lat: Double, log: Double)

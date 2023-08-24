@@ -170,13 +170,13 @@ class FragmentMore : BaseFragment(), MainNavigationFragment, MoreNavigator,
             }
         }
 
-        analyticsHelper.fireEvent(
+        viewModel.analyticsHelper.fireEvent(
             AnalyticsKey.Names.ButtonClick, bundleOf(
                 AnalyticsKey.Keys.ButtonName to buttonName,
                 AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.More,
             )
         )
-        analyticsHelper.addTrigger(AnalyticsKey.Screens.More,buttonName)
+        viewModel.analyticsHelper.addTrigger(AnalyticsKey.Screens.More,buttonName)
     }
 
 

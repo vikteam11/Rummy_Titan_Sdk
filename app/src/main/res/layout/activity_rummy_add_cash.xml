@@ -386,8 +386,7 @@
                         android:foreground="?attr/selectableItemBackground"
                         android:visibility="gone"
                         app:cornerRadius="4dp"
-                        app:layout_constraintTop_toBottomOf="@+id/btnMyRecentTransactions"
-                       >
+                        app:layout_constraintTop_toBottomOf="@+id/btnMyRecentTransactions">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
@@ -416,6 +415,7 @@
                                 app:spanCount="2" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </com.loopeer.shadow.ShadowView>
+
 
                     <com.loopeer.shadow.ShadowView
                         android:id="@+id/btnRedeemCoupan"
@@ -703,7 +703,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:background="@color/colorPrimary" />
+                tools:background="@color/rummy_colorPrimary" />
 
             <include
                 layout="@layout/layout_progress_dialog_rummy"

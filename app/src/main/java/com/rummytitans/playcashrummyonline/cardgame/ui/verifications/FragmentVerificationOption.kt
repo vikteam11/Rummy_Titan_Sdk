@@ -64,8 +64,7 @@ class FragmentVerificationOption : BaseFragment(), AddressVerificationNavigator,
     ): View {
         viewModel =
             ViewModelProvider(
-                this.viewModelStore,
-                viewModelFactory
+                this
             ).get(AddressVerificationViewModel::class.java)
 
         viewModel.navigatorAct = this

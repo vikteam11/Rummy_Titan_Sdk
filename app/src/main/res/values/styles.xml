@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="RummyAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/text_color8</item>
         <item name="colorPrimaryDark">@color/rummy_mainColor</item>
         <item name="colorAccent">@color/text_color2</item>
@@ -14,12 +14,12 @@
         <item name="cardViewStyle">@style/CardViewStyle</item>
     </style>
 
-    <style name="addressVerificationDarkHome" parent="AppTheme">
+    <style name="addressVerificationDarkHome" parent="RummyAppTheme">
         <item name="android:statusBarColor">@color/rummy_mainColor</item>
         <item name="android:navigationBarColor">@color/rummy_black_3</item>
     </style>
 
-    <style name="addressVerificationLight" parent="AppTheme">
+    <style name="addressVerificationLight" parent="RummyAppTheme">
         <item name="android:statusBarColor">@color/rummy_statusBarColor</item>
         <item name="android:navigationBarColor">@color/rummy_windowBackColor</item>
         <item name="android:windowBackground">@color/rummy_windowBackColor</item>
@@ -68,7 +68,7 @@
         <item name="android:windowDisablePreview">true</item>
     </style>
 
-    <style name="Theme.AppUpdateTheme" parent="AppTheme">
+    <style name="Theme.AppUpdateTheme" parent="RummyAppTheme">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowDisablePreview">true</item>
@@ -107,6 +107,7 @@
         <item name="android:windowDisablePreview">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
+        <item name="android:statusBarColor">@color/rummy_mainColor</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>

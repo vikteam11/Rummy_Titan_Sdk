@@ -74,8 +74,7 @@ class FragmentRecentTransactions : BaseFragment(), MainNavigationFragment,
     ): View? {
         setTheme(inflater)
         viewModel = ViewModelProvider(
-            this.viewModelStore,
-            viewModelFactory
+            this
         ).get(RecentTransactionViewModel::class.java)
         binding =
             FragmentRecentTransactionRummyBinding.inflate(localInflater ?: inflater, container, false)

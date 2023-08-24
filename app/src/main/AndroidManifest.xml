@@ -34,7 +34,7 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/RummyAppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:allowBackup, android:fullBackupContent">
@@ -97,7 +97,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/SplashAppTheme">
 
-           <!-- <intent-filter>
+          <!--  <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -176,6 +176,7 @@
         <activity
             android:name=".ui.WebViewActivity"
             android:exported="false"
+            android:theme="@style/addressVerificationDarkHome"
             android:screenOrientation="portrait" />
 
         <activity
@@ -215,6 +216,7 @@
             android:exported="false"
             android:name="com.rummytitans.playcashrummyonline.cardgame.ui.common.CommonFragmentActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/addressVerificationDarkHome"
             android:windowSoftInputMode="adjustResize|stateVisible" />
 
         <activity

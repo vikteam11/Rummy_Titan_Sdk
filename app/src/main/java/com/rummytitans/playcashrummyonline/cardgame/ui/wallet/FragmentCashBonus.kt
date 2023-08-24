@@ -46,8 +46,7 @@ class FragmentCashBonus : BaseFragment(), MainNavigationFragment,
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setTheme(inflater)
         viewModel = ViewModelProvider(
-            this.viewModelStore,
-            viewModelFactory
+            this
         ).get(CashBonusViewModel::class.java)
         binding =
             FragmentCashBonusRummyBinding.inflate(localInflater ?: inflater, container, false).apply {
