@@ -31,7 +31,7 @@
         android:elevation="10dp"
         android:padding="@dimen/margin_min"
         android:visibility="@{visible ? View.VISIBLE :View.GONE }"
-        android:theme="@style/ProgressBar" />
+        android:theme="@style/RummySdk_ProgressBar" />
 
 </FrameLayout>
 </layout>

@@ -213,7 +213,7 @@ class WebAutoAddressVerifyActivity : BaseActivity(), AddressVerificationNavigato
     override fun onBackPressed() {
         BottomSheetAlertDialog(
             this, AlertdialogModel(
-                getString(R.string.app_name),
+                getString(R.string.app_name_rummy),
                 getString(R.string.back_alert),
                 getString(R.string.no),
                 getString(R.string.yes),

@@ -92,7 +92,7 @@
                         android:layout_marginEnd="8dp"
                         android:fontFamily="@font/rubik_regular"
                         android:gravity="center"
-                        android:textAppearance="@style/TextAppearance.MyTeam11.Small"
+                        android:textAppearance="@style/RummySdk_TextAppearance.Small"
                         android:textColor="@color/paleGreyThree"
                         android:textSize="12sp"
                         app:setAmountFormat="@{viewModel.amount}"
@@ -168,7 +168,7 @@
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/ilEditCardNumber"
-                            android:theme="@style/Widget.MyTeam11.TextInputLayoutActivate"
+                            android:theme="@style/RummySdk.TextInputLayoutActivate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/rubik_medium"
@@ -179,7 +179,7 @@
 
                             <androidx.appcompat.widget.AppCompatEditText
                                 android:id="@+id/editCardNumber"
-                                style="@style/Widget.MyTeam11.BorderEditTextV2"
+                                style="@style/RummySdk_Widget.BorderEditTextV2"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/edittext_height"
                                 android:fontFamily="@font/rubik_medium"
@@ -203,7 +203,7 @@
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/inputLayoutCVV"
-                            android:theme="@style/Widget.MyTeam11.TextInputLayoutActivate"
+                            android:theme="@style/RummySdk.TextInputLayoutActivate"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
@@ -216,7 +216,7 @@
 
                             <androidx.appcompat.widget.AppCompatEditText
                                 android:id="@+id/editTextCVV"
-                                style="@style/Widget.MyTeam11.BorderEditTextV2"
+                                style="@style/RummySdk_Widget.BorderEditTextV2"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/edittext_height"
                                 android:fontFamily="@font/rubik_medium"
@@ -258,7 +258,7 @@
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/inputLayoutName"
-                            android:theme="@style/Widget.MyTeam11.TextInputLayoutActivate"
+                            android:theme="@style/RummySdk.TextInputLayoutActivate"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -270,7 +270,7 @@
 
                             <androidx.appcompat.widget.AppCompatEditText
                                 android:id="@+id/editTextName"
-                                style="@style/Widget.MyTeam11.BorderEditTextV2"
+                                style="@style/RummySdk_Widget.BorderEditTextV2"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/edittext_height"
                                 android:backgroundTint="@color/grayBorder"
@@ -368,7 +368,7 @@
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/inputLayoutDate"
-                            android:theme="@style/Widget.MyTeam11.TextInputLayoutActivate"
+                            android:theme="@style/RummySdk.TextInputLayoutActivate"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
@@ -380,7 +380,7 @@
 
                             <androidx.appcompat.widget.AppCompatEditText
                                 android:id="@+id/editDate"
-                                style="@style/Widget.MyTeam11.BorderEditTextV2"
+                                style="@style/RummySdk_Widget.BorderEditTextV2"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/edittext_height"
                                 android:fontFamily="@font/rubik_medium"
@@ -423,7 +423,7 @@
                     android:background="@drawable/bg_white_progress"
                     android:elevation="10dp"
                     android:padding="@dimen/margin_min"
-                    android:theme="@style/ProgressBar"
+                    android:theme="@style/RummySdk_ProgressBar"
                     android:visibility="@{viewModel.isLoading()? View.VISIBLE: View.GONE}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

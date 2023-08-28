@@ -58,10 +58,7 @@ class AutomaticAddressVerificationFragment : BaseFragment(), AddressVerification
         savedInstanceState: Bundle?
     ): View {
         viewModel =
-            ViewModelProvider(
-                this.viewModelStore,
-                viewModelFactory
-            ).get(AddressVerificationViewModel::class.java)
+            ViewModelProvider(this ).get(AddressVerificationViewModel::class.java)
 
         viewModel.navigatorAct = this
         (activity as? BaseActivity)?.let {

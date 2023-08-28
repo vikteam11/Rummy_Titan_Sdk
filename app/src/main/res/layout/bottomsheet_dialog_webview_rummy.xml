@@ -89,7 +89,7 @@
                         android:elevation="10dp"
                         android:indeterminateTint="@{Color.parseColor(color)}"
                         android:padding="@dimen/margin_min"
-                        android:theme="@style/ProgressBar" />
+                        android:theme="@style/RummySdk_ProgressBar" />
                 </FrameLayout>
 
             </WebView>

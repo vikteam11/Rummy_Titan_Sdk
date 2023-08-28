@@ -119,6 +119,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="24dp"
                 android:background="@drawable/bg_primary_box"
+                android:backgroundTint="@color/maingreen"
                 android:fontFamily="@font/rubik_medium"
                 android:text="@{alertModel.positiveText}"
                 android:textColor="@color/text_color8"

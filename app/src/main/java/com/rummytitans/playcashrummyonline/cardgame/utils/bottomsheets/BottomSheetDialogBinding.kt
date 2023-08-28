@@ -11,7 +11,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 
 
  class BottomSheetDialogBinding<D:ViewDataBinding> (context: Context,
-                                                    @LayoutRes val layoutRes:Int):BottomSheetDialog(context, R.style.BottomSheetDialog){
+                                                    @LayoutRes val layoutRes:Int):BottomSheetDialog(context, R.style.RummySdk_BottomSheetDialog){
 
     var binding: D =
         DataBindingUtil.inflate(LayoutInflater.from(context),layoutRes,null,false)

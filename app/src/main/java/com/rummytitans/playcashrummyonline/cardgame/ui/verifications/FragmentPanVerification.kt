@@ -64,10 +64,7 @@ class FragmentPanVerification : BaseFragment(), RequestVarificationInterface,
     ): View? {
         setTheme(inflater)
         viewModel =
-            ViewModelProvider(
-                this.viewModelStore,
-                viewModelFactory
-            ).get(PanVerificationViewModel::class.java)
+            ViewModelProvider(this).get(PanVerificationViewModel::class.java)
         binding =
             FragmentPanVerificationRummyBinding.inflate(localInflater ?: inflater, container, false)
                 .apply {

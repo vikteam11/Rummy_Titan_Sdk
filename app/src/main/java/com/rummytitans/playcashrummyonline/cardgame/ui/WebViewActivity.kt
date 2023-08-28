@@ -18,6 +18,7 @@ import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
+import com.rummytitans.playcashrummyonline.cardgame.RummyTitanSDK
 import kotlinx.android.synthetic.main.fragment_webviews_rummy.*
 
 class WebViewActivity : AppCompatActivity() {
@@ -77,6 +78,9 @@ class WebViewActivity : AppCompatActivity() {
                             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                             startActivity(intent)
+                            true
+                        } else if (url.toString().isMyTeamDeeplink()) {
+                            RummyTitanSDK.rummyCallback?.openDeeplink(url)
                             true
                         } else if (url.toString().contains("${MyConstants.AppDeeplink}:")) {
                             openDeeplink(url.toString())

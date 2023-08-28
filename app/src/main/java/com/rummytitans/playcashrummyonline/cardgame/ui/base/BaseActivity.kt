@@ -26,6 +26,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.appsflyer.AppsFlyerLib
+import com.rummytitans.playcashrummyonline.cardgame.RummyTitanSDK
 //import com.onesignal.OSInAppMessageAction
 //import com.onesignal.OneSignal
 import com.rummytitans.playcashrummyonline.cardgame.models.MatchModel
@@ -45,7 +46,7 @@ open class BaseActivity : AppCompatActivity(), BaseNavigator {
     var matchModel: MatchModel =
         MatchModel()
 
-    var myTheme: Int = R.style.AppTheme_Safe
+    var myTheme: Int = R.style.RummyAppTheme
 
     val isTimesUpForQuiz = MutableLiveData<Boolean>()
 
@@ -168,7 +169,8 @@ open class BaseActivity : AppCompatActivity(), BaseNavigator {
     override fun logoutUser() {
         //HaptikSDK.logout(this)
         finishAffinity()
-        startActivity(Intent(this, RummyNewLoginActivity::class.java))
+      //  startActivity(Intent(this, RummyNewLoginActivity::class.java))
+        RummyTitanSDK.rummyCallback?.logoutUser()
     }
 
     override fun getStringResource(resourseId: Int) =

@@ -13,13 +13,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/belowContainerBack">
+    android:background="@color/black">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottom_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/belowContainerBack"
+        android:background="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -158,7 +158,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/ilAdhardNumber"
-                    android:theme="@style/Widget.MyTeam11.TextInputLayoutActivate"
+                    android:theme="@style/RummySdk.TextInputLayoutActivate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -175,7 +175,7 @@
                         android:layout_height="wrap_content"
                         android:paddingBottom="16dp"
                         android:backgroundTint="@color/edtTintColor"
-                        style="@style/Widget.MyTeam11.BorderEditTextV2"
+                        style="@style/RummySdk_Widget.BorderEditTextV2"
                         android:text="@={viewmodel.aadhaarNumber}"
                         android:hint="@string/enter_aadhar_hint"
                         android:inputType="number"

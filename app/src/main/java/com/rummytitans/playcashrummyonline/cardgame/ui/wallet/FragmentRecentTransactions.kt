@@ -231,7 +231,7 @@ class FragmentRecentTransactions : BaseFragment(), MainNavigationFragment,
                 Environment.DIRECTORY_DOWNLOADS,
                 "RummyTitans_" + data.ID + ".pdf"
             )
-            request.setTitle(getString(R.string.app_name))
+            request.setTitle(getString(R.string.app_name_rummy))
             request.setMimeType("application/pdf")
             request.setDescription("Downloading Transaction History")
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)

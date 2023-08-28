@@ -107,7 +107,7 @@
             android:elevation="@dimen/margin_micro"
             android:gravity="center"
             android:text="PAY"
-            android:textAppearance="@style/TextAppearance.MyTeam11.Medium"
+            android:textAppearance="@style/RummySdk_TextAppearance.Medium"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:visibility="@{model.data.isSelected?View.VISIBLE:View.GONE}"

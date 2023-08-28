@@ -120,7 +120,7 @@
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/editPanUserName"
-                    style="@style/Widget.MyTeam11.BorderEditText"
+                    style="@style/RummySdk_Widget.BorderEditText"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="10dp"
@@ -155,7 +155,7 @@
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/editPanNumber"
-                    style="@style/Widget.MyTeam11.BorderEditText"
+                    style="@style/RummySdk_Widget.BorderEditText"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="10dp"
@@ -193,7 +193,7 @@
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/editPanDOB"
-                    style="@style/Widget.MyTeam11.BorderEditText"
+                    style="@style/RummySdk_Widget.BorderEditText"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="10dp"
@@ -228,7 +228,7 @@
 
                 <LinearLayout
                     android:id="@+id/editStates"
-                    style="@style/Widget.MyTeam11.BorderEditText"
+                    style="@style/RummySdk_Widget.BorderEditText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -277,7 +277,7 @@
                     android:background="@drawable/bg_white_progress"
                     android:elevation="10dp"
                     android:padding="@dimen/margin_min"
-                    android:theme="@style/ProgressBar"
+                    android:theme="@style/RummySdk_ProgressBar"
                     android:visibility="@{viewmodel.isProgressLoading?View.VISIBLE:View.GONE}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

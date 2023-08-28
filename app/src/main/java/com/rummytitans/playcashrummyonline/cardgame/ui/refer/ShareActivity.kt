@@ -91,7 +91,7 @@ class ShareActivity : BaseActivity() {
                 Intent(this, WebViewActivity::class.java)
                     .putExtra(MyConstants.INTENT_PASS_WEB_URL, WebViewUrls.AppDefaultURL+WebViewUrls.REFER_FRIEND)
                     .putExtra(MyConstants.INTENT_PASS_SHOW_CROSS, true)
-                    .putExtra(MyConstants.INTENT_PASS_WEB_TITLE, getString(R.string.app_name))
+                    .putExtra(MyConstants.INTENT_PASS_WEB_TITLE, getString(R.string.app_name_rummy))
             )
         }
 

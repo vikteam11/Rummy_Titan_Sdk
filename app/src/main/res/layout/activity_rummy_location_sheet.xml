@@ -33,7 +33,7 @@
             android:background="@drawable/bg_white_progress"
             android:elevation="10dp"
             android:padding="@dimen/margin_min"
-            android:theme="@style/ProgressBar"
+            android:theme="@style/RummySdk_ProgressBar"
             android:visibility="gone" />
 
         <View

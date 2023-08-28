@@ -74,7 +74,7 @@
                         app:tabMaxWidth="10dp"
                         android:visibility="@{viewmodel.headerList.size() > 1 ? View.VISIBLE : View.GONE}"
                         android:layout_gravity="bottom|center_horizontal"
-                        app:tabTextAppearance="@style/MyTabLayoutTextAppearanceV6"
+                        app:tabTextAppearance="@style/RummySdk_MyTabLayoutTextAppearanceV6"
                         app:layout_constraintTop_toBottomOf="@id/sliderContainer"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"/>

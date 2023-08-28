@@ -309,7 +309,7 @@ class FragmentRummyWebViewer() : BaseFragment(),
             if((it as? RummyMainActivity)?.mCurrentFragment !is FragmentRummyWebViewer)
                 return
             val alertModel= AlertdialogModel(
-                getString(R.string.app_name),
+                getString(R.string.app_name_rummy),
                 msg,
                 positiveText = exitMSg,
                 onPositiveClick = {

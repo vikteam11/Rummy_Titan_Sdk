@@ -15,6 +15,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.appsflyer.AppsFlyerLib
 import com.rummytitans.playcashrummyonline.cardgame.ui.newlogin.RummyNewLoginActivity
+import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.RummyAddCashActivity
 import dagger.hilt.android.AndroidEntryPoint
 //import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 //import com.google.firebase.ktx.Firebase
@@ -187,13 +188,13 @@ class DeepLinkActivity : BaseActivity(), DeepLinkNavigator {
                         .putExtra("comingForGame", true)
                 )
             } else if (it.key == "addcashamount" || it.key == "addcash") {
-               /* startActivity(
-                    Intent(this, AddCashActivity::class.java)
+                startActivity(
+                    Intent(this, RummyAddCashActivity::class.java)
                         .putExtra(MyConstants.INTENT_PASS_AMOUNT, it.value.toDouble())
                         .putExtra(MyConstants.INTENT_COME_FROM_GAME,
                             intent.getBooleanExtra(MyConstants.INTENT_COME_FROM_GAME,false))
                 )
-                finish()*/
+                finish()
             }else if(it.key == "addressVerification") {
                 val rejectMsg = if (TextUtils.isEmpty(it.value))
                     ""

@@ -101,7 +101,7 @@ fun sendToCloseAbleInternalBrowser(activity: Context, webUrl: String,title:Strin
     activity.startActivity(
         Intent(activity, WebViewActivity::class.java)
             .putExtra(MyConstants.INTENT_PASS_WEB_URL, webUrl)
-            .putExtra(MyConstants.INTENT_PASS_WEB_TITLE, if(title =="") activity.getString(R.string.app_name) else title)
+            .putExtra(MyConstants.INTENT_PASS_WEB_TITLE, if(title =="") activity.getString(R.string.app_name_rummy) else title)
             .putExtra(MyConstants.INTENT_PASS_SHOW_TOOLBAR, true)
             .putExtra(MyConstants.INTENT_PASS_SHOW_CROSS, true)
     )
@@ -616,7 +616,7 @@ fun sendToInternalBrowser(activity: Context, webUrl: String,title: String="") {
         Intent(activity, WebViewActivity::class.java)
             .putExtra(MyConstants.INTENT_PASS_WEB_URL, webUrl)
             .putExtra(MyConstants.INTENT_PASS_WEB_TITLE,
-                if(title=="")activity.getString(R.string.app_name) else title)
+                if(title=="")activity.getString(R.string.app_name_rummy) else title)
     )
 }
 
@@ -667,7 +667,7 @@ fun Activity.showRestrictLocationDialog(msg:String){
 fun Context.showBottomSheetWebView(
     url: String,
     color:String,
-    title:String=getString(R.string.app_name)
+    title:String=getString(R.string.app_name_rummy)
 ){
     WebViewBottomSheetDialog(
         context = this,
@@ -680,4 +680,9 @@ fun Context.showBottomSheetWebView(
 fun Double.decimalFormat():Double{
     val format =  DecimalFormat("##.##").format(this)
     return format.toDouble()
+}
+
+
+fun String.isMyTeamDeeplink():Boolean{
+    return this.contains("myteam11storedeeplink:",true) || this.contains("myTeamDeepLink:",true)
 }

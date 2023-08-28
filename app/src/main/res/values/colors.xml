@@ -7,7 +7,7 @@
     <color name="rummy_mainColor">#c4002a</color>
     <color name="rummy_navigationColor">#310610</color>
 
-    // to manage dark theme on address verification
+   <!-- // to manage dark theme on address verification-->
     <color name="rummy_toolBarColor">#c4002a</color>
     <color name="rummy_progressBarColor">#221E1E</color>
     <color name="backColorEnterAadhar">#221E1E</color>
@@ -35,11 +35,11 @@
     <color name="verifyOptionBackColor">#FF686569</color>
     <color name="radioColor">#9a9498</color>
     <color name="hideShowBorderColor">#FF686569</color>
-     <color name="quickGuideColor">#3ecb87</color>
-     <color name="drivEditTxtColor">#e8e8e8</color>
-       <color name="stepOneTintColor">#292929</color>
-        <color name="infoAadharTxtColor">#9a9498</color>
-        <color name="infoAadharTintColor">#292929</color>
+    <color name="quickGuideColor">#3ecb87</color>
+    <color name="drivEditTxtColor">#e8e8e8</color>
+    <color name="stepOneTintColor">#292929</color>
+    <color name="infoAadharTxtColor">#9a9498</color>
+    <color name="infoAadharTintColor">#292929</color>
 
     <!-- colors new Design -->
     <color name="bright_orange">#ff641a</color>

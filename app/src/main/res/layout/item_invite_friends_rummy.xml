@@ -22,7 +22,7 @@
           app:layout_constraintTop_toTopOf="@+id/imgUser" android:layout_marginStart="6dp"/>
 
     <View android:id="@+id/progressBar"
-          style="@style/customProgressBar"
+          style="@style/RummySdk_customProgressBar"
           android:layout_width="0dp"
           android:layout_height="2dp"
           android:layerType="hardware"

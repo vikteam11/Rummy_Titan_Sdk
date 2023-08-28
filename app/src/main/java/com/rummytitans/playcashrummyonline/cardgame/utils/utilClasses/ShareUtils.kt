@@ -36,5 +36,5 @@ fun Context.shareReferMessage(url: String?, referMessage:String?="",referCode:St
     sendIntent.action = Intent.ACTION_SEND
     sendIntent.putExtra(Intent.EXTRA_TEXT, shareDescription)
     sendIntent.type = "text/plain"
-    startActivity(Intent.createChooser(sendIntent, "Invite Friend - ${getString(R.string.app_name)}"))
+    startActivity(Intent.createChooser(sendIntent, "Invite Friend - ${getString(R.string.app_name_rummy)}"))
 }

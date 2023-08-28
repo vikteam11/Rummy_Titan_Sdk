@@ -13,30 +13,30 @@
         <item name="android:navigationBarColor">@color/black</item>
         <item name="android:textColorPrimary">@color/text_color8</item>
         <item name="android:textColorSecondary">@color/text_color2</item>
-        <item name="cardViewStyle">@style/CardViewStyle</item>
+        <item name="cardViewStyle">@style/RummySdk_CardViewStyle</item>
     </style>
 
-    <style name="addressVerificationDarkHome" parent="RummyAppTheme">
+    <style name="RummySdk_addressVerificationDarkHome" parent="RummyAppTheme">
         <item name="android:statusBarColor">@color/rummy_mainColor</item>
         <item name="android:navigationBarColor">@color/rummy_black_3</item>
     </style>
 
-    <style name="addressVerificationLight" parent="RummyAppTheme">
+    <style name="RummySdk_addressVerificationLight" parent="RummyAppTheme">
         <item name="android:statusBarColor">@color/rummy_statusBarColor</item>
         <item name="android:navigationBarColor">@color/rummy_windowBackColor</item>
         <item name="android:windowBackground">@color/rummy_windowBackColor</item>
 
     </style>
 
-    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+    <style name="RummySdk_DialogTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:windowMinWidthMinor">16dp</item>
     </style>
 
-    <style name="CardViewStyle">
+    <style name="RummySdk_CardViewStyle">
         <item name="cardBackgroundColor">@color/rummy_black_3</item>
     </style>
     <!-- Base application theme. -->
-    <style name="AppTheme.Safe" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="RummyAppTheme.Safe" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/rummy_colorPrimary</item>
         <item name="colorPrimaryDark">@color/rummy_colorPrimary</item>
         <item name="colorAccent">@color/rummy_colorPrimary</item>
@@ -54,7 +54,7 @@
         <item name="android:windowDisablePreview">true</item>
     </style>
 
-    <style name="AppTheme.Regular" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="RummyAppTheme.Regular" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/app_purple</item>
         <item name="colorPrimaryDark">@color/app_purple</item>
         <item name="colorAccent">@color/app_purple</item>
@@ -76,7 +76,7 @@
         <item name="android:windowDisablePreview">true</item>
     </style>
 
-    <style name="Theme.Youtube.Transparent" parent="android:Theme">
+    <style name="RummySdk_Theme.Youtube.Transparent" parent="android:Theme">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>
@@ -86,25 +86,25 @@
     </style>
 
 
-    <style name="ProgressBar" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="RummySdk_ProgressBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorAccent">@color/rummy_progressTintColor</item>
     </style>
 
-    <style name="SplashAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="RummySdk_SplashAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowBackground">@drawable/img_onboarding_rummy_bg</item>
     </style>
 
-    <style name="AppTheme.Onboard" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="RummyAppTheme.Onboard" parent="Theme.AppCompat.Light.NoActionBar">
         <!--        <item name="android:windowAnimationStyle">@null</item>-->
         <item name="android:windowDisablePreview">true</item>
         <item name="android:navigationBarColor">@color/rummy_navigationColor</item>
 
     </style>
 
-    <style name="AppTheme.FullScreen" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="RummyAppTheme.FullScreen" parent="Theme.AppCompat.Light.NoActionBar">
         <!--        <item name="android:windowAnimationStyle">@null</item>-->
         <item name="android:windowDisablePreview">true</item>
         <item name="android:windowNoTitle">true</item>
@@ -129,7 +129,7 @@
     </style>
     //Buttons
 
-    <style name="Widget.MyTeam11.RaisedButton" parent="@style/Widget.AppCompat.Button.Colored">
+    <style name="RummySdk_Widget.MyTeam11.RaisedButton" parent="@style/Widget.AppCompat.Button.Colored">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:gravity">center</item>
@@ -146,7 +146,7 @@
 
     //Buttons
 
-    <style name="Widget.MyTeam11.RaisedButton.Small" parent="@style/Widget.AppCompat.Button.Colored">
+    <style name="RummySdk_Widget.MyTeam11.RaisedButton.Small" parent="@style/Widget.AppCompat.Button.Colored">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:gravity">center</item>
@@ -161,7 +161,7 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="Widget.MyTeam11.ParentBottomButton" parent="@style/Widget.AppCompat.Button.Colored">
+    <style name="RummySdk_Widget.ParentBottomButton" parent="@style/Widget.AppCompat.Button.Colored">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:background">@drawable/view_shadow</item>
@@ -174,7 +174,7 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
-    <style name="Widget.MyTeam11.BorderEditText" parent="Widget.AppCompat.EditText">
+    <style name="RummySdk_Widget.BorderEditText" parent="Widget.AppCompat.EditText">
         <item name="android:background">@drawable/rounded_rect_border_gray</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/cool_grey</item>
@@ -184,25 +184,25 @@
         <item name="android:gravity">center_vertical</item>
     </style>
 
-    <style name="Widget.MyTeam11.BoxEditText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="RummySdk_Widget.BoxEditText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:textSize">12sp</item>
         <item name="android:colorAccent">@color/rummy_azure_two</item>
     </style>
 
 
-    <style name="Widget.MyTeam11.BoxEditTextV2" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+    <style name="RummySdk_Widget.BoxEditTextV2" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="android:textSize">12sp</item>
         <item name="android:fontFamily">@font/rubik_bold</item>
         <item name="android:colorAccent">@color/text_color8</item>
         <item name="hintTextColor">@color/text_color2</item>
         <item name="android:textColorHint">@color/text_color2</item>
     </style>
-    <style name="TextLabel" parent="TextAppearance.Design.Hint">
+    <style name="RummySdk_TextLabel" parent="TextAppearance.Design.Hint">
         <item name="android:textSize">12sp</item>
         <item name="android:fontFamily">@font/rubik_regular</item>
     </style>
 
-    <style name="Widget.MyTeam11.BorderEditTextV2" parent="Widget.AppCompat.EditText">
+    <style name="RummySdk_Widget.BorderEditTextV2" parent="Widget.AppCompat.EditText">
         <item name="android:textSize">16sp</item>
         <item name="backgroundTint">@color/text_color5</item>
         <item name="android:textColor">@color/gray1</item>
@@ -213,7 +213,7 @@
     </style>
 
 
-    <style name="Widget.MyTeam11.TextInputLayout" parent="AppTheme.Safe">
+    <style name="RummySdk_Widget.TextInputLayout" parent="RummyAppTheme.Safe">
         <item name="colorPrimary">@color/grayBorder</item>
         <item name="colorPrimaryDark">@color/grayBorder</item>
         <item name="colorAccent">@color/grayBorder</item>
@@ -222,50 +222,50 @@
         <item name="colorControlActivated">@color/grayBorder</item>
     </style>
 
-    <style name="Widget.MyTeam11.TextInputLayoutDisable" parent="AppTheme.Safe">
+    <style name="RummySdk_Widget.TextInputLayoutDisable" parent="RummyAppTheme.Safe">
         <item name="colorAccent">@color/silver_two</item>
     </style>
 
-    <style name="Widget.MyTeam11.RadioButton" parent="AppTheme.Safe">
+    <style name="RummySdk_Widget.RadioButton" parent="RummyAppTheme.Safe">
         <item name="colorAccent">@color/maingreen</item>
         <item name="colorControlNormal">@color/grayBorder</item>
         <item name="colorControlActivated">@color/maingreen</item>
     </style>
 
-    <style name="TextAppearance.MyTeam11.Large" parent="@android:style/TextAppearance.Large">
+    <style name="RummySdk_TextAppearance.Large" parent="@android:style/TextAppearance.Large">
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/gunmetal</item>
     </style>
 
-    <style name="TextAppearance.MyTeam11.Medium" parent="@android:style/TextAppearance.Medium">
+    <style name="RummySdk_TextAppearance.Medium" parent="@android:style/TextAppearance.Medium">
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/gunmetal</item>
     </style>
 
-    <style name="TextAppearance.MyTeam11.Normal" parent="@android:style/TextAppearance.Medium">
+    <style name="RummySdk_TextAppearance.Normal" parent="@android:style/TextAppearance.Medium">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/gunmetal</item>
     </style>
 
-    <style name="TextAppearance.MyTeam11.Small" parent="@android:style/TextAppearance.Medium">
+    <style name="RummySdk_TextAppearance.Small" parent="@android:style/TextAppearance.Medium">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/cool_grey</item>
     </style>
 
-    <style name="TextAppearance.MyTeam11.extraSmall" parent="@android:style/TextAppearance.Medium">
+    <style name="RummySdk_TextAppearance.extraSmall" parent="@android:style/TextAppearance.Medium">
         <item name="android:textSize">10sp</item>
         <item name="android:textColor">@color/cool_grey</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="RummyAppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="RummyAppTheme.AppBarOverlay..PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="customProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal" />
+    <style name="RummySdk_customProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal" />
 
-    <style name="NavItemSelectedColor" parent="Widget.MaterialComponents.BottomNavigationView">
+    <style name="RummySdk_NavItemSelectedColor" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="itemTextColor">@color/maize</item>
     </style>
 
@@ -277,57 +277,57 @@
         <attr name="cl_theme" format="integer" />
     </declare-styleable>
 
-    <style name="tab_text" parent="AppTheme.Safe">
+    <style name="tab_text" parent="RummyAppTheme.Safe">
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="SpinnerwithNoArrow" parent="@android:style/Widget.Spinner" />
+    <style name="RummySdk_SpinnerwithNoArrow" parent="@android:style/Widget.Spinner" />
 
-    <style name="MyTabLayoutTextAppearance" parent="TextAppearance.Design.Tab">
+    <style name="RummySdk_MyTabLayoutTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">10sp</item>
         <item name="android:textAllCaps">true</item>
     </style>
 
-    <style name="MyTabLayoutTextAppearance.rubikMedium" parent="MyTabLayoutTextAppearance">
+    <style name="RummySdk_MyTabLayoutTextAppearance.rubikMedium" parent="RummySdk_MyTabLayoutTextAppearance">
         <item name="android:textSize">12sp</item>
         <item name="fontFamily">@font/rubik_medium</item>
     </style>
 
-    <style name="MyTabLayoutTextAppearanceLarge" parent="TextAppearance.Design.Tab">
+    <style name="RummySdk_MyTabLayoutTextAppearanceLarge" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">14sp</item>
         <item name="fontFamily">@font/rubik_medium</item>
         <item name="android:textAllCaps">false</item>
     </style>
 
-    <style name="MyTabLayoutTextAppearanceV6" parent="TextAppearance.Design.Tab">
+    <style name="RummySdk_MyTabLayoutTextAppearanceV6" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">11sp</item>
         <item name="fontFamily">@font/rubik_medium</item>
         <item name="textAllCaps">false</item>
         <item name="android:textAllCaps">false</item>
     </style>
 
-    <style name="MyTabLayoutTextAppearanceContest" parent="TextAppearance.Design.Tab">
+    <style name="RummySdk.MyTabLayoutTextAppearanceContest" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">10sp</item>
         <item name="fontFamily">@font/rubik_medium</item>
         <item name="android:textAllCaps">true</item>
     </style>
 
-    <style name="incorrect_text_TextAppearance" parent="@android:style/TextAppearance">
+    <style name="RummySdk_incorrect_text_TextAppearance" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/red</item>
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="correct_text_TextAppearance" parent="@android:style/TextAppearance">
+    <style name="RummySdk_correct_text_TextAppearance" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/red</item>
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="AppTheme.Regular.Small" parent="AppTheme">
+    <style name="RummyAppTheme.Regular.Small" parent="RummyAppTheme">
         <item name="android:textSize">8sp</item>
         <item name="fontFamily">@font/rubik_medium</item>
     </style>
 
-    <style name="NoDateMessage" parent="@android:style/TextAppearance">
+    <style name="RummySdk_NoDateMessage" parent="@android:style/TextAppearance">
         <item name="android:gravity">center</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/cool_grey</item>
@@ -335,13 +335,13 @@
     </style>
 
 
-    <style name="TextInputLayout" parent="@style/TextAppearance.AppCompat">
+    <style name="RummySdk.TextInputLayout" parent="@style/TextAppearance.AppCompat">
         <item name="android:textColorHint">@color/text_color2</item>
         <item name="android:textSize">@dimen/textSize10sp</item>
         <item name="android:fontFamily">@font/rubik_regular</item>
     </style>
 
-    <style name="Widget.MyTeam11.TextInputLayoutActivate" parent="AppTheme.Safe">
+    <style name="RummySdk.TextInputLayoutActivate" parent="RummyAppTheme.Safe">
         <item name="colorControlNormal">@color/text_color2</item>
         <item name="colorControlActivated">@color/text_color2</item>
         <item name="colorControlHighlight">@color/text_color2</item>
@@ -350,11 +350,11 @@
 
     </style>
 
-    <style name="BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/BottomSheetModal</item>
+    <style name="RummySdk.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/RummySdk_BottomSheetModal</item>
     </style>
 
-    <style name="BottomSheetModal" parent="Widget.Design.BottomSheet.Modal">
+    <style name="RummySdk_BottomSheetModal" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@android:color/transparent</item>
     </style>
 </resources>

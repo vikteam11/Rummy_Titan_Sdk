@@ -91,7 +91,7 @@
                     android:layout_marginEnd="8dp"
                     android:fontFamily="@font/rubik_regular"
                     android:gravity="center"
-                    android:textAppearance="@style/TextAppearance.MyTeam11.Small"
+                    android:textAppearance="@style/RummySdk_TextAppearance.Small"
                     android:textColor="@color/paleGreyThree"
                     android:textSize="12sp"
                     app:setAmountFormat="@{viewModel.amount}"
@@ -233,7 +233,7 @@
             android:background="@drawable/bg_white_progress"
             android:elevation="12dp"
             android:padding="@dimen/margin_min"
-            android:theme="@style/ProgressBar"
+            android:theme="@style/RummySdk_ProgressBar"
             android:visibility="@{viewModel.isLoading? View.VISIBLE: View.GONE}" />
 
         <View

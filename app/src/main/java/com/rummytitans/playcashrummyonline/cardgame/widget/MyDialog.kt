@@ -43,7 +43,7 @@ class MyDialog(private var act: Activity) {
     }
 
     fun getFullScreenDialog(layout: View): Dialog {
-        val d = Dialog(act,R.style.DialogTheme)
+        val d = Dialog(act,R.style.RummySdk_DialogTheme)
         d.window?.let { dialogWindow->
             dialogWindow.requestFeature(Window.FEATURE_NO_TITLE)
             dialogWindow.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

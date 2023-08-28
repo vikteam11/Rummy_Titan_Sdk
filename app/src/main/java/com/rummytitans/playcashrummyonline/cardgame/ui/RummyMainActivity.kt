@@ -35,6 +35,7 @@ import com.github.mikephil.charting.formatter.PercentFormatter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 //import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
+import com.rummytitans.playcashrummyonline.cardgame.RummyTitanSDK
 import com.rummytitans.playcashrummyonline.cardgame.games.rummy.RummyWebViewActivity
 import com.rummytitans.playcashrummyonline.cardgame.models.WalletInfoModel
 import com.rummytitans.playcashrummyonline.cardgame.ui.common.CommonFragmentActivity
@@ -42,8 +43,8 @@ import com.rummytitans.playcashrummyonline.cardgame.ui.more.FragmentMore
 import com.rummytitans.playcashrummyonline.cardgame.ui.rakeback.RakeBackFragment
 import com.rummytitans.playcashrummyonline.cardgame.ui.refer.FragmentShare
 import com.rummytitans.playcashrummyonline.cardgame.ui.refer.ReferEarnActivity
-import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.AddCashActivity
 import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.FragmentWallet
+import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.RummyAddCashActivity
 import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.adapter.WalletBonusAdapter
 import com.rummytitans.playcashrummyonline.cardgame.utils.alertDialog.AlertdialogModel
 import com.rummytitans.playcashrummyonline.cardgame.utils.bottomsheets.BottomSheetAlertDialog
@@ -108,13 +109,15 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
         binding.viewModel = viewModel
 
         binding.navigation.setOnNavigationItemSelectedListener(this)
+
+        initUI()
         observeWalletData()
         initFragments()
 
         //findViewById<View>(R.id.navigation_home).performClick()
         replaceFragment(FragmentHome())
-        if (intent.hasExtra("deepLink"))
-            startDeepLinkActivity(intent.getStringExtra("deepLink"))
+        handleDeepLink()
+        handleTabs()
         analyticsHelper.fireEvent(
             AnalyticsKey.Names.GameScreenLaunched
         )
@@ -124,6 +127,56 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
         disableTooltipFromNavigation()
         viewModel.checkForActiveMatch()
 
+    }
+
+    private fun initUI() {
+        if(!RummyTitanSDK.rummySdkOptions.displayProfileIcon){
+            binding.imgUser.visibility = View.GONE
+            binding.imgBack.visibility = View.VISIBLE
+        }else{
+            binding.imgUser.visibility = View.GONE
+            binding.imgBack.visibility = View.GONE
+        }
+    }
+
+
+    private fun handleTabs(){
+        intent.getStringExtra(MyConstants.INTENT_PASS_SELECT_TAB)?.let {
+            when(it){
+                "wallet"->{
+                    viewModel.displayHome.set(false)
+                    redirectToTab(R.id.navigation_wallet)
+                }
+                "refer"->{
+                    viewModel.displayHome.set(false)
+                    redirectToTab(R.id.navigation_refer)
+                }
+                "rakeback"->{
+                    viewModel.displayHome.set(false)
+                    redirectToTab(R.id.navigation_rakeback)
+                }
+            }
+        }
+
+    }
+
+    private fun handleDeepLink() {
+        if (intent.hasExtra("deepLink")){
+            intent.getStringExtra("deepLink")?.let { deeplink->
+                if (deeplink.contains("screen=refer", true)) {
+                    viewModel.displayHome.set(false)
+                    redirectToTab(R.id.navigation_refer)
+                } else  if (deeplink.contains("screen=wallet", true)) {
+                    viewModel.displayHome.set(false)
+                    redirectToTab(R.id.navigation_wallet)
+                } else  if (deeplink.contains("screen=rakeback", true)) {
+                    viewModel.displayHome.set(false)
+                   redirectToTab(R.id.navigation_rakeback)
+                } else {
+                    startDeepLinkActivity(deeplink)
+                }
+            }
+        }
     }
 
     private fun disableTooltipFromNavigation() {
@@ -144,6 +197,10 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
     }
 
     private fun initClicks() {
+        binding.imgBack.setOnClickListener {
+            onBackPressed()
+        }
+
         binding.ivRefers.setOnClickListenerDebounce {
             startActivity(
                 Intent(this, ReferEarnActivity::class.java)
@@ -164,6 +221,16 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
         }
         binding.bottomSheetMiniWallet.btnTopAddCash.setOnClickListenerDebounce {
             sendToAddCash()
+        }
+        binding.bottomSheetMiniWallet.btnMyRecentTransactions.setOnClickListenerDebounce {
+            startActivity(
+                Intent(this, CommonFragmentActivity::class.java)
+                    .putExtra(MyConstants.INTENT_PASS_COMMON_TYPE, "recent")
+                    .putExtra("tab", 0)
+                    .putExtra(
+                        "currentBalance", viewModel.walletInfo.value?.Balance?.TotalAmount ?: 0.0
+                    )
+            )
         }
     }
 
@@ -433,6 +500,9 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
         super.onNewIntent(intent)
         if (intent?.getBooleanExtra(MyConstants.CALL_RECENT_MATCH_API,false)==true)
             viewModel.checkForActiveMatch()
+
+        handleTabs()
+        handleDeepLink()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -451,6 +521,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
         val currentFragment = supportFragmentManager.findFragmentById(fragment_container.id)
         currentFragment?.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
+
     override fun onBackPressed() {
         if (mCurrentFragment is FragmentHome){
             if(viewModel.isMiniWalletOpen.get()){
@@ -474,6 +545,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
                    // if(isTaskRoot){
                      //   startActivity(Intent(this, MainActivity::class.java))
                     //}
+                    RummyTitanSDK.rummyCallback?.sdkFinish()
                     finish()
                 },
             ),
@@ -484,7 +556,9 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
     override fun onDestroy() {
         super.onDestroy()
         popupWindow?.dismiss()
+        RummyTitanSDK.rummyCallback?.sdkFinish()
     }
+
     private var popupWindow:PopupWindow?= null
     fun setUpPopupWindow(msg:String?,tabId:Int,badgeBinding: NotificationBadgeRummyBinding) {
 
@@ -528,7 +602,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
 
     override fun sendToAddCash() {
         startActivityForResult(
-            Intent(this, AddCashActivity::class.java),
+            Intent(this, RummyAddCashActivity::class.java),
             MyConstants.REQUEST_CODE_ADD_CASH)
     }
 }

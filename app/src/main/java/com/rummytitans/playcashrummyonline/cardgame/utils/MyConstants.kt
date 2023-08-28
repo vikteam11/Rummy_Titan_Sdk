@@ -69,6 +69,7 @@ object MyConstants {
     const val RESTRICT_LOC_MESSAGE="Uh-oh! You can't proceed further as you are from a restricted state."
 
     const val AppDeeplink = "rummytitandeeplink"
+    const val myTeamDeepLink = "rummytitandeeplink"
     const val AppDeeplink_ = "rummytitansdeeplink"
     const val CREATE_NEW_TEAM = "create"
     const val EDIT_TEAM = "edit"
@@ -190,7 +191,7 @@ object MyConstants {
     const val CENTER = "CENTER"
 
     var CURRENT_TIME = MutableLiveData<Long>(0)
-    var APP_THEME = MutableLiveData<Int>(R.style.AppTheme_Safe)
+    var APP_THEME = MutableLiveData<Int>(R.style.RummyAppTheme)
     const val KABADDI = "Kabaddi"
     const val Raider = "RAIDER"
     const val COUPONMODEL="COUPONMODEL"

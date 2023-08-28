@@ -138,7 +138,7 @@
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/editDOB"
                     android:focusable="false"
-                    style="@style/Widget.MyTeam11.BorderEditTextV2"
+                    style="@style/RummySdk_Widget.BorderEditTextV2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/your_date_of_birth"
@@ -163,7 +163,7 @@
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/editPincode"
-                    style="@style/Widget.MyTeam11.BorderEditTextV2"
+                    style="@style/RummySdk_Widget.BorderEditTextV2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="PinCode"

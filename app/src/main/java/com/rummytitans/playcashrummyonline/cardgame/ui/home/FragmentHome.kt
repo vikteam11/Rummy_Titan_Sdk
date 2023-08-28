@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager.widget.ViewPager
 import com.rummytitans.playcashrummyonline.cardgame.R
+import com.rummytitans.playcashrummyonline.cardgame.RummyTitanSDK
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsKey
 import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
 import com.rummytitans.playcashrummyonline.cardgame.databinding.FragmentHomeRummyBinding
@@ -29,6 +30,8 @@ import com.rummytitans.playcashrummyonline.cardgame.ui.home.adapter.*
 import com.rummytitans.playcashrummyonline.cardgame.ui.joinGame.JoinGameBottomSheet
 import com.rummytitans.playcashrummyonline.cardgame.ui.newlogin.RummyNewLoginActivity
 import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.OnOfferBannerClick
+import com.rummytitans.playcashrummyonline.cardgame.utils.MyConstants
+import com.rummytitans.playcashrummyonline.cardgame.utils.isMyTeamDeeplink
 import com.rummytitans.playcashrummyonline.cardgame.utils.setOnClickListenerDebounce
 import com.rummytitans.playcashrummyonline.cardgame.utils.showBottomSheetWebView
 import com.rummytitans.playcashrummyonline.cardgame.widget.MyDialog
@@ -161,7 +164,7 @@ class FragmentHome : BaseFragmentLocation(),
             activity?.showBottomSheetWebView(
                 url = viewModel.selectedCategory.get()?.RuleUrl?:"",
                 color = viewModel.selectedColor.get() ?: "",
-                getString(R.string.app_name)
+                getString(R.string.app_name_rummy)
             )
         }
         binding.viewFilter.setOnClickListenerDebounce {
@@ -285,12 +288,14 @@ class FragmentHome : BaseFragmentLocation(),
             )
         )
         if(headerModel.deeplink.isNotEmpty() && headerModel.deeplink != null) {
-            if (headerModel.deeplink.contains("screen=refer", true)) {
-                //(activity as? MainActivity)?.redirectToTab(R.id.navigation_refer)
+            if(headerModel.deeplink.isMyTeamDeeplink()){
+                RummyTitanSDK.rummyCallback?.openDeeplink(headerModel.deeplink)
+            }else if (headerModel.deeplink.contains("screen=refer", true)) {
+                (activity as? RummyMainActivity)?.redirectToTab(R.id.navigation_refer)
             } else  if (headerModel.deeplink.contains("screen=wallet", true)) {
-                //(activity as? MainActivity)?.redirectToTab(R.id.navigation_wallet)
+                (activity as? RummyMainActivity)?.redirectToTab(R.id.navigation_wallet)
             } else  if (headerModel.deeplink.contains("screen=rakeback", true)) {
-                //(activity as? MainActivity)?.redirectToTab(R.id.navigation_rakeback)
+                (activity as? RummyMainActivity)?.redirectToTab(R.id.navigation_rakeback)
             } else {
                 startActivity(
                     Intent(

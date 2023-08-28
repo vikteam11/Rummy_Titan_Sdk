@@ -117,7 +117,7 @@
 
                 <TextView
                     android:id="@+id/tvMobileNumber"
-                    style="@style/Widget.MyTeam11.BorderEditTextV2"
+                    style="@style/RummySdk_Widget.BorderEditTextV2"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/edittext_height"
                     android:background="@drawable/box_grey_border"
@@ -200,7 +200,7 @@
                 android:text="@{viewModel.linkOtpSend ? `Back` : `Cancel`}"
                 android:onClick="@{()->viewModel.linkOtpSend ? viewModel.backToLink() :viewModel.toggleLinkWalletSheet()}"
                 android:textSize="12sp"
-                android:textAppearance="@style/TextAppearance.MyTeam11.Medium"
+                android:textAppearance="@style/RummySdk_TextAppearance.Medium"
                 android:textColor="@color/text_color2"
                 app:layout_constraintEnd_toStartOf="@+id/txtLink"
                 app:layout_constraintStart_toStartOf="parent"
@@ -219,7 +219,7 @@
                 android:gravity="center"
                 android:text="@{!viewModel.linkOtpSend ? `PROCEED` : `LINK`}"
                 android:alpha="@{!viewModel.linkOtpSend ? 1.0f : viewModel.validForPinview ? 1.0f :0.5f,default=0.5}"
-                android:textAppearance="@style/TextAppearance.MyTeam11.Medium"
+                android:textAppearance="@style/RummySdk_TextAppearance.Medium"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"

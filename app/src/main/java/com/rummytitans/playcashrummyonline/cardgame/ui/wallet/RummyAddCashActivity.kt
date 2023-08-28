@@ -47,7 +47,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class AddCashActivity :
+class RummyAddCashActivity :
     CurrentLocationBaseActivity(), OnOfferClick, AddCashNavigator, OnOfferBannerClick {
 
     var currentOfferPage = 0
@@ -205,7 +205,7 @@ class AddCashActivity :
 
     private fun observeData() {
         viewModel.mBannerOffer.observe(this, Observer {
-            headerAdapter = WalletOffersAdapter(it, this@AddCashActivity)
+            headerAdapter = WalletOffersAdapter(it, this@RummyAddCashActivity)
             binding.viewPagerOffers.adapter = headerAdapter
             binding.tabHeaders.setupWithViewPager(binding.viewPagerOffers)
             startViewPagerScrolling()

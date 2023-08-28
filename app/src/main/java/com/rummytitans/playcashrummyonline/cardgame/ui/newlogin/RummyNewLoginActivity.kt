@@ -65,12 +65,12 @@ class RummyNewLoginActivity : BaseActivity(), NewLoginNavigator {
         mViewModel.prefs.loginResponse = ""
         mViewModel.emailTextArray = ArrayList<String>().apply {
             add(getString(R.string.enter_your_email_address_and_password_to_continue_your_fantasy_journey_with_myteam11))
-            add(getString(R.string.app_name))
+            add(getString(R.string.app_name_rummy))
         }
 
         mViewModel.phoneTextArray = ArrayList<String>().apply {
             add(getString(R.string.enter_your_phone_number_to_continue_your_fantasy_journey_with_myteam11))
-            add(getString(R.string.app_name))
+            add(getString(R.string.app_name_rummy))
         }
         mViewModel.colorArray = ArrayList<Int>().apply {
             add(R.color.cool_grey)

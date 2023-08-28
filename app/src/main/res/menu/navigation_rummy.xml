@@ -6,8 +6,14 @@
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home_menu"
-        app:showAsAction="never"
+        app:showAsAction="withText"
         android:title="HOME" />
+
+    <item
+        android:id="@+id/navigation_wallet"
+        app:showAsAction="withText"
+        android:icon="@drawable/ic_bg_wallet_rummy"
+        android:title="@string/title_wallet" />
 
     <item
         android:id="@+id/navigation_rakeback"
@@ -17,20 +23,13 @@
 
     <item
         android:id="@+id/navigation_refer"
-        android:icon="@drawable/ic_offer_home"
+        android:icon="@drawable/ic_refer_home_rummy"
         app:showAsAction="withText"
         android:title="REFER" />
 
-     <item
-         android:id="@+id/navigation_wallet"
-         app:showAsAction="withText"
-         android:icon="@drawable/ic_offer_home"
-         android:title="@string/title_wallet" />
-
-
     <item
          android:id="@+id/navigation_more"
-         android:icon="@drawable/ic_offer_home"
+         android:icon="@drawable/ic_more"
          app:showAsAction="withText"
         android:title="@string/title_more" />
 

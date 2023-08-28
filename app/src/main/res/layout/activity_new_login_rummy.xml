@@ -230,7 +230,7 @@
             android:backgroundTint="@color/white"
             android:elevation="10dp"
             android:padding="@dimen/margin_min"
-            android:theme="@style/ProgressBar"
+            android:theme="@style/RummySdk_ProgressBar"
             android:visibility="@{viewModel.ParentLoading?View.VISIBLE:View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

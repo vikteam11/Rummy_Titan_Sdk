@@ -326,7 +326,7 @@ class FragmentWallet : BaseFragment(),
         }
 
         startActivityForResult(
-            Intent(activity, AddCashActivity::class.java)
+            Intent(activity, RummyAddCashActivity::class.java)
                 .putExtra("wallet", viewModel.walletInfo.value?.Balance)
                 .putExtra(MyConstants.INTENT_PASS_AMOUNT, viewModel.walletInfo.value?.AddCashAmount)
                 .putExtra(MyConstants.INTENT_PASS_IS_ADDRESS_VERIFICATION_REQUIRED,viewModel.isAddressVerified)

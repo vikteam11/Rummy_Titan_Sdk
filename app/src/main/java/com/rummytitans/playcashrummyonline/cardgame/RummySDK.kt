@@ -2,18 +2,25 @@ package com.rummytitans.playcashrummyonline.cardgame
 
 import android.content.Context
 import android.content.Intent
+import android.text.TextUtils
+import android.util.Base64
 import androidx.annotation.Keep
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.sdk_callbacks.RummySdkOptions
+import com.rummytitans.playcashrummyonline.cardgame.sdk_callbacks.RummyTitansCallback
 import com.rummytitans.playcashrummyonline.cardgame.ui.LaunchActivity
 import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
 import com.rummytitans.playcashrummyonline.cardgame.ui.launcher.SDKSplashActivity
 import java.io.ByteArrayInputStream
 import java.io.ObjectInputStream
+import java.nio.charset.StandardCharsets
 
 @Keep
 object RummyTitanSDK {
+    internal var rummyCallback:RummyTitansCallback?= null
+    internal var rummySdkOptions:RummySdkOptions = RummySdkOptions()
 
     private lateinit var appContext: Context
 
@@ -21,48 +28,29 @@ object RummyTitanSDK {
         appContext = context.applicationContext
     }
 
+    fun setCallback(callback: RummyTitansCallback){
+        rummyCallback = callback
+    }
+    fun setOptions(options: RummySdkOptions){
+        rummySdkOptions = options
+    }
 
     fun initialize1(context: Context) {
         appContext = context
     }
+
     fun startLibraryActivity() {
         val intent = Intent(appContext, SDKSplashActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         appContext.startActivity(intent)
     }
 
-    fun inItSDK(context: Context){
-        val intent = Intent(context,SDKSplashActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        context.startActivity(intent)
-
-    }
-
-    fun inItSDK1(context: Context){
-        val intent = Intent(context,LaunchActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        context.startActivity(intent)
-
-    }
-
-    fun inItSDK2(context: Context,encodedString : String){
-        val byteArray = encodedString.toByteArray()
-
-        val byteArrayInputStream = ByteArrayInputStream(byteArray)
-        val objectInputStream = ObjectInputStream(byteArrayInputStream)
-
-        val decodedObject = objectInputStream.readObject()
-
-        objectInputStream.close()
-
-        println("Decoded String: $decodedObject")
+    fun startRummyTitans(context: Context,encodedString : String,deeplink:String=""){
+        val decodedString=String(Base64.decode(encodedString, Base64.CRLF), StandardCharsets.UTF_8)
+        println("Decoded String: $decodedString")
         SharedPreferenceStorage(context).let { prefs->
             try {
-                // Parse the decoded JSON string using Gson
-                val gson = Gson()
-                SharedPreferenceStorage(context).loginResponse = gson.toJson(decodedObject)
-                // Use the parsed model
-                // ...
+                SharedPreferenceStorage(context).loginResponse = decodedString
             } catch (e: JsonSyntaxException) {
                 // Handle JSON parsing errors
                 e.printStackTrace()
@@ -72,12 +60,12 @@ object RummyTitanSDK {
 
             val intent = Intent(context, RummyMainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            if(!TextUtils.isEmpty(deeplink)){
+                intent.putExtra("deeplink",deeplink)
+            }
             context.startActivity(intent)
 
         }
-
-
-
     }
 
 

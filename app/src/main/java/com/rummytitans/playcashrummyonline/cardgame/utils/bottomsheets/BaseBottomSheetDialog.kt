@@ -6,7 +6,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 
-open class BaseBottomSheetDialog (context: Context):BottomSheetDialog(context, R.style.BottomSheetDialog){
+open class BaseBottomSheetDialog (context: Context):BottomSheetDialog(context, R.style.RummySdk_BottomSheetDialog){
 
     init {
         dismissWithAnimation=true

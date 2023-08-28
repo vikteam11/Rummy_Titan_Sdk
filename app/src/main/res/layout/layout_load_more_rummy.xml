@@ -10,6 +10,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:theme="@style/ProgressBar"/>
+        android:theme="@style/RummySdk_ProgressBar"/>
 
 </LinearLayout>

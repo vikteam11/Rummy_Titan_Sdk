@@ -26,7 +26,7 @@ class WebPaymentActivity : AppCompatActivity() {
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         val prefs = SharedPreferenceStorage(applicationContext)
-        setTheme(if (prefs.onSafePlay) R.style.AppTheme else R.style.AppTheme_Regular)
+        setTheme(R.style.RummyAppTheme)
         supportActionBar?.hide()
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.fragment_webviews_rummy)

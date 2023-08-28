@@ -274,7 +274,7 @@ class RummyWebViewActivity() : BaseActivity(), RummyNavigator {
 
     override fun showDialog(msg: String, isExit: Boolean) {
         val alertModel= AlertdialogModel(
-            getString(R.string.app_name),
+            getString(R.string.app_name_rummy),
             msg,
             positiveText = "OK",
             onPositiveClick = {
@@ -299,7 +299,7 @@ class RummyWebViewActivity() : BaseActivity(), RummyNavigator {
 
     fun exitDialog(msg:String="",exitMSg:String="OK") {
         val alertModel= AlertdialogModel(
-            getString(R.string.app_name),
+            getString(R.string.app_name_rummy),
             msg,
             positiveText = exitMSg,
             onPositiveClick = {

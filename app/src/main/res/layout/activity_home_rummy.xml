@@ -43,17 +43,36 @@
                     android:visibility="@{!TextUtils.isEmpty(viewModel.balance) &amp;&amp; viewModel.displayHome ? View.VISIBLE : View.GONE,default=gone}"
                     app:constraint_referenced_ids="viewBgWallet,ivWallet,txtWallet"/>
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/imgUser"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/avatar_1"
-                    android:layout_marginStart="8dp"
-                    app:setAvatar="@{viewModel.userAvtar}"
+                <FrameLayout
+                    android:id="@+id/layoutUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
 
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imgUser"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/avatar_1"
+                        android:layout_marginStart="8dp"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        app:setAvatar="@{viewModel.userAvtar}" />
+
+                    <ImageView
+                        android:id="@+id/imgBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/ic_newback"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/layoutUser"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </FrameLayout>
                 <ImageView
                     android:id="@+id/appLogo"
                     android:layout_width="90dp"
@@ -61,7 +80,7 @@
                     android:layout_marginStart="20dp"
                     android:background="@drawable/new_app_logo"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/imgUser"
+                    app:layout_constraintStart_toEndOf="@id/layoutUser"
                     app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -239,8 +258,8 @@
                     app:itemIconSize="24dp"
                     app:itemIconTint="@color/bottom_selector"
                     app:itemTextColor="@color/bottom_selector"
-                    app:itemTextAppearanceActive="@style/AppTheme.Regular.Small"
-                    app:itemTextAppearanceInactive="@style/AppTheme.Regular.Small"
+                    app:itemTextAppearanceActive="@style/RummyAppTheme.Regular.Small"
+                    app:itemTextAppearanceInactive="@style/RummyAppTheme.Regular.Small"
                     app:labelVisibilityMode="labeled"
                     app:menu="@menu/navigation_rummy" />
             </FrameLayout>

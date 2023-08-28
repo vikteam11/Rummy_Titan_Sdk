@@ -101,7 +101,7 @@
             android:background="@drawable/bg_white_progress"
             android:elevation="10dp"
             android:padding="@dimen/margin_min"
-            android:theme="@style/ProgressBar"
+            android:theme="@style/RummySdk_ProgressBar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

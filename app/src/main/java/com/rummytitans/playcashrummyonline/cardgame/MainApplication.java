@@ -36,7 +36,7 @@ import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsHelper;
 import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage;
 
 
-@HiltAndroidApp
+//@HiltAndroidApp
 public class MainApplication extends Application implements LifecycleEventObserver {
 
     public static WeakReference<Activity> forgroundActivityRef = null;
@@ -214,7 +214,7 @@ public class MainApplication extends Application implements LifecycleEventObserv
             NotificationManager notificationManager =(NotificationManager)
                     getSystemService(Context.NOTIFICATION_SERVICE);
             NotificationChannel channel = new NotificationChannel(
-                    getString(R.string.app_name),
+                    getString(R.string.app_name_rummy),
                     "RummyTitans",
                     NotificationManager.IMPORTANCE_DEFAULT);
 

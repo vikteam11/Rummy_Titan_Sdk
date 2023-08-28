@@ -214,7 +214,7 @@
                 android:padding="@dimen/margin_min"
                 android:layout_gravity="center"
                 android:indeterminateTint="@{Color.parseColor(viewmodel.selectedColor)}"
-                android:theme="@style/ProgressBar" />
+                android:theme="@style/RummySdk_ProgressBar" />
         </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

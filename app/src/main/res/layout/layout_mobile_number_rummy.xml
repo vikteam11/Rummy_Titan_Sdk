@@ -80,7 +80,7 @@
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/editMobileNumber"
-                style="@style/Widget.MyTeam11.BorderEditTextV2"
+                style="@style/RummySdk_Widget.BorderEditTextV2"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/edittext_height"
                 android:backgroundTint="@color/grey4"
@@ -121,7 +121,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inputLayout1"
                 app:TextInputTintColor="@{@color/secondary}"
-                android:theme="@style/Widget.MyTeam11.TextInputLayout"
+                android:theme="@style/RummySdk_Widget.TextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -135,7 +135,7 @@
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/editReferCode"
-                    style="@style/Widget.MyTeam11.BorderEditTextV2"
+                    style="@style/RummySdk_Widget.BorderEditTextV2"
                     android:backgroundTint="@color/gray1"
                     android:layout_width="match_parent"
                     android:fontFamily="@font/rubik_medium"

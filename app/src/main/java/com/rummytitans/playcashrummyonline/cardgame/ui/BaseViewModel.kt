@@ -15,6 +15,7 @@ import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.rummytitans.playcashrummyonline.cardgame.RummyTitanSDK
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -313,7 +314,7 @@ abstract class BaseViewModel<N>(val conn: ConnectionDetector? = null) : ViewMode
             val requestBuilder =
                 request.newBuilder().url(url)
                     .addHeader("AppVersion", BuildConfig.VERSION_CODE.toString())
-                    .addHeader("AppType", "${MyConstants.APP_TYPE}")
+                    .addHeader("AppType", "${RummyTitanSDK.rummySdkOptions.currentAppType}")
                     .addHeader("GameType", "1")
                     .addHeader("IsPlayStore",BuildConfig.isPlayStoreApk.toString()).build()
             return@Interceptor chain.proceed(requestBuilder)

@@ -212,7 +212,7 @@
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/txtInputLayout"
-                            style="@style/Widget.MyTeam11.BoxEditTextV2"
+                            style="@style/RummySdk_Widget.BoxEditTextV2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:boxStrokeColor="@color/box_stroke_color"
@@ -226,7 +226,7 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:shapeAppearance="?attr/shapeAppearanceSmallComponent">
 
-                            <com.google.android.material.textfield.TextInputEditText
+                            <androidx.appcompat.widget.AppCompatEditText
                                 android:id="@+id/edtWithdrawAmount"
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
@@ -440,7 +440,7 @@
             android:background="@drawable/bg_white_progress"
             android:elevation="10dp"
             android:padding="@dimen/margin_min"
-            android:theme="@style/ProgressBar"
+            android:theme="@style/RummySdk_ProgressBar"
             android:visibility="@{viewmodel.isLoading() ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

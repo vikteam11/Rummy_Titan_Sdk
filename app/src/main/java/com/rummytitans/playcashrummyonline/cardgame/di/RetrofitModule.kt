@@ -7,6 +7,7 @@ import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
 import com.rummytitans.playcashrummyonline.cardgame.utils.MyConstants
 import android.text.TextUtils
 import com.google.gson.Gson
+import com.rummytitans.playcashrummyonline.cardgame.RummyTitanSDK
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -62,7 +63,7 @@ class RetrofitModule {
             val url = httpUrl.newBuilder().build()
             val builder = request.newBuilder().url(url)
             builder.addHeader("AppVersion", BuildConfig.VERSION_CODE.toString())
-            builder.addHeader("AppType", "${MyConstants.APP_TYPE}") //uses in BaseViewModel and Analytic helper fireevent()
+            builder.addHeader("AppType", "${RummyTitanSDK.rummySdkOptions.currentAppType}") //uses in BaseViewModel and Analytic helper fireevent()
             builder.addHeader("GameType", "1")
             builder.addHeader("IsPlayStore",BuildConfig.isPlayStoreApk.toString())
 //            pref.toUserDetail(gson)?.let {
