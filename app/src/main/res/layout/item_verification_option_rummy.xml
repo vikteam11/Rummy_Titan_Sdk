@@ -38,7 +38,7 @@
             android:layout_height="18dp"
             android:scaleType="fitXY"
             app:setSrcCompact="@{model.isSelect ? @drawable/selcted_radio_btn : @drawable/unselected_radio_btn}"
-            app:setTint="@{model.isSelect ? @color/maingreen : @color/text_color2}"
+            app:setTint="@{model.isSelect ? @color/rummy_maingreen : @color/text_color2}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />

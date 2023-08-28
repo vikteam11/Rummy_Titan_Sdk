@@ -23,7 +23,7 @@
         android:layout_marginEnd="12dp"
         app:setViewBackground="@{@color/rummy_black_3}"
         app:viewRadius="@{12}"
-        app:strokeColor="@{category.Selected ? @color/maingreen : @color/transparent}"
+        app:strokeColor="@{category.Selected ? @color/rummy_maingreen : @color/transparent}"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -89,7 +89,7 @@
             android:background="@drawable/bg_border_cool_gray"
             app:setViewBackground="@{@color/rummy_black_3}"
             app:viewRadius="@{12}"
-            app:strokeColor="@{@color/maingreen}"
+            app:strokeColor="@{@color/rummy_maingreen}"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"

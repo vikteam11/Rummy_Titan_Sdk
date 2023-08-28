@@ -41,7 +41,7 @@ class FragmentVerify : BaseFragment(),
     ): View {
         setTheme(inflater)
         setLanguage()
-        viewModel = ViewModelProvider(this.viewModelStore, viewModelFactory)
+        viewModel = ViewModelProvider(this)
             .get(VerifyViewModel::class.java)
         binding = FragmentVerifyRummyBinding.inflate(localInflater ?: inflater, container, false).apply {
             lifecycleOwner = this@FragmentVerify

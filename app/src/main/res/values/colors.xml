@@ -226,7 +226,7 @@
     <color name="blackColor">#000e1a</color>
 
     <color name="grayBorder">#FF686569</color>
-    <color name="maingreen">#3ecb87</color>
+    <color name="rummy_maingreen">#3ecb87</color>
     <color name="maingreenAlpha">#333ECB87</color>
     <color name="rummy_black_3">#221E1E</color>
     <color name="text_color8">#e8e8e8</color>

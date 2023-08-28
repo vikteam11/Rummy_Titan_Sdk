@@ -15,6 +15,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -118,11 +119,15 @@ class FragmentBankVerification : BaseFragment(), RequestVarificationInterface,
         d.txtGallery.setOnClickListener {
             d.dismiss()
             pickFrom = 1
-            PermissionActivity.startActivityForPermissionWithResult(
-                this,
-                permissions.toList(),
-                PermissionActivity.PERMISSION_REQUEST_CODE
-            )
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+                openGallery()
+            }else{
+                PermissionActivity.startActivityForPermissionWithResult(
+                    this,
+                    permissions.toList(),
+                    PermissionActivity.PERMISSION_REQUEST_CODE
+                )
+            }
         }
 
     }

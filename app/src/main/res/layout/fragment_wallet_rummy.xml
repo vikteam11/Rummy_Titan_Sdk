@@ -7,6 +7,7 @@
 
         <import type="android.view.View" />
         <import type="android.text.TextUtils"/>
+        <import type="com.rummytitans.playcashrummyonline.cardgame.RummyTitanSDK"/>
         <variable
             name="viewmodel"
             type="com.rummytitans.playcashrummyonline.cardgame.ui.wallet.viewmodel.WalletViewModel" />
@@ -122,7 +123,7 @@
                                 app:layout_constraintBottom_toBottomOf="@+id/piechart"
                                 app:layout_constraintStart_toStartOf="@+id/txtYourWinning2"
                                 app:layout_constraintTop_toBottomOf="@+id/txtYourWinning2"
-                                app:srcCompat="@drawable/ic_nc_wallet_stetment" />
+                                app:srcCompat="@drawable/ic_nc_wallet_stetment_rummy" />
 
                             <TextView
                                 android:id="@+id/btnMyRecentTransactions"
@@ -144,7 +145,7 @@
                                 android:layout_height="30dp"
                                 android:layout_marginEnd="16dp"
                                 android:background="@drawable/bg_white_box"
-                                android:backgroundTint="@color/maingreen"
+                                android:backgroundTint="@color/rummy_maingreen"
                                 android:elevation="3dp"
                                 android:fontFamily="@font/rubik_medium"
                                 android:gravity="center"
@@ -318,6 +319,7 @@
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="16dp"
                             android:layout_marginEnd="12dp"
+                            android:visibility="@{RummyTitanSDK.INSTANCE.option.showKycOptions ? View.VISIBLE :View.GONE}"
                             app:setViewBackground="@{@color/rummy_black_3}"
                             app:strokeColor="@{@color/grayBorder}"
                             app:viewRadius="@{4}"

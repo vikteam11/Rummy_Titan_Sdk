@@ -12,6 +12,7 @@ import com.rummytitans.playcashrummyonline.cardgame.widget.MyDialog
 import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
+import com.rummytitans.playcashrummyonline.cardgame.RummyTitanSDK
 import com.rummytitans.playcashrummyonline.cardgame.utils.MyConstants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -30,7 +31,7 @@ class DeepLinkViewModel @Inject constructor(
     val isForceUpdate = MutableLiveData<VersionModel>()
 
     fun checkForceUpdate() {
-        val apis = getApiEndPointObject(MyConstants.SPLASH_URL)
+        val apis = getApiEndPointObject(RummyTitanSDK.getOption().gameSplashUrl)
         apiCall(apis.getVersion(
             loginResponse?.UserId ?: 0, BuildConfig.VERSION_CODE, ""
         ), {

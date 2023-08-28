@@ -179,7 +179,7 @@
             android:layout_height="45dp"
             android:gravity="center"
             android:layout_marginTop="20dp"
-            android:background="@drawable/bg_primary_box"
+            android:background="@drawable/bg_primary_box_rummy"
             android:fontFamily="@font/rubik_medium"
             android:text="@string/submit"
             android:textAllCaps="true"

@@ -169,7 +169,7 @@
                     android:paddingStart="4dp"
                     android:paddingEnd="2dp"
                     android:src="@drawable/ic_wallet_home_fill"
-                    app:tint="@color/maingreen"
+                    app:tint="@color/rummy_maingreen"
                     app:layout_constraintEnd_toStartOf="@id/txtWallet"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>

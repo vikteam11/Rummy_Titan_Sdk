@@ -114,7 +114,7 @@
                         android:layout_width="0dp"
                         android:layout_height="40dp"
                         android:layout_weight="1"
-                        android:background="@color/maingreen"
+                        android:background="@color/rummy_maingreen"
                         android:gravity="center"
                         android:padding="10dp"
                         android:text="@string/okay"

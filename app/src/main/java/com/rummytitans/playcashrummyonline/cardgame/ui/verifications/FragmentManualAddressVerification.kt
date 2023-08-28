@@ -21,6 +21,7 @@ import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
@@ -131,7 +132,7 @@ class FragmentManualAddressVerification : BaseFragment(), AddressVerificationNav
         val cal = Calendar.getInstance()
         cal.add(Calendar.YEAR,-18)
         val datePickerDialog = DatePickerDialog(
-            requireActivity(), { _, p1, p2, p3 ->
+            requireActivity(),R.style.RummySdkDatePickerDialogTheme, { _, p1, p2, p3 ->
                 //val dob = p1.toString()+ "-" + (p2 + 1).toString() + "-" + p3.toString()
                 val calendar = Calendar.getInstance()
                 calendar.set(p1,p2,p3)
@@ -260,11 +261,15 @@ class FragmentManualAddressVerification : BaseFragment(), AddressVerificationNav
 
             binding.btnGallery.setOnClickListener {
                 pickFrom = 1
-                PermissionActivity.startActivityForPermissionWithResult(
-                    this@FragmentManualAddressVerification,
-                    permissions.toList(),
-                    PermissionActivity.PERMISSION_REQUEST_CODE
-                )
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+                    openGallery()
+                }else{
+                    PermissionActivity.startActivityForPermissionWithResult(
+                        this@FragmentManualAddressVerification,
+                        permissions.toList(),
+                        PermissionActivity.PERMISSION_REQUEST_CODE
+                    )
+                }
                 dismiss()
             }
             val titleMsg = if (viewModel.selectedDocument.get() == 1)

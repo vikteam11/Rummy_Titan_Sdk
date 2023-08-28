@@ -213,7 +213,7 @@
                     android:layout_width="0dp"
                     android:layout_height="35dp"
                     android:backgroundTint="@{Color.parseColor(colorCode)}"
-                    android:background="@drawable/bg_primary_box"
+                    android:background="@drawable/bg_primary_box_rummy"
                     android:fontFamily="@font/rubik_medium"
                     android:gravity="center"
                     android:padding="10dp"

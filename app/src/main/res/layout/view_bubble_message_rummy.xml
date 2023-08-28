@@ -71,7 +71,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:visibility="visible"
         android:backgroundTint="@color/black"
-        android:background="@drawable/circle_cool_gray"
+        android:background="@drawable/circle_cool_gray_rummy"
         app:srcCompat="@drawable/ic_close" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

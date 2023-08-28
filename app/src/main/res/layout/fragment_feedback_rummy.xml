@@ -124,7 +124,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/margin_min"
-                        android:background="@drawable/box_with_grey_border">
+                        android:background="@drawable/box_with_grey_border_rummy">
 
 
                         <TextView
@@ -313,7 +313,7 @@
             android:layout_marginEnd="@dimen/dimen_16"
             android:layout_marginBottom="@dimen/dimen_16"
             android:background="@drawable/bg_squre_shape"
-            android:backgroundTint="@color/maingreen"
+            android:backgroundTint="@color/rummy_maingreen"
             android:fontFamily="@font/rubik_medium"
             android:foreground="?selectableItemBackground"
             android:text='@string/frag_feedback_submit'

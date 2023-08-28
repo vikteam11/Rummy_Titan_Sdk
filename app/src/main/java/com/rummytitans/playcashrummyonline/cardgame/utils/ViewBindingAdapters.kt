@@ -617,7 +617,7 @@ fun setImageUrl(view: ImageView, setImageUrl: String?, setPlaceHolder: Int?) {
     else {
         try {
             VectorDrawableCompat.create(
-                view.resources, setPlaceHolder ?: R.drawable.app_logo, view.context.theme
+                view.resources, setPlaceHolder ?: R.drawable.app_logo_rummy, view.context.theme
             )
         } catch (e: Exception) {
             ContextCompat.getDrawable(view.context, setPlaceHolder!!)

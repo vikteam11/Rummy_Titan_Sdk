@@ -276,7 +276,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginHorizontal="@dimen/dimen_16"
                     android:background="@drawable/bg_squre_shape"
-                    android:backgroundTint="@color/maingreen"
+                    android:backgroundTint="@color/rummy_maingreen"
                     android:gravity="center"
                     android:text="@string/back_to_wallet"
                     android:textAllCaps="true"

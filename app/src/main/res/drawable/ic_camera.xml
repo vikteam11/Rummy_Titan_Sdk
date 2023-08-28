@@ -4,25 +4,25 @@
     android:viewportWidth="36"
     android:viewportHeight="36">
     <path
-        android:fillColor="@color/maingreen"
+        android:fillColor="@color/rummy_maingreen"
         android:pathData="M18,18 L33.576,9.006A17.977,17.977 0,0 0,18 0L18,18Z" />
     <path
-        android:fillColor="@color/maingreen"
+        android:fillColor="@color/rummy_maingreen"
         android:pathData="M18,18.003 L2.424,9.003a17.9,17.9 0,0 0,0 17.988L18,18.003Z" />
     <path
         android:fillColor="#fff"
         android:pathData="M18,18Z" />
     <path
-        android:fillColor="@color/maingreen"
+        android:fillColor="@color/rummy_maingreen"
         android:pathData="M18,0A17.977,17.977 0,0 0,2.424 9.006L18,18Z" />
     <path
-        android:fillColor="@color/maingreen"
+        android:fillColor="@color/rummy_maingreen"
         android:pathData="M33.576,9.003 L18,18.003l15.576,8.994a17.9,17.9 0,0 0,0 -17.988Z" />
     <path
-        android:fillColor="@color/maingreen"
+        android:fillColor="@color/rummy_maingreen"
         android:pathData="M18,18L18,36a17.977,17.977 0,0 0,15.576 -9.006L18,18Z" />
     <path
-        android:fillColor="@color/maingreen"
+        android:fillColor="@color/rummy_maingreen"
         android:pathData="M2.424,26.994A17.977,17.977 0,0 0,18 36L18,18Z" />
     <path
         android:fillColor="#fff"

@@ -98,7 +98,7 @@ class JoinContestViewModel @Inject constructor(
         val json = JsonObject()
         json.addProperty("StakeId",lobby?.StakeId?:"")
         json.addProperty("app_version", BuildConfig.VERSION_CODE)
-        json.addProperty("app_type", RummyTitanSDK.rummySdkOptions.currentAppType)
+        json.addProperty("app_type", RummyTitanSDK.getOption().currentAppType)
         json.addProperty("State",prefs.userStateName)
         json.addProperty("DeviceType","Android")
         json.addProperty("DeviceID",prefs.androidId)

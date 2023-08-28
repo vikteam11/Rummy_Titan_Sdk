@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:visibility="@{showDivider ? View.VISIBLE :View.INVISIBLE}"
-            android:background="@drawable/dash_line"
+            android:background="@drawable/dash_line_rummy"
             android:backgroundTint="@color/grayBorder"
             app:layout_constraintTop_toTopOf="parent"/>
 

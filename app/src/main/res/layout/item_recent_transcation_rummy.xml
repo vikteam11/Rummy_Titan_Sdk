@@ -108,7 +108,7 @@
                         android:layout_marginEnd="@dimen/margin_min"
                         android:fontFamily="@font/rubik_medium"
                         android:text='@{(viewModel.data.IsCr==0?"+":"-")+@string/rupees+String.valueOf(viewModel.data.Amount)}'
-                        android:textColor='@{viewModel.data.IsCr==0?@color/maingreen:@color/alertRed}'
+                        android:textColor="@{viewModel.data.IsCr==0?@color/rummy_maingreen:@color/alertRed}"
                         android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/imageView2"
@@ -230,7 +230,7 @@
                             android:layout_marginStart="8dp"
                             android:fontFamily="@font/rubik_medium"
                             android:text='@{(viewModel.data.IsCr==0?"+":"-")+@string/rupees+String.valueOf(viewModel.data.Wiining)}'
-                            android:textColor='@{viewModel.data.IsCr==0?@color/maingreen:@color/alertRed}'
+                            android:textColor="@{viewModel.data.IsCr==0?@color/rummy_maingreen:@color/alertRed}"
                             android:textSize="13sp"
                             android:visibility="@{viewModel.data.Wiining==0.0?View.GONE:View.VISIBLE}"
                             app:layout_constraintEnd_toEndOf="@+id/textView103"
@@ -265,7 +265,7 @@
                             android:fontFamily="@font/rubik_medium"
                             android:singleLine="true"
                             android:text="@{(viewModel.data.IsCr==0?'+':'-')+@string/rupees+String.valueOf(viewModel.data.Unutilized)}"
-                            android:textColor='@{viewModel.data.IsCr==0?@color/maingreen:@color/alertRed}'
+                            android:textColor="@{viewModel.data.IsCr==0?@color/rummy_maingreen:@color/alertRed}"
                             android:textSize="13sp"
                             android:visibility="@{viewModel.data.Unutilized==0.0?View.GONE:View.VISIBLE}"
                             app:layout_constraintEnd_toEndOf="@+id/textView77"
@@ -297,7 +297,7 @@
                             android:fontFamily="@font/rubik_medium"
                             android:singleLine="true"
                             android:text="@{(viewModel.data.IsCr==0?'+':'-')+@string/rupees+String.valueOf(viewModel.data.Myteam11Credit)}"
-                            android:textColor='@{viewModel.data.IsCr==0?@color/maingreen:@color/alertRed}'
+                            android:textColor="@{viewModel.data.IsCr==0?@color/rummy_maingreen:@color/alertRed}"
                             android:textSize="13sp"
                             android:visibility="@{viewModel.data.Myteam11Credit==0.0?View.GONE:View.VISIBLE}"
                             app:layout_constraintEnd_toEndOf="@+id/textView110"
@@ -456,8 +456,8 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginHorizontal="16dp"
-                        android:background="@drawable/box_grey_border"
-                        android:backgroundTint="@color/maingreen"
+                        android:background="@drawable/box_grey_border_rummy"
+                        android:backgroundTint="@color/rummy_maingreen"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@id/txtReply"
@@ -475,7 +475,7 @@
                         android:text="REPLAY"
                         android:textAllCaps="true"
                         android:fontFamily="@font/rubik_medium"
-                        android:textColor="@color/maingreen"
+                        android:textColor="@color/rummy_maingreen"
                         android:textSize="13sp"
                         android:drawablePadding="8dp"
                         app:layout_constraintEnd_toEndOf="parent"

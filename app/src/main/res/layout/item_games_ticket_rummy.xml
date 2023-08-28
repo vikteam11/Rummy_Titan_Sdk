@@ -47,7 +47,7 @@
             app:layout_constraintStart_toStartOf="@id/gameIcon"
             app:layout_constraintTop_toTopOf="parent"
             android:backgroundTint="@color/steel_grey"
-            android:background="@drawable/dash_line" />
+            android:background="@drawable/dash_line_rummy" />
 
         <TextView
             android:id="@+id/txtTitle"
@@ -85,21 +85,21 @@
             android:layout_marginTop="6dp"
             android:fontFamily="@font/rubik_medium"
             android:text="@{model.expiredMessage}"
-            android:textColor="@{isUsed?model.IsExpired?@color/redVariant1:@color/maingreen:@color/maingreen}"
+            android:textColor="@{isUsed?model.IsExpired?@color/redVariant1:@color/rummy_maingreen:@color/rummy_maingreen}"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/txtTitle"
             app:layout_constraintTop_toBottomOf="@+id/txtCount"
             tools:text="this is it"
-            tools:textColor="@color/maingreen" />
+            tools:textColor="@color/rummy_maingreen" />
 
         <Button
             android:id="@+id/btnRedeem"
             android:layout_width="66dp"
             android:layout_height="26dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/bg_primary_box"
-            android:backgroundTint="@color/maingreen"
+            android:background="@drawable/bg_primary_box_rummy"
+            android:backgroundTint="@color/rummy_maingreen"
             android:elevation="3dp"
             android:fontFamily="@font/rubik_medium"
             android:gravity="center"

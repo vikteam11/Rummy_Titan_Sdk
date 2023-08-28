@@ -314,7 +314,7 @@ abstract class BaseViewModel<N>(val conn: ConnectionDetector? = null) : ViewMode
             val requestBuilder =
                 request.newBuilder().url(url)
                     .addHeader("AppVersion", BuildConfig.VERSION_CODE.toString())
-                    .addHeader("AppType", "${RummyTitanSDK.rummySdkOptions.currentAppType}")
+                    .addHeader("AppType", "${RummyTitanSDK.getOption().currentAppType}")
                     .addHeader("GameType", "1")
                     .addHeader("IsPlayStore",BuildConfig.isPlayStoreApk.toString()).build()
             return@Interceptor chain.proceed(requestBuilder)

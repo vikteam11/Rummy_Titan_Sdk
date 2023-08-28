@@ -96,8 +96,8 @@
             android:layout_height="40dp"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/bg_primary_box"
-            android:backgroundTint="@color/maingreen"
+            android:background="@drawable/bg_primary_box_rummy"
+            android:backgroundTint="@color/rummy_maingreen"
             android:elevation="@dimen/margin_micro"
             android:gravity="center"
             android:text="PAY"
@@ -113,7 +113,7 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:visibility="@{showDivider ? View.VISIBLE :View.INVISIBLE}"
-            android:background="@drawable/dash_line"
+            android:background="@drawable/dash_line_rummy"
             android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@+id/txtPay"/>
     </androidx.constraintlayout.widget.ConstraintLayout>

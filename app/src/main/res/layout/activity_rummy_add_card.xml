@@ -163,7 +163,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/box_grey_border"
+                        android:background="@drawable/box_grey_border_rummy"
                         android:padding="8dp">
 
                         <com.google.android.material.textfield.TextInputLayout
@@ -249,7 +249,7 @@
                             android:layout_marginTop="6dp"
                             android:fontFamily="@font/rubik_regular"
                             android:text="@string/add_Card_mestro_skit_expiry"
-                            android:textColor="@color/maingreen"
+                            android:textColor="@color/rummy_maingreen"
                             android:textSize="12sp"
                             android:visibility="@{viewModel.isMestroCard? View.VISIBLE :View.GONE}"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -435,7 +435,8 @@
                     android:layout_height="45dp"
                     android:layout_margin="20dp"
                     android:alpha="@{viewModel.isCardValid &amp;&amp; viewModel.showPayButton ? 1f :.5F}"
-                    android:background="@drawable/bg_primary_box"
+                    android:background="@drawable/bg_primary_box_rummy"
+                    android:backgroundTint="@color/rummy_maingreen"
                     android:fontFamily="@font/rubik_medium"
                     android:onClick="pay"
                     android:text='@{viewModel.checked?"Save and Pay":"PaY"}'

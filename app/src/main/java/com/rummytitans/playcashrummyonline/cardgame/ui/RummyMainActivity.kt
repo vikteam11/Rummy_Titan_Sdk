@@ -130,7 +130,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
     }
 
     private fun initUI() {
-        if(!RummyTitanSDK.rummySdkOptions.displayProfileIcon){
+        if(!RummyTitanSDK.getOption().displayProfileIcon){
             binding.imgUser.visibility = View.GONE
             binding.imgBack.visibility = View.VISIBLE
         }else{

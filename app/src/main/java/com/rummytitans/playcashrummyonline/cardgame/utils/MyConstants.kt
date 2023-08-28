@@ -16,10 +16,12 @@ object MyConstants {
     const val REDIS_URL = "https://redis.goteam11.com/"
     const val N2_URL = "https://n2.myteam11.com/"
     var CURRENT_APP_TYPE = 8
-    const val SPLASH_URL =  "https://api.myteam11.com"//"https://app2.goteam11.com"//
+    const val GAME_PROD = "https://api.myteam11.com"
+    const val GAME_STAG = "https://app2.goteam11.com"
+    const val SPLASH_URL = GAME_PROD
     const val APP_CURRENT_URL = PRODUCTION_URL
     //const val APP_CURRENT_URL2 = "http://15.207.63.62:7000/"
-   // const val GAME_PLAY_URL = "https://n2.mt11games.com:7000"
+    // const val GAME_PLAY_URL = "https://n2.mt11games.com:7000"
     //const val GAME_PLAY_URL = "https://rummytitans.mt11games.com/"
     const val GAME_PLAY_URL = "https://rummy.myteam11.games/"
 

@@ -29,8 +29,8 @@
             android:id="@+id/bt_continue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_primary_box"
-            android:backgroundTint="@{viewmodel.isButtonEnabled ?@color/maingreen:@color/cool_grey}"
+            android:background="@drawable/bg_primary_box_rummy"
+            android:backgroundTint="@{viewmodel.isButtonEnabled ?@color/rummy_maingreen:@color/cool_grey}"
             android:fontFamily="@font/rubik_medium"
             android:gravity="center"
             android:foreground="?selectableItemBackground"
@@ -94,7 +94,7 @@
                 android:id="@+id/bt_expand"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/box_with_grey_border"
+                android:background="@drawable/box_with_grey_border_rummy"
                 android:elevation="@dimen/dimen_10"
                 android:fontFamily="@font/rubik_medium"
                 android:gravity="center"
@@ -131,7 +131,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="20dp"
-                android:background="@drawable/box_with_grey_border8">
+                android:background="@drawable/box_with_grey_border_rummy8">
 
                 <ImageView
                     android:id="@+id/ivRecomended"
@@ -206,7 +206,7 @@
                         android:id="@+id/dash_line"
                         android:layout_width="match_parent"
                         android:layout_height="1.5dp"
-                        android:background="@drawable/dash_line"
+                        android:background="@drawable/dash_line_rummy"
                         android:backgroundTint="@color/text_color6"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -275,7 +275,7 @@
                     android:padding="16dp"
                     android:overScrollMode="never"
                     android:nestedScrollingEnabled="false"
-                    android:background="@drawable/box_with_grey_border8"
+                    android:background="@drawable/box_with_grey_border_rummy8"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             </androidx.cardview.widget.CardView>

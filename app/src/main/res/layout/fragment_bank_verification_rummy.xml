@@ -394,7 +394,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:background="@drawable/bg_squre_shape"
-            android:backgroundTint="@color/maingreen"
+            android:backgroundTint="@color/rummy_maingreen"
             android:layout_marginBottom="16dp"
             android:layout_marginHorizontal="16dp"
             android:enabled="@{!viewmodel.isProgressLoading()}"

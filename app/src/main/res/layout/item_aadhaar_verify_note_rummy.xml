@@ -22,7 +22,7 @@
         android:layout_height="6dp"
         android:layout_marginTop="5dp"
         android:visibility="@{showCheckBox ? View.GONE : View.VISIBLE}"
-        android:background="@drawable/circle_cool_gray"
+        android:background="@drawable/circle_cool_gray_rummy"
         android:backgroundTint="@color/optionSelectColor"
         app:layout_constraintTop_toTopOf="@id/txtNote"
         app:layout_constraintStart_toStartOf="parent"

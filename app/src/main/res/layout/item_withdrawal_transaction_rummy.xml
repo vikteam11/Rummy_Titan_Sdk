@@ -106,7 +106,7 @@
                         android:layout_marginEnd="@dimen/margin_min"
                         android:fontFamily="@font/rubik_medium"
                         android:text='@{(viewModel.data.IsCr==0?"+":"-")+@string/rupees+String.valueOf(viewModel.data.Amount)}'
-                        android:textColor='@{viewModel.data.IsCr==0?@color/maingreen:@color/alertRed}'
+                        android:textColor="@{viewModel.data.IsCr==0?@color/rummy_maingreen:@color/alertRed}"
                         android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/imageView2"
@@ -284,8 +284,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginTop="@dimen/dimen_8"
-                        android:background="@drawable/box_grey_border"
-                        android:backgroundTint="@color/maingreen"
+                        android:background="@drawable/box_grey_border_rummy"
+                        android:backgroundTint="@color/rummy_maingreen"
                         android:gravity="center"
                         android:insetTop="0dp"
                         android:onClick="@{()->viewModel.sendToWithdrawalDetail.invoke()}"
@@ -293,7 +293,7 @@
                         android:text="@string/track_your_request"
                         android:textAllCaps="true"
                         android:fontFamily="@font/rubik_medium"
-                        android:textColor="@color/maingreen"
+                        android:textColor="@color/rummy_maingreen"
                         android:textSize="13sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

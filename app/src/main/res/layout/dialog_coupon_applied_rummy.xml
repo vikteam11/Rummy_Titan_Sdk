@@ -80,7 +80,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/bg_squre_shape"
-            android:backgroundTint="@color/maingreen"
+            android:backgroundTint="@color/rummy_maingreen"
             android:elevation="@dimen/margin_micro"
             android:gravity="center"
             android:text="@string/ok"

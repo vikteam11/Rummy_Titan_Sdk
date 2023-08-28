@@ -167,7 +167,7 @@
                            app:layout_constraintVertical_chainStyle="packed"
                            app:srcCompat="@drawable/ic_copy_icon"
                            android:backgroundTint="@color/rummy_mainColor"
-                           android:background="@drawable/bg_primary_box"
+                           android:background="@drawable/bg_primary_box_rummy"
                            app:tint="@color/white" />
                    </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -271,8 +271,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="25dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/bg_primary_box"
-            android:backgroundTint="@color/maingreen"
+            android:background="@drawable/bg_primary_box_rummy"
+            android:backgroundTint="@color/rummy_maingreen"
             android:text="@string/share"
             android:textColor="@color/white"
             android:textSize="12sp"

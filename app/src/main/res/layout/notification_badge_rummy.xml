@@ -12,7 +12,7 @@
     app:colorCodeFirst="@{@color/squash}"
     app:colorCodeSecond="@{@color/piss_yellow}"
     app:radius="@{30f}"
-    tools:background="@drawable/bg_primary_box"
+    tools:background="@drawable/bg_primary_box_rummy"
     android:backgroundTint="@color/yellow">
 
     <TextView

@@ -90,7 +90,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@drawable/dash_line"
+            android:background="@drawable/dash_line_rummy"
             android:backgroundTint="@color/silver_two"
             android:visibility="@{showDivider ? View.VISIBLE :View.INVISIBLE}"
             android:layout_marginTop="20dp"
@@ -102,7 +102,7 @@
             android:layout_height="40dp"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/bg_primary_box"
+            android:background="@drawable/bg_primary_box_rummy"
             android:backgroundTint="@color/verify_green"
             android:elevation="@dimen/margin_micro"
             android:gravity="center"

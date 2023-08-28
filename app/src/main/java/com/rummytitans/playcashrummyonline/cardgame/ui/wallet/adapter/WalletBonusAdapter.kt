@@ -16,7 +16,7 @@ class WalletBonusAdapter(
 ) :
     RecyclerView.Adapter<BaseViewHolder>() {
     val colorArray = arrayOf(
-        R.color.maingreen,
+        R.color.rummy_maingreen,
         R.color.faded_orange,
         R.color.lavender_blue, R.color.reddishPink_two,
         R.color.bright_sky_blue

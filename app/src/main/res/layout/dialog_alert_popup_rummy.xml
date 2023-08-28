@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:elevation="15dp"
             tools:visibility="visible"
-            android:background="@drawable/box_with_grey_border8"
+            android:background="@drawable/box_with_grey_border_rummy8"
             android:backgroundTint="@color/text_color5">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -121,8 +121,8 @@
                     android:layout_height="40dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
-                    android:background="@drawable/bg_primary_box"
-                    android:backgroundTint="@color/maingreen"
+                    android:background="@drawable/bg_primary_box_rummy"
+                    android:backgroundTint="@color/rummy_maingreen"
                     android:fontFamily="@font/rubik_medium"
                     android:text="@{alertModel.positiveText}"
                     android:textColor="@color/white"

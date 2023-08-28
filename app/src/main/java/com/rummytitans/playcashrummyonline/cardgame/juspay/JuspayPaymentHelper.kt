@@ -12,6 +12,8 @@ import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import com.rummytitans.playcashrummyonline.cardgame.R
+import com.rummytitans.playcashrummyonline.cardgame.RummyTitanSDK
+import com.rummytitans.playcashrummyonline.cardgame.utils.MyConstants
 import org.json.JSONArray
 import org.json.JSONObject
 import java.util.*
@@ -70,12 +72,17 @@ class JuspayPaymentHelper(
         initiationPayload.put("requestId", requestId)
         initiationPayload.put(PaymentConstants.SERVICE, JusPayService)
 
+        val env = if(RummyTitanSDK.getOption().baseUrl == MyConstants.PRODUCTION_URL ||
+            RummyTitanSDK.getOption().baseUrl == MyConstants.N2_URL)
+            "prod"
+        else
+            "sandbox"
         val payload = JSONObject()
         payload.put("action", "initiate")
         payload.put("merchantId", "myteam11")
         payload.put("clientId", "myteam11-android")
         payload.put("customerId", customerId)
-        payload.put(PaymentConstants.ENV,if (BuildConfig.DEBUG) "sandbox" else "prod")//"prod")//
+        payload.put(PaymentConstants.ENV,env)//"prod")//
         initiationPayload.put(PaymentConstants.PAYLOAD, payload)
 
         hyperInstance.initiate(initiationPayload, object : HyperPaymentsCallbackAdapter() {

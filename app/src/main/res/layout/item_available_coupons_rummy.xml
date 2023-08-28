@@ -26,7 +26,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/coupons_bg"
+        android:background="@drawable/coupons_bg_rummy"
         android:elevation="3dp"
         android:padding="12dp"
         android:layout_marginBottom="8dp">
@@ -128,7 +128,7 @@
             android:paddingVertical="8dp"
             android:visibility="@{selected ? View.GONE : View.VISIBLE}"
             android:background="@drawable/bg_squre_shape"
-            android:backgroundTint="@color/maingreen"
+            android:backgroundTint="@color/rummy_maingreen"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/guide8"
             app:layout_constraintTop_toTopOf="parent"

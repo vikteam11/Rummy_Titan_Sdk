@@ -42,7 +42,7 @@ class WebAutoAddressVerifyActivity : BaseActivity(), AddressVerificationNavigato
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this.viewModelStore, viewModelFactory)
+        viewModel = ViewModelProvider(this)
             .get(AddressVerificationViewModel::class.java)
         viewModel.navigatorAct = this
         viewModel.navigator = this

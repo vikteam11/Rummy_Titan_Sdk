@@ -227,9 +227,9 @@
     </style>
 
     <style name="RummySdk_Widget.RadioButton" parent="RummyAppTheme.Safe">
-        <item name="colorAccent">@color/maingreen</item>
+        <item name="colorAccent">@color/rummy_maingreen</item>
         <item name="colorControlNormal">@color/grayBorder</item>
-        <item name="colorControlActivated">@color/maingreen</item>
+        <item name="colorControlActivated">@color/rummy_maingreen</item>
     </style>
 
     <style name="RummySdk_TextAppearance.Large" parent="@android:style/TextAppearance.Large">
@@ -356,5 +356,13 @@
 
     <style name="RummySdk_BottomSheetModal" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="RummySdkDatePickerDialogTheme" parent="ThemeOverlay.MaterialComponents.Dialog">
+        <!-- Customize the attributes of the DatePickerDialog here -->
+        <!-- For example, change the background color: -->
+        <item name="android:windowBackground">@color/rummy_black_3</item>
+        <!-- Or change the text color: -->
+        <item name="android:textColorPrimary">@color/text_color2</item>
     </style>
 </resources>

@@ -371,6 +371,7 @@ class FragmentWallet : BaseFragment(),
                     val cal = Calendar.getInstance()
                     DatePickerDialog(
                         activity,
+                        R.style.RummySdkDatePickerDialogTheme,
                         DatePickerDialog.OnDateSetListener { p0, p1, p2, p3 ->
                             val dob =
                                 p3.toString() + "/" + (p2 + 1).toString() + "/" + p1.toString()

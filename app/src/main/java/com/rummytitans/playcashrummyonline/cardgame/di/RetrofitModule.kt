@@ -8,6 +8,7 @@ import com.rummytitans.playcashrummyonline.cardgame.utils.MyConstants
 import android.text.TextUtils
 import com.google.gson.Gson
 import com.rummytitans.playcashrummyonline.cardgame.RummyTitanSDK
+import com.rummytitans.playcashrummyonline.cardgame.di.anotation.RummySdk
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,19 +28,24 @@ class RetrofitModule {
 
     @Singleton
     @Provides
-    fun getApiInterface(retrofit: Retrofit) = retrofit.create(APIInterface::class.java)
+    @RummySdk
+    fun getApiInterface(@RummySdk retrofit: Retrofit) = retrofit.create(APIInterface::class.java)
 
     @Singleton
     @Provides
+    @RummySdk
     fun provideGson() = Gson()
 
     @Singleton
     @Provides
-    fun getRetrofit(okHttpClient: OkHttpClient):Retrofit {
-      val baseApiUrl= if (TextUtils.isEmpty(MainApplication.appUrl))
+    @RummySdk
+    fun getRetrofit(@RummySdk okHttpClient: OkHttpClient):Retrofit {
+        val baseurl = RummyTitanSDK.getOption().baseUrl
+        val baseApiUrl= if (TextUtils.isEmpty(baseurl))
           MyConstants.APP_CURRENT_URL
-      else
-          MainApplication.appUrl ?: MyConstants.APP_CURRENT_URL
+        else
+          baseurl
+
         return Retrofit.Builder()
             .baseUrl(baseApiUrl)
             .addConverterFactory(GsonConverterFactory.create())
@@ -49,21 +55,23 @@ class RetrofitModule {
 
     @Singleton
     @Provides
-    fun getOkHttpClient(interceptor: Interceptor) =
+    @RummySdk
+    fun getOkHttpClient(@RummySdk interceptor: Interceptor) =
         OkHttpClient.Builder().addInterceptor(interceptor)
             .connectTimeout(60, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS).build()
 
     @Singleton
     @Provides
-    fun getInterceptor(pref: SharedPreferenceStorage, gson: Gson): Interceptor {
+    @RummySdk
+    fun getInterceptor(pref: SharedPreferenceStorage,@RummySdk gson: Gson): Interceptor {
         return Interceptor { chain: Interceptor.Chain ->
             val request = chain.request()
             val httpUrl = request.url
             val url = httpUrl.newBuilder().build()
             val builder = request.newBuilder().url(url)
             builder.addHeader("AppVersion", BuildConfig.VERSION_CODE.toString())
-            builder.addHeader("AppType", "${RummyTitanSDK.rummySdkOptions.currentAppType}") //uses in BaseViewModel and Analytic helper fireevent()
+            builder.addHeader("AppType", "${RummyTitanSDK.getOption().currentAppType}") //uses in BaseViewModel and Analytic helper fireevent()
             builder.addHeader("GameType", "1")
             builder.addHeader("IsPlayStore",BuildConfig.isPlayStoreApk.toString())
 //            pref.toUserDetail(gson)?.let {

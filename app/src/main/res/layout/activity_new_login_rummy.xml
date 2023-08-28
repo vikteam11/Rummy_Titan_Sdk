@@ -191,7 +191,7 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="40dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/bg_primary_box"
+            android:background="@drawable/bg_primary_box_rummy"
             android:backgroundTint="@color/secondary"
             android:fontFamily="@font/rubik_medium"
             android:onClick="submit"

@@ -17,6 +17,8 @@ import androidx.databinding.ObservableInt
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.rummytitans.playcashrummyonline.cardgame.MainApplication
+import com.rummytitans.playcashrummyonline.cardgame.RummyTitanSDK
+import com.rummytitans.playcashrummyonline.cardgame.di.anotation.RummySdk
 import com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -53,7 +55,7 @@ class LaunchViewModel @Inject constructor(
             }
         }
 
-        val apis = getApiEndPointObject(MyConstants.SPLASH_URL)
+        val apis = getApiEndPointObject(RummyTitanSDK.getOption().gameSplashUrl)
 
         compositeDisposable.add(
             apis.getVersion(
