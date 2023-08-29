@@ -1,13 +1,13 @@
 package com.rummytitans.playcashrummyonline.cardgame.di.viewmodels
 
-import androidx.lifecycle.ViewModel
+/*import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import javax.inject.Inject
 import javax.inject.Provider
 
-/**
+*//**
  * ViewModelFactory which uses Dagger to create the instances.
- */
+ *//*
 class MyTeam11ViewModelFactory @Inject constructor(
     private val creators: @JvmSuppressWildcards Map<Class<out ViewModel>, Provider<ViewModel>>
 ) : ViewModelProvider.Factory {
@@ -23,4 +23,4 @@ class MyTeam11ViewModelFactory @Inject constructor(
             throw RuntimeException(e)
         }
     }
-}
+}*/

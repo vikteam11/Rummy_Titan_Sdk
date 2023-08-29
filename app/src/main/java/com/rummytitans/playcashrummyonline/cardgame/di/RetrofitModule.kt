@@ -32,7 +32,7 @@ class RetrofitModule {
 
     @Singleton
     @Provides
-    @RummySdk
+   // @RummySdk
     fun provideGson() = Gson()
 
     @Singleton
@@ -63,7 +63,7 @@ class RetrofitModule {
     @Singleton
     @Provides
     @RummySdk
-    fun getInterceptor(pref: SharedPreferenceStorage,@RummySdk gson: Gson): Interceptor {
+    fun getInterceptor(pref: SharedPreferenceStorage): Interceptor {
         return Interceptor { chain: Interceptor.Chain ->
             val request = chain.request()
             val httpUrl = request.url

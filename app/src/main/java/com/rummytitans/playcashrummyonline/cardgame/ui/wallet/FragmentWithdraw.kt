@@ -46,8 +46,8 @@ class FragmentWithdraw : BaseFragment(), MainNavigationFragment,
     BaseNavigator, WithdrawalNavigator,WithDrawTdsListener,
     WithdrawalMethodSelectionListener {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    //@Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
     var alertWithdrawalDialog: Dialog? = null
     lateinit var binding: FragmentWithdrawRummyBinding
     lateinit var viewModel: WithdrawViewModel

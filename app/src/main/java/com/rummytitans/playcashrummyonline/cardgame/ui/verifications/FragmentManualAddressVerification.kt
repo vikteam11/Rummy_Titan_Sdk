@@ -45,8 +45,8 @@ import javax.inject.Inject
 class FragmentManualAddressVerification : BaseFragment(), AddressVerificationNavigator,
     BottomSheetStatusListener {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+   // @Inject
+   // lateinit var viewModelFactory: ViewModelProvider.Factory
 
     lateinit var viewModel: AddressVerificationViewModel
 

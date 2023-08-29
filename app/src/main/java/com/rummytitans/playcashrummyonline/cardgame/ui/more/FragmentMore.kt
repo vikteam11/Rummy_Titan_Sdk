@@ -36,8 +36,8 @@ class FragmentMore : BaseFragment(), MainNavigationFragment, MoreNavigator,
     lateinit var prefs: SharedPreferenceStorage
     lateinit var viewModel: MoreViewModel
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    //@Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?

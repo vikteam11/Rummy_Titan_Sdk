@@ -58,8 +58,8 @@ class FragmentWallet : BaseFragment(),
     BaseNavigator, OnOfferBannerClick, HideKeyboardInterface,
     BubbleShowCaseSequence.OnSkipInterface, WalletNavigator {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+   // @Inject
+   // lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel: WalletViewModel
     lateinit var binding: FragmentWalletRummyBinding
     private var mRedeemCouponDialog: Dialog? = null

@@ -42,8 +42,8 @@ class FragmentShare : BaseFragment(), MainNavigationFragment,
     com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseNavigator {
 
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+   // @Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var binding: ActivityRummyShareBinding
     lateinit var viewModel: ReferViewModel
     private val contentAdapter: ReferContentAdapter by lazy {

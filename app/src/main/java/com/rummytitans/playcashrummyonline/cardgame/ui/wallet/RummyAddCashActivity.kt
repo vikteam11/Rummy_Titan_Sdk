@@ -66,8 +66,8 @@ class RummyAddCashActivity :
     lateinit var viewModel: AddCashViewModel
     var mRedeemCouponDialog: Dialog? = null
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+   // @Inject
+   // lateinit var viewModelFactory: ViewModelProvider.Factory
     var headerAdapter: WalletOffersAdapter?=null
     var mOfferAdapter: OffersAdapter?=null
     var couponsAdapter: AvailableCouponsAdapter?=null

@@ -45,8 +45,8 @@ class ContactListActivity : BaseActivity() {
 
     lateinit var viewModel: ContactsViewModel
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    //@Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
 
     lateinit var binding: ActivityRummyContectsBinding
 

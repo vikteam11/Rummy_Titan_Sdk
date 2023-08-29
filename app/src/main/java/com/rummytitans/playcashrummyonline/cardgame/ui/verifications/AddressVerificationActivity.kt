@@ -32,8 +32,8 @@ interface AddressVerificationNavigator{
 
 class AddressVerificationActivity : BaseActivity(), AddressVerificationNavigator {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+   // @Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
 
     lateinit var viewModel: AddressVerificationViewModel
 

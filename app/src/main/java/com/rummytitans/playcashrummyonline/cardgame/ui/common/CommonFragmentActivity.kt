@@ -47,8 +47,8 @@ class CommonFragmentActivity : BaseActivity() {
     lateinit var binding: ActivityRummyCommonFragmentBinding
     lateinit var viewModel: CommonViewModel
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+   // @Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

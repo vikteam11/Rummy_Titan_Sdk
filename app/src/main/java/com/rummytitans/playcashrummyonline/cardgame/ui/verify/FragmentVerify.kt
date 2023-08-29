@@ -30,8 +30,8 @@ import javax.inject.Inject
 class FragmentVerify : BaseFragment(),
     BaseNavigator, VerificationNavigator {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+   // @Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
     var dialogChangeEmail: Dialog? = null
     lateinit var viewModel: VerifyViewModel
     lateinit var binding: FragmentVerifyRummyBinding

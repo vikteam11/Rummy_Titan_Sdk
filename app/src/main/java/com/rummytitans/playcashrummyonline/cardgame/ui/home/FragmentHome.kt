@@ -53,8 +53,8 @@ class FragmentHome : BaseFragmentLocation(),
     lateinit var prefs: SharedPreferenceStorage
     lateinit var viewModel: HomeViewModel
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+   // @Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
     private val rummyLobbyAdapter:RummyLobbyAdapter by lazy {
         RummyLobbyAdapter(arrayListOf(),this)
     }

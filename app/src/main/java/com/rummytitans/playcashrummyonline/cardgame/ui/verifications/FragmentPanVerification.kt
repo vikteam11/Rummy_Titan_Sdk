@@ -41,8 +41,8 @@ class FragmentPanVerification : BaseFragment(), RequestVarificationInterface,
     lateinit var binding: FragmentPanVerificationRummyBinding
     lateinit var viewModel: PanVerificationViewModel
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    //@Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private var currentPhotoPath = ""
 

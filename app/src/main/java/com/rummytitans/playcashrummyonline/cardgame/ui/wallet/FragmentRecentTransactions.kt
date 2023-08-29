@@ -44,8 +44,8 @@ class FragmentRecentTransactions : BaseFragment(), MainNavigationFragment,
 
     lateinit var binding: FragmentRecentTransactionRummyBinding
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    //@Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel: RecentTransactionViewModel
 
     internal var PERMISSION_REQUEST_CODE = 11

@@ -16,14 +16,15 @@ import androidx.lifecycle.ViewModelProvider
 import com.appsflyer.AppsFlyerLib
 import com.rummytitans.playcashrummyonline.cardgame.ui.newlogin.RummyNewLoginActivity
 import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.RummyAddCashActivity
+import dagger.hilt.android.AndroidEntryPoint
 //import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 //import com.google.firebase.ktx.Firebase
 import javax.inject.Inject
-
+@AndroidEntryPoint
 class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    //@Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel: DeepLinkRummyViewModel
     lateinit var binding: ActivityDeepLinkRummyBinding
 

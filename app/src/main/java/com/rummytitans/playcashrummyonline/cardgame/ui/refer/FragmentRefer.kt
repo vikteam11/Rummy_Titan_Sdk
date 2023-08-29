@@ -43,8 +43,8 @@ import javax.inject.Inject
 class FragmentRefer : BaseFragment(), MainNavigationFragment,
     ReferItemClick, BaseNavigator {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+   // @Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var sheetBehavior: BottomSheetBehavior<*>
 
     companion object {

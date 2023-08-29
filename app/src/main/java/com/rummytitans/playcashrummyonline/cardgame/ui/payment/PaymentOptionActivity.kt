@@ -56,8 +56,8 @@ class PaymentOptionActivity : BaseActivity(), PaymentOptionNavigator, BottomShee
     lateinit var viewModel: PaymentOptionViewModel
     val mOtpReceiver by lazy { OtpReceiver() }
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    //@Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
     private var paymentBy = ""
     private val availableUpi = ArrayList<String>()
     private var disposableSearchText: Disposable? = null

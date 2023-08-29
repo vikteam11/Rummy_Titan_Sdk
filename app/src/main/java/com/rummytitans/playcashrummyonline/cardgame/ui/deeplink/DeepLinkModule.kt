@@ -1,5 +1,6 @@
 package com.rummytitans.playcashrummyonline.cardgame.ui.deeplink
 
+/*
 import com.rummytitans.playcashrummyonline.cardgame.di.viewmodels.ViewModelKey
 import androidx.lifecycle.ViewModel
 import dagger.Binds
@@ -15,4 +16,4 @@ abstract class DeepLinkModule {
     @IntoMap
     @ViewModelKey(DeepLinkRummyViewModel::class)
     abstract fun bindCreateContestViewModel(viewModel: DeepLinkRummyViewModel): ViewModel
-}
+}*/

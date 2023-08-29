@@ -45,8 +45,8 @@ class FragmentRummyWebViewer() : BaseFragment(),
     var isStatusBarHidden = false
     lateinit var mBinding: ActivityGamesWebViewerRummyBinding
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    //@Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var mViewModel: RummyViewModel
 
     companion object {

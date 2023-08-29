@@ -30,8 +30,8 @@ class WebAutoAddressVerifyActivity : BaseActivity(), AddressVerificationNavigato
 
 
     lateinit var binding: ActivityRummyAutoAddressVerifyWebviewsBinding
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+   // @Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
 
     lateinit var viewModel: AddressVerificationViewModel
 

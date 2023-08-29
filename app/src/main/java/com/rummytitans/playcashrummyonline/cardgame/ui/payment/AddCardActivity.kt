@@ -39,8 +39,8 @@ import javax.inject.Inject
 
 class AddCardActivity : BaseActivity(), AddCardNavigator, PaymentListener {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    //@Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var progressDialog: Dialog
     lateinit var binding: ActivityRummyAddCardBinding
     lateinit var viewModel: AddCardViewModel

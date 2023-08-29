@@ -37,6 +37,7 @@ import com.rummytitans.playcashrummyonline.cardgame.RummyTitanSDK
 import com.rummytitans.playcashrummyonline.cardgame.games.rummy.RummyWebViewActivity
 import com.rummytitans.playcashrummyonline.cardgame.models.WalletInfoModel
 import com.rummytitans.playcashrummyonline.cardgame.ui.common.CommonFragmentActivity
+import com.rummytitans.playcashrummyonline.cardgame.ui.games.tickets.GamesTicketActivity
 import com.rummytitans.playcashrummyonline.cardgame.ui.more.FragmentMore
 import com.rummytitans.playcashrummyonline.cardgame.ui.rakeback.RakeBackFragment
 import com.rummytitans.playcashrummyonline.cardgame.ui.refer.FragmentShare
@@ -54,8 +55,8 @@ import javax.inject.Inject
 class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener,
    ActiveGameNavigator {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+   // @Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel: MainViewModel
 
     lateinit var mCurrentFragment: BaseFragment
@@ -230,6 +231,20 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
                     )
             )
         }
+
+        binding.viewBgTicket.setOnClickListenerDebounce {
+            viewModel.analyticsHelper.fireEvent(
+                AnalyticsKey.Names.ButtonClick, bundleOf(
+                    AnalyticsKey.Keys.ButtonName to  AnalyticsKey.Values.AvailableTickets,
+                    AnalyticsKey.Keys.Screen to AnalyticsKey.Values.Home
+                )
+            )
+            startActivity(
+                Intent(this, GamesTicketActivity::class.java)
+            )
+        }
+
+
     }
 
     private fun loadWalletData(){

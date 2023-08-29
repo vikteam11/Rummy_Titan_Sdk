@@ -30,8 +30,8 @@ class FragmentUnutilized : BaseFragment(), MainNavigationFragment,
 
     lateinit var binding: FragmentUnutilizedRummyBinding
     lateinit var mViewmModel: UnutilizedViewModel
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    //@Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
     var backDialog: Dialog? = null
 
     companion object {
@@ -56,8 +56,7 @@ class FragmentUnutilized : BaseFragment(), MainNavigationFragment,
         setTheme(inflater)
         setLanguage()
         mViewmModel = ViewModelProvider(
-            this.viewModelStore,
-            viewModelFactory
+            this
         ).get(UnutilizedViewModel::class.java)
         binding =
             FragmentUnutilizedRummyBinding.inflate(localInflater ?: inflater, container, false).apply {

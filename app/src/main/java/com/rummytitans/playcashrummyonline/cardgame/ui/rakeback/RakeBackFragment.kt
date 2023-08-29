@@ -36,8 +36,8 @@ class RakeBackFragment :  BaseFragment(),RakeBackNavigator{
 
     lateinit var binding : FragmentRakebackBinding
     lateinit var viewModel: RakeBackViewModel
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+   // @Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val rakeBackHistoryAdapter:RakeBackHistoryAdapter by lazy {
         RakeBackHistoryAdapter(arrayListOf())

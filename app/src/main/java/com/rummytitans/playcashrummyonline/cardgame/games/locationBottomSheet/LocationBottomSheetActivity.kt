@@ -21,8 +21,8 @@ import javax.inject.Inject
 
 class LocationBottomSheetActivity : BaseActivity(), LocationNavigator {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    //@Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var mViewModel: LocationViewModel
     lateinit var mBinding: ActivityLocationSheetRummyBinding
 

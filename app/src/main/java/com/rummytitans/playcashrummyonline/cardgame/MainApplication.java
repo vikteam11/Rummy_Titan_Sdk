@@ -36,7 +36,7 @@ import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsHelper;
 import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage;
 
 
-//@HiltAndroidApp
+@HiltAndroidApp
 public class MainApplication extends Application implements LifecycleEventObserver {
 
     public static WeakReference<Activity> forgroundActivityRef = null;

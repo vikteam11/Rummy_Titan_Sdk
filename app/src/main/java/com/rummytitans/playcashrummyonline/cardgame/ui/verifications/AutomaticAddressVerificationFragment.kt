@@ -26,8 +26,8 @@ import javax.inject.Inject
 class AutomaticAddressVerificationFragment : BaseFragment(), AddressVerificationNavigator {
 
     private val REQUEST_WEBVIEW = 1001
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    //@Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
 
     lateinit var viewModel: AddressVerificationViewModel
 

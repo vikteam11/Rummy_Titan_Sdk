@@ -39,8 +39,8 @@ class FragmentBankVerification : BaseFragment(), RequestVarificationInterface,
     lateinit var binding: FragmentBankVerificationRummyBinding
     lateinit var viewModel: BankVerificationViewModel
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    //@Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
 
 
     private var currentPhotoPath = ""
@@ -63,8 +63,7 @@ class FragmentBankVerification : BaseFragment(), RequestVarificationInterface,
     ): View? {
         setTheme(inflater)
         viewModel = ViewModelProvider(
-            this.viewModelStore,
-            viewModelFactory
+            this
         ).get(BankVerificationViewModel::class.java)
         binding =
             FragmentBankVerificationRummyBinding.inflate(localInflater ?: inflater, container, false)

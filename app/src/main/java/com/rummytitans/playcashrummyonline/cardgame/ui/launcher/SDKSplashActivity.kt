@@ -104,7 +104,6 @@ class SDKSplashActivity : AppCompatActivity(),
 
     override fun onResume() {
         super.onResume()
-        Toast.makeText(this, packageName, Toast.LENGTH_LONG).show()
         Log.e("pkgname == ",packageName)
        // if (packageName == "in.myteam11.store")
             apiCall()

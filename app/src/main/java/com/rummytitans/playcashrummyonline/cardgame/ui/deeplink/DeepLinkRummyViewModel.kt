@@ -13,8 +13,9 @@ import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.rummytitans.playcashrummyonline.cardgame.RummyTitanSDK
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-
+@HiltViewModel
 class DeepLinkRummyViewModel @Inject constructor(
     val prefs: SharedPreferenceStorage, val apis: APIInterface,
     val gson: Gson, val connectionDetector: ConnectionDetector

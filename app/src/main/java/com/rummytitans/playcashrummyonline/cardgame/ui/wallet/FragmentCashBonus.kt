@@ -25,8 +25,8 @@ class FragmentCashBonus : BaseFragment(), MainNavigationFragment,
 
     lateinit var binding: FragmentCashBonusRummyBinding
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    //@Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel: CashBonusViewModel
 
     lateinit var adapter: CashBonusAdapter

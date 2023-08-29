@@ -35,8 +35,8 @@ import javax.inject.Inject
 class FragmentVerificationOption : BaseFragment(), AddressVerificationNavigator,VerificationOptionNavigator,BottomSheetStatusListener {
 
     private val REQUEST_WEBVIEW = 1001
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    //@Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
 
     lateinit var viewModel: AddressVerificationViewModel
 

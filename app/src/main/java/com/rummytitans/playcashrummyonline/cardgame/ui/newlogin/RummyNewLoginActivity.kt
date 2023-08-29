@@ -41,8 +41,8 @@ import javax.inject.Inject
 
 class RummyNewLoginActivity : BaseActivity(), NewLoginNavigator {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    //@Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var binding: ActivityNewLoginRummyBinding
     lateinit var mViewModel: NewLoginViewModel
 

@@ -36,8 +36,8 @@ class SettingsFragment : BaseFragment(),
     com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseNavigator, SettingFragmentNavigator,
     ColorChooseInterface {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+   // @Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var binding: FragmentMySettingsRummyBinding
     lateinit var viewModel: SettingsViewModel
     var alertDialog: Dialog? = null

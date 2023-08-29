@@ -27,8 +27,8 @@ import javax.inject.Inject
 class FragmentSupport : BaseFragment(), MainNavigationFragment, SupportClick,
     BaseNavigator {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+   // @Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var binding: FragmentHelpDeskRummyBinding
     lateinit var viewModel: SupportViewModel
     var array = ArrayList<SupportModel>()

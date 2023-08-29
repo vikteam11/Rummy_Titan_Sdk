@@ -20,6 +20,7 @@ import com.rummytitans.playcashrummyonline.cardgame.models.RummyLobbyModel
 import com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseActivity
 import com.rummytitans.playcashrummyonline.cardgame.games.rummy.RummyWebViewActivity
 import com.rummytitans.playcashrummyonline.cardgame.utils.MyConstants
+import com.rummytitans.playcashrummyonline.cardgame.utils.launchAddressVerificationScreen
 import com.rummytitans.playcashrummyonline.cardgame.utils.setOnClickListenerDebounce
 import com.rummytitans.playcashrummyonline.cardgame.widget.MyDialog
 import com.tapadoo.alerter.Alerter
@@ -28,8 +29,8 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class JoinGameBottomSheet : BottomSheetDialogFragment(), JoinGameSheetNavigator{
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+   // @Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel: JoinContestViewModel
     lateinit var mBinding: BottomSheetJoinGameRummyBinding
 
@@ -159,7 +160,7 @@ class JoinGameBottomSheet : BottomSheetDialogFragment(), JoinGameSheetNavigator{
     }
 
     override fun sendToAddressVerification() {
-        //launchAddressVerificationScreen("")
+        launchAddressVerificationScreen("")
     }
 }
 

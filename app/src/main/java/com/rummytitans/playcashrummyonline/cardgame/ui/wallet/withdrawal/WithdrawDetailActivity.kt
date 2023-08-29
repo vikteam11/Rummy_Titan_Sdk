@@ -22,8 +22,8 @@ import javax.inject.Inject
 
 
 class WithdrawDetailActivity : BaseActivity(), WithdrawalDetailNavigator {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+   // @Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var mViewModel: WithdrawDetailViewModel
     lateinit var binding: ActivityRummyWithdrawDetailBinding
     var cancelWithdrawalDialog: BottomSheetAlertDialog? = null

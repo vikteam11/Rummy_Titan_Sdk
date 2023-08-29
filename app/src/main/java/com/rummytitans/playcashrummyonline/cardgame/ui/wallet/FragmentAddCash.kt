@@ -19,8 +19,8 @@ class FragmentAddCash : BaseFragment(), MainNavigationFragment {
     lateinit var binding: FragmentAddCashRummyBinding
     lateinit var viewModel: AddCashViewModel
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+   // @Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
 
     companion object {
         fun newInstance(currentBalance: Double): FragmentAddCash {
@@ -35,8 +35,7 @@ class FragmentAddCash : BaseFragment(), MainNavigationFragment {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setTheme(inflater)
         viewModel = ViewModelProvider(
-            this.viewModelStore,
-            viewModelFactory
+            this
         ).get(AddCashViewModel::class.java)
         binding =
             FragmentAddCashRummyBinding.inflate(localInflater ?: inflater, container, false).apply {

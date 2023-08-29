@@ -36,8 +36,8 @@ import javax.inject.Inject
 
 class ShareActivity : BaseActivity() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+   // @Inject
+   // lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var binding: ActivityRummyShareBinding
     lateinit var viewModel: ReferViewModel
 

@@ -18,8 +18,8 @@ import javax.inject.Inject
 
 class GamesTicketActivity : CurrentLocationBaseActivity(), GameTicketNavigator {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+   // @Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var mBinding: ActivityRummyGamesTicketBinding
     private lateinit var mViewModel: GamesTicketViewModel
     var callingRequired: Byte = STATE_YES
