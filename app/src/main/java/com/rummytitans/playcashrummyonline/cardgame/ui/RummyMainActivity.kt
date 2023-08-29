@@ -8,20 +8,18 @@ import com.rummytitans.playcashrummyonline.cardgame.databinding.ActivityHomeRumm
 import com.rummytitans.playcashrummyonline.cardgame.databinding.NotificationBadgeRummyBinding
 import com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseActivity
 import com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseFragment
-import com.rummytitans.playcashrummyonline.cardgame.ui.deeplink.DeepLinkActivity
+import com.rummytitans.playcashrummyonline.cardgame.ui.deeplink.DeepLinkActivityRummy
 import com.rummytitans.playcashrummyonline.cardgame.ui.home.FragmentHome
 import com.rummytitans.playcashrummyonline.cardgame.utils.*
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.PopupWindow
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.forEach
@@ -389,7 +387,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
 
     private fun startDeepLinkActivity(deepLink: String?) {
         startActivity(
-            Intent(this, DeepLinkActivity::class.java)
+            Intent(this, DeepLinkActivityRummy::class.java)
                 .putExtra("deepLink", deepLink ?: "")
         )
     }

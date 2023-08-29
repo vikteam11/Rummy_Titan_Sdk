@@ -28,7 +28,6 @@ class RetrofitModule {
 
     @Singleton
     @Provides
-    @RummySdk
     fun getApiInterface(@RummySdk retrofit: Retrofit) = retrofit.create(APIInterface::class.java)
 
     @Singleton

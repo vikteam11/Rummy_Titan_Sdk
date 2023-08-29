@@ -16,16 +16,15 @@ import androidx.lifecycle.ViewModelProvider
 import com.appsflyer.AppsFlyerLib
 import com.rummytitans.playcashrummyonline.cardgame.ui.newlogin.RummyNewLoginActivity
 import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.RummyAddCashActivity
-import dagger.hilt.android.AndroidEntryPoint
 //import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 //import com.google.firebase.ktx.Firebase
 import javax.inject.Inject
 
-class DeepLinkActivity : BaseActivity(), DeepLinkNavigator {
+class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    lateinit var viewModel: DeepLinkViewModel
+    lateinit var viewModel: DeepLinkRummyViewModel
     lateinit var binding: ActivityDeepLinkRummyBinding
 
     var comingFor = 0
@@ -37,14 +36,14 @@ class DeepLinkActivity : BaseActivity(), DeepLinkNavigator {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(DeepLinkViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(DeepLinkRummyViewModel::class.java)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_deep_link_rummy)
         binding.lifecycleOwner = this
         AppsFlyerLib.getInstance().sendPushNotificationData(this)
         viewModel.apply {
-            navigator = this@DeepLinkActivity
-            navigatorAct = this@DeepLinkActivity
-            myDialog = MyDialog(this@DeepLinkActivity)
+            navigator = this@DeepLinkActivityRummy
+            navigatorAct = this@DeepLinkActivityRummy
+            myDialog = MyDialog(this@DeepLinkActivityRummy)
             binding.viewModel = this
             checkForceUpdate()
         }

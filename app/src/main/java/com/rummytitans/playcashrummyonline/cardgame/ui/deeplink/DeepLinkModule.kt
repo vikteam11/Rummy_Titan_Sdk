@@ -13,6 +13,6 @@ import dagger.multibindings.IntoMap
 abstract class DeepLinkModule {
     @Binds
     @IntoMap
-    @ViewModelKey(DeepLinkViewModel::class)
-    abstract fun bindCreateContestViewModel(viewModel: DeepLinkViewModel): ViewModel
+    @ViewModelKey(DeepLinkRummyViewModel::class)
+    abstract fun bindCreateContestViewModel(viewModel: DeepLinkRummyViewModel): ViewModel
 }

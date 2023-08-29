@@ -1,7 +1,6 @@
 package com.rummytitans.playcashrummyonline.cardgame.ui.base
 
 import com.rummytitans.playcashrummyonline.cardgame.R
-import com.rummytitans.playcashrummyonline.cardgame.ui.deeplink.DeepLinkActivity
 import com.rummytitans.playcashrummyonline.cardgame.utils.alertDialog.AlertdialogModel
 import com.rummytitans.playcashrummyonline.cardgame.widget.FadingSnackbar
 import com.rummytitans.playcashrummyonline.cardgame.widget.MyDialog
@@ -30,9 +29,7 @@ import com.rummytitans.playcashrummyonline.cardgame.RummyTitanSDK
 //import com.onesignal.OSInAppMessageAction
 //import com.onesignal.OneSignal
 import com.rummytitans.playcashrummyonline.cardgame.models.MatchModel
-import com.rummytitans.playcashrummyonline.cardgame.ui.newlogin.RummyNewLoginActivity
 import com.tapadoo.alerter.Alerter
-import dagger.android.support.DaggerAppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 

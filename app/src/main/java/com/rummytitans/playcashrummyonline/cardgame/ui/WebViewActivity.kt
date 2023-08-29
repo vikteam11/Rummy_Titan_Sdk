@@ -4,7 +4,7 @@ import com.rummytitans.playcashrummyonline.cardgame.BuildConfig
 import com.rummytitans.playcashrummyonline.cardgame.R
 import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
 import com.rummytitans.playcashrummyonline.cardgame.databinding.FragmentWebviewsRummyBinding
-import com.rummytitans.playcashrummyonline.cardgame.ui.deeplink.DeepLinkActivity
+import com.rummytitans.playcashrummyonline.cardgame.ui.deeplink.DeepLinkActivityRummy
 import com.rummytitans.playcashrummyonline.cardgame.utils.*
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -137,7 +137,7 @@ class WebViewActivity : AppCompatActivity() {
             val data = url.split("?")
             if (data.isNotEmpty()) {
                 startActivity(
-                    Intent(this@WebViewActivity, DeepLinkActivity::class.java)
+                    Intent(this@WebViewActivity, DeepLinkActivityRummy::class.java)
                         .putExtra("data", data[1])
                 )
             }

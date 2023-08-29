@@ -8,7 +8,7 @@ import com.rummytitans.playcashrummyonline.cardgame.databinding.ActivityRummyAdd
 import com.rummytitans.playcashrummyonline.cardgame.databinding.DialogWalletRedeemCodeRummyBinding
 import com.rummytitans.playcashrummyonline.cardgame.models.*
 import com.rummytitans.playcashrummyonline.cardgame.ui.common.CommonFragmentActivity
-import com.rummytitans.playcashrummyonline.cardgame.ui.deeplink.DeepLinkActivity
+import com.rummytitans.playcashrummyonline.cardgame.ui.deeplink.DeepLinkActivityRummy
 import com.rummytitans.playcashrummyonline.cardgame.ui.payment.PaymentOptionActivity
 import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.adapter.AvailableCouponsAdapter
 import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.model.WalletRedeemCodeModel
@@ -236,7 +236,7 @@ class RummyAddCashActivity :
 
     override fun onOfferClick(offer: HeaderItemModel) {
         if (TextUtils.isEmpty(offer.deeplink)) return
-        startActivity(Intent(this,DeepLinkActivity::class.java).putExtra("deepLink",offer.deeplink))
+        startActivity(Intent(this,DeepLinkActivityRummy::class.java).putExtra("deepLink",offer.deeplink))
     }
 
     @SuppressLint("CheckResult")

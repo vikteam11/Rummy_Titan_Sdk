@@ -25,12 +25,11 @@ import com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseNavigator
 import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
 import com.rummytitans.playcashrummyonline.cardgame.ui.MainViewModel
 import com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseFragmentLocation
-import com.rummytitans.playcashrummyonline.cardgame.ui.deeplink.DeepLinkActivity
+import com.rummytitans.playcashrummyonline.cardgame.ui.deeplink.DeepLinkActivityRummy
 import com.rummytitans.playcashrummyonline.cardgame.ui.home.adapter.*
 import com.rummytitans.playcashrummyonline.cardgame.ui.joinGame.JoinGameBottomSheet
 import com.rummytitans.playcashrummyonline.cardgame.ui.newlogin.RummyNewLoginActivity
 import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.OnOfferBannerClick
-import com.rummytitans.playcashrummyonline.cardgame.utils.MyConstants
 import com.rummytitans.playcashrummyonline.cardgame.utils.isMyTeamDeeplink
 import com.rummytitans.playcashrummyonline.cardgame.utils.setOnClickListenerDebounce
 import com.rummytitans.playcashrummyonline.cardgame.utils.showBottomSheetWebView
@@ -300,7 +299,7 @@ class FragmentHome : BaseFragmentLocation(),
                 startActivity(
                     Intent(
                         requireActivity(),
-                        DeepLinkActivity::class.java
+                        DeepLinkActivityRummy::class.java
                     ).putExtra("deepLink", headerModel.deeplink)
                 )
             }

@@ -82,7 +82,7 @@ class JuspayPaymentHelper(
         payload.put("merchantId", "myteam11")
         payload.put("clientId", "myteam11-android")
         payload.put("customerId", customerId)
-        payload.put(PaymentConstants.ENV,env)//"prod")//
+        payload.put(PaymentConstants.ENV, env)//"prod")//
         initiationPayload.put(PaymentConstants.PAYLOAD, payload)
 
         hyperInstance.initiate(initiationPayload, object : HyperPaymentsCallbackAdapter() {

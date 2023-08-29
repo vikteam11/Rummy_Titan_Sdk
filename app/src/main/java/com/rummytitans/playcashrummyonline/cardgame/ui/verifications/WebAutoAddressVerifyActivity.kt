@@ -5,7 +5,7 @@ import com.rummytitans.playcashrummyonline.cardgame.BuildConfig
 import com.rummytitans.playcashrummyonline.cardgame.R
 import com.rummytitans.playcashrummyonline.cardgame.databinding.ActivityRummyAutoAddressVerifyWebviewsBinding
 import com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseActivity
-import com.rummytitans.playcashrummyonline.cardgame.ui.deeplink.DeepLinkActivity
+import com.rummytitans.playcashrummyonline.cardgame.ui.deeplink.DeepLinkActivityRummy
 import com.rummytitans.playcashrummyonline.cardgame.ui.verifications.viewmodels.AddressVerificationViewModel
 import com.rummytitans.playcashrummyonline.cardgame.utils.*
 import com.rummytitans.playcashrummyonline.cardgame.utils.alertDialog.AlertdialogModel
@@ -202,7 +202,7 @@ class WebAutoAddressVerifyActivity : BaseActivity(), AddressVerificationNavigato
             val data = url.split("?")
             if (data.isNotEmpty()) {
                 startActivity(
-                    Intent(this@WebAutoAddressVerifyActivity, DeepLinkActivity::class.java)
+                    Intent(this@WebAutoAddressVerifyActivity, DeepLinkActivityRummy::class.java)
                         .putExtra("data", data[1])
                 )
             }

@@ -55,7 +55,7 @@
             android:exported="false"
             android:theme="@style/Theme.DialogActivity" />
         <activity
-            android:name=".ui.deeplink.DeepLinkActivity"
+            android:name=".ui.deeplink.DeepLinkActivityRummy"
             android:exported="true"
             android:launchMode="singleTask"
             android:parentActivityName=".ui.RummyMainActivity"
