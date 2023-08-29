@@ -19,6 +19,7 @@ import com.rummytitans.playcashrummyonline.cardgame.databinding.BottomSheetJoinG
 import com.rummytitans.playcashrummyonline.cardgame.models.RummyLobbyModel
 import com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseActivity
 import com.rummytitans.playcashrummyonline.cardgame.games.rummy.RummyWebViewActivity
+import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.RummyAddCashActivity
 import com.rummytitans.playcashrummyonline.cardgame.utils.MyConstants
 import com.rummytitans.playcashrummyonline.cardgame.utils.launchAddressVerificationScreen
 import com.rummytitans.playcashrummyonline.cardgame.utils.setOnClickListenerDebounce
@@ -29,8 +30,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class JoinGameBottomSheet : BottomSheetDialogFragment(), JoinGameSheetNavigator{
-   // @Inject
-    //lateinit var viewModelFactory: ViewModelProvider.Factory
+
     lateinit var viewModel: JoinContestViewModel
     lateinit var mBinding: BottomSheetJoinGameRummyBinding
 
@@ -54,7 +54,6 @@ class JoinGameBottomSheet : BottomSheetDialogFragment(), JoinGameSheetNavigator{
     }
 
     override fun onAttach(context: Context) {
-       // AndroidSupportInjection.inject(this)
         super.onAttach(context)
     }
     override fun onCreateView(
@@ -119,13 +118,13 @@ class JoinGameBottomSheet : BottomSheetDialogFragment(), JoinGameSheetNavigator{
     }
 
     override fun sendToAddCash(amount: Double) {
-       /* startActivityForResult(
-            Intent(requireActivity(), AddCashActivity::class.java).putExtra(
+        startActivityForResult(
+            Intent(requireActivity(), RummyAddCashActivity::class.java).putExtra(
                 MyConstants.INTENT_PASS_AMOUNT, amount
             ).putExtra(MyConstants.INTENT_ADD_CASH_RESTRICTION, false)
                 .putExtra(MyConstants.INTENT_ADD_CASH_FOR_JOIN, true),
             MyConstants.REQUEST_CODE_ADD_CASH
-        )*/
+        )
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

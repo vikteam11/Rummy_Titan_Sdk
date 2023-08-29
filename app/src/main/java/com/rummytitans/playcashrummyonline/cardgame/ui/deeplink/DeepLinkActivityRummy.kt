@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.text.TextUtils
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.appsflyer.AppsFlyerLib
 import com.rummytitans.playcashrummyonline.cardgame.ui.newlogin.RummyNewLoginActivity
@@ -49,6 +50,18 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
             checkForceUpdate()
         }
 
+        viewModel.isForceUpdate.observe(this, Observer {model->
+            if (model.ForceUpdate) {
+                if (model.playStoreApkUpdateFrom==model.UPDATE_FROM_APP_STORE)
+                    sendToPlayStore(this,packageName)
+                else{
+                    // todo updateApp
+                }
+                finish()
+            } else {
+                handleIntent(intent)
+            }
+        })
 
         if (intent.hasExtra("data")) {
             val data = intent.getStringExtra("data")

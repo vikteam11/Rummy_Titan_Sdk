@@ -1,5 +1,5 @@
-//apply plugin: 'com.android.library'
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
+//apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -16,7 +16,7 @@ android {
         targetSdkVersion 33
         versionCode 29
         versionName '1.2.9'
-        applicationId "com.rummytitans.playcashrummyonline.cardgame"
+       // applicationId "com.rummytitans.playcashrummyonline.cardgame"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
