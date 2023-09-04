@@ -203,11 +203,6 @@ class ReferViewModel @Inject constructor(
         )
     }
 
-    fun copyReferCode() {
-        copyCode(referCode.get())
-        navigator.showMessage(navigator.getStringResource(R.string.code_copied))
-    }
-
     private fun calculateSums() {
         receivedAmount.value = 0
         totalAmount.value = 0

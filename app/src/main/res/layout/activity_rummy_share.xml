@@ -150,17 +150,16 @@
                            android:textColor="@color/text_color8"
                            android:textSize="26sp"
                            app:layout_constraintBottom_toBottomOf="parent"
-                           app:layout_constraintEnd_toStartOf="@+id/imageView45"
+                           app:layout_constraintEnd_toStartOf="@+id/imgCopy"
                            app:layout_constraintStart_toStartOf="parent"
                            app:layout_constraintTop_toTopOf="parent"
                            tools:text="dfgdfgdgdfgdfgd" />
 
 
                        <ImageView
-                           android:id="@+id/imageView45"
+                           android:id="@+id/imgCopy"
                            android:layout_width="24dp"
                            android:layout_height="24dp"
-                           android:onClick="@{()->viewModel.copyReferCode()}"
                            app:layout_constraintBottom_toBottomOf="parent"
                            app:layout_constraintEnd_toEndOf="parent"
                            app:layout_constraintTop_toTopOf="parent"

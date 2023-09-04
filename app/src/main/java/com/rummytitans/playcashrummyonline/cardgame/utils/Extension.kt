@@ -1,19 +1,15 @@
 package com.rummytitans.playcashrummyonline.cardgame.utils
 
-import com.rummytitans.playcashrummyonline.cardgame.R
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
-import com.rummytitans.playcashrummyonline.cardgame.models.LoginResponse
-import com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseFragment
-import com.rummytitans.playcashrummyonline.cardgame.utils.MyConstants.DATE_TYPE
-import com.rummytitans.playcashrummyonline.cardgame.utils.MyConstants.HOURS_TYPE
 import android.app.Activity
 import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
 import android.text.TextUtils
@@ -31,6 +27,7 @@ import androidx.core.app.ShareCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.core.widget.ImageViewCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModel
@@ -42,14 +39,19 @@ import com.google.gson.Gson
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.jakewharton.rxbinding2.widget.TextViewAfterTextChangeEvent
 import com.rummytitans.playcashrummyonline.cardgame.BuildConfig
-import com.rummytitans.playcashrummyonline.cardgame.utils.bottomsheets.LottieBottomSheetDialog
-import com.rummytitans.playcashrummyonline.cardgame.utils.bottomsheets.models.BottomSheetStatusDataModel
-import android.os.Build
-import androidx.fragment.app.Fragment
+import com.rummytitans.playcashrummyonline.cardgame.R
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.models.LoginResponse
 import com.rummytitans.playcashrummyonline.cardgame.models.NewPaymentGateWayModel
 import com.rummytitans.playcashrummyonline.cardgame.ui.WebViewActivity
+import com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseFragment
+import com.rummytitans.playcashrummyonline.cardgame.ui.deeplink.DeepLinkActivityRummy
 import com.rummytitans.playcashrummyonline.cardgame.ui.verifications.AddressVerificationActivity
+import com.rummytitans.playcashrummyonline.cardgame.utils.MyConstants.DATE_TYPE
+import com.rummytitans.playcashrummyonline.cardgame.utils.MyConstants.HOURS_TYPE
+import com.rummytitans.playcashrummyonline.cardgame.utils.bottomsheets.LottieBottomSheetDialog
 import com.rummytitans.playcashrummyonline.cardgame.utils.bottomsheets.WebViewBottomSheetDialog
+import com.rummytitans.playcashrummyonline.cardgame.utils.bottomsheets.models.BottomSheetStatusDataModel
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -62,7 +64,6 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 import kotlin.Pair
-import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
 
 
@@ -270,7 +271,7 @@ fun validIfscCodetestCases(code: String): Boolean {
 }
 
 fun checkAndSetLanguage(context: Context) {
-    if (TextUtils.isEmpty(com.rummytitans.playcashrummyonline.cardgame.utils.LocaleHelper.getLanguage(context))) com.rummytitans.playcashrummyonline.cardgame.utils.LocaleHelper.setLocale(context)
+    if (TextUtils.isEmpty(LocaleHelper.getLanguage(context))) com.rummytitans.playcashrummyonline.cardgame.utils.LocaleHelper.setLocale(context)
     else com.rummytitans.playcashrummyonline.cardgame.utils.LocaleHelper.onAttach(context)
 }
 
@@ -445,13 +446,21 @@ fun Context.deleteApp(packageName: String) {
 
 fun Context.openDeeplink(url: String,fromGame:Boolean=false) {
     if (TextUtils.isEmpty(url)) return
-    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+   /* val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
     intent.putExtra(MyConstants.INTENT_COME_FROM_GAME,fromGame)
     startActivity(intent)
+*/
+    startDeeplinkActivity(url)
+}
+
+fun Context.startDeeplinkActivity(url: String){
+    startActivity(
+        Intent(this, DeepLinkActivityRummy::class.java).putExtra("deepLink", url)
+    )
 }
 
 fun Context.isAppLanguageEnglish() =
-    com.rummytitans.playcashrummyonline.cardgame.utils.LocaleHelper.getLanguage(this) == getString(R.string.english_code)
+    LocaleHelper.getLanguage(this) == getString(R.string.english_code)
 
 fun String.toBase64() = try {
     Base64.encodeToString(toByteArray(), Base64.DEFAULT) ?: ""
@@ -459,10 +468,11 @@ fun String.toBase64() = try {
     ""
 }
 
-fun copyCode(code: String?) {
+fun Context.copyCode(code: String?) {
     if (TextUtils.isEmpty(code)) return
     val clip = ClipData.newPlainText("code", code)
-    com.rummytitans.playcashrummyonline.cardgame.MainApplication.manager.setPrimaryClip(clip)
+    val manager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager?
+    manager?.setPrimaryClip(clip)
 }
 
 fun JSONObject.toBundle(): Bundle {

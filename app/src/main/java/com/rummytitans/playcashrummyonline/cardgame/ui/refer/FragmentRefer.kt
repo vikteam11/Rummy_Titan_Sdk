@@ -293,6 +293,7 @@ class FragmentRefer : BaseFragment(), MainNavigationFragment,
 
     @SuppressLint("Range")
     private fun fetchContacts() {
+        viewModel.contactLoading.set(true)
         val d = Observable.fromCallable {
             val mContectList = ArrayList<TempContactModel>()
             val cr = context?.contentResolver
@@ -341,6 +342,7 @@ class FragmentRefer : BaseFragment(), MainNavigationFragment,
         }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
+                viewModel.contactLoading.set(false)
                 viewModel.saveContactsApi(it)
             }
     }

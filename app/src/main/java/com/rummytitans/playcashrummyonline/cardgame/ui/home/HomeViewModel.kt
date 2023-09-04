@@ -85,7 +85,7 @@ class HomeViewModel @Inject constructor(
         if (!connectionDetector.isConnected) {
             return
         }
-        val apis = getApiEndPointObject(MyConstants.GAME_PLAY_URL)
+        val apis = getApiEndPointObject(prefs.gamePlayUrl ?:"")
         compositeDisposable.add(
             apis.getBanner(
                 loginResponse.UserId,
@@ -123,7 +123,7 @@ class HomeViewModel @Inject constructor(
             return
         }
         isLoading.set(true)
-        val apis = getApiEndPointObject(MyConstants.GAME_PLAY_URL)
+        val apis = getApiEndPointObject(prefs.gamePlayUrl ?:"")
         compositeDisposable.add(
             apis.getCategories(
                 loginResponse.UserId,
@@ -176,7 +176,7 @@ class HomeViewModel @Inject constructor(
             return
         }
         lobbyLoading.set(true)
-        val apis = getApiEndPointObject(MyConstants.GAME_PLAY_URL)
+        val apis = getApiEndPointObject(prefs.gamePlayUrl ?:"")
         compositeDisposable.add(
             apis.getLobbies(
                 loginResponse.UserId,

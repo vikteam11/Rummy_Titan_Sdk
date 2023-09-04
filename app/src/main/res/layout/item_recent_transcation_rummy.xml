@@ -280,7 +280,7 @@
                             android:layout_marginTop="8dp"
                             android:paddingStart="8dp"
                             android:fontFamily="@font/rubik_regular"
-                            android:text="@string/credit_bonus"
+                            android:text="@string/game_bonus"
                             android:textColor="@color/text_color3"
                             android:textSize="12sp"
                             android:maxLines="1"

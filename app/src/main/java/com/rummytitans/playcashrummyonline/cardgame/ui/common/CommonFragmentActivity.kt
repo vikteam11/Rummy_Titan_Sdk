@@ -26,9 +26,11 @@ import com.rummytitans.playcashrummyonline.cardgame.ui.profile.verify.FragmentVe
 import com.rummytitans.playcashrummyonline.cardgame.ui.refer.FragmentRefer
 import com.rummytitans.playcashrummyonline.cardgame.ui.settings.SettingsFragment
 import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.*
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_rummy_common_fragment.*
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class CommonFragmentActivity : BaseActivity() {
 
     var popupSportType: PopupWindow? = null
@@ -46,9 +48,6 @@ class CommonFragmentActivity : BaseActivity() {
 
     lateinit var binding: ActivityRummyCommonFragmentBinding
     lateinit var viewModel: CommonViewModel
-
-   // @Inject
-    //lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -136,8 +135,9 @@ class CommonFragmentActivity : BaseActivity() {
                     addFragment(FragmentProfileInfo.newInstance())
                 }*/
                 "CashBonus" -> {
+                    val title=intent.getStringExtra(MyConstants.INTENT_PASS_WEB_TITLE)?:""
                     topBar.visibility=View.GONE
-                    addFragment(FragmentCashBonus.newInstance())
+                    addFragment(FragmentCashBonus.newInstance(title= title))
                 }
 
                 "withdraw" -> {

@@ -28,6 +28,7 @@ import com.google.gson.Gson
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsKey
 import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
 import com.rummytitans.playcashrummyonline.cardgame.ui.newlogin.RummyNewLoginActivity
+import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.RummyAddCashActivity
 import kotlinx.android.synthetic.main.activity_games_web_viewer_rummy.*
 import javax.inject.Inject
 
@@ -240,8 +241,8 @@ class RummyWebViewActivity() : BaseActivity(), RummyNavigator {
                     "exit"->{
                         when(eventModel.redirectionParams.redirectionUrl?.lowercase()){
                             "addmoney" ->{
-                              /*  addCash(eventModel.redirectionParams.extraParams?.amount?:
-                                MyConstants.DEFAULT_ADD_CASH_AMOUNT.toInt())*/
+                                addCash(eventModel.redirectionParams.extraParams?.amount?:
+                                MyConstants.DEFAULT_ADD_CASH_AMOUNT.toInt())
                             }
                             "dialog" ->{
                                 showDialog(eventModel.redirectionParams.extraParams?.message?:"",true)
@@ -263,6 +264,17 @@ class RummyWebViewActivity() : BaseActivity(), RummyNavigator {
             }
         }
     }
+
+    private fun addCash(amount:Int){
+        startActivityForResult(
+            Intent(this, RummyAddCashActivity::class.java)
+                .putExtra(MyConstants.INTENT_PASS_AMOUNT, amount.toDouble())
+                .putExtra(MyConstants.INTENT_COME_FROM_GAME,
+                    intent.getBooleanExtra(MyConstants.INTENT_COME_FROM_GAME,false)),
+            MyConstants.REQUEST_CODE_ADD_CASH
+        )
+    }
+
 
     override fun getStringResource(resourseId: Int): String {
         return getString(resourseId)

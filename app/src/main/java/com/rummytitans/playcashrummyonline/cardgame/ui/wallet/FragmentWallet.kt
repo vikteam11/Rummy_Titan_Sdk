@@ -52,7 +52,6 @@ import com.github.mikephil.charting.formatter.PercentFormatter
 import com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseNavigator
 import kotlinx.android.synthetic.main.fragment_wallet_rummy.*
 import java.util.*
-import javax.inject.Inject
 
 class FragmentWallet : BaseFragment(),
     BaseNavigator, OnOfferBannerClick, HideKeyboardInterface,
@@ -248,12 +247,18 @@ class FragmentWallet : BaseFragment(),
     }
 
     private fun onClickBonusItem() {
+        val title = viewModel.walletInfo.value?.Balance?.BonusList?.singleOrNull { it.isbouns }?.name
+            ?:  getString(R.string.game_bonus)
+
         arguments?.getBoolean("isActivity")?.let {
             if (it)
-                addFragment(FragmentCashBonus.newInstance(it))
+                addFragment(FragmentCashBonus.newInstance(it,title))
             else startActivity(
                 Intent(requireActivity(), CommonFragmentActivity::class.java)
-                    .putExtra(MyConstants.INTENT_PASS_COMMON_TYPE, "CashBonus"))
+                    .putExtra(MyConstants.INTENT_PASS_COMMON_TYPE, "CashBonus")
+                    .putExtra(MyConstants.INTENT_PASS_WEB_TITLE,title )
+            )
+
         }
     }
 

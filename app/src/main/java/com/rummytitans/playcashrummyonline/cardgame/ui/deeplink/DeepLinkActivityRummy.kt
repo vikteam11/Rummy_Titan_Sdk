@@ -15,8 +15,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.appsflyer.AppsFlyerLib
+import com.rummytitans.playcashrummyonline.cardgame.RummyTitanSDK
+import com.rummytitans.playcashrummyonline.cardgame.ui.games.tickets.GamesTicketActivity
 import com.rummytitans.playcashrummyonline.cardgame.ui.newlogin.RummyNewLoginActivity
 import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.RummyAddCashActivity
+import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.withdrawal.WithdrawDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 //import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 //import com.google.firebase.ktx.Firebase
@@ -137,11 +140,9 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
                 else if (split.size == 1) map[split[0]] = ""
             }else{
                 if (viewModel.prefs.loginCompleted) {
-                    startActivity(Intent(this, RummyMainActivity::class.java))
-                    finishAffinity()
+                   goToHome()
                 }else{
-                    startActivity(Intent(this, RummyNewLoginActivity::class.java))
-                    finishAffinity()
+                    RummyTitanSDK.rummyCallback?.logoutUser()
                 }
             }
         }
@@ -151,32 +152,13 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
     fun redirection(map: Map<String, String>) {
         map.forEach {
             if (it.key=="withdrawDetail"){
-               /* startActivity(
+                startActivity(
                     Intent(this, WithdrawDetailActivity::class.java)
                         .putExtra(MyConstants.INTENT_PASS_TRANSACTION_ID, it.value)
                 )
-                finish()*/
-            }else if (it.key == "matchId") {
-                viewModel.getMatchDetails(it.value)
-                comingFor = MATCH
-            } else if (it.key == "contestId") {
-                viewModel.getInviteCodeDetails(it.value)
-                comingFor = CONTEST
-            } else if (it.key == "createTeam") {
-                viewModel.getMatchDetails(it.value)
-                comingFor = CREATE_TEAM
-            } else if (it.key == "sports") {
-                viewModel.changeSportsType(it.value.toInt())
-                comingFor = SPORTS_CHANGE
-            } else if (it.key == "sportswithapptype") {
-                val value1 = it.value.split("-")
-                val finalValue=if (!TextUtils.isEmpty(value1[0]) && TextUtils.isDigitsOnly(value1[0]))
-                    value1[0].toInt()
-                else   1
-                viewModel.changeSportsType(finalValue)
-                comingFor = SPORTS_CHANGE
+                finish()
             }else if (it.key == "web") {
-                //sendToInternalBrowser(this, it.value)
+                sendToInternalBrowser(this, it.value)
                 finish()
             } else if (it.key == "external") {
                 sendToExternalBrowser(this, it.value)
@@ -186,20 +168,8 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
                 sendToYoutubeVideo(it.value)
                 finish()
             }*/
-            else if (it.key == "poker") {
-                startActivity(
-                    Intent(this, RummyMainActivity::class.java)
-                        .putExtra(MyConstants.INTENT_POKER_DATA, it.value)
-                        .putExtra("comingForGame", true)
-                )
-                finish()
-            } else if (it.key == "game") {
-                finishAffinity()
-                startActivity(
-                    Intent(this, RummyMainActivity::class.java)
-                        .putExtra(MyConstants.INTENT_GAME_DATA, it.value)
-                        .putExtra("comingForGame", true)
-                )
+             else if (it.key == "game") {
+                 goToHome()
             } else if (it.key == "addcashamount" || it.key == "addcash") {
                 startActivity(
                     Intent(this, RummyAddCashActivity::class.java)
@@ -213,41 +183,40 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
                     ""
                 else
                     it.value
-               // launchAddressVerificationScreen(rejectMsg,true)
+                launchAddressVerificationScreen(rejectMsg,true)
                 finish()
             }else if (it.key == "screen") {
                 when (it.value) {
                     "main" -> {
-                        finishAffinity()
-                        startActivity(Intent(this, RummyMainActivity::class.java))
+                        goToHome()
                     }
 
                     "games" -> {
-                        startActivity(
-                            Intent(this, RummyMainActivity::class.java)
-                                .putExtra("comingForGame", true)
-                        )
-                        finish()
+                        goToHome()
                     }
-                   /* "gamesTicket" -> {
+                    "gamesTicket" -> {
                         startActivity(Intent(this, GamesTicketActivity::class.java))
                         finish()
                     }
-                    "notification" -> {
-                        startActivity(Intent(this, NotificationActivity::class.java))
-                        finish()
-                    }
                     "profile" -> {
-                        startActivity(Intent(this, ProfileActivity::class.java))
+                       // startActivity(Intent(this, ProfileActivity::class.java))
+                        RummyTitanSDK.rummyCallback?.openProfile()
+                        RummyTitanSDK.rummyCallback?.sdkFinish()
                         finish()
                     }
                     "addcash" -> {
-                        startActivity(Intent(this, AddCashActivity::class.java)
+                        startActivity(Intent(this, RummyAddCashActivity::class.java)
                             .putExtra(MyConstants.INTENT_COME_FROM_GAME,
                                 intent.getBooleanExtra(MyConstants.INTENT_COME_FROM_GAME,false))
                         )
                         finish()
                     }
+                   /*
+                    "notification" -> {
+                        startActivity(Intent(this, NotificationActivity::class.java))
+                        finish()
+                    }
+
                     "scratch" -> {
                         startActivity(Intent(this, ScrachCardActivity::class.java))
                         finish()
@@ -265,26 +234,16 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
                         finish()
                     }*/
                     "wallet" -> {
-                        startActivity(Intent(this, RummyMainActivity::class.java)
-                            .putExtra(MyConstants.INTENT_PASS_SELECT_TAB,"wallet"))
-                        finish()
+                        goToHome(tabName = "wallet")
                     }
                     "refer","Refer"->{
-                        startActivity(Intent(this, RummyMainActivity::class.java)
-                            .putExtra(MyConstants.INTENT_PASS_SELECT_TAB,"refer"))
-                        finish()
+                        goToHome(tabName = "refer")
                     }
                     "rakeback"->{
-                        startActivity(Intent(this, RummyMainActivity::class.java)
-                            .putExtra(MyConstants.INTENT_PASS_SELECT_TAB,"rakeback"))
-                        finish()
+                        goToHome(tabName = "rakeback")
                     }
                     else -> {
-                       /* startActivity(
-                            Intent(this, CommonFragmentActivity::class.java)
-                                .putExtra(MyConstants.INTENT_PASS_COMMON_TYPE, it.value)
-                        )
-                        finish()*/
+                       goToHome()
                     }
                 }
                 return@forEach
@@ -299,8 +258,7 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
     }
 
     override fun finishAllAndCallMainActivity() {
-        finishAffinity()
-        startActivity(Intent(this, RummyMainActivity::class.java))
+        goToHome()
     }
 
     override fun finishActivity() {
@@ -310,6 +268,18 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
             else
                 finish()
         },2000)
+    }
+    private fun goToHome(tabName:String="",deeplinkStr:String?=""){
+        val intent =  Intent(this, RummyMainActivity::class.java)
+
+        if(!TextUtils.isEmpty(tabName)){
+            intent.putExtra(MyConstants.INTENT_PASS_SELECT_TAB,tabName)
+        }
+        deeplinkStr?.let { deeplink->
+
+        }
+        startActivity(intent)
+        finish()
     }
 }
 

@@ -9,7 +9,7 @@
     android:layout_gravity="center"
     android:progressTint="@color/rummy_mainColor"
     android:indeterminateTint="@color/rummy_mainColor"
-    android:progressDrawable="@drawable/bg_progress"
+    android:progressDrawable="@drawable/bg_progress_rummy"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"/>
 </FrameLayout>

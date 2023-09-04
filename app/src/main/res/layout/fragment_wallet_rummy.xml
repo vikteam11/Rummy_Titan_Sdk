@@ -85,7 +85,8 @@
                                 app:layout_constraintEnd_toEndOf="@+id/piechart"
                                 app:layout_constraintStart_toStartOf="@+id/piechart"
                                 app:layout_constraintTop_toTopOf="@+id/piechart"
-                                app:srcCompat="@drawable/ic_rupees"/>
+                                app:srcCompat="@drawable/ic_rupees_rummy"
+                                app:tint="@color/white"/>
 
                             <TextView
                                 android:id="@+id/textView61"

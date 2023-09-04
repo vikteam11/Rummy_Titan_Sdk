@@ -120,7 +120,7 @@
                 android:layout_marginTop="8dp"
                 android:secondaryProgress="100"
                 android:progress="@{model.getProgressPrecentage()}"
-                android:progressDrawable="@drawable/bg_progress"
+                android:progressDrawable="@drawable/bg_progress_rummy"
                 android:progressTint="@color/rummy_maingreen"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -61,6 +61,7 @@ interface PreferenceStorage {
     var createTeamSettingResponse: String?
     var appUrl: String?
     var appUrl2: String?
+    var gamePlayUrl: String?
     var referUrl: String?
     var referCode: String?
     var referShareMessage: String?
@@ -179,6 +180,7 @@ class SharedPreferenceStorage @Inject constructor(context: Context) : Preference
     override var appUrl by StringPreference(prefs, PREF_APP_URL, MyConstants.APP_CURRENT_URL)
 
     override var appUrl2 by StringPreference(prefs, PREF_APP_URL2, "")
+    override var gamePlayUrl by StringPreference(prefs, PREF_GAME_URL, "")
 
     override var quizBackMessage by StringPreference(prefs, PREF_QUIZ_BACK_MESSAGE, "")
 
@@ -369,6 +371,7 @@ class SharedPreferenceStorage @Inject constructor(context: Context) : Preference
         const val PREF_CREATE_TEAM_SETTING = "pref_create_team_setting"
         const val PREF_APP_URL = "pref_app_url"
         const val PREF_APP_URL2 = "pref_app_url2"
+        const val PREF_GAME_URL = "pref_game_url2"
         const val PREF_QUIZ_BACK_MESSAGE = "pref_quiz_back_message"
         const val PREF_BRANCH_URL = "pref_branch_url"
         const val PREF_BRANCH_REFER_CODE = "pref_branch_refercode"

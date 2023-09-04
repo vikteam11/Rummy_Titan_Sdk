@@ -53,7 +53,7 @@ class JoinContestViewModel @Inject constructor(
         isLoading.set(true)
         val json = JsonObject()
         json.addProperty("StakeId",stakeId)
-        val apis = getApiEndPointObject(MyConstants.GAME_PLAY_URL)
+        val apis = getApiEndPointObject(prefs.gamePlayUrl ?:"")
         compositeDisposable.add(
             apis.confirmLobby(
                 loginResponse.UserId,
@@ -107,7 +107,7 @@ class JoinContestViewModel @Inject constructor(
         json.addProperty("PINCode",prefs.PinCode)
 
         isLoading.set(true)
-        val apis = getApiEndPointObject(MyConstants.GAME_PLAY_URL)
+        val apis = getApiEndPointObject(prefs.gamePlayUrl ?:"")
         compositeDisposable.add(
             apis.joinLobby(
                 loginResponse.UserId,

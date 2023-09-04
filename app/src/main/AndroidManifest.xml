@@ -62,7 +62,7 @@
             android:screenOrientation="portrait">
             <tools:validation testUrl="https://rummytitans.io/open/asdkf" />
 
-            <intent-filter android:autoVerify="true">
+            <!--<intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
@@ -88,7 +88,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="rummytitansdeeplink" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
         <activity
             android:name=".ui.launcher.SDKSplashActivity"
@@ -96,14 +96,14 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/RummySdk_SplashAppTheme">
-
+<!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-             AppsFlyer Links  new
-            <intent-filter
+            </intent-filter>-->
+
+            <!--<intent-filter
                 android:autoVerify="true"
                 tools:targetApi="m">
                 <action android:name="android.intent.action.VIEW" />
@@ -127,7 +127,7 @@
                     android:scheme="@string/appsflyer_open_app_link" />
             </intent-filter>
 
-            <!-- Firebase App Links -->
+            &lt;!&ndash; Firebase App Links &ndash;&gt;
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
 
@@ -137,7 +137,7 @@
                 <data
                     android:host="rummytitans.page.link"
                     android:scheme="https" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
         <activity
             android:name=".ui.RummyMainActivity"
@@ -166,6 +166,12 @@
             android:name="com.rummytitans.playcashrummyonline.cardgame.utils.locationservices.uiModules.RequestPermissionActivity"
             android:exported="false"
             android:theme="@style/Theme.DialogActivity" />
+
+        <activity
+            android:name=".utils.permissions.PermissionActivity"
+            android:exported="false"
+            android:theme="@style/Theme.DialogActivity" />
+
         <activity
             android:name=".games.rummy.RummyWebViewActivity"
             android:configChanges="orientation|screenSize"

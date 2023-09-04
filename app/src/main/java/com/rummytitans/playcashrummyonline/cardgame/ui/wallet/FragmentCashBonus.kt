@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.rummytitans.playcashrummyonline.cardgame.ui.newlogin.RummyNewLoginActivity
 import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.adapter.CashBonusAdapter
 import kotlinx.android.synthetic.main.fragment_cash_bonus_rummy.*
-import javax.inject.Inject
 
 class FragmentCashBonus : BaseFragment(), MainNavigationFragment,
     BaseNavigator {
@@ -34,10 +33,11 @@ class FragmentCashBonus : BaseFragment(), MainNavigationFragment,
     var type = 1
 
     companion object {
-        fun newInstance(isActivity: Boolean=false): FragmentCashBonus {
+        fun newInstance(isActivity: Boolean=false,title:String): FragmentCashBonus {
             val frag = FragmentCashBonus()
             val bundle = Bundle()
             bundle.putBoolean("isActivity", isActivity)
+            bundle.putString("title", title)
             frag.arguments = bundle
             return frag
         }
@@ -48,6 +48,8 @@ class FragmentCashBonus : BaseFragment(), MainNavigationFragment,
         viewModel = ViewModelProvider(
             this
         ).get(CashBonusViewModel::class.java)
+
+        viewModel.title = arguments?.getString("title") ?: getString(R.string.game_bonus)
         binding =
             FragmentCashBonusRummyBinding.inflate(localInflater ?: inflater, container, false).apply {
                 lifecycleOwner = this@FragmentCashBonus

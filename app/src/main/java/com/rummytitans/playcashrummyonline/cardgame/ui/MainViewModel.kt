@@ -51,10 +51,10 @@ class MainViewModel @Inject constructor(
     var isGraphVisible = ObservableBoolean(false)
     var isMiniWalletOpen = ObservableBoolean(false)
     init {
-       // fetchVerificationData()
+        fetchVerificationData()
     }
 
-   /* fun fetchVerificationData() {
+    fun fetchVerificationData() {
         if (prefs.KycStatus == 1) return
         if (!connectionDetector.isConnected) {
             return
@@ -77,14 +77,11 @@ class MainViewModel @Inject constructor(
         )
     }
 
-
-
-
     fun fetchProfileData() {
         if (!connectionDetector.isConnected) {
             return
         }
-        compositeDisposable.add(
+        /*compositeDisposable.add(
             apiInterface.getProfileIno(
                 loginResponse.UserId.toString(),
                 loginResponse.ExpireToken,
@@ -99,35 +96,13 @@ class MainViewModel @Inject constructor(
                     }
                 }), ({
                 }))
-        )
+        )*/
     }
-
-    *//*call for fetch addresse verify or not remove it later*//*
-    private fun fetchWalletData() {
-        if (!connectionDetector.isConnected) {
-            return
-        }
-
-        compositeDisposable.add(
-            apiInterface.getWalletIno(
-                loginResponse.UserId.toString(),
-                loginResponse.ExpireToken,
-                loginResponse.AuthExpire,
-                prefs.seletedLanguage ?: "en"
-            )
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(({
-                    isAddressVerified = it.IsAddressVerified
-                }), ({
-
-                }))
-        )
-    }*/
 
     fun toggleMiniWallet(){
         isMiniWalletOpen.set(!isMiniWalletOpen.get())
     }
+
     fun fetchWalletData() {
         if (!connectionDetector.isConnected) {
             myDialog?.noInternetDialog {
@@ -169,9 +144,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun getWalletDetail() {
-        //remove fetchWalletData when we get isAddressVerified in getWalletDetail APi
-        //fetchWalletData()
-
+        fetchWalletData()
         if (!connectionDetector.isConnected) {
             return
         }
@@ -216,7 +189,7 @@ class MainViewModel @Inject constructor(
         )
         json.addProperty("KYCStatus", prefs.KycStatus)
         json.addProperty("PINCode", prefs.PinCode)
-        val apis = getApiEndPointObject(MyConstants.GAME_PLAY_URL)
+        val apis = getApiEndPointObject(prefs.gamePlayUrl ?:"")
 
         compositeDisposable.add(
             apis.checkForActiveMatch(

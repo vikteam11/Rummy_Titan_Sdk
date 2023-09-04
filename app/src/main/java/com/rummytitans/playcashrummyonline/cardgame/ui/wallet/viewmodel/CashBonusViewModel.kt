@@ -38,6 +38,7 @@ class CashBonusViewModel @Inject constructor(
     val regularColor = prefs.regularColor
     val safeColor = prefs.safeColor
     val selectedColor = ObservableField(if (prefs.onSafePlay) safeColor else regularColor)
+    var title = ""
 
     fun fetchCashBonus() {
         if (!connectionDetector.isConnected) {

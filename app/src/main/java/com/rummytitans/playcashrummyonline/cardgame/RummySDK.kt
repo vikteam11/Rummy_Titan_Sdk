@@ -61,6 +61,8 @@ object RummyTitanSDK {
                 pref.splashResponse = splashDecodeString
                 pref.appUrl = rummySdkOptions.baseUrl
                 pref.appUrl2 = rummySdkOptions.baseUrl2
+                pref.gamePlayUrl= rummySdkOptions.gamePlayUrl
+                pref.locationApiTimeLimit = rummySdkOptions.locationDelay
             } catch (e: JsonSyntaxException) {
                 // Handle JSON parsing errors
                 e.printStackTrace()

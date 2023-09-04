@@ -77,8 +77,8 @@ class AddCashViewModel @Inject constructor(
     private val _mAddCashOffer = MutableLiveData<ArrayList<AddCashOfferModel.AddCash>>()
     val mAddCashOffer : LiveData<ArrayList<AddCashOfferModel.AddCash>> = _mAddCashOffer
 
-    private val _mBannerOffer = MutableLiveData<ArrayList<HeaderItemModel>>(ArrayList())
-    val mBannerOffer: LiveData<ArrayList<HeaderItemModel>> get() = _mBannerOffer
+    private val _mBannerOffer = MutableLiveData<ArrayList<WalletInfoModel.Offer>>(ArrayList())
+    val mBannerOffer: LiveData<ArrayList<WalletInfoModel.Offer>> get() = _mBannerOffer
 
     var userCurrentState=""
     var userCurrentStateLatLog=""
@@ -398,6 +398,7 @@ class AddCashViewModel @Inject constructor(
                         offerDescription.set(it.Description)
                         _mAddCashOffer.value = it.Response?.Offers
                         _mAvailableCoupons.value = it.Response?.Coupans
+                        _mBannerOffer.value = it.Response.Headers
 
                         isOfferListEmpty.set(it.Response?.Offers?.isEmpty()==true)
                         isCouponsListEmpty.set(it.Response?.Coupans?.isEmpty()==true)
@@ -431,7 +432,7 @@ class AddCashViewModel @Inject constructor(
                     isLoading.set(false)
                     allowAutoScrolling = it.IsAutoScrollHeader
                     if (it.Status) {
-                        _mBannerOffer.value = it.Response
+                        //_mBannerOffer.value = it.Response
                     } else {
                         //navigator.showError(it.Message)
                     }

@@ -179,6 +179,11 @@ class FragmentShare : BaseFragment(), MainNavigationFragment,
                 )
             }
         }
+
+        binding.imgCopy.setOnClickListenerDebounce {
+            requireActivity().copyCode(viewModel.referCode.get())
+            showMessage(getString(R.string.code_copied))
+        }
     }
 
     private fun showDialog() {
@@ -298,6 +303,7 @@ class FragmentShare : BaseFragment(), MainNavigationFragment,
         }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
+                viewModel.contactLoading.set(false)
                 viewModel.saveContactsApi(it)
             }
     }

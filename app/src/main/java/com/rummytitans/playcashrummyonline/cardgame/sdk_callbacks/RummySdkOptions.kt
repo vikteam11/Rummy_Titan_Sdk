@@ -10,4 +10,5 @@ data class RummySdkOptions(
     val gameSplashUrl :String = MyConstants.SPLASH_URL,
     val displayProfileIcon :Boolean = false,
     val showKycOptions :Boolean = false,
+    val locationDelay :Long = 0L,
 )

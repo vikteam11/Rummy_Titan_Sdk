@@ -47,7 +47,7 @@ class RakeBackViewModel @Inject constructor(
         }
         isLoading.set(!dataRefresh)
         isRefreshing.set(dataRefresh)
-        val apis = getApiEndPointObject(MyConstants.GAME_PLAY_URL)
+        val apis = getApiEndPointObject(prefs.gamePlayUrl ?:"")
         compositeDisposable.add(
             apis.getRakeBackDetail(
                 loginResponse.UserId.toString(),
@@ -93,7 +93,7 @@ class RakeBackViewModel @Inject constructor(
         isLoading.set(true)
         val body = JsonObject()
         body.addProperty("amount",amount)
-        val apis = getApiEndPointObject(MyConstants.GAME_PLAY_URL)
+        val apis = getApiEndPointObject(prefs.gamePlayUrl ?:"")
         compositeDisposable.add(
             apis.redeemRakeBack(
                 loginResponse.UserId.toString(),

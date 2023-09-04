@@ -21,9 +21,9 @@ object MyConstants {
     const val SPLASH_URL = GAME_PROD
     const val APP_CURRENT_URL = PRODUCTION_URL
     //const val APP_CURRENT_URL2 = "http://15.207.63.62:7000/"
-    // const val GAME_PLAY_URL = "https://n2.mt11games.com:7000"
+     const val GAME_PLAY_URL = "https://n2.mt11games.com:7000"
     //const val GAME_PLAY_URL = "https://rummytitans.mt11games.com/"
-    const val GAME_PLAY_URL = "https://rummy.myteam11.games/"
+   // const val GAME_PLAY_URL = "https://rummy.myteam11.games/"
 
     const val REQUEST_UPDATE_VERIFY_DETAILS=999
 

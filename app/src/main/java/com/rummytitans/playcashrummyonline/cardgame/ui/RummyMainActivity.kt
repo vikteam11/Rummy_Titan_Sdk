@@ -30,6 +30,7 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 //import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
@@ -232,6 +233,14 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
             )
         }
 
+        binding.ivSupport.setOnClickListenerDebounce {
+            startActivity(
+                Intent(this, CommonFragmentActivity::class.java)
+                    .putExtra(MyConstants.INTENT_PASS_COMMON_TYPE, "support")
+                    .putExtra("FROM", "Wallet")
+            )
+        }
+
         binding.viewBgTicket.setOnClickListenerDebounce {
             viewModel.analyticsHelper.fireEvent(
                 AnalyticsKey.Names.ButtonClick, bundleOf(
@@ -378,7 +387,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
                 startActivity(
                     Intent(this@RummyMainActivity, CommonFragmentActivity::class.java)
                         .putExtra(MyConstants.INTENT_PASS_COMMON_TYPE, "CashBonus")
-                        .putExtra(MyConstants.INTENT_PASS_WEB_TITLE,getString(R.string.credit_bonus) )
+                        .putExtra(MyConstants.INTENT_PASS_WEB_TITLE,getString(R.string.game_bonus) )
                 )
             }
         }
@@ -555,9 +564,6 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
                 getString(R.string.go_back),
                 "Play",
                 onNegativeClick = {
-                   // if(isTaskRoot){
-                     //   startActivity(Intent(this, MainActivity::class.java))
-                    //}
                     RummyTitanSDK.rummyCallback?.sdkFinish()
                     finish()
                 },
@@ -573,9 +579,9 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
     }
 
     private var popupWindow:PopupWindow?= null
-    fun setUpPopupWindow(msg:String?,tabId:Int,badgeBinding: NotificationBadgeRummyBinding) {
 
-        /*binding.navigation.findViewById<BottomNavigationItemView>(tabId)?.let {tabView->
+    fun setUpPopupWindow(msg:String?,tabId:Int,badgeBinding: NotificationBadgeRummyBinding) {
+        binding.navigation.findViewById<BottomNavigationItemView>(tabId)?.let { tabView->
             badgeBinding.root.visibility = View.VISIBLE
             badgeBinding.root.viewTreeObserver.addOnGlobalLayoutListener {
                 val xCor:Int = (tabView.x +(tabView.width/2)).toInt()
@@ -583,7 +589,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
                 badgeBinding.txtTitle.text = msg
                 badgeBinding.root.x = finalPosX.toFloat()
             }
-        }*/
+        }
     }
 
 

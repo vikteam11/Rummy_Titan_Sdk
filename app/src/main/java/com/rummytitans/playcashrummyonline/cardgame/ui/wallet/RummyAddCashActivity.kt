@@ -36,6 +36,7 @@ import androidx.viewpager.widget.ViewPager
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
 import com.rummytitans.playcashrummyonline.cardgame.ui.home.adapter.WalletOffersAdapter
+import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.adapter.AddCashBannerAdapter
 import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.adapter.OffersAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -48,7 +49,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class RummyAddCashActivity :
-    CurrentLocationBaseActivity(), OnOfferClick, AddCashNavigator, OnOfferBannerClick {
+    CurrentLocationBaseActivity(), OnOfferClick, AddCashNavigator, OnAddCashBannerClick {
 
     var currentOfferPage = 0
     private var performAddCash=false
@@ -68,7 +69,7 @@ class RummyAddCashActivity :
 
    // @Inject
    // lateinit var viewModelFactory: ViewModelProvider.Factory
-    var headerAdapter: WalletOffersAdapter?=null
+    var headerAdapter: AddCashBannerAdapter?=null
     var mOfferAdapter: OffersAdapter?=null
     var couponsAdapter: AvailableCouponsAdapter?=null
     private var addCashRestriction: Boolean = false
@@ -129,7 +130,6 @@ class RummyAddCashActivity :
             intent?.getBooleanExtra(MyConstants.INTENT_ADD_CASH_RESTRICTION, true) ?: true
 
         viewModel.getOfferList()
-        viewModel.getHeaders()
 
         try {
             if (intent.getSerializableExtra("wallet") is WalletInfoModel.Balance) {
@@ -205,7 +205,7 @@ class RummyAddCashActivity :
 
     private fun observeData() {
         viewModel.mBannerOffer.observe(this, Observer {
-            headerAdapter = WalletOffersAdapter(it, this@RummyAddCashActivity)
+            headerAdapter = AddCashBannerAdapter(it, this@RummyAddCashActivity)
             binding.viewPagerOffers.adapter = headerAdapter
             binding.tabHeaders.setupWithViewPager(binding.viewPagerOffers)
             startViewPagerScrolling()
@@ -232,11 +232,6 @@ class RummyAddCashActivity :
         if(BuildConfig.isPlayStoreApk == 1 ){
             launchAddressVerificationScreen(viewModel.addressVerificationRejectMsg)
         }
-    }
-
-    override fun onOfferClick(offer: HeaderItemModel) {
-        if (TextUtils.isEmpty(offer.deeplink)) return
-        startActivity(Intent(this,DeepLinkActivityRummy::class.java).putExtra("deepLink",offer.deeplink))
     }
 
     @SuppressLint("CheckResult")
@@ -562,8 +557,17 @@ class RummyAddCashActivity :
         else if(performAddCash)
             binding.btnAddCash.performClick()
     }
+
+    override fun onBannerClick(offer: WalletInfoModel.Offer) {
+
+    }
 }
 
+
+
+interface OnAddCashBannerClick {
+    fun onBannerClick(offer: WalletInfoModel.Offer){}
+}
 interface OnOfferClick {
     fun onSelectOffer(position:Int, model: AddCashOfferModel.AddCash)
 }
