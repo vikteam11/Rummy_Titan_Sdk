@@ -487,8 +487,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_twitter"
-                        app:tint="@color/text_color8" />
+                        app:srcCompat="@drawable/ic_twitter_rummy" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tvFollowTwitter"

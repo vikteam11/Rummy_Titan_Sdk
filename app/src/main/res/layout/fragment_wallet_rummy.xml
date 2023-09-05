@@ -451,7 +451,7 @@
                                 android:ellipsize="end"
                                 android:fontFamily="@font/rubik_regular"
                                 android:singleLine="true"
-                                android:text="@string/frag_wallet_redeem_your_myteam11_nets_chips_here"
+                                android:text="@string/redeem_your_rummy_titans_nets_chips_here"
                                 android:textColor="@color/text_color2"
                                 android:textSize="12sp"
                                 app:layout_constraintBottom_toBottomOf="parent"

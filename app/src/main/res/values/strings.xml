@@ -790,7 +790,7 @@
     <string name="frag_wallet_redeem_coupon">Redeem Coupon</string>
     <string name="redeem">Redeem Now</string>
     <string name="only_redeem">Redeem</string>
-    <string name="frag_wallet_redeem_your_myteam11_nets_chips_here">Redeem your RummyTitans Coupon</string>
+    <string name="redeem_your_rummy_titans_nets_chips_here">Redeem your RummyTitans Coupon</string>
     <string name="frag_wallet_transaction_history">Transaction History</string>
     <string name="frag_wallet_where_amp_how_much_spent_know_all">
         <![CDATA[Where & How much you Spent? Know it All]]></string>
