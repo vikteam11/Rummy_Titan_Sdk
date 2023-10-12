@@ -33,11 +33,10 @@ class FragmentCashBonus : BaseFragment(), MainNavigationFragment,
     var type = 1
 
     companion object {
-        fun newInstance(isActivity: Boolean=false,title:String): FragmentCashBonus {
+        fun newInstance(isActivity: Boolean=false): FragmentCashBonus {
             val frag = FragmentCashBonus()
             val bundle = Bundle()
             bundle.putBoolean("isActivity", isActivity)
-            bundle.putString("title", title)
             frag.arguments = bundle
             return frag
         }

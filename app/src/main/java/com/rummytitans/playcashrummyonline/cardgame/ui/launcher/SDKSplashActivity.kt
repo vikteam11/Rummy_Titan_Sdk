@@ -12,6 +12,7 @@ import android.provider.Settings
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.Keep
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
@@ -22,6 +23,7 @@ import com.appsflyer.AppsFlyerLib
 //import com.google.firebase.ktx.Firebase
 //import com.google.firebase.messaging.FirebaseMessaging
 import com.rummytitans.playcashrummyonline.cardgame.MainApplication
+import com.rummytitans.playcashrummyonline.cardgame.RummyTitanSDK
 import com.rummytitans.playcashrummyonline.cardgame.databinding.ActivitySplashSdkBinding
 import com.rummytitans.playcashrummyonline.cardgame.models.LoginResponse
 import com.rummytitans.playcashrummyonline.cardgame.models.VersionModel
@@ -58,6 +60,8 @@ class SDKSplashActivity : AppCompatActivity(),
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.activity_splash_sdk,null,false)
         setContentView(binding.root)
         //FirebaseMessaging.getInstance().subscribeToTopic("global")
+        // For normally run SDK
+        viewModel.prefs.gamePlayUrl= MyConstants.GAME_PLAY_URL
         fetchAdvertisingId()
         viewModel.navigator = this
         viewModel.myDialog= MyDialog(this)

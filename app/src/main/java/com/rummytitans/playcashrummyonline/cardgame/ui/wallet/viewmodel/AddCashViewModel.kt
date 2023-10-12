@@ -87,6 +87,13 @@ class AddCashViewModel @Inject constructor(
 
     var allowAutoScrolling = true
     var viewScrollingTime:Long = 5
+
+    val isGstCardVisible = ObservableBoolean(false)
+    val isGstCalculating = ObservableBoolean(false)
+    private val _gstList = MutableLiveData<List<GstCalculationModel.GSTBifurcationItem>>()
+    val gstList: LiveData<List<GstCalculationModel.GSTBifurcationItem>> = _gstList
+    val gstModel = MutableLiveData<GstCalculationModel>()
+    var enableGstCalculation = ObservableBoolean(false)
     fun hideSheet() {
         isBottomSheetVisible.set(false)
     }
@@ -394,6 +401,7 @@ class AddCashViewModel @Inject constructor(
                         navigator.logoutUser()
                     }
                     if (it.Status) {
+                        enableGstCalculation.set(it.Response.IsGST)
                         offerTitle.set(it.Offer)
                         offerDescription.set(it.Description)
                         _mAddCashOffer.value = it.Response?.Offers
@@ -409,6 +417,53 @@ class AddCashViewModel @Inject constructor(
                     isLoading.set(false)
                     navigator.showError(R.string.something_went_wrong)
                     it.printStackTrace()
+                })
+        )
+    }
+
+    fun getGstData(amount : String,isJoin : Boolean) {
+        if (!connectionDetector.isConnected) {
+            myDialog?.noInternetDialog {
+                getGstData(amount,isJoin)
+            }
+            return
+        }
+        isGstCalculating.set(true)
+        val json = JsonObject()
+        json.addProperty("Amount",amount)
+        json.addProperty("isJoin",isJoin)
+
+        compositeDisposable.add(
+            apis.getGstCalcualtion(
+                loginResponse.UserId.toString(),
+                loginResponse.ExpireToken,
+                loginResponse.AuthExpire,
+                json
+            ).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({
+                    isGstCalculating.set(false)
+                    if (it.Status) {
+                        it.Response.gSTBifurcation?.iterator()?.let { iterator ->
+                            while (iterator.hasNext()) {
+                                iterator.next().let { bonus ->
+                                    bonus.note = it.Response.note
+                                }
+                            }
+                        }
+                        if((addCashAmmount.get() ?: 0.0) > 0.0){
+                            _gstList.value = it.Response.gSTBifurcation
+                            gstModel.value = it.Response
+                            isGstCardVisible.set(true)
+                        }
+                    } else {
+                        isGstCardVisible.set(false)
+                        navigator.showError(it.Message)
+                    }
+                }, {
+                    isGstCalculating.set(false)
+                    isGstCardVisible.set(false)
+                    navigator.handleError(it)
                 })
         )
     }

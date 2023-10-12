@@ -1231,6 +1231,7 @@
     <string name="transaction_id">Transaction ID</string>
     <string name="redeemed">Redeemed</string>
     <string name="redemption_available">Redemption Available</string>
+    <string name="gst_calculation" translatable="false">GST Calculation</string>
 
 
 </resources>

@@ -1,5 +1,6 @@
 package com.rummytitans.playcashrummyonline.cardgame.models;
 
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -15,7 +16,7 @@ public class WalletInfoModel {
     public Balance Balance;
     @SerializedName("UserInfo")
     public UserInfo UserInfo;
-    @SerializedName("ScarchCard")
+    @SerializedName("ScratchCard")
     public int ScarchCard;
     @SerializedName("AddCashAmount")
     public double AddCashAmount;
@@ -24,6 +25,13 @@ public class WalletInfoModel {
     public String GameTicketMesage;
     @SerializedName("GameTicketMesageColor")
     public String GameTicketMesageColor;
+
+    @SerializedName("BankVerify")
+    public boolean BankVerify;
+    @SerializedName("PanVerify")
+    public boolean PanVerify;
+    @SerializedName("AddressVerify")
+    public boolean AddressVerify;
 
 
     public static class Offer {
@@ -53,10 +61,7 @@ public class WalletInfoModel {
         public double Unutilized;
         @SerializedName("DailyBonus")
         public double DailyBonus;
-        @SerializedName("BankVerify")
-        public boolean BankVerify;
-        @SerializedName("PanVerify")
-        public boolean PanVerify;
+
         public int ScrachCardsCoun=9;
         @SerializedName("BonusList")
         public ArrayList<WalletBonesModel> BonusList;
@@ -73,12 +78,25 @@ public class WalletInfoModel {
 
     public static class WalletBonesModel implements Serializable {
         @SerializedName("Val")
-        public String val;
+        public String value;
         @SerializedName("Name")
         public String name;
+        @SerializedName("WalletType")
+        public Integer walletType;
         @SerializedName("isbouns")
         public boolean isbouns;
         public int colorCode;
         public String title;
+        public boolean isArrowUpDown = false;
+
+        public boolean isCreditBonus(){
+            return walletType == 2;
+        }
+        public boolean isWinning(){
+            return walletType == 0;
+        }
+        public boolean isDeposit(){
+            return walletType == 1;
+        }
     }
 }

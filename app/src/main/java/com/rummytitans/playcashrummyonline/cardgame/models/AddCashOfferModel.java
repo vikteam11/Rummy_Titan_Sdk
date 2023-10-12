@@ -21,6 +21,8 @@ public class AddCashOfferModel {
     public String TandC;
     @SerializedName("Title")
     public String Title;
+    @SerializedName("IsGST")
+    public Boolean IsGST;
 
     public static class AddCash {
         @SerializedName("Id")

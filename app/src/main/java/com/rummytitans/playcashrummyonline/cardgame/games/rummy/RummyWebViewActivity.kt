@@ -78,25 +78,6 @@ class RummyWebViewActivity() : BaseActivity(), RummyNavigator {
             }
         }
         val finalUrl = intent.getStringExtra(MyConstants.INTENT_PASS_WEB_URL)?:""
-       /*
-        val json = JSONObject()
-        mViewModel.let { viewModel ->
-            json.put("user_id", viewModel.loginModel.UserId)
-            json.put("auth_expire", viewModel.loginModel.AuthExpire)//"c321f3242c34234c234c23")
-            json.put("expire_token", viewModel.loginModel.ExpireToken)
-            json.put("app_version", BuildConfig.VERSION_CODE)
-            json.put("unique_id", viewModel.prefs.androidId)
-            json.put("app_type",  if(BuildConfig.isPlayStoreApk==1) 3 else 2)
-            json.put("lobbyID", "rummy")
-            json.put("State", viewModel.loginModel.gameState)
-            json.put("DeviceType", "Android")
-            json.put("DeviceID", viewModel.prefs.androidId)
-            json.put("IPAddress", getIpAddress())
-            json.put("PINCode", viewModel.prefs.PinCode)
-            json.put("KYCStatus", viewModel.prefs.KycStatus)
-            finalUrl = mGameModel.gameUrl+"info="+json.toString().toBase64()
-        }*/
-
         mBinding.webViewGame.apply {
             loadUrl(finalUrl)
 
@@ -229,6 +210,9 @@ class RummyWebViewActivity() : BaseActivity(), RummyNavigator {
         @JavascriptInterface
         fun receiveMessage(data: String) {
             Log.d("RummyTitan","data "+data)
+            if(MyConstants.LOGS_ENABLE)
+                mViewModel.uploadEvents( intent.getStringExtra(MyConstants.INTENT_PASS_WEB_URL)?:"",System.currentTimeMillis(),data)
+
             kotlin.runCatching {
                 val eventModel = Gson().fromJson(data, GameEventModel::class.java)
                 when(eventModel.redirectionType.lowercase()){

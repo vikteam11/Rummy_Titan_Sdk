@@ -1,5 +1,6 @@
 package com.rummytitans.playcashrummyonline.cardgame.ui
 
+import android.os.Build
 import com.rummytitans.playcashrummyonline.cardgame.BuildConfig
 import com.rummytitans.playcashrummyonline.cardgame.api.APIInterface
 import com.rummytitans.playcashrummyonline.cardgame.models.BaseModel
@@ -316,7 +317,9 @@ abstract class BaseViewModel<N>(val conn: ConnectionDetector? = null) : ViewMode
                     .addHeader("AppVersion", BuildConfig.VERSION_CODE.toString())
                     .addHeader("AppType", "${RummyTitanSDK.getOption().currentAppType}")
                     .addHeader("GameType", "1")
-                    .addHeader("IsPlayStore",BuildConfig.isPlayStoreApk.toString()).build()
+                    .addHeader("IsPlayStore",BuildConfig.isPlayStoreApk.toString())
+                    .addHeader("DeviceName", Build.MODEL)
+                    .addHeader("DeviceOS", "Android").build()
             return@Interceptor chain.proceed(requestBuilder)
         }
     }

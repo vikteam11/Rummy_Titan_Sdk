@@ -1,5 +1,6 @@
 package com.rummytitans.playcashrummyonline.cardgame.di
 
+import android.os.Build
 import com.rummytitans.playcashrummyonline.cardgame.BuildConfig
 import com.rummytitans.playcashrummyonline.cardgame.MainApplication
 import com.rummytitans.playcashrummyonline.cardgame.api.APIInterface
@@ -72,6 +73,8 @@ class RetrofitModule {
             builder.addHeader("AppVersion", BuildConfig.VERSION_CODE.toString())
             builder.addHeader("AppType", "${RummyTitanSDK.getOption().currentAppType}") //uses in BaseViewModel and Analytic helper fireevent()
             builder.addHeader("GameType", "1")
+            builder.addHeader("DeviceName", Build.MODEL)
+            builder.addHeader("DeviceOS", "Android")
             builder.addHeader("IsPlayStore",BuildConfig.isPlayStoreApk.toString())
 //            pref.toUserDetail(gson)?.let {
 //                builder.addHeader("UserId", it.UserId.toString())

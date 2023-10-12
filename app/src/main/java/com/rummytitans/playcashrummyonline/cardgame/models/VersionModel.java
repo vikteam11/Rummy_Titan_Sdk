@@ -40,7 +40,8 @@ public class VersionModel implements Serializable {
     public boolean isTrueCallerEnable;
     @SerializedName("LoginAuthToken")
     public String LoginAuthTokan;
-
+    @SerializedName("LogsEnable")
+    public boolean isLogsEnable;
     @SerializedName("UpdateFrom")
     public int playStoreApkUpdateFrom;
     @SerializedName("VerifyAadharWithOtp")

@@ -74,6 +74,7 @@ class LaunchViewModel @Inject constructor(
                         prefs.loginAuthTokan = it.Response.LoginAuthTokan ?: ""
                         versionResp.value = it.Response
                         prefs.splashResponse = gson.toJson(it.Response)
+                        MyConstants.LOGS_ENABLE = it.Response.isLogsEnable
                     } else {
                         navigator.showError(it.Message)
                     }

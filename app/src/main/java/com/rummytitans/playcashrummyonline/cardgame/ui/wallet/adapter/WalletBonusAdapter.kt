@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseViewHolder
+import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.WalletNavigator
 
 class WalletBonusAdapter(
     var listResponse: MutableList<WalletInfoModel.WalletBonesModel>?,
+    val listner: WalletNavigator? = null,
     val onClickItem: () -> Unit
 ) :
     RecyclerView.Adapter<BaseViewHolder>() {
@@ -52,7 +54,9 @@ class WalletBonusAdapter(
                 mBinding.viewModel =this
             }
             mBinding.root.setOnClickListener {
-                if (listResponse?.get(position)?.isbouns == true) onClickItem.invoke()
+                listResponse?.get(position)?.isArrowUpDown =  !listResponse?.get(position)?.isArrowUpDown!!
+                notifyDataSetChanged()
+                listner?.performBonusListClick(listResponse!![position])
             }
         }
 

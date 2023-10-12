@@ -56,11 +56,13 @@ class WalletViewModel @Inject constructor(
     var isGraphVisible = ObservableBoolean(false)
 
     val isAvtivity = ObservableBoolean(false)
-
+    var isGstBonusShow = ObservableBoolean(false)
     var regularColor = prefs.regularColor
     var safeColor = prefs.safeColor
     val selectedColor = ObservableField(if (prefs.onSafePlay) safeColor else regularColor)
-
+    var bonusSubList= arrayListOf<WalletInfoModel.WalletBonesModel>()
+    var depositBonusVal = ObservableField<WalletInfoModel.WalletBonesModel>()
+    var gstBonusVal = ObservableField<WalletInfoModel.WalletBonesModel>()
     //first time user fill data code
     var pincode = ObservableField<String>("")
     var date = ObservableField<String>("")
@@ -126,30 +128,51 @@ class WalletViewModel @Inject constructor(
                         prefs.loginCompleted = false
                         navigator.logoutUser()
                     }
-                    isAddressVerified=it.IsAddressVerified
+                    isAddressVerified=it.Response?.AddressVerify?:false
                     addressVerificationRejectMsg=it.Message?:""
                     if (it.Status) {
                         isGraphVisible.set(true)
 
-                        it.Response.Offer = it.Response.Offer.filter { it1 -> it1.IsShow }
+                        //it.Response.Offer = it.Response.Offer.filter { it1 -> it1.IsShow }
+
                         data.value = it.Response
                         when {
-                            !it.Response.Balance.BankVerify or !it.Response.Balance.PanVerify or !isAddressVerified -> {
+                            !it.Response.BankVerify or !it.Response.PanVerify or !isAddressVerified-> {
                                 isVerified.set(false)
                             }
-                            it.Response.Balance.BankVerify and it.Response.Balance.PanVerify and isAddressVerified and (it.Response.Balance.Winning >= 200) -> {
+                            it.Response.BankVerify and it.Response.PanVerify and isAddressVerified and (it.Response.Balance.Winning >= 200) -> {
                                 isVerified.set(true)
                             }
-                            it.Response.Balance.BankVerify and it.Response.Balance.PanVerify and isAddressVerified and (it.Response.Balance.Winning < 200) -> {
+                            it.Response.BankVerify and it.Response.PanVerify and isAddressVerified and (it.Response.Balance.Winning < 200) -> {
                                 isVerified.set(true)
                             }
                         }
 
+                        bonusSubList.clear()
+                        it.Response.Balance.BonusList?.iterator()?.let { iterator ->
+                            while (iterator.hasNext()) {
+                                iterator.next().let { bonus ->
+                                    if(!bonus.value.contains("₹")){
+                                        bonus.value = "₹"+bonus.value
+                                    }
+                                    if(isGstBonusShow.get() && bonus.isDeposit){
+                                        bonus.isArrowUpDown = true
+                                    }
+                                    if (bonus.walletType == 3) {
+                                        bonusSubList.add(bonus)
+                                        iterator.remove()
+                                    }
+                                }
+                            }
+                        }
+
+                        depositBonusVal.set(getBonusSubItem(0))
+                        gstBonusVal.set(getBonusSubItem(1))
                         with(it.Response.Balance) {
                             if (prefs.userTotalAmount != TotalAmount.toString()) {
                                 var credit = "0.0"
                                 BonusList.forEach { bonus ->
-                                    if (bonus.isbouns) credit = bonus.`val`
+                                    if (bonus.isbouns) credit = bonus.value
                                 }
                                 analyticsHelper.setJsonUserProperty(
                                     emptyJson().apply {
@@ -168,7 +191,12 @@ class WalletViewModel @Inject constructor(
                         isGraphVisible.set(false)
                         navigator.showError(it.Message)
                     }
-                    if (it.IsAddressVerified) navigator.showMessage(it.Message)
+                    //hide in case of address not verified.
+                    //in that case message key contains rejection message.
+                    if (it.IsAddressVerified) {
+                        // in case or error message allready display see above code
+                        if (it.Status) navigator.showMessage(it.Message)
+                    }
                 }), ({
                     isSwipeLoading.set(false)
                     isGraphVisible.set(false)
@@ -371,6 +399,11 @@ class WalletViewModel @Inject constructor(
                     navigator.handleError(it)
                 }))
         )
+    }
+    private fun getBonusSubItem(pos:Int): WalletInfoModel.WalletBonesModel?{
+        return if(bonusSubList.size > pos){
+            bonusSubList[pos]
+        }else null
     }
 
 }

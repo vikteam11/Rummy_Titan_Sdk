@@ -778,7 +778,7 @@ interface APIInterface {
         @Body map:JsonObject
     ): Single<NewPaymentGateWayModel>
 
-    @POST("myprofile/getamount")
+    @GET("transaction/v2/account-balance")
     fun getWalletIno(
         @Header(USER_ID) UserId: String,
         @Header(EXPIRE_TOKEN) ExpireToken: String,
@@ -980,6 +980,19 @@ interface APIInterface {
 
     @GET("account/v1/states")
     fun getStateList(): Single<BaseModel<ArrayList<StateModel>>>
+
+    @POST("print-log")
+    fun printRummyLog(
+        @Body json:JsonObject
+    ): Single<BaseModel<JsonObject>>
+
+    @POST("payment/v1/calculate/gst")
+    fun getGstCalcualtion(
+        @Header(USER_ID) UserId: String,
+        @Header(EXPIRETOKEN) AuthExpire: String,
+        @Header(AUTHEXPIRE) ExpireToken: String,
+        @Body json:JsonObject
+    ): Single<BaseModel<GstCalculationModel>>
 
 
     companion object {

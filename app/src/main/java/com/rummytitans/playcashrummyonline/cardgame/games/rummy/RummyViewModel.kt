@@ -14,6 +14,8 @@ import android.text.TextUtils
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import com.google.gson.Gson
+import com.google.gson.JsonObject
+import com.rummytitans.playcashrummyonline.cardgame.BuildConfig
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -37,57 +39,87 @@ class RummyViewModel @Inject constructor(
     private var mGameModel: GamesResponseModel.GamesModel? = null
     var isEmptyData = ObservableBoolean(false)
     var comeFromAllGames = ObservableBoolean(false)
+    var loginResponse: LoginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
 
     init {
-       // fetchProfileData()
+        // fetchProfileData()
         //fetchVerificationData()
         requestGames()
     }
 
-   /* private fun fetchProfileData() {
-        if (!prefs.PinCode.isNullOrEmpty()) return
+    /* private fun fetchProfileData() {
+         if (!prefs.PinCode.isNullOrEmpty()) return
+         if (!connectionDetector.isConnected) {
+             return
+         }
+         compositeDisposable.add(
+             apiInterface.getProfileIno(
+                 loginModel.UserId.toString(),
+                 loginModel.ExpireToken,
+                 loginModel.AuthExpire
+             )
+                 .subscribeOn(Schedulers.io())
+                 .observeOn(AndroidSchedulers.mainThread())
+                 .subscribe(({
+                     if (it.Status) prefs.PinCode = it.Response.PinCode
+                 }), ({
+                 }))
+         )
+     }
+
+     private fun fetchVerificationData() {
+         if (prefs.KycStatus==1) return
+         if (!connectionDetector.isConnected) {
+             return
+         }
+         compositeDisposable.add(
+             apiInterface.getVerificationInfo(
+                 loginModel.UserId.toString(),
+                 loginModel.ExpireToken,
+                 loginModel.AuthExpire
+             )
+                 .subscribeOn(Schedulers.io())
+                 .observeOn(AndroidSchedulers.mainThread())
+                 .subscribe(({
+                     if (it.Status)
+                         prefs.KycStatus = if(it.Response.MobileVerify && it.Response.PanVerify && it.Response.BankVerify)
+                             1 else 0
+                 }), ({
+                 }))
+         )
+     }*/
+    fun uploadEvents(url: String, timestamp: Long, eventJson: String) {
         if (!connectionDetector.isConnected) {
+            myDialog?.noInternetDialog {
+                uploadEvents(url, timestamp, eventJson)
+            }
             return
         }
+
+        val json = JsonObject()
+        json.addProperty("userId", loginResponse.UserId.toString())
+        json.addProperty("url", url)
+        json.addProperty("timestamp", timestamp)
+        json.addProperty("appType", MyConstants.APP_TYPE)
+        json.addProperty("appVersion", BuildConfig.VERSION_CODE.toString())
+        json.addProperty("os", "android")
+        json.addProperty("meta", eventJson)
+        var api = getApiEndPointObject(MyConstants.UPDATE_EVENT_URL)
         compositeDisposable.add(
-            apiInterface.getProfileIno(
-                loginModel.UserId.toString(),
-                loginModel.ExpireToken,
-                loginModel.AuthExpire
-            )
+            api.printRummyLog(
+                json
+            ).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(({
-                    if (it.Status) prefs.PinCode = it.Response.PinCode
-                }), ({
-                }))
+                .subscribe({
+
+                }, {
+                    navigator.handleError(it)
+                })
         )
     }
 
-    private fun fetchVerificationData() {
-        if (prefs.KycStatus==1) return
-        if (!connectionDetector.isConnected) {
-            return
-        }
-        compositeDisposable.add(
-            apiInterface.getVerificationInfo(
-                loginModel.UserId.toString(),
-                loginModel.ExpireToken,
-                loginModel.AuthExpire
-            )
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(({
-                    if (it.Status)
-                        prefs.KycStatus = if(it.Response.MobileVerify && it.Response.PanVerify && it.Response.BankVerify)
-                            1 else 0
-                }), ({
-                }))
-        )
-    }*/
-
     private fun requestGames() {
-        if(isSwipeRefresh.get()){
+        if (isSwipeRefresh.get()) {
             return
         }
         isSwipeRefresh.set(true)
@@ -121,11 +153,11 @@ class RummyViewModel @Inject constructor(
                         navigator.logoutUser()
                     }
 
-                    if (it.Status && it.Response!=null) {
+                    if (it.Status && it.Response != null) {
                         mGameModel = it.Response
                         navigatorAct.launchRummy(it.Response)
                     } else {
-                        val errorMsg= if (TextUtils.isEmpty(it.Message))
+                        val errorMsg = if (TextUtils.isEmpty(it.Message))
                             navigator.getStringResource(R.string.something_went_wrong)
                         else
                             it.Message
@@ -146,6 +178,6 @@ class RummyViewModel @Inject constructor(
     fun logoutUser() {
         prefs.loginCompleted = false
         prefs.loginResponse = gson.toJson(LoginResponse())
-        logoutStatus(apiInterface,loginModel.UserId, prefs.androidId ?: "", "0")
+        logoutStatus(apiInterface, loginModel.UserId, prefs.androidId ?: "", "0")
     }
 }

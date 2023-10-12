@@ -85,7 +85,7 @@ class HomeViewModel @Inject constructor(
         if (!connectionDetector.isConnected) {
             return
         }
-        val apis = getApiEndPointObject(prefs.gamePlayUrl ?:"")
+        val apis = getApiEndPointObject(MyConstants.GAME_PLAY_URL)
         compositeDisposable.add(
             apis.getBanner(
                 loginResponse.UserId,

@@ -126,7 +126,7 @@ class MainViewModel @Inject constructor(
                     if (it.Status) {
                         if (it.Response is WalletInfoModel) {
                             val apiData = it.Response as WalletInfoModel
-                            apiData.Offer = apiData.Offer.filter { it1 -> it1.IsShow }
+                         //   apiData.Offer = apiData.Offer.filter { it1 -> it1.IsShow }
                             _walletInfo.value = apiData
                         }
                     } else {

@@ -1,3 +1,4 @@
+-dontobfuscate
 #retrofit
 -dontwarn retrofit.**
 -keep class retrofit.** { *; }
@@ -28,6 +29,7 @@
 -keep class com.rummytitans.playcashrummyonline.cardgame.models.** {*;}
 -keep class com.rummytitans.playcashrummyonline.cardgame.ui.quiz.realtime.question.** {*;}
 -keep class com.rummytitans.playcashrummyonline.cardgame.ui.** {*;}
+
 
 -dontwarn com.squareup.okhttp.**
 

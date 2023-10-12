@@ -174,6 +174,112 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/topView"/>
 
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/btnGstBonus"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="8dp"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginEnd="12dp"
+                            app:cardElevation="4dp"
+                            android:visibility="@{viewmodel.isGstBonusShow?View.VISIBLE:View.GONE}"
+                            app:cardBackgroundColor="@color/RummyalertOrange"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/rvBones">
+
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="55dp"
+                                android:backgroundTint="@color/rummy_black_3"
+                                android:background="@drawable/bg_squre_8dp"
+                                android:layout_marginTop="1dp"
+                                android:padding="10dp">
+
+                                <ImageView
+                                    android:id="@+id/imageView63"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:srcCompat="@drawable/ic_gst_plus" />
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toStartOf="@+id/imageView63"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/rubik_regular"
+                                        android:text="@{viewmodel.depositBonusVal.name}"
+                                        android:textColor="@color/text_color2"
+                                        android:textSize="10sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:fontFamily="@font/rubik_medium"
+                                        android:singleLine="true"
+                                        android:text="@{viewmodel.depositBonusVal.value.toString()}"
+                                        android:textColor="@color/text_color8"
+                                        android:textSize="14sp" />
+
+
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:orientation="vertical"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    android:gravity="center"
+                                    app:layout_constraintStart_toEndOf="@+id/imageView63"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <TextView
+                                        android:id="@+id/textView1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/rubik_regular"
+                                        android:text="@{viewmodel.gstBonusVal.name}"
+                                        android:textColor="@color/text_color2"
+                                        android:textSize="10sp"
+                                        />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:fontFamily="@font/rubik_medium"
+                                        android:singleLine="true"
+                                        android:textColor="@color/text_color8"
+                                        android:textSize="14sp"
+                                        android:text="@{viewmodel.gstBonusVal.value.toString()}"
+                                        />
+
+
+
+                                </LinearLayout>
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.cardview.widget.CardView>
+
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/btnScratchCard"
                             android:layout_width="match_parent"
@@ -190,7 +296,7 @@
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintHorizontal_chainStyle="packed"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/rvBones">
+                            app:layout_constraintTop_toBottomOf="@+id/btnGstBonus">
 
                             <ImageView
                                 android:id="@+id/image"

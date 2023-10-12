@@ -125,7 +125,7 @@ class FragmentWallet : BaseFragment(),
 
             binding.rvBones.apply {
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                adapter = WalletBonusAdapter(it.Balance.BonusList) { onClickBonusItem() }
+                adapter = WalletBonusAdapter(it.Balance.BonusList,this@FragmentWallet) { onClickBonusItem() }
             }
         }
 
@@ -247,19 +247,7 @@ class FragmentWallet : BaseFragment(),
     }
 
     private fun onClickBonusItem() {
-        val title = viewModel.walletInfo.value?.Balance?.BonusList?.singleOrNull { it.isbouns }?.name
-            ?:  getString(R.string.game_bonus)
 
-        arguments?.getBoolean("isActivity")?.let {
-            if (it)
-                addFragment(FragmentCashBonus.newInstance(it,title))
-            else startActivity(
-                Intent(requireActivity(), CommonFragmentActivity::class.java)
-                    .putExtra(MyConstants.INTENT_PASS_COMMON_TYPE, "CashBonus")
-                    .putExtra(MyConstants.INTENT_PASS_WEB_TITLE,title )
-            )
-
-        }
     }
 
     private fun showRedeemCouponCodeDialog() {
@@ -626,12 +614,28 @@ class FragmentWallet : BaseFragment(),
 
     private fun getPercentValue(total: Double, amount: Double) = (amount * 100 / total).toFloat()
 
+    override fun performBonusListClick(model: WalletInfoModel.WalletBonesModel) {
+        if (model.walletType == 2) {
+            arguments?.getBoolean("isActivity")?.let {
+                if (it)
+                    addFragment(FragmentCashBonus.newInstance(it))
+                else startActivity(
+                    Intent(requireActivity(), CommonFragmentActivity::class.java)
+                        .putExtra(MyConstants.INTENT_PASS_COMMON_TYPE, "CashBonus"))
+            }
+        }
+        if(model.walletType == 1 && viewModel.bonusSubList.size >=2){
+            viewModel.isGstBonusShow.set(!viewModel.isGstBonusShow.get())
+        }
+    }
+
 }
 
 interface WalletNavigator {
     fun fillProfileDataForFirstTimeUser()
     fun performOnAddCashClick()
     fun onAddressNotVerified()
+    fun performBonusListClick(model : WalletInfoModel.WalletBonesModel)
 }
 
 interface OnOfferBannerClick {

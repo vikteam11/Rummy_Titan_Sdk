@@ -26,6 +26,8 @@ import android.os.Handler
 import android.os.Looper
 import android.text.InputFilter
 import android.text.TextUtils
+import android.util.Log
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
@@ -37,6 +39,7 @@ import com.jakewharton.rxbinding2.widget.RxTextView
 import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
 import com.rummytitans.playcashrummyonline.cardgame.ui.home.adapter.WalletOffersAdapter
 import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.adapter.AddCashBannerAdapter
+import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.adapter.GstCalculationAdapter
 import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.adapter.OffersAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -157,6 +160,7 @@ class RummyAddCashActivity :
         initClick()
         initListeners()
         observeData()
+        observeGstCalculation()
 
         viewModel.analyticsHelper.fireEvent(
             AnalyticsKey.Names.ScreenLoadDone, bundleOf(
@@ -164,6 +168,30 @@ class RummyAddCashActivity :
             )
         )
     }
+
+    private fun callGstData(amount : String,isJoin : Boolean){
+        if(!viewModel.enableGstCalculation.get() || amount.toDouble() == 0.0){
+            viewModel.isGstCardVisible.set(false)
+            return
+        }
+        viewModel.isGstCardVisible.set(true)
+        binding.shimmerViewContainer.startShimmer()
+        viewModel.getGstData(amount,isJoin)
+    }
+
+    private fun observeGstCalculation(){
+        viewModel.gstList.observe(this){gstList->
+            binding.shimmerViewContainer.stopShimmer()
+            if (gstList.isEmpty()){
+                binding.cardTds.visibility= View.GONE
+                return@observe
+            }else{
+                binding.cardTds.visibility= View.VISIBLE
+                binding.recycleGst.adapter = GstCalculationAdapter(gstList)
+            }
+        }
+    }
+
 
     var fromGame=false
     override fun collectPlayStoreRequiredData() {
@@ -209,6 +237,7 @@ class RummyAddCashActivity :
             binding.viewPagerOffers.adapter = headerAdapter
             binding.tabHeaders.setupWithViewPager(binding.viewPagerOffers)
             startViewPagerScrolling()
+            callGstData(viewModel.addCashAmmount.get().toString(),isComingForJoin)
         })
 
         viewModel.mAddCashOffer.observe(this, Observer {
@@ -266,18 +295,34 @@ class RummyAddCashActivity :
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 try {
-                    if (it.toString().isNotEmpty()) {
-                        val amount =
+                    val amountInString=it.editable().toString()
+                    val amount = if (!TextUtils.isEmpty(amountInString)) amountInString.toDouble() else 0.0
+
+                    Log.d("amountInString","amountInString $amountInString")
+                    if(amount > 0.0){
+                        val amountStr =
                             DecimalFormat("##.##").format(it.editable().toString().toDouble())
                                 .toDouble()
-                        viewModel.addCashAmmount.set(amount)
-                    } else
+                        viewModel.addCashAmmount.set(amountStr)
+                        callGstData(amount.toString(),isComingForJoin)
+                    }else{
+                        clearGstFinalAmount()
+                        viewModel.isGstCardVisible.set(false)
                         viewModel.addCashAmmount.set(0.0)
+                    }
                 } catch (e: Exception) {
                     e.printStackTrace()
+                    clearGstFinalAmount()
                     viewModel.addCashAmmount.set(0.0)
                 }
             }
+    }
+
+    private fun clearGstFinalAmount() {
+        viewModel.gstModel.value?.finalAmount = 0.0
+        viewModel.isGstCardVisible.set(false)
+        Log.d("amountInString","clearGstFinalAmount ${viewModel.gstModel.value?.finalAmount}")
+
     }
 
     private fun initClick(){
