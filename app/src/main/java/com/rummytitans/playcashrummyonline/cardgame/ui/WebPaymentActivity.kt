@@ -1,7 +1,7 @@
 package com.rummytitans.playcashrummyonline.cardgame.ui
 
 import com.rummytitans.playcashrummyonline.cardgame.R
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.databinding.FragmentWebviewsRummyBinding
 import com.rummytitans.playcashrummyonline.cardgame.utils.MyConstants
 import android.annotation.SuppressLint
@@ -25,7 +25,7 @@ class WebPaymentActivity : AppCompatActivity() {
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
-        val prefs = SharedPreferenceStorage(applicationContext)
+        val prefs = SharedPreferenceStorageRummy(applicationContext)
         setTheme(R.style.RummyAppTheme)
         supportActionBar?.hide()
         super.onCreate(savedInstanceState)

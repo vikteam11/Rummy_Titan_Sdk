@@ -9,7 +9,7 @@ import com.google.gson.JsonObject
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsKey
 import com.rummytitans.playcashrummyonline.cardgame.api.APIInterface
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.models.LoginResponse
 import com.rummytitans.playcashrummyonline.cardgame.models.RakeBackDetailModel
 import com.rummytitans.playcashrummyonline.cardgame.ui.BaseViewModel
@@ -23,7 +23,7 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 @HiltViewModel
 class RakeBackViewModel @Inject constructor(
-    val prefs: SharedPreferenceStorage,
+    val prefs: SharedPreferenceStorageRummy,
     val gson: Gson,
     val apiInterface: APIInterface,
     val connectionDetector: ConnectionDetector, val analyticsHelper: AnalyticsHelper

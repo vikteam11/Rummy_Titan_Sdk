@@ -33,10 +33,11 @@ import dagger.hilt.android.HiltAndroidApp;
 
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AbstractApplicationLifeCycleHelper;
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsHelper;
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage;
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy;
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy;
 
 
-@HiltAndroidApp
+//@HiltAndroidApp
 public class MainApplication extends Application implements LifecycleEventObserver {
 
     public static WeakReference<Activity> forgroundActivityRef = null;
@@ -127,12 +128,12 @@ public class MainApplication extends Application implements LifecycleEventObserv
                     Log.d("LOG_TAG", "onConversionDataSuccess: " + attrName + " = " + conversionData.get(attrName));
 
                     if (attrName.equalsIgnoreCase("campaignId")) {
-                        SharedPreferenceStorage pref = new SharedPreferenceStorage(getApplicationContext());
+                        SharedPreferenceStorageRummy pref = new SharedPreferenceStorageRummy(getApplicationContext());
                         pref.setCampaignId(conversionData.get(attrName).toString());
                     }
 
                     if (attrName.equalsIgnoreCase("refercode")) {
-                        SharedPreferenceStorage pref = new SharedPreferenceStorage(getApplicationContext());
+                        SharedPreferenceStorageRummy pref = new SharedPreferenceStorageRummy(getApplicationContext());
                         pref.setReferCode(conversionData.get(attrName).toString());
                     }
 
@@ -192,7 +193,7 @@ public class MainApplication extends Application implements LifecycleEventObserv
                 Log.d("AppsFlyer DeepLinks-->", deeplinkValue);
                 openGameAppFlyer = true;
 
-                SharedPreferenceStorage pref = new SharedPreferenceStorage(getApplicationContext());
+                SharedPreferenceStorageRummy pref = new SharedPreferenceStorageRummy(getApplicationContext());
                 pref.setAppsFlyerDeepLink(deeplinkValue);
 
         }

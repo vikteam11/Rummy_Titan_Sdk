@@ -18,7 +18,7 @@ import kotlin.reflect.KProperty
 /**
  * Storage for app and user preferences.
  */
-interface PreferenceStorage {
+interface PreferenceStorageRummy {
     var onSafePlay: Boolean
     var introductionCompleted: Boolean
     var loginCompleted: Boolean
@@ -61,6 +61,9 @@ interface PreferenceStorage {
     var createTeamSettingResponse: String?
     var appUrl: String?
     var appUrl2: String?
+    var displayProfileIcon: Boolean
+    var showKycOptions: Boolean
+    var locationDelay: Long
     var gamePlayUrl: String?
     var referUrl: String?
     var referCode: String?
@@ -108,7 +111,7 @@ interface PreferenceStorage {
 /**
  * [PreferenceStorage] impl backed by [android.content.SharedPreferences].
  */
-class SharedPreferenceStorage @Inject constructor(context: Context) : PreferenceStorage {
+class SharedPreferenceStorageRummy @Inject constructor(context: Context) : PreferenceStorageRummy {
 
     private val prefs = context.applicationContext.getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
 
@@ -180,6 +183,9 @@ class SharedPreferenceStorage @Inject constructor(context: Context) : Preference
     override var appUrl by StringPreference(prefs, PREF_APP_URL, MyConstants.APP_CURRENT_URL)
 
     override var appUrl2 by StringPreference(prefs, PREF_APP_URL2, "")
+    override var displayProfileIcon by BooleanPreference(prefs, PREF_DISPLAY_PROFILE_ICON,false)
+    override var showKycOptions by BooleanPreference(prefs, PREF_SHOW_KYC_OPTION,false)
+    override var locationDelay by LongPreference(prefs, PREF_LOCATION_DELAY,0L)
     override var gamePlayUrl by StringPreference(prefs, PREF_GAME_URL, "")
 
     override var quizBackMessage by StringPreference(prefs, PREF_QUIZ_BACK_MESSAGE, "")
@@ -323,7 +329,7 @@ class SharedPreferenceStorage @Inject constructor(context: Context) : Preference
 
     companion object {
         const val PREF_CHAT_MAG_COUNT = "pref_chat_msg_count"
-        const val PREFS_NAME = "rummyTitans"
+        const val PREFS_NAME = "rummyTitansSDK"
         const val PREF_SAFE = "pref_safe"
         const val PREF_IS_GAME_DISABLED = "pref_is_Games_disabled"
         const val PREF_ONINTRODUCTION = "pref_introduction"
@@ -343,6 +349,9 @@ class SharedPreferenceStorage @Inject constructor(context: Context) : Preference
         const val PREF_POLL_ID = "pref_poll_id"
         const val PREF_LANGUAGE_RESPONSE = "pref_language_response"
         const val PREF_SELECTED_LANGUAGE = "Locale.Helper.Selected.Language"
+        const val PREF_DISPLAY_PROFILE_ICON = "pref_display_profile_icon"
+        const val PREF_SHOW_KYC_OPTION = "pref_show_kyc_option"
+        const val PREF_LOCATION_DELAY = "pref_location_delay"
         const val PREF_IS_FIRST_TIME = "pref_ois_first_time"
         const val PREF_IS_EMAIL_SENT = "pref_is_email_sent"
         const val PREF_FIREBASE_TOKEN = "pref_firebase_token"

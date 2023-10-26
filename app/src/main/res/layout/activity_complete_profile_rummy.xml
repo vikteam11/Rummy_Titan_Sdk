@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+
+        <variable
+            name="viewModel"
+            type="com.rummytitans.playcashrummyonline.cardgame.ui.completeprofile.CompleteProfileViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="@dimen/margin_large" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="@dimen/margin_large" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtRegisterTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:text="@string/txt_almost_done"
+                    android:textAppearance="@style/RummySdk_TextAppearance.Large"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                    app:layout_constraintStart_toStartOf="@+id/guideline5"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtRegisterDesc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_min"
+                    android:gravity="center_horizontal"
+                    android:text="@string/txt_your_team_name_can_never_be_edited_set_it_once_n_set_it_right"
+                    android:textAppearance="@style/RummySdk_TextAppearance.Small"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                    app:layout_constraintStart_toStartOf="@+id/guideline5"
+                    app:layout_constraintTop_toBottomOf="@+id/txtRegisterTitle" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtSignupWithSocial"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:gravity="center_horizontal"
+                    android:text="@string/txt_profile_info"
+                    android:textAppearance="@style/RummySdk_TextAppearance.Medium"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtRegisterDesc" />
+
+
+                <!-- android:onTextChanged="@{itemViewModel.onTextChanged}"-->
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/editTeamName"
+                    style="@style/RummySdk_Widget.BorderEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginTop="@dimen/margin_min"
+                    android:digits="qwertyuiopasdfghjklzxcvbnm0123456789QWERTYUIOPASDFGHJKLZXCVBNM._"
+                    android:hint="@string/hint_enter_your_team_name"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLength="25"
+                    android:maxLines="1"
+                    android:onTextChanged="@{viewModel::onTeamnameChanged}"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                    app:layout_constraintStart_toStartOf="@+id/guideline5"
+                    app:layout_constraintTop_toBottomOf="@+id/txtSignupWithSocial"
+                    app:setCompactDrawableWithTrophyRight="@{viewModel.txtTeamNameIcon}" />
+
+                <!--android:text="@string/txt_your_team_name_can_never_be_edited"-->
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtTeamName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@{viewModel.txtTeamName}"
+                    android:textColor="@{viewModel.txtTeamNameColor}"
+                    android:textSize="@dimen/textSize10sp"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/guideline5"
+                    app:layout_constraintTop_toBottomOf="@+id/editTeamName" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/lableAvailableTeamNames"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Available Team Names: "
+                    android:textColor="@color/gunmetal"
+                    android:textSize="12sp"
+                    android:visibility="@{viewModel.isSuggestionAvailable()?View.VISIBLE:View.GONE}"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/guideline5"
+                    app:layout_constraintTop_toBottomOf="@+id/txtTeamName" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/teamNameSuggestion"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:visibility="@{viewModel.isSuggestionAvailable()?View.VISIBLE:View.GONE}"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/guideline5"
+                    app:layout_constraintTop_toBottomOf="@+id/lableAvailableTeamNames" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtFullName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/txt_your_name_should_match_with_your_authentic_identity"
+                    android:textColor="@color/cool_grey"
+                    android:textSize="@dimen/textSize10sp"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                    app:layout_constraintStart_toStartOf="@+id/guideline5"
+                    app:layout_constraintTop_toBottomOf="@+id/editFullName" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtFullName2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/txt_residents_of_assam_odisha_telangana_amp_nagaland_are_not_eligible_to_play"
+                    android:textColor="@color/cool_grey"
+                    android:textSize="@dimen/textSize10sp"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                    app:layout_constraintStart_toStartOf="@+id/guideline5"
+                    app:layout_constraintTop_toBottomOf="@+id/editStates" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/editFullName"
+                    style="@style/RummySdk_Widget.BorderEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/edittext_height"
+                    android:hint="@string/hint_enter_your_full_name"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:onTextChanged="@{viewModel::onFullnameChanged}"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/guideline5"
+                    app:layout_constraintTop_toBottomOf="@+id/teamNameSuggestion"
+                    app:setCompactDrawableLeft="@{R.drawable.ic_user_rummy}" />
+
+
+                <LinearLayout
+                    android:id="@+id/editStates"
+                    style="@style/RummySdk_Widget.BorderEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_min"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/guideline5"
+                    app:layout_constraintTop_toBottomOf="@+id/txtFullName">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        app:srcCompat="@drawable/ic_india_rummy" />
+
+                    <Spinner
+                        android:id="@+id/spnState"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_small"
+                        android:layout_weight="1"
+                        android:popupBackground="@color/text_color5"
+                        app:adapter="@{viewModel.stateList}" />
+                </LinearLayout>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtProfileAvtar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:gravity="center_horizontal"
+                    android:text="@string/txt_profile_avatar"
+                    android:textAppearance="@style/RummySdk_TextAppearance.Medium"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                    app:layout_constraintStart_toStartOf="@+id/guideline5"
+                    app:layout_constraintTop_toBottomOf="@+id/txtFullName2" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerAvatars"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_min"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="@dimen/margin_min"
+                    app:avatarAdapter="@{viewModel.avatarList}"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                    app:layout_constraintStart_toStartOf="@+id/guideline5"
+                    app:layout_constraintTop_toBottomOf="@+id/txtProfileAvtar" />
+
+
+                <ProgressBar
+                    android:id="@+id/loadingLogin"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_white_progress"
+                    android:elevation="10dp"
+                    android:padding="@dimen/margin_min"
+                    android:theme="@style/RummySdk_ProgressBar"
+                    android:visibility="@{viewModel.isLoading?View.VISIBLE:View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="@+id/recyclerAvatars"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                    app:layout_constraintStart_toStartOf="@+id/guideline5"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <com.rummytitans.playcashrummyonline.cardgame.widget.FadingSnackbar
+                    android:id="@+id/fadingSnackbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:elevation="@dimen/margin_micro"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btnLetsPlay"
+            style="@style/RummySdk_Widget.MyTeam11.RaisedButton"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_min"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:onClick="@{() ->viewModel.saveProfile()}"
+            android:text="@string/txt_let_s_play" />
+    </LinearLayout>
+
+</layout>

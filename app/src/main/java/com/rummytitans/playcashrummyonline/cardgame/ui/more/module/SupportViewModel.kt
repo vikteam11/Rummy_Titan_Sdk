@@ -3,7 +3,7 @@ package com.rummytitans.playcashrummyonline.cardgame.ui.more.module
 import android.text.TextUtils
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.playcashrummyonline.cardgame.api.APIInterface
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.models.HelpDeskModel
 import com.rummytitans.playcashrummyonline.cardgame.models.LoginResponse
 import com.rummytitans.playcashrummyonline.cardgame.ui.BaseViewModel
@@ -17,7 +17,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 @HiltViewModel
 class SupportViewModel @Inject constructor(
-    val prefs: SharedPreferenceStorage, val apis: APIInterface,
+    val prefs: SharedPreferenceStorageRummy, val apis: APIInterface,
     val gson: Gson, val analyticsHelper: AnalyticsHelper,
     connectionDetector: ConnectionDetector
 ) : BaseViewModel<SupportClick>(connectionDetector) {

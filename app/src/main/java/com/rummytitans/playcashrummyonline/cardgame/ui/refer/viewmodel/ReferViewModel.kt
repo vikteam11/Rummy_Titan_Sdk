@@ -3,7 +3,7 @@ package com.rummytitans.playcashrummyonline.cardgame.ui.refer.viewmodel
 import com.rummytitans.playcashrummyonline.cardgame.R
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.playcashrummyonline.cardgame.api.APIInterface
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.models.LoginResponse
 import com.rummytitans.playcashrummyonline.cardgame.models.ReferModel
 import com.rummytitans.playcashrummyonline.cardgame.models.TempContactModel
@@ -26,7 +26,7 @@ import kotlin.math.roundToInt
 
 @HiltViewModel
 class ReferViewModel @Inject constructor(
-    val prefs: SharedPreferenceStorage,
+    val prefs: SharedPreferenceStorageRummy,
     val gson: Gson,
     val apiInterface: APIInterface,
     val connectionDetector: ConnectionDetector, val analyticsHelper: AnalyticsHelper

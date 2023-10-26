@@ -184,7 +184,7 @@
 
         <activity
             android:exported="false"
-            android:name="com.rummytitans.playcashrummyonline.cardgame.ui.refer.ReferActivity"
+            android:name="com.rummytitans.playcashrummyonline.cardgame.ui.refer.RummySDKReferActivity"
             android:parentActivityName="com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity"
             android:screenOrientation="portrait" />
 
@@ -260,11 +260,21 @@
             android:screenOrientation="portrait"
             android:theme="@style/RummyAppTheme"  />
 
-        <activity android:name=".ui.verifications.AddressVerificationActivity"
+        <activity android:name=".ui.verifications.RummySDKAddressVerificationActivity"
             android:windowSoftInputMode="adjustResize|stateHidden"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/RummyAppTheme"  />
+
+        <activity android:name=".ui.profile.ProfileActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:exported="false"
+            android:name="com.rummytitans.playcashrummyonline.cardgame.ui.profile.updatePhone.UpdatePhoneActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
 
     </application>
 

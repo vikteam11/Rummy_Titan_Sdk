@@ -212,6 +212,20 @@ interface APIInterface {
         @Header(AUTHEXPIRE) authExpire: String
     ): Single<BaseModel<Any>>
 
+    @GET("users/getuserprofile")
+    fun getProfileIno(
+        @Header(USER_ID) UserId: String,
+        @Header(EXPIRE_TOKEN) ExpireToken: String,
+        @Header(AUTH_EXPIRE) AuthExpire: String
+    ): Single<BaseModel<ProfileInfoModel>>
+
+    @GET("myprofile/getlevels")
+    fun getLevels(
+        @Header(USER_ID) UserId: String,
+        @Header(EXPIRE_TOKEN) ExpireToken: String,
+        @Header(AUTH_EXPIRE) AuthExpire: String
+    ): Single<BaseModel<LevelModel>>
+
     @POST("player/userteamsave")
     fun saveTeam(
         @Header(USERID) userId: Int,
@@ -811,24 +825,23 @@ interface APIInterface {
         @Header(AUTH_EXPIRE) AuthExpire: String
     ): Single<BaseModel<ArrayList<CashBonusModel>>>
 
-    @GET("myprofile/gettransactionv3")
+    @GET("transaction/v2/list/{TypeId}/{PageNo}")
     fun getRecentTransactions(
         @Header(USER_ID) UserId: String,
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
-        @Header("PageNo") PageNo: String,
-        @Header("TypeId") TypeId: Int
+        @Path("PageNo") PageNo: String,
+        @Path("TypeId") TypeId: Int
     ): Single<BaseModel<ArrayList<TransactionModel>>>
 
-    @GET("myprofile/gettransactiondetail")
+    @GET("transaction/v2/detail/{tranId}/{gameId}")
     fun getTransectionDetails(
         @Header(USER_ID) UserId: String,
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Header("TranType") typeId: String,
-        @Header(TRANSACTION_ID) txtId: String,
-        @Header(JOINED_MATCH_ID) matchId: String,
-        @Header(LEAGUE_ID) leagueID: String
+        @Path("tranId") txtId: String,
+        @Path("gameId") gameId: String,
     ): Single<BaseModel<TransactionModel.TransactionListModel>>
 
     @POST("joinleauge/usableandamountNewv2")
@@ -844,6 +857,7 @@ interface APIInterface {
         @Header("passcount") passcount: Int,
         @Header("Modipasscount") Modipasscount: Int = 0
     ): Single<BaseModel<UsableAmountModel>>
+
 
     @GET("myprofile/getwdoptionsV3")
     fun getWithdrawalOptions(

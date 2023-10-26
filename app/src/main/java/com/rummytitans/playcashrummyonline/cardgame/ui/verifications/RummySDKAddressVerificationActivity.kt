@@ -20,8 +20,6 @@ import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import java.util.*
-import javax.inject.Inject
 
 interface AddressVerificationNavigator{
     fun hideKeyboard(){}
@@ -30,7 +28,7 @@ interface AddressVerificationNavigator{
     fun onAadhaarInitialized(url:String){}
 }
 
-class AddressVerificationActivity : BaseActivity(), AddressVerificationNavigator {
+class RummySDKAddressVerificationActivity : BaseActivity(), AddressVerificationNavigator {
 
    // @Inject
     //lateinit var viewModelFactory: ViewModelProvider.Factory

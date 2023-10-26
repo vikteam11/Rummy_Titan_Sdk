@@ -121,9 +121,9 @@ class FragmentManualAddressVerification : BaseFragment(), AddressVerificationNav
         initClicks()
 
         if(viewModel.selectedDocument.get() == 1){
-            (activity as? AddressVerificationActivity)?.setTitle(getString(R.string.upload_aadhar))
+            (activity as? RummySDKAddressVerificationActivity)?.setTitle(getString(R.string.upload_aadhar))
         }else{
-            (activity as? AddressVerificationActivity)?.setTitle(getString(R.string.upload_license))
+            (activity as? RummySDKAddressVerificationActivity)?.setTitle(getString(R.string.upload_license))
         }
     }
 

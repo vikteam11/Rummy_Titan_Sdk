@@ -8,7 +8,7 @@ data class RummySdkOptions(
     val baseUrl2 :String = "https://api.myteam11.com",
     val gamePlayUrl :String = MyConstants.GAME_PLAY_URL,
     val gameSplashUrl :String = MyConstants.SPLASH_URL,
-    val displayProfileIcon :Boolean = false,
+    val displayProfileIcon :Boolean = true,
     val showKycOptions :Boolean = false,
     val locationDelay :Long = 0L,
 )

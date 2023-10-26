@@ -2,11 +2,10 @@ package com.rummytitans.playcashrummyonline.cardgame.ui.refer
 
 import com.rummytitans.playcashrummyonline.cardgame.R
 import com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseActivity
-import com.rummytitans.playcashrummyonline.cardgame.ui.refer.FragmentRefer
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_refer_rummy.*
 
-class ReferActivity : BaseActivity() {
+class RummySDKReferActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

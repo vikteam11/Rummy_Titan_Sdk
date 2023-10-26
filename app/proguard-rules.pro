@@ -11,6 +11,8 @@
 -keep interface okhttp3.** { *; }
 -dontwarn okhttp3.**
 
+-keep class androidx.viewbinding.** { *; }
+-keep class androidx.viewbinding.adapters.** { !* }
 
 -optimizationpasses 1
 # Okio

@@ -11,6 +11,7 @@ import com.appsflyer.AppsFlyerLib
 import com.google.firebase.analytics.FirebaseAnalytics
 //import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
+import com.rummytitans.playcashrummyonline.cardgame.RummyTitanSDK
 //import com.onesignal.OneSignal
 import org.json.JSONObject
 import java.util.*
@@ -22,41 +23,21 @@ class AnalyticsHelper @Inject constructor(var context: Context, var gson: Gson) 
     val mFirebaseAnalytics = FirebaseAnalytics.getInstance(context)
     //var firestore = FirebaseFirestore.getInstance()
     fun setUserProperty(property: String, value: String) {
-        try {
-            mFirebaseAnalytics.setUserProperty(property, value)
-            //OneSignal.sendTag(property, value)
-           // pushPropertiesOnFirestore(property, value)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        RummyTitanSDK.analytiCallback?.setUserPropertySDK(property,value)
     }
 
     fun setJsonUserProperty(json: JSONObject) {
-        try {
-            val map = gson.fromJson<HashMap<String, Any>>(json.toString(), HashMap::class.java)
-            for ((key, value) in map) {
-                mFirebaseAnalytics.setUserProperty(key, value.toString())
-               // pushPropertiesOnFirestore(key, value.toString())
-            }
-            //OneSignal.sendTags(json)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        RummyTitanSDK.analytiCallback?.setJsonUserPropertySDK(json)
     }
 
     fun setUserID(userID: String?) {
         mFirebaseAnalytics.setUserId(userID)
         //OneSignal.setExternalUserId(userID?:"")
-        fireLoginEvent(userID)
+        //fireLoginEvent(userID)
     }
 
     fun setUserDataToTools(loginResponse: LoginResponse?){
-        kotlin.runCatching {
-            loginResponse?.apply {
-               /* OneSignal.setEmail(Email)
-                OneSignal.setSMSNumber(Mobile)*/
-            }
-        }
+        RummyTitanSDK.analytiCallback?.setUserDataToToolsSDK()
     }
 
     fun updateEndPointValue(loginResponse: LoginResponse?) {
@@ -66,7 +47,7 @@ class AnalyticsHelper @Inject constructor(var context: Context, var gson: Gson) 
        // smartech.login(userId)
     }
 
-    /*fun fireLogoutEvent() {
+   /* fun fireLogoutEvent() {
         OneSignal.removeExternalUserId(object :OneSignal.OSExternalUserIdUpdateCompletionHandler {
             @Override
             fun onComplete(results: JSONObject) {
@@ -104,29 +85,24 @@ class AnalyticsHelper @Inject constructor(var context: Context, var gson: Gson) 
       //  smartech.logoutAndClearUserIdentity(true)
     }
 */
-    fun addTrigger(key:String,value: String) {
-        //OneSignal.addTrigger(key,value)
-        //  smartech.logoutAndClearUserIdentity(true)
-    }
+   fun addTrigger(key:String,value: String) {
+   //OneSignal.addTrigger(key,value)
+       RummyTitanSDK.analytiCallback?.addTriggerSDK(key,value)
+   }
 
     fun sendEventToFireBase(eventName: String, eventData: Bundle) {
-        eventData.putString(AnalyticsKey.Keys.Platform,if (BuildConfig.isPlayStoreApk==1) "AndroidPlayStore" else "Android")
-        mFirebaseAnalytics.logEvent(eventName, eventData)
+        RummyTitanSDK.analytiCallback?.sendEventToFireBaseSDK(eventName,eventData)
     }
 
     fun fireAttributesEvent(eventName: String?, userId: String?) {
-        val eventValue: HashMap<String, Any> = HashMap()
-        eventValue[AnalyticsConstants.USER_ID] = userId ?: ""
-        eventValue[AnalyticsKey.Keys.Platform]=if (BuildConfig.isPlayStoreApk==1) "AndroidPlayStore" else "Android"
-        AppsFlyerLib.getInstance().logEvent(context, eventName, eventValue)
+        RummyTitanSDK.analytiCallback?.fireAttributesEventSDK(eventName,userId)
     }
 
     fun fireEvent(key: String, bundle: Bundle? = Bundle()) {
-        if (bundle == null) return
-        fireAppxorEvent(key, bundle)
+        RummyTitanSDK.analytiCallback?.fireEventSDK(key,bundle)
     }
 
-    private fun fireAppxorEvent(eventName: String, eventData: Bundle) {
+   /* private fun fireAppxorEvent(eventName: String, eventData: Bundle) {
         try {
             eventData.putString(AnalyticsKey.Keys.Platform.lowercase(),if (BuildConfig.isPlayStoreApk==1) "AndroidPlayStore" else "Android")
             eventData.putInt(AnalyticsKey.Keys.AppId,8)
@@ -140,7 +116,7 @@ class AnalyticsHelper @Inject constructor(var context: Context, var gson: Gson) 
         } catch (e: Exception) {
             e.printStackTrace()
         }
-    }
+    }*/
 
     /*fun pushEventOnFirestore(eventName: String, json: JSONObject) {
         val doc = firestore.collection("androidEvents").document()

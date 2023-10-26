@@ -5,7 +5,7 @@ import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.playcashrummyonline.cardgame.api.APIInterface
 import com.rummytitans.playcashrummyonline.cardgame.api.APIInterface.Companion.LOCATION_COORDINATE
 import com.rummytitans.playcashrummyonline.cardgame.api.APIInterface.Companion.LOCATION_STATE
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.models.*
 import com.rummytitans.playcashrummyonline.cardgame.ui.BaseViewModel
 import com.rummytitans.playcashrummyonline.cardgame.utils.ConnectionDetector
@@ -30,7 +30,7 @@ import javax.inject.Inject
 import kotlin.collections.ArrayList
 @HiltViewModel
 class AddCashViewModel @Inject constructor(
-    val prefs: SharedPreferenceStorage,
+    val prefs: SharedPreferenceStorageRummy,
     val apis: APIInterface,
     val gson: Gson,
     val connectionDetector: ConnectionDetector, val analyticsHelper: AnalyticsHelper

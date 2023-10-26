@@ -4,7 +4,7 @@ import com.rummytitans.playcashrummyonline.cardgame.BuildConfig
 import com.rummytitans.playcashrummyonline.cardgame.MainApplication.analyticsHelper
 import com.rummytitans.playcashrummyonline.cardgame.R
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsKey
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.databinding.FragmentMoreRummyBinding
 import com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseFragment
 import com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseNavigator
@@ -33,7 +33,7 @@ class FragmentMore : BaseFragment(), MainNavigationFragment, MoreNavigator,
     lateinit var binding: FragmentMoreRummyBinding
 
     @Inject
-    lateinit var prefs: SharedPreferenceStorage
+    lateinit var prefs: SharedPreferenceStorageRummy
     lateinit var viewModel: MoreViewModel
 
     //@Inject

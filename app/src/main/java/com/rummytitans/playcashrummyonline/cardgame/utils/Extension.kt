@@ -40,13 +40,13 @@ import com.jakewharton.rxbinding2.widget.RxTextView
 import com.jakewharton.rxbinding2.widget.TextViewAfterTextChangeEvent
 import com.rummytitans.playcashrummyonline.cardgame.BuildConfig
 import com.rummytitans.playcashrummyonline.cardgame.R
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.models.LoginResponse
 import com.rummytitans.playcashrummyonline.cardgame.models.NewPaymentGateWayModel
 import com.rummytitans.playcashrummyonline.cardgame.ui.WebViewActivity
 import com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseFragment
 import com.rummytitans.playcashrummyonline.cardgame.ui.deeplink.DeepLinkActivityRummy
-import com.rummytitans.playcashrummyonline.cardgame.ui.verifications.AddressVerificationActivity
+import com.rummytitans.playcashrummyonline.cardgame.ui.verifications.RummySDKAddressVerificationActivity
 import com.rummytitans.playcashrummyonline.cardgame.utils.MyConstants.DATE_TYPE
 import com.rummytitans.playcashrummyonline.cardgame.utils.MyConstants.HOURS_TYPE
 import com.rummytitans.playcashrummyonline.cardgame.utils.bottomsheets.LottieBottomSheetDialog
@@ -67,7 +67,7 @@ import kotlin.Pair
 import kotlin.math.roundToInt
 
 
-fun SharedPreferenceStorage.getAPPURL() =
+fun SharedPreferenceStorageRummy.getAPPURL() =
     if (TextUtils.isEmpty(appUrl)) "https://app.myteam11.com" else appUrl
 
 private val PANCARD_PATTERN = Pattern.compile("[A-Z,a-z]{5}[0-9]{4}[A-Z,a-z]{1}")
@@ -491,7 +491,7 @@ fun JSONObject.toBundle(): Bundle {
     return bundle
 }
 
-fun SharedPreferenceStorage.toUserDetail(gson: Gson): LoginResponse? {
+fun SharedPreferenceStorageRummy.toUserDetail(gson: Gson): LoginResponse? {
     if (loginResponse.isNullOrEmpty() || !loginCompleted) return null
     return gson.fromJson(loginResponse, LoginResponse::class.java)
 }
@@ -602,7 +602,7 @@ fun Activity.hasPermissions(permissions: Array<String>): Boolean{
 fun Activity.launchAddressVerificationScreen(verificationRejectMessage:String,fromDeepLink:Boolean=false){
     val intent = Intent(
         this,
-        AddressVerificationActivity::class.java)
+        RummySDKAddressVerificationActivity::class.java)
         .putExtra("FROM_SPLASH", false)
         .putExtra(MyConstants.INTENT_PASS_VERIFICATION_REJECT_MSG,verificationRejectMessage)
     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK  or Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -612,7 +612,7 @@ fun Activity.launchAddressVerificationScreen(verificationRejectMessage:String,fr
 }
 
 fun Fragment.launchAddressVerificationScreen(verificationRejectMessage:String){
-    val intent = Intent(requireContext(), AddressVerificationActivity::class.java)
+    val intent = Intent(requireContext(), RummySDKAddressVerificationActivity::class.java)
         .putExtra("FROM_SPLASH", false)
         .putExtra(MyConstants.INTENT_PASS_VERIFICATION_REJECT_MSG,verificationRejectMessage)
     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK  or Intent.FLAG_ACTIVITY_CLEAR_TOP

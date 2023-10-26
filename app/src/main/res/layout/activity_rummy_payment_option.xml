@@ -270,7 +270,7 @@
             tools:visibility="gone"
             app:color="@{viewModel.selectedColor}"
             app:mutableBottomSheetState="@{viewModel._bottomSheetLinkWallet}"
-            app:bottomSheetState="@{viewModel.bottomSheetLinkWallet}"
+            app:bottomSheetStateRummy="@{viewModel.bottomSheetLinkWallet}"
             />
 
         <include
@@ -285,7 +285,7 @@
             app:viewModel="@{viewModel}"
             tools:visibility="gone"
             app:mutableBottomSheetState="@{viewModel._bottomSheetAddUpi}"
-            app:bottomSheetState="@{viewModel.bottomSheetAddUpi}"
+            app:bottomSheetStateRummy="@{viewModel.bottomSheetAddUpi}"
             />
 
         <include

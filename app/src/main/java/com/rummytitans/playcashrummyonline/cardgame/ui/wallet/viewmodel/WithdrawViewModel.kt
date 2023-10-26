@@ -4,7 +4,7 @@ import com.rummytitans.playcashrummyonline.cardgame.R
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsKey
 import com.rummytitans.playcashrummyonline.cardgame.api.APIInterface
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.models.*
 import com.rummytitans.playcashrummyonline.cardgame.ui.BaseViewModel
 import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.WithdrawalNavigator
@@ -27,7 +27,7 @@ import java.text.DecimalFormat
 import javax.inject.Inject
 @HiltViewModel
 class WithdrawViewModel @Inject constructor(
-    val prefs: SharedPreferenceStorage,
+    val prefs: SharedPreferenceStorageRummy,
     val gson: Gson,
     val apiInterface: APIInterface,
     val connectionDetector: ConnectionDetector, val analyticsHelper: AnalyticsHelper

@@ -16,6 +16,9 @@
         <item name="cardViewStyle">@style/RummySdk_CardViewStyle</item>
     </style>
 
+
+
+
     <style name="RummySdk_addressVerificationDarkHome" parent="RummyAppTheme">
         <item name="android:statusBarColor">@color/rummy_mainColor</item>
         <item name="android:navigationBarColor">@color/rummy_black_3</item>

@@ -21,10 +21,11 @@ object MyConstants {
     const val SPLASH_URL = GAME_PROD
     const val APP_CURRENT_URL = PRODUCTION_URL
     //const val APP_CURRENT_URL2 = "http://15.207.63.62:7000/"
-     const val GAME_PLAY_URL = "https://n2.mt11games.com:7000"
+   //  const val GAME_PLAY_URL = "https://n2.mt11games.com:7000"
     //const val GAME_PLAY_URL = "https://rummytitans.mt11games.com/"
-   // const val GAME_PLAY_URL = "https://rummy.myteam11.games/"
+    const val GAME_PLAY_URL = "https://rummy.myteam11.games/"
 
+    const val UPDATE_EVENT_URL = "https://logs.mt11games.com/"
     const val REQUEST_UPDATE_VERIFY_DETAILS=999
 
     const val APP_TYPE = 8
@@ -40,7 +41,7 @@ object MyConstants {
     const val NET_BANKING = 2
     const val OTHER = 5
     const val DEFAULT_ADD_CASH_AMOUNT = 700.0
-
+    var LOGS_ENABLE = false
     const val REQUEST_CODE_GALLERY =111
     const val REQUEST_CODE_CAMERA =112
     const val REQUEST_APP_SETTING =25

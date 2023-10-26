@@ -5,7 +5,7 @@ import com.rummytitans.playcashrummyonline.cardgame.R
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsKey
 import com.rummytitans.playcashrummyonline.cardgame.api.APIInterface
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.models.BaseModel
 import com.rummytitans.playcashrummyonline.cardgame.models.LoginResponse
 import com.rummytitans.playcashrummyonline.cardgame.ui.BaseViewModel
@@ -27,7 +27,7 @@ import javax.inject.Inject
 import kotlin.collections.ArrayList
 @HiltViewModel
 class NewLoginViewModel @Inject constructor(
-    val apiInterface: APIInterface, val prefs: SharedPreferenceStorage,
+    val apiInterface: APIInterface, val prefs: SharedPreferenceStorageRummy,
     val gson: Gson, val connectionDetector: ConnectionDetector, val analyticsHelper: AnalyticsHelper
 ) : BaseViewModel<NewLoginNavigator>(connectionDetector) {
 

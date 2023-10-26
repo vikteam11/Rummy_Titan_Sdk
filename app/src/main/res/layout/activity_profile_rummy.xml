@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+
+        <import type="android.text.TextUtils" />
+
+        <import type="android.graphics.Color" />
+
+        <import type="android.view.View" />
+
+        <import type="com.google.android.material.bottomsheet.BottomSheetBehavior" />
+
+
+
+        <variable
+            name="profileViewModel"
+            type="com.rummytitans.playcashrummyonline.cardgame.ui.profile.ProfileViewModel" />
+
+        <variable
+            name="profileInfoViewModel"
+            type="com.rummytitans.playcashrummyonline.cardgame.ui.profile.info.viewmodel.ProfileInfoViewModel" />
+
+        <variable
+            name="verificationViewModel"
+            type="com.rummytitans.playcashrummyonline.cardgame.ui.profile.verify.viewmodel.VerifyViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:background="@drawable/rummy_bg_profile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:alpha="0.9"
+                tools:background="@color/rummy_azure_two"
+                android:background="@color/rummy_mainColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ScrollView
+                android:id="@+id/scrollview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:paddingTop="20dp"
+                android:scrollbars="none">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <ImageView
+                        android:id="@+id/icBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:padding="10dp"
+                        android:onClick="@{()->profileViewModel.navigator.goBack()}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_newback" />
+
+
+                    <ImageView
+                        android:id="@+id/editProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:gravity="center"
+                        android:onClick="editProfile"
+                        android:padding="10dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_edit_profile_rummy" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/icUser"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:padding="5dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/dummy_avtar"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageView28"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:elevation="8dp"
+                        android:padding="3dp"
+                        android:onClick="@{()->profileViewModel.showSheet(2)}"
+                        app:layout_constraintBottom_toBottomOf="@+id/icUser"
+                        app:layout_constraintEnd_toEndOf="@+id/icUser"
+                        app:tint="@color/white"
+                        app:srcCompat="@drawable/ic_camera_alt_black_rummy_24dp" />
+
+                    <TextView
+                        android:id="@+id/textView63"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="@{profileInfoViewModel.profileInfo.Name}"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/icUser"
+                        tools:text="Shahid Khan" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:gravity="center_vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView63">
+
+                        <TextView
+                            android:id="@+id/textView64"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:text="@{profileInfoViewModel.profileInfo.TeamNmae}"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            tools:text="shdKhan" />
+
+                        <TextView
+                            android:id="@+id/btnUpdateTeamName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="16dp"
+                            android:layout_marginStart="7dp"
+                            android:background="@drawable/bg_white_box"
+                            android:backgroundTint="@color/rummy_maingreen"
+                            android:fontFamily="@font/rubik_medium"
+                            android:gravity="center"
+                            android:paddingHorizontal="10dp"
+                            android:singleLine="true"
+                            android:text="@string/update"
+                            android:textColor="@color/white"
+                            android:textSize="10sp"
+                            android:textStyle="bold"
+                            android:visibility="@{TextUtils.isEmpty(profileInfoViewModel.profileInfo.TeamNmae)?View.GONE:View.VISIBLE}" />
+                    </LinearLayout>
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="160dp"
+                        android:background="@drawable/rummy_bg_profile"
+                        android:paddingBottom="30dp"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/textView720"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/rubik_medium"
+                            android:text="@string/profile_verification"
+                            android:textColor="@color/text_color8"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <RelativeLayout
+                            android:id="@+id/verifyLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@+id/textView720">
+
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/shadow_view1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/shadow_view"
+                                android:layout_marginTop="-20dp"
+                                android:layout_marginHorizontal="16dp"
+                                app:cardBackgroundColor="@color/rummy_black_3"
+                                android:elevation="3dp"
+                                app:cornerRadius="16dp"
+                                app:cardCornerRadius="16dp">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:background="@color/black_2"
+                                    android:paddingBottom="10dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent">
+
+
+                                    <TextView
+                                        android:id="@+id/textView36"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="16dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:text="@{verificationViewModel.isVrified?@string/profile_verified:@string/profile_unverified}"
+                                        app:setVerificationDesc="@{verificationViewModel.verificationInfo}"
+                                        android:textAppearance="@style/RummySdk_TextAppearance.Small"
+                                        android:textColor="@color/text_color2"
+                                        android:textSize="10sp"
+                                        app:layout_constraintBottom_toBottomOf="@id/txtVerifyAccount"
+                                        app:layout_constraintEnd_toStartOf="@+id/txtVerifyAccount"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="@+id/txtVerifyAccount" />
+
+                                    <TextView
+                                        android:id="@+id/txtVerifyAccount"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="25dp"
+                                        android:layout_marginTop="15dp"
+                                        android:layout_marginEnd="16dp"
+                                        app:viewFillColor="@{@color/rummy_maingreen}"
+                                        app:viewBorderColor="@{@color/rummy_maingreen}"
+                                        app:viewRadius="@{4}"
+                                        app:isAlpha="@{true}"
+                                        android:gravity="center"
+                                        android:paddingLeft="10dp"
+                                        android:paddingRight="10dp"
+                                        android:text="Update"
+                                        android:textAppearance="@style/RummySdk_TextAppearance.Large"
+                                        android:textColor="@color/rummy_maingreen"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        app:layout_constraintVertical_chainStyle="packed" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/shadow_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginHorizontal="16dp"
+                                app:cardElevation="4dp"
+                                app:cardBackgroundColor="@color/rummy_black_3"
+                                android:foreground="?attr/selectableItemBackground"
+                                app:cornerRadius="16dp"
+                                app:cardCornerRadius="16dp">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+
+                                    <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/rvVerification"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:layout_marginHorizontal="4dp"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"/>
+
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+                            </androidx.cardview.widget.CardView>
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/textView72"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/rubik_medium"
+                            android:text="@string/profile_info"
+                            android:textColor="@color/text_color8"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/verifyLayout" />
+
+                        <TextView
+                            android:id="@+id/textView74"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:text="@{profileInfoViewModel.profileInfo.Name}"
+                            android:textColor="@color/text_color2"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toStartOf="@+id/guideline20"
+                            app:layout_constraintStart_toStartOf="@+id/textView73"
+                            app:layout_constraintTop_toBottomOf="@+id/textView73"
+                            tools:text="Shahid Khan" />
+
+                        <TextView
+                            android:id="@+id/textView79"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:text='@{"+91-"+profileInfoViewModel.profileInfo.Mobile}'
+                            android:textColor="@color/text_color2"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toStartOf="@id/change_phonno"
+                            app:layout_constraintStart_toStartOf="@+id/textView78"
+                            app:layout_constraintTop_toBottomOf="@+id/textView78"
+                            tools:text="9166867929" />
+
+                        <ImageView
+                            android:id="@+id/change_phonno"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="16dp"
+                            android:background="@drawable/bg_border_cool_gray"
+                            android:backgroundTint="@color/rummy_mainColor"
+                            android:onClick="onEditMobileClick"
+                            android:padding="4dp"
+                            app:layout_constraintBottom_toBottomOf="@id/textView79"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/textView78"
+                            app:srcCompat="@drawable/ic_edit_profile_rummy" />
+
+                        <TextView
+                            android:id="@+id/textView80"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:text="@{profileInfoViewModel.profileInfo.TeamNmae}"
+                            android:textColor="@color/text_color2"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toStartOf="@+id/guideline20"
+                            app:layout_constraintStart_toStartOf="@+id/textView71"
+                            app:layout_constraintTop_toBottomOf="@+id/textView78"
+                            tools:text="shdKhan" />
+
+                        <TextView
+                            android:id="@+id/textView76"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:text="@{profileInfoViewModel.profileInfo.Email}"
+                            android:textColor="@color/text_color2"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/textView75"
+                            app:layout_constraintTop_toBottomOf="@+id/textView73"
+                            tools:text="shahid@myteam11.com" />
+
+                        <TextView
+                            android:id="@+id/textView73"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/name"
+                            android:textColor="@color/text_color8"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="@+id/textView72"
+                            app:layout_constraintTop_toBottomOf="@+id/textView72" />
+
+                        <TextView
+                            android:id="@+id/textView78"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/phone"
+                            android:textColor="@color/text_color8"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="@+id/textView76"
+                            app:layout_constraintTop_toBottomOf="@+id/textView74" />
+
+                        <TextView
+                            android:id="@+id/textView71"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/team_name"
+                            android:textColor="@color/text_color8"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="@+id/textView72"
+                            app:layout_constraintTop_toBottomOf="@+id/textView74" />
+
+                        <TextView
+                            android:id="@+id/textView75"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/email"
+                            android:textColor="@color/text_color8"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="@+id/guideline20"
+                            app:layout_constraintTop_toBottomOf="@+id/textView72" />
+
+
+                        <TextView
+                            android:id="@+id/btnLogout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/raised_rounded_rectangle_button"
+                            android:backgroundTint="@color/rummy_maingreen"
+                            android:layout_marginBottom="20dp"
+                            android:drawablePadding="10dp"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="12dp"
+                            android:paddingTop="4dp"
+                            android:paddingRight="12dp"
+                            android:paddingBottom="4dp"
+                            android:text="@string/log_out"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            app:drawableLeftCompat="@drawable/ic_logout_white_rummy"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+
+                        <TextView
+                            android:id="@+id/btnLogoutAllDevice"
+                            setUnderline="@{true}"
+                            android:visibility="gone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/rubik_regular"
+                            android:onClick="@{()->profileViewModel.logoutFromAllDevice()}"
+                            android:text="@string/logout_from_all_device"
+                            android:textColor="@color/gunmetal"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/btnLogout"
+                            app:layout_constraintVertical_bias="0" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline20"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.5" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </ScrollView>
+
+            <com.rummytitans.playcashrummyonline.cardgame.widget.FadingSnackbar
+                android:id="@+id/fadingSnackbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:elevation="@dimen/margin_micro"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/bgView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#5000"
+            android:onClick="@{()->profileViewModel.hideAllSheet()}"
+            android:visibility="@{profileViewModel.isBottomSheetVisible||profileViewModel.isAvtarBottomSheetVisible? View.VISIBLE:View.GONE}"
+            tools:visibility="gone" />
+
+
+        <include
+            android:id="@+id/bottomSheetUpdateAvtar"
+            layout="@layout/rummy_bottomsheet_update_avtar_dialog"
+            bind:viewmodel="@{profileViewModel}" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#66000000"
+            android:onClick="@{()->profileViewModel.toggleBottomSheet()}"
+            android:visibility="@{profileViewModel._bottomSheetStateEvent==BottomSheetBehavior.STATE_EXPANDED?View.VISIBLE:View.GONE}"
+            tools:visibility="gone" />
+
+        <include
+            android:id="@+id/bottomSheetAlert"
+            layout="@layout/bottom_sheet_alert_rummy"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            bind:alertModel="@{profileViewModel.alertDialogModel}"
+            bind:bottomBehavior="@{profileViewModel.bottomSheetStateEvent}"
+            bind:colorCode="@{profileViewModel.selectedColor}"
+            bind:mutableBottomSheetState="@{profileViewModel._bottomSheetStateEvent}" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

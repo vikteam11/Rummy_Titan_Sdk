@@ -16,6 +16,7 @@ import android.app.DownloadManager
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.text.TextUtils
@@ -29,23 +30,24 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseNavigator
 import com.rummytitans.playcashrummyonline.cardgame.ui.newlogin.RummyNewLoginActivity
-import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.SortItemListener
-import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.adapter.RecentTranscationAdapter
+import com.rummytitans.playcashrummyonline.cardgame.ui.transactions.RecentTranscationAdapter
 import com.rummytitans.playcashrummyonline.cardgame.utils.LocaleHelper
+import com.rummytitans.playcashrummyonline.cardgame.utils.extensions.openPdfFile
+import com.rummytitans.playcashrummyonline.cardgame.utils.permissions.PermissionActivity
 import com.rummytitans.playcashrummyonline.cardgame.utils.sendToInternalBrowser
 import com.rummytitans.playcashrummyonline.cardgame.widget.EndlessRecyclerView
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.fragment_recent_transaction_rummy.*
-import javax.inject.Inject
+import java.io.File
 
 class FragmentRecentTransactions : BaseFragment(), MainNavigationFragment,
     BaseNavigator,
-    TransactionItemNavigator, EndlessRecyclerView.Pager, SortItemListener {
+    TransactionItemNavigator, EndlessRecyclerView.Pager,SortItemListener {
 
     lateinit var binding: FragmentRecentTransactionRummyBinding
 
-    //@Inject
-    //lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel: RecentTransactionViewModel
 
     internal var PERMISSION_REQUEST_CODE = 11
@@ -74,8 +76,7 @@ class FragmentRecentTransactions : BaseFragment(), MainNavigationFragment,
     ): View? {
         setTheme(inflater)
         viewModel = ViewModelProvider(
-            this
-        ).get(RecentTransactionViewModel::class.java)
+            this).get(RecentTransactionViewModel::class.java)
         binding =
             FragmentRecentTransactionRummyBinding.inflate(localInflater ?: inflater, container, false)
                 .apply {
@@ -105,6 +106,7 @@ class FragmentRecentTransactions : BaseFragment(), MainNavigationFragment,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.navigator = this
+        viewModel.navigatorAct = this
         if (arguments?.containsKey("currentBalance")!!)
             viewModel.currentBalance.set(arguments?.getDouble("currentBalance", 0.0))
         else
@@ -115,15 +117,18 @@ class FragmentRecentTransactions : BaseFragment(), MainNavigationFragment,
     }
 
     private fun RecentTransactionViewModel.initApis(){
-        sortedTransactions.observe(viewLifecycleOwner,  {
+        sortedTransactions.observe(viewLifecycleOwner) {
             (binding.rvTransaction.adapter as? RecentTranscationAdapter)
-                ?.updateItems(it as ArrayList<TransactionModel.TransactionListModel>, viewModel.tabName)
-        })
+                ?.updateItems(
+                    it as ArrayList<TransactionModel.TransactionListModel>,
+                    viewModel.tabName
+                )
+        }
 
-        transactionDetail.observe(viewLifecycleOwner,  {
+        transactionDetail.observe(viewLifecycleOwner) {
             (binding.rvTransaction.adapter as? RecentTranscationAdapter)
                 ?.updateModel(it)
-        })
+        }
     }
 
     private fun FragmentRecentTransactionRummyBinding.initView(){
@@ -144,9 +149,11 @@ class FragmentRecentTransactions : BaseFragment(), MainNavigationFragment,
                     SortAdapter(this@FragmentRecentTransactions, SortAdapter.VIEW_TRAN_SORT).apply {
                         mLastIndex=0
                         sortItemList.add(SortItemModel("All"))
-                        sortItemList.add(SortItemModel("Withdrawal"))
                         sortItemList.add(SortItemModel("Add Cash"))
-                        sortItemList.add(SortItemModel("Other"))
+                        sortItemList.add(SortItemModel("Withdrawal"))
+                        sortItemList.add(SortItemModel("Join"))
+                        sortItemList.add(SortItemModel("Winning"))
+
                         sortItemList[0].sortType.set(1)
                     }
                 layoutManager = LinearLayoutManager(context)
@@ -193,19 +200,16 @@ class FragmentRecentTransactions : BaseFragment(), MainNavigationFragment,
     override fun showMessage(message: String?) {
         swipeRefresh?.isRefreshing = false
         if (TextUtils.isEmpty(message)) return
-        binding.fadingSnackbar.show(messageText = message, longDuration = false, isError = false)
     }
 
     override fun showError(message: String?) {
         swipeRefresh?.isRefreshing = false
         if (TextUtils.isEmpty(message)) return
-        binding.fadingSnackbar.show(messageText = message, longDuration = true, isError = true)
     }
 
     override fun showError(message: Int) {
         swipeRefresh?.isRefreshing = false
         if (message == 0) return
-        binding.fadingSnackbar.show(longDuration = true, messageId = message, isError = true)
     }
 
     override fun logoutUser() {
@@ -231,7 +235,7 @@ class FragmentRecentTransactions : BaseFragment(), MainNavigationFragment,
                 Environment.DIRECTORY_DOWNLOADS,
                 "RummyTitans_" + data.ID + ".pdf"
             )
-            request.setTitle(getString(R.string.app_name_rummy))
+            request.setTitle(getString(R.string.app_name))
             request.setMimeType("application/pdf")
             request.setDescription("Downloading Transaction History")
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
@@ -281,7 +285,13 @@ class FragmentRecentTransactions : BaseFragment(), MainNavigationFragment,
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(resultCode==Activity.RESULT_OK)
+        if(requestCode == PermissionActivity.PERMISSION_REQUEST_CODE ){
+            if(resultCode == Activity.RESULT_OK){
+                viewModel.downLoadInvoice()
+            }else{
+                showMessageView("Please allow required permission to download InVoice")
+            }
+        }else if(resultCode==Activity.RESULT_OK)
             viewModel.fetchRecentTransaction()
     }
 
@@ -312,11 +322,31 @@ class FragmentRecentTransactions : BaseFragment(), MainNavigationFragment,
             getString(R.string.replay)
         )
     }
+    override fun downloadInvoiceUrl(transaction:TransactionModel.TransactionListModel) {
+        viewModel.transaction = transaction
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            viewModel.downLoadInvoice()
+        } else {
+            PermissionActivity.startActivityForPermissionWithResult(
+                this@FragmentRecentTransactions,
+                listOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                PermissionActivity.PERMISSION_REQUEST_CODE
+            )
+        }
+    }
+
+    override fun openInvoicePdfFile(file: File) {
+        binding.root.postDelayed({
+            requireContext().openPdfFile(file)
+        },500)
+    }
 }
 
 interface TransactionItemNavigator {
     fun sendToWebView(url:String){}
     fun onDownloadClick(data: TransactionModel.TransactionListModel)
+    fun downloadInvoiceUrl(transaction:TransactionModel.TransactionListModel){}
+    fun openInvoicePdfFile(file: File){}
     fun onTrackDetailRequest(data: TransactionModel.TransactionListModel)
     fun asyncRequestDetails(data: TransactionModel.TransactionListModel)
 }

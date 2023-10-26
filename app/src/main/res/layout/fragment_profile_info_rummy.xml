@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.graphics.Color" />
+
+        <variable
+            name="viewmodel"
+            type="com.rummytitans.playcashrummyonline.cardgame.ui.profile.info.viewmodel.ProfileInfoViewModel" />
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:refreshing='@{viewmodel.isSwipeLoading}'>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:paddingBottom="10dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/black">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_16"
+                    android:background="@drawable/box_with_grey_border_rummy"
+                    android:elevation="2dp"
+                    android:orientation="vertical"
+                    android:padding="@dimen/margin_min"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inputLayoutTeamName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_4"
+                        app:TextInputTintColor="@{@color/text_color2}"
+                        android:theme="@style/RummySdk_Widget.TextInputLayout"
+                        app:hintTextAppearance="@style/RummySdk.TextInputLayout">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTeamName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:focusable="false"
+                            android:backgroundTint="@color/text_color5"
+                            android:hint="@string/frag_profile_info_team_name"
+                            android:singleLine="true"
+                            android:text="@{viewmodel.profileInfo.TeamNmae}"
+                            android:textColor="@color/text_color8"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inputLayoutUserName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/frag_profile_info_your_name"
+                        android:theme="@style/RummySdk.TextInputLayoutActivate"
+                        app:TextInputTintColor="@{@color/text_color2}"
+                        app:hintTextAppearance="@style/RummySdk.TextInputLayout">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editUserName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/edtTintColor"
+                            android:singleLine="true"
+                            android:text="@{viewmodel.profileInfo.Name}"
+                            android:textColor="@color/text_color8"
+                            android:textSize="14sp"
+                            android:maxLength="25"
+                            android:textStyle="bold" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inputLayoutDob"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/frag_profile_info_date_of_birth"
+                        app:TextInputTintColor="@{@color/text_color2}"
+                        android:theme="@style/RummySdk.TextInputLayoutActivate"
+                        app:hintTextAppearance="@style/RummySdk.TextInputLayout">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editDOB"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/edtTintColor"
+                            android:focusable="false"
+                            android:enabled="@{viewmodel.isDOBEditable()}"
+                            android:singleLine="true"
+                            android:textColor="@color/text_color8"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            app:setDOBText="@{viewmodel.profileInfo.DOB}" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/rubik_regular"
+                        android:text="@string/frag_profile_info_gender"
+                        android:textColor="@color/text_color2"
+                        android:textSize="@dimen/textSize10sp" />
+
+                    <RadioGroup
+                        android:id="@+id/rbGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="-5dp"
+                        android:layout_marginTop="1dp"
+                        android:orientation="horizontal"
+                        android:theme="@style/RummySdk_Widget.RadioButton">
+
+                        <RadioButton
+                            android:id="@+id/rbMale"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:checked='@{viewmodel.profileInfo.Gender.equals("M") || viewmodel.profileInfo.Gender.equals("")?true:false}'
+                            android:fontFamily="@font/rubik_medium"
+                            android:text="@string/frag_profile_info_male"
+                            android:textColor="@color/text_color8"
+                            android:textSize="14sp" />
+
+                        <RadioButton
+                            android:id="@+id/rbFemale"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:checked='@{viewmodel.profileInfo.Gender.equals("F")?true:false}'
+                            android:fontFamily="@font/rubik_medium"
+                            android:text="@string/frag_profile_info_female"
+                            android:textColor="@color/text_color8"
+                            android:textSize="14sp" />
+
+                        <RadioButton
+                            android:id="@+id/rbOther"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:checked='@{viewmodel.profileInfo.Gender.equals("O")?true:false}'
+                            android:fontFamily="@font/rubik_medium"
+                            android:text="@string/frag_profile_info_other"
+                            android:textColor="@color/text_color8"
+                            android:textSize="14sp" />
+                    </RadioGroup>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inputLayoutEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/frag_profile_info_email_address"
+                        app:TextInputTintColor="@{@color/text_color2}"
+                        android:theme="@style/RummySdk.TextInputLayoutActivate"
+                        app:hintTextAppearance="@style/RummySdk.TextInputLayout">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editEmailAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/edtTintColor"
+                            android:enabled="@{viewmodel.isEmailEditable()}"
+                            android:focusable="@{viewmodel.isEmailEditable()}"
+                            android:inputType="textEmailAddress"
+                            android:text="@{viewmodel.profileInfo.Email}"
+                            android:textColor="@color/text_color8"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/inputLayoutNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:hint="@string/frag_profile_info_phone_number"
+                            app:TextInputTintColor="@{@color/text_color2}"
+                            android:theme="@style/RummySdk_Widget.TextInputLayout"
+                            app:hintTextAppearance="@style/RummySdk.TextInputLayout">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editPhone"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:focusable="false"
+                                android:backgroundTint="@color/edtTintColor"
+                                android:text="@{viewmodel.profileInfo.Mobile}"
+                                android:textColor="@color/text_color8"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <Button
+                            android:id="@+id/btnUpdateMobile"
+                            android:layout_width="58dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="end|center_vertical"
+                            android:layout_marginEnd="16dp"
+                            android:background="@drawable/bg_primary_box_rummy"
+                            android:backgroundTint="@color/rummy_maingreen"
+                            android:fontFamily="@font/rubik_medium"
+                            android:foreground="?selectableItemBackground"
+                            android:onClick="@{()->viewmodel.navigatorAct.onEditMobileClick()}"
+                            android:text="Edit"
+                            android:textColor="@color/white"
+                            android:textSize="12sp" />
+                    </FrameLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inputLayoutAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/frag_profile_info_your_address"
+                        app:TextInputTintColor="@{@color/text_color2}"
+                        android:theme="@style/RummySdk.TextInputLayoutActivate"
+                        app:hintTextAppearance="@style/RummySdk.TextInputLayout">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/edtTintColor"
+                            android:singleLine="true"
+                            android:enabled="@{viewmodel.isAddressEditable()}"
+                            android:text="@{viewmodel.profileInfo.Address}"
+                            android:textColor="@color/text_color8"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        TextInputTintColor="@{Color.parseColor(viewmodel.selectedColor)}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:focusable="false"
+                        android:hint="Your City"
+                         android:visibility="gone"
+                        android:theme="@style/RummySdk.TextInputLayoutActivate"
+                        app:hintTextAppearance="@style/RummySdk.TextInputLayout">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editCity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="@{viewmodel.isEditable}"
+                            android:text="Jaipur"
+                            android:textColor="@color/text_color8"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        TextInputTintColor="@{Color.parseColor(viewmodel.selectedColor)}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_min"
+                        android:hint="@string/frag_profile_info_your_state"
+                        android:visibility="gone"
+                        android:theme="@style/RummySdk.TextInputLayoutActivate"
+                        app:hintTextAppearance="@style/RummySdk.TextInputLayout">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editState"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="@{viewmodel.isEditable}"
+                            android:singleLine="true"
+                            android:text="@{viewmodel.profileInfo.StateName}"
+                            android:textColor="@color/text_color8"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/inputLayoutState"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:hint="@string/frag_profile_info_your_state"
+                            android:theme="@style/RummySdk.TextInputLayoutActivate"
+                            app:hintTextAppearance="@style/RummySdk.TextInputLayout"
+                            app:TextInputTintColor="@{@color/text_color2}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <androidx.appcompat.widget.AppCompatEditText
+                                android:id="@+id/edtState"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/edtTintColor"
+                                android:drawableEnd="@drawable/ic_arrow_down"
+                                app:drawableTint="@color/text_color2"
+                                android:editable="false"
+                                app:setDrawableEndCompact="@{viewmodel.isStateEditable ? @drawable/ic_arrow_down : null}"
+                                android:enabled="@{viewmodel.isStateEditable()}"
+                                android:focusableInTouchMode="false"
+                                android:imeOptions="actionNext"
+                                android:inputType="none"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:textAllCaps="false"
+                                android:textColor="@color/text_color8"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                        <Spinner
+                            android:id="@+id/spnState"
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:background="@null"
+                            android:selectedItemPosition="@{viewmodel.selectedStatePosition}"
+                            android:spinnerMode="dropdown"
+                            android:visibility="@{viewmodel.isEditable?View.VISIBLE:View.GONE}"
+                            app:adapter="@{viewmodel.stateList}"
+                            android:popupBackground="@color/text_color5"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/inputLayout" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inputLayoutPinCode"
+                        TextInputTintColor="@{Color.parseColor(viewmodel.selectedColor)}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/frag_profile_info_your_pin_code"
+                        android:visibility="gone"
+                        android:theme="@style/RummySdk.TextInputLayoutActivate"
+                        app:hintTextAppearance="@style/RummySdk.TextInputLayout">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editPinCode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/text_color5"
+                            android:digits="0123456789"
+                            android:enabled="@{viewmodel.isEditable}"
+                            android:inputType="phone"
+                            android:maxLength="6"
+                            android:text="@{viewmodel.profileInfo.PinCode}"
+                            android:textColor="@color/text_color8"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_min"
+                        android:visibility="@{viewmodel.isEditable?View.VISIBLE:View.GONE}">
+
+                        <Button
+                            android:id="@+id/btnCancelUpdateProfile"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:background="?colorPrimary"
+                            android:backgroundTint="@color/rummy_maingreen"
+                            android:foreground="?selectableItemBackground"
+                            android:onClick="@{()->viewmodel.goToNonEditable()}"
+                            android:text="@string/frag_profile_info_cancel"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:visibility="gone" />
+
+
+                        <Button
+                            android:id="@+id/btnUpdateProfile"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:enabled="@{viewmodel.updateData}"
+                            android:alpha="@{viewmodel.updateData ?1.0f :.5F}"
+                            android:background="@drawable/bg_primary_box_rummy"
+                            android:backgroundTint="@color/rummy_maingreen"
+                            android:foreground="?selectableItemBackground"
+                            android:text="@string/frag_profile_info_update_now"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <FrameLayout
+                    android:id="@+id/btnEditProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_16"
+                    android:layout_marginTop="@dimen/margin_min"
+                    android:layout_marginEnd="@dimen/dimen_16"
+                    android:background="@drawable/bg_white_box"
+                    android:backgroundTint="@color/rummy_maingreen"
+                    android:elevation="2dp"
+                    android:foreground="?selectableItemBackground"
+                    android:onClick="@{()->viewmodel.goToEditable()}"
+                    android:visibility="@{viewmodel.isEditable?View.GONE:View.GONE}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+                    <TextView
+                        android:id="@+id/txtEditProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/margin_min"
+                        android:fontFamily="@font/rubik_medium"
+                        android:gravity="center_vertical"
+                        android:text="@string/frag_profile_info_edit_profile"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                </FrameLayout>
+
+
+<!--                android:visibility='@{viewmodel.loginType.equals("EMAIL")?View.VISIBLE:View.GONE}'-->
+                <FrameLayout
+                    android:id="@+id/btnChangePassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_16"
+                    android:layout_marginTop="@dimen/margin_min"
+                    android:layout_marginEnd="@dimen/dimen_16"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/bg_white_box"
+                    android:elevation="2dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btnEditProfile">
+
+                    <TextView
+                        android:id="@+id/txtChangePassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/margin_min"
+                        android:background="?selectableItemBackground"
+                        android:fontFamily="@font/rubik_medium"
+                        android:gravity="center_vertical"
+                        android:text="@string/frag_profile_info_change_password"
+                        android:textColor="@color/gunmetal"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginRight="@dimen/margin_min"
+                        android:rotation="180"
+                        app:tint="@color/silver" />
+
+                </FrameLayout>
+
+
+                <ProgressBar
+                    android:id="@+id/loadingLogin"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_white_progress"
+                    android:elevation="10dp"
+                    android:padding="@dimen/margin_min"
+                    android:theme="@style/RummySdk_ProgressBar"
+                    android:visibility="@{viewmodel.isLoading() ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</layout>

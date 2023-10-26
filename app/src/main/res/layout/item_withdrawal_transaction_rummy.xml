@@ -106,7 +106,7 @@
                         android:layout_marginEnd="@dimen/margin_min"
                         android:fontFamily="@font/rubik_medium"
                         android:text='@{(viewModel.data.IsCr==0?"+":"-")+@string/rupees+String.valueOf(viewModel.data.Amount)}'
-                        android:textColor="@{viewModel.data.IsCr==0?@color/rummy_maingreen:@color/alertRed}"
+                        android:textColor='@{viewModel.data.IsCr==0?@color/rummy_maingreen:@color/alertRed}'
                         android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/imageView2"
@@ -166,14 +166,14 @@
                         android:id="@+id/tvWithdrawId"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
                         android:fontFamily="@font/rubik_medium"
                         android:text="@{viewModel.data.TxnId}"
                         android:textColor="@color/white"
                         android:textSize="12sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/tvWithdrawIdHint"
-                        app:layout_constraintTop_toBottomOf="@+id/tvStatus" />
+                        app:layout_constraintEnd_toStartOf="@id/tvStatus"
+                        app:layout_constraintStart_toEndOf="@+id/tvWithdrawIdHint"
+                        app:layout_constraintTop_toTopOf="@+id/tvStatus"
+                        app:layout_constraintBottom_toBottomOf="@id/tvStatus"/>
 
                     <TextView
                         android:id="@+id/tvStatus"
@@ -194,57 +194,53 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginTop="10dp"
+                        android:visibility="gone"
                         android:background="@color/grayBorder"
                         app:layout_constraintTop_toBottomOf="@+id/tvWithdrawId"
                         tools:layout_editor_absoluteX="8dp" />
 
-                    <TextView
-                        android:id="@+id/tvWithdrawAmountHint"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dimen_16"
-                        android:fontFamily="@font/rubik_regular"
-                        android:text="@string/withdrawal_amount"
-                        android:textColor="@color/text_color3"
-                        android:textSize="12sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/div1" />
 
-                    <TextView
-                        android:id="@+id/tvWithdrawAmount"
-                        android:layout_width="0dp"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvDetails"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/rubik_medium"
-                        android:text="@{@string/rupees+String.valueOf(viewModel.data.Amount)}"
-                        android:textColor="@color/white"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toStartOf="@+id/guide1"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvWithdrawAmountHint" />
-
-                    <TextView
-                        android:id="@+id/tvBankHint"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dimen_16"
-                        android:fontFamily="@font/rubik_regular"
-                        android:text="@string/bank_account"
-                        android:textColor="@color/text_color3"
-                        android:textSize="12sp"
-                        app:layout_constraintStart_toEndOf="@+id/guide1"
-                        app:layout_constraintTop_toBottomOf="@+id/div1" />
-
-                    <TextView
-                        android:id="@+id/tvBank"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/rubik_medium"
-                        android:text="@{viewModel.data.BankAccount}"
-                        android:textColor="@color/white"
-                        android:textSize="14sp"
+                        android:visibility="@{viewModel.data.transactionDetailAvailable() ? View.VISIBLE : View.GONE,default=gone}"
+                        android:layout_marginVertical="8dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/guide1"
-                        app:layout_constraintTop_toBottomOf="@+id/tvWithdrawAmountHint" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/div1"
+                        android:background="@drawable/box_grey_border_rummy"
+                        android:backgroundTint="@color/grayBorder"/>
+
+                    <TextView
+                        android:id="@+id/txtClosingBalance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/rubik_regular"
+                        android:text="Closing Balance"
+                        tools:visibility="visible"
+                        android:visibility="@{viewModel.data.closingBalanceAvailable() ? View.VISIBLE : View.GONE,default=gone}"
+                        android:textColor="@color/text_color2"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/rvDetails" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvClosingBalance"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:spanCount="3"
+                        android:layout_marginVertical="8dp"
+                        tools:visibility="visible"
+                        tools:itemCount="3"
+                        tools:listitem="@layout/item_transaction_bonus_rummy"
+                        android:visibility="@{viewModel.data.transactionBreakupAvailable() ? View.VISIBLE : View.GONE,default=gone}"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtClosingBalance" />
 
                     <LinearLayout
                         android:id="@+id/layoutTime"
@@ -256,14 +252,14 @@
                         android:background="@drawable/bg_squre_shape"
                         android:backgroundTint="@color/text_color5"
                         android:layout_marginTop="@dimen/dimen_20"
-                        app:layout_constraintTop_toBottomOf="@+id/tvBank" >
+                        app:layout_constraintTop_toBottomOf="@+id/rvClosingBalance">
 
                         <TextView
                             android:id="@+id/tvPlacedOnHint"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/rubik_regular"
-                            android:text="@{@string/placed_on+' '}"
+                            android:text="@{`Withdrawal Request of ₹`+ viewModel.data.Amount +` Placed On:`+' '}"
                             android:textColor="@color/text_color2"
                             android:textSize="12sp"/>
 
@@ -280,6 +276,7 @@
                             android:textSize="12sp" />
 
                     </LinearLayout>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="48dp"

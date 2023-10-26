@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 
 public class TransactionModel implements Serializable {
@@ -16,9 +18,13 @@ public class TransactionModel implements Serializable {
     public ArrayList<TransactionListModel> Transaction;
 
     public class TransactionListModel implements Serializable {
-
+        @SerializedName("GameId")
+        public String gameId;
+        @SerializedName("TaxInvoice")
+        public Boolean taxInvoice;
         @SerializedName("GamePlayUrl")
         public String GamePlayUrl;
+
         @SerializedName("Url")
         public String Url;
         @SerializedName("Cr")
@@ -67,6 +73,34 @@ public class TransactionModel implements Serializable {
         public boolean isDetailAvailable=false;
         public Byte showDetailView = HIDE_VIEW;
         public int withdrawalStatusColor;
+
+        @SerializedName("TransactionBreakup")
+        public List<KeyValuePairModel> transactionBreakup;
+
+        @SerializedName("TransactionDetails")
+        public List<KeyValuePairModel> transactionDetails;
+
+        @SerializedName("ClosingBalance")
+        public List<KeyValuePairModel> closingBalance;
+
+        public Boolean isRummyTransaction(){
+            return Title.toLowerCase(Locale.ROOT).contains("rummy");
+        }
+
+        public Boolean isDepositTransaction(){
+            return TranType ==1;//TranType==1; //1 for deposit transaction
+        }
+
+        public Boolean transactionBreakupAvailable(){
+            return transactionBreakup!=null && transactionBreakup.size()>0;
+        }
+        public Boolean transactionDetailAvailable(){
+            return transactionDetails!=null && transactionDetails.size()>0;
+        }
+        public Boolean closingBalanceAvailable(){
+            return closingBalance!=null && closingBalance.size()>0;
+        }
+
     }
 }
 

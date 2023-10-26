@@ -1,7 +1,7 @@
 package com.rummytitans.playcashrummyonline.cardgame.ui.contectList.viewModel
 
 import com.rummytitans.playcashrummyonline.cardgame.api.APIInterface
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.models.ContactModel
 import com.rummytitans.playcashrummyonline.cardgame.models.LoginResponse
 import com.rummytitans.playcashrummyonline.cardgame.models.MyContactsResponseModel
@@ -22,7 +22,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ContactsViewModel @Inject constructor(
-    val prefs: SharedPreferenceStorage,
+    val prefs: SharedPreferenceStorageRummy,
     val gson: Gson,
     val apiInterface: APIInterface,
     val connectionDetector: ConnectionDetector

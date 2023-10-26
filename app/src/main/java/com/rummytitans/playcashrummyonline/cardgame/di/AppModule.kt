@@ -2,11 +2,12 @@ package com.rummytitans.playcashrummyonline.cardgame.di
 
 import com.rummytitans.playcashrummyonline.cardgame.MainApplication
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsHelper
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.utils.ConnectionDetector
 import android.content.ClipboardManager
 import android.content.Context
 import com.google.gson.Gson
+import com.rummytitans.playcashrummyonline.cardgame.di.anotation.RummySdk
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,8 +22,9 @@ class AppModule {
 
 
     @Singleton
+    @RummySdk
     @Provides
-    fun providesPreferenceStorage(@ApplicationContext context: Context) = SharedPreferenceStorage(context)
+    fun providesPreferenceStorage(@ApplicationContext context: Context) = SharedPreferenceStorageRummy(context)
 
     @Provides
     fun providesClipboardManager(@ApplicationContext context: Context) =

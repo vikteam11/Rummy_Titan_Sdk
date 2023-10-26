@@ -1,18 +1,20 @@
-package com.rummytitans.playcashrummyonline.cardgame.ui.wallet.adapter
+package com.rummytitans.playcashrummyonline.cardgame.ui.transactions
 
 import com.rummytitans.playcashrummyonline.cardgame.R
-import com.rummytitans.playcashrummyonline.cardgame.databinding.ItemRecentTranscationRummyBinding
-import com.rummytitans.playcashrummyonline.cardgame.databinding.ItemWithdrawalTransactionRummyBinding
 import com.rummytitans.playcashrummyonline.cardgame.models.TransactionModel
-import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.TransactionItemNavigator
-import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.viewmodel.ItemTransactionViewModel
 import com.rummytitans.playcashrummyonline.cardgame.utils.setOnClickListenerDebounce
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.rummytitans.playcashrummyonline.cardgame.databinding.ItemRecentTranscationRummyBinding
+import com.rummytitans.playcashrummyonline.cardgame.databinding.ItemWithdrawalTransactionRummyBinding
 import com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseViewHolder
+import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.TransactionItemNavigator
+import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.viewmodel.ItemTransactionViewModel
+import com.rummytitans.playcashrummyonline.cardgame.utils.SpacesItemDecoration
 
 class RecentTranscationAdapter(
     var listResponse: ArrayList<TransactionModel.TransactionListModel>?,
@@ -25,7 +27,7 @@ class RecentTranscationAdapter(
     lateinit var mContext: Context
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         mContext = parent.context
-        return if (viewType == 6)//Withdrawal
+        return if (viewType == 2)//Withdrawal
             WithdrawalTransactionViewHolder(
                 ItemWithdrawalTransactionRummyBinding.inflate(
                     LayoutInflater.from(
@@ -69,25 +71,28 @@ class RecentTranscationAdapter(
         notifyDataSetChanged()
         tabName = tabtext
     }
-
     fun updateModel(model: TransactionModel.TransactionListModel) {
         listResponse?.elementAtOrNull(currentItemPos)?.let {
-            it.GamePlayUrl = model.GamePlayUrl
             it.Description = model.Description
-            it.Unutilized = model.Unutilized
-            it.Wiining = model.Wiining
-            it.Myteam11Credit = model.Myteam11Credit
+
             it.Status = model.Status
             it.isDetailAvailable = true
-            it.TxnId = model.TxnId
             it.showDetailView = TransactionModel.SHOW_VIEW
             it.statusCode=model.statusCode
             it.BankAccount=model.BankAccount
+
+            it.taxInvoice = model.taxInvoice
+            it.GamePlayUrl = model.GamePlayUrl
+            it.transactionBreakup = model.transactionBreakup
+            it.transactionDetails = model.transactionDetails
+            it.closingBalance = model.closingBalance
+
+            Log.d("ClosingBa","Closing Balance ${model.closingBalance.size} ${model.closingBalanceAvailable()}")
+
         }
         notifyItemChanged(currentItemPos)
         oldItemPos = currentItemPos
     }
-
     inner class RecentTransactionViewHolder(var mBinding: ItemRecentTranscationRummyBinding) :
         BaseViewHolder(mBinding.root) {
 
@@ -106,11 +111,38 @@ class RecentTranscationAdapter(
                             performToggle(model, position)
                         }, colorCode
                     )
+
                 mBinding.viewModel = itemViewModel
+
+                mBinding.rvBreakup.adapter = TransactionDetailItemAdapter(
+                    model.transactionBreakup?: arrayListOf(),
+                    TransactionDetailItemAdapter.VIEW_TRAN_BREAKUP,
+                    colorCode
+                )
+                mBinding.rvDetails.adapter = TransactionDetailItemAdapter(
+                    model.transactionDetails?: arrayListOf(),
+                    TransactionDetailItemAdapter.VIEW_DETAIL,
+                    colorCode
+                )
+
+                if(mBinding.rvClosingBalance.itemDecorationCount == 0){
+                    mBinding.rvClosingBalance.addItemDecoration(SpacesItemDecoration(8))
+                }
+                mBinding.rvClosingBalance.adapter = TransactionDetailItemAdapter(
+                    model.closingBalance?: arrayListOf(),
+                    TransactionDetailItemAdapter.VIEW_CLOSING_BALANCE,
+                    colorCode
+                )
+
                 mBinding.viewReplay.setOnClickListenerDebounce {
                     listner.sendToWebView(model.GamePlayUrl?:"")
                 }
+                mBinding.btnDownload.setOnClickListenerDebounce {
+                    listner.downloadInvoiceUrl(model)
+                }
+
             }
+
             mBinding.executePendingBindings()
         }
 
@@ -133,7 +165,6 @@ class RecentTranscationAdapter(
             notifyItemChanged(oldItemPos)
         }
     }
-
     inner class WithdrawalTransactionViewHolder(var mBinding: ItemWithdrawalTransactionRummyBinding) :
         BaseViewHolder(mBinding.root) {
 
@@ -168,6 +199,22 @@ class RecentTranscationAdapter(
                         }
                     )
                 mBinding.viewModel = itemViewModel
+
+                mBinding.rvDetails.adapter = TransactionDetailItemAdapter(
+                    model.transactionDetails?: arrayListOf(),
+                    TransactionDetailItemAdapter.VIEW_DETAIL,
+                    colorCode
+                )
+
+                if(mBinding.rvClosingBalance.itemDecorationCount == 0){
+                    mBinding.rvClosingBalance.addItemDecoration(SpacesItemDecoration(8))
+                }
+                mBinding.rvClosingBalance.adapter = TransactionDetailItemAdapter(
+                    model.closingBalance?: arrayListOf(),
+                    TransactionDetailItemAdapter.VIEW_CLOSING_BALANCE,
+                    colorCode
+                )
+
             }
             mBinding.executePendingBindings()
         }

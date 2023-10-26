@@ -130,7 +130,7 @@ class FragmentVerificationOption : BaseFragment(), AddressVerificationNavigator,
                             viewModel.initAadhaar()
                             AnalyticsKey.Values.VerifyAadhaarViaOTP
                         }else->{
-                            (activity as? AddressVerificationActivity? )?.addFragment(
+                            (activity as? RummySDKAddressVerificationActivity? )?.addFragment(
                                 FragmentManualAddressVerification.newInstance(viewModel.kycNotes.value,docOption.documentType)
                             )
 
@@ -194,7 +194,7 @@ class FragmentVerificationOption : BaseFragment(), AddressVerificationNavigator,
 
     override fun onResume() {
         super.onResume()
-        (activity as? AddressVerificationActivity)?.setTitle(getString(R.string.verifyAddress))
+        (activity as? RummySDKAddressVerificationActivity)?.setTitle(getString(R.string.verifyAddress))
         if (::viewModel.isInitialized){
             val anyOtpSelected =  verificationOptionAdapter?.options?.any { it.isSelect }?:false
             if(anyOtpSelected){

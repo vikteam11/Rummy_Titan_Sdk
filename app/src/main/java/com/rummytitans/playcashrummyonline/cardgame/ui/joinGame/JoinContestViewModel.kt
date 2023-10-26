@@ -3,7 +3,7 @@ package com.rummytitans.playcashrummyonline.cardgame.ui.joinGame
 
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.playcashrummyonline.cardgame.api.APIInterface
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.models.LoginResponse
 import com.rummytitans.playcashrummyonline.cardgame.models.JoinGameConfirmationModel
 import com.rummytitans.playcashrummyonline.cardgame.ui.BaseViewModel
@@ -27,7 +27,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class JoinContestViewModel @Inject constructor(
-    val prefs: SharedPreferenceStorage,
+    val prefs: SharedPreferenceStorageRummy,
     val apis: APIInterface,
     val gson: Gson,
     val connectionDetector: ConnectionDetector,

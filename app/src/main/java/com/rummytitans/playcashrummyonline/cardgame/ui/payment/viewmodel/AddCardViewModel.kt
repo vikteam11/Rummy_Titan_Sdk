@@ -2,7 +2,7 @@ package com.rummytitans.playcashrummyonline.cardgame.ui.payment.viewmodel
 
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.playcashrummyonline.cardgame.api.APIInterface
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.models.LoginResponse
 import com.rummytitans.playcashrummyonline.cardgame.ui.BaseViewModel
 import com.rummytitans.playcashrummyonline.cardgame.ui.payment.AddCardNavigator
@@ -28,7 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 @HiltViewModel
 class AddCardViewModel @Inject constructor(
-    val prefs: SharedPreferenceStorage,
+    val prefs: SharedPreferenceStorageRummy,
     val apis: APIInterface,
     val gson: Gson, val analyticsHelper: AnalyticsHelper,
     val connectionDetector: ConnectionDetector

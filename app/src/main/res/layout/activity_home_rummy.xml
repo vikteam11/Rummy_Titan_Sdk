@@ -32,10 +32,12 @@
                 android:background="@color/rummy_azure_two">
 
                 <androidx.constraintlayout.widget.Group
+                    android:id="@+id/group3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="@{viewModel.displayHome &amp;&amp; viewModel.gameTicket >0 ? View.VISIBLE : View.GONE,default=gone}"
-                    app:constraint_referenced_ids="viewBgTicket,ivTicket,txtTicket"/>
+                    app:constraint_referenced_ids="viewBgTicket,ivTicket,txtTicket"
+                    tools:layout_editor_absoluteX="8dp" />
 
                 <androidx.constraintlayout.widget.Group
                     android:layout_width="wrap_content"
@@ -51,26 +53,24 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/imgUser"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/avatar_1"
-                        android:layout_marginStart="8dp"
-                        android:layout_gravity="center"
-                        android:visibility="gone"
-                        app:setAvatar="@{viewModel.userAvtar}" />
-
                     <ImageView
                         android:id="@+id/imgBack"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
                         android:layout_gravity="center_vertical"
                         android:background="@drawable/ic_newback"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/layoutUser"
-                        app:layout_constraintTop_toTopOf="parent" />
+
+                        />
+
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imgUser"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/avatar_1"
+                        app:setAvatar="@{viewModel.userAvtar}" />
+
 
                 </FrameLayout>
                 <ImageView

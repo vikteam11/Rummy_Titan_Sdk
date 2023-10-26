@@ -35,7 +35,7 @@
         app:behavior_peekHeight="0dp"
         tools:visibility="visible"
         app:behavior_hideable="true"
-        app:bottomSheetState="@{bottomBehavior}"
+        app:bottomSheetStateRummy="@{bottomBehavior}"
         app:onBottomSheetStateChanged="@{mutableBottomSheetState}"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 

@@ -2,7 +2,7 @@ package com.rummytitans.playcashrummyonline.cardgame.ui.wallet.withdrawal.viewmo
 
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.playcashrummyonline.cardgame.api.APIInterface
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.ui.BaseViewModel
 import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.withdrawal.WithdrawalDetailNavigator
 import com.rummytitans.playcashrummyonline.cardgame.utils.ConnectionDetector
@@ -20,7 +20,7 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 @HiltViewModel
 class WithdrawDetailViewModel @Inject constructor(
-    val prefs: SharedPreferenceStorage,
+    val prefs: SharedPreferenceStorageRummy,
     val gson: Gson,
     val apiInterface: APIInterface,
     val connectionDetector: ConnectionDetector, val analyticsHelper: AnalyticsHelper

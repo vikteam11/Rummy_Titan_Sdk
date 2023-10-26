@@ -41,6 +41,7 @@ import androidx.core.widget.ImageViewCompat
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.RecyclerView
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
@@ -50,6 +51,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.textfield.TextInputLayout
+import com.rummytitans.playcashrummyonline.cardgame.ui.completeprofile.AvatarAdapter
 //import com.loopeer.shadow.ShadowView
 import java.text.DecimalFormat
 import java.text.ParseException
@@ -71,6 +73,12 @@ fun setHtmlText(textView: TextView, str: String?) {
     textView.text = HtmlCompat.fromHtml(str ?: "", HtmlCompat.FROM_HTML_MODE_LEGACY)
 }
 
+@BindingAdapter("avatarAdapter")
+fun addAvatarAdapter(recyclerView: RecyclerView, avatarList: ArrayList<AvatarModel>) {
+    val adapter: AvatarAdapter = recyclerView.adapter as AvatarAdapter
+    adapter.updateItems(avatarList)
+}
+
 @BindingAdapter("lottieFile")
 fun setLottieAnimation(view: View?,lottieFile: String?){
     if (TextUtils.isEmpty(lottieFile)) return
@@ -85,6 +93,12 @@ fun setLottieAnimation(view: View?,lottieFile: String?){
         }
     }
 }
+
+@BindingAdapter("setRefreshing")
+fun com.rummytitans.playcashrummyonline.cardgame.widget.EndlessRecyclerView.setRefreshing(flag:Boolean){
+    isRefreshing = flag
+}
+
 
 @BindingAdapter("adapter")
 fun addAdapter(spinner: Spinner, dataList: MutableList<String>) {
@@ -820,8 +834,8 @@ fun bottomSheetIsDragable(view:View,flag:Boolean){
     behavior.isDraggable = flag
 }
 
-@BindingAdapter("bottomSheetState")
-fun bottomSheetState(view: View, event: Int) {
+@BindingAdapter("bottomSheetStateRummy")
+fun bottomSheetStateRummy(view: View, event: Int) {
     BottomSheetBehavior.from(view).state = event
 }
 
@@ -909,6 +923,43 @@ fun setDOBText(view: TextView, dob: String?) {
     if (!TextUtils.isEmpty(dob) && dob?.contains(" ")!!) view.text = dob.split(" ")[0]
 }
 
+@BindingAdapter(value = ["setVerificationDesc"])
+fun setVerificationDesc(view: TextView, model: ProfileVerificationModel?) {
+    model?.apply {
+        view.text =   when{
+            !EmailVerify && !TextUtils.isEmpty(Email)->{
+                view.context.getString(R.string.please_verify_email)
+            }
+            !EmailVerify->{
+                view.context.getString(R.string.please_verify_email)
+            }
+            !PanVerify  && !TextUtils.isEmpty(PanCardNumber)->{
+                view.context.getString(R.string.your_pan_detail_under_process)
+            }
+            !PanVerify ->{
+                view.context.getString(R.string.please_verify_pan)
+            }
+            !BankVerify  && !TextUtils.isEmpty(AccNo)->{
+                view.context.getString(R.string.your_bankdetail_under_process)
+            }
+            !BankVerify ->{
+                view.context.getString(R.string.please_verify_bank_detail)
+            }
+            !AddressVerified  && !TextUtils.isEmpty(AddressNo)->{
+                view.context.getString(R.string.address_verification_under_process)
+            }
+            !AddressVerified ->{
+                view.context.getString(R.string.your_address_verification_under_process)
+            }
+            else ->{
+                view.context.getString(R.string.update_bank_deatils)
+            }
+        }
+    } ?: run {
+        view.text = if(model?.profileVerified() == true) view.context.getString(R.string.profile_verified)  else
+            view.context.getString(R.string.profile_unverified)
+    }
+}
 
 
 

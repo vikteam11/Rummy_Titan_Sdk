@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="rummy_avatar_image">
+        <item>@drawable/avatar_1</item>
+        <item>@drawable/avatar_2</item>
+        <item>@drawable/avatar_3</item>
+        <item>@drawable/avatar_4</item>
+        <item>@drawable/avatar_5</item>
+
+        <item>@drawable/avatar_7</item>
+        <item>@drawable/avatar_8</item>
+        <item>@drawable/avatar_9</item>
+        <item>@drawable/avatar_10</item>
+
+        <item>@drawable/avatar_11</item>
+        <item>@drawable/avatar_12</item>
+        <item>@drawable/avatar_13</item>
+        <item>@drawable/avatar_14</item>
+        <item>@drawable/avatar_15</item>
+        <item>@drawable/avatar_16</item>
+        <item>@drawable/avatar_17</item>
+        <item>@drawable/avatar_18</item>
+        <item>@drawable/avatar_19</item>
+        <item>@drawable/avatar_20</item>
+        <item>@drawable/avatar_21</item>
+        <item>@drawable/avatar_22</item>
+        <item>@drawable/avatar_23</item>
+        <item>@drawable/avatar_24</item>
+        <item>@drawable/avatar_25</item>
+        <item>@drawable/avatar_26</item>
+    </string-array>
+    <string-array name="avtar_image_new">
+        <item>@drawable/avatar_11</item>
+        <item>@drawable/avatar_12</item>
+        <item>@drawable/avatar_13</item>
+        <item>@drawable/avatar_14</item>
+        <item>@drawable/avatar_15</item>
+        <item>@drawable/avatar_16</item>
+        <item>@drawable/avatar_17</item>
+        <item>@drawable/avatar_18</item>
+        <item>@drawable/avatar_19</item>
+        <item>@drawable/avatar_20</item>
+        <item>@drawable/avatar_21</item>
+        <item>@drawable/avatar_22</item>
+        <item>@drawable/avatar_23</item>
+        <item>@drawable/avatar_24</item>
+        <item>@drawable/avatar_25</item>
+        <item>@drawable/avatar_26</item>
+    </string-array>
+</resources>

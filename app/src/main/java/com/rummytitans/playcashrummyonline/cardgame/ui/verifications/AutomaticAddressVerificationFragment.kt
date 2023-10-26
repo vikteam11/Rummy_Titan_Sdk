@@ -87,12 +87,12 @@ class AutomaticAddressVerificationFragment : BaseFragment(), AddressVerification
 
     override fun onResume() {
         super.onResume()
-        (activity as? AddressVerificationActivity)?.setTitle(getString(R.string.verifyAddress))
+        (activity as? RummySDKAddressVerificationActivity)?.setTitle(getString(R.string.verifyAddress))
     }
 
     private fun initClicks() {
         binding.txtComplteKyc.setOnClickListenerDebounce {
-            (activity as? AddressVerificationActivity? )?.addFragment(
+            (activity as? RummySDKAddressVerificationActivity? )?.addFragment(
                 FragmentManualAddressVerification.newInstance(viewModel.kycNotes.value,1)
             )
         }

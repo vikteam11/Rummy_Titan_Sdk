@@ -1,11 +1,11 @@
 package com.rummytitans.playcashrummyonline.cardgame.ui.wallet.model
 
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 
 
-class WalletRedeemCodeModel(prefs:SharedPreferenceStorage) {
+class WalletRedeemCodeModel(prefs:SharedPreferenceStorageRummy) {
     var availableCode= ObservableField<String>()
     var regularColor = prefs.regularColor
     var safeColor = prefs.safeColor

@@ -1,7 +1,7 @@
 package com.rummytitans.playcashrummyonline.cardgame.ui.verifications
 
 import com.rummytitans.playcashrummyonline.cardgame.R
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.databinding.ActivityRummyVerificationBinding
 import com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseActivity
 import com.rummytitans.playcashrummyonline.cardgame.ui.home.MainNavigationFragment
@@ -16,7 +16,7 @@ import javax.inject.Inject
 class VerificationActivity : BaseActivity() {
 
     @Inject
-    lateinit var prefs: SharedPreferenceStorage
+    lateinit var prefs: SharedPreferenceStorageRummy
     val FRAGMENT_ID = R.id.fragment_container
     lateinit var binding: ActivityRummyVerificationBinding
 

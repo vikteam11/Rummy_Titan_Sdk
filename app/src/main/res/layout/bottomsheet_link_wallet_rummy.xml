@@ -31,7 +31,7 @@
         android:clickable="true"
         android:focusable="true"
         app:behavior_hideable="true"
-        app:bottomSheetState="@{bottomSheetState}"
+        app:bottomSheetStateRummy="@{bottomSheetState}"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         app:onBottomSheetStateChanged="@{mutableBottomSheetState}">
 

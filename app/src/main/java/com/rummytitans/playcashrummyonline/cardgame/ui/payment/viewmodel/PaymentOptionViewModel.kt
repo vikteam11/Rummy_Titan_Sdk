@@ -3,7 +3,7 @@ package com.rummytitans.playcashrummyonline.cardgame.ui.payment.viewmodel
 import com.rummytitans.playcashrummyonline.cardgame.R
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.playcashrummyonline.cardgame.api.APIInterface
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.models.LoginResponse
 import com.rummytitans.playcashrummyonline.cardgame.models.NewPaymentGateWayModel
 import com.rummytitans.playcashrummyonline.cardgame.models.WalletInfoModel
@@ -27,7 +27,7 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 @HiltViewModel
 class PaymentOptionViewModel @Inject constructor(
-    val prefs: SharedPreferenceStorage,
+    val prefs: SharedPreferenceStorageRummy,
     val apis: APIInterface,
     val gson: Gson,
     val analyticsHelper: AnalyticsHelper,

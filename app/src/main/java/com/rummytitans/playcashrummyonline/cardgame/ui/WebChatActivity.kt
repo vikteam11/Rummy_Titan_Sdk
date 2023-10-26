@@ -2,7 +2,7 @@ package com.rummytitans.playcashrummyonline.cardgame.ui
 
 import com.rummytitans.playcashrummyonline.cardgame.BuildConfig
 import com.rummytitans.playcashrummyonline.cardgame.R
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.databinding.ActivityRummyWebchatBinding
 import com.rummytitans.playcashrummyonline.cardgame.models.LoginResponse
 import com.rummytitans.playcashrummyonline.cardgame.utils.*
@@ -21,14 +21,14 @@ import com.google.gson.Gson
 class WebChatActivity : AppCompatActivity() {
     lateinit var binding:ActivityRummyWebchatBinding
     override fun onCreate(savedInstanceState: Bundle?) {
-        val prefs = SharedPreferenceStorage(this)
+        val prefs = SharedPreferenceStorageRummy(this)
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this,R.layout.activity_rummy_webchat)
 
         binding.icBack.setOnClickListener { onBackPressed() }
 
-        val loginResponse = SharedPreferenceStorage(this).let {
+        val loginResponse = SharedPreferenceStorageRummy(this).let {
             Gson().fromJson(it.loginResponse, LoginResponse::class.java)
         }
 

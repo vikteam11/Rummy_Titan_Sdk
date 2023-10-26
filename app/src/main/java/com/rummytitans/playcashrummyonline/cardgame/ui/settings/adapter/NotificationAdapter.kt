@@ -1,7 +1,7 @@
 package com.rummytitans.playcashrummyonline.cardgame.ui.settings.adapter
 
 import com.rummytitans.playcashrummyonline.cardgame.R
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.databinding.ItemNotificaitonSettingRummyBinding
 import com.rummytitans.playcashrummyonline.cardgame.models.SubscriptionItemModel
 import android.content.Context
@@ -20,7 +20,7 @@ class NotificationAdapter(
     val mList: List<SubscriptionItemModel>,
     val isUserSubscribe: ObservableBoolean,
     val mTopicsSet: MutableLiveData<HashSet<String>>,
-    val preferences: SharedPreferenceStorage
+    val preferences: SharedPreferenceStorageRummy
 ) :
     RecyclerView.Adapter<BaseViewHolder>() {
     lateinit var context: Context

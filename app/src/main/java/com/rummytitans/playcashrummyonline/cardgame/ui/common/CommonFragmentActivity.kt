@@ -2,7 +2,7 @@ package com.rummytitans.playcashrummyonline.cardgame.ui.common
 
 import com.rummytitans.playcashrummyonline.cardgame.R
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsHelper
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.databinding.ActivityRummyCommonFragmentBinding
 import com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseActivity
 import com.rummytitans.playcashrummyonline.cardgame.ui.more.FragmentSupport
@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.appsflyer.AppsFlyerLib
 import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
+import com.rummytitans.playcashrummyonline.cardgame.ui.profile.info.FragmentProfileInfo
 import com.rummytitans.playcashrummyonline.cardgame.ui.profile.verify.FragmentVerify
 import com.rummytitans.playcashrummyonline.cardgame.ui.refer.FragmentRefer
 import com.rummytitans.playcashrummyonline.cardgame.ui.settings.SettingsFragment
@@ -40,7 +41,7 @@ class CommonFragmentActivity : BaseActivity() {
 
 
     @Inject
-    lateinit var pref: SharedPreferenceStorage
+    lateinit var pref: SharedPreferenceStorageRummy
 
     @Inject
     lateinit var analyticsHelper: AnalyticsHelper
@@ -128,12 +129,12 @@ class CommonFragmentActivity : BaseActivity() {
                     addFragment(FragmentSupport.newInstance(from, requestDialog))
                 }
 
-                /*"editprofile" -> {
+                "editprofile" -> {
                     icDown.visibility = View.GONE
                     txtOptionText.visibility = View.GONE
                     titile.text = "Edit Profile"
                     addFragment(FragmentProfileInfo.newInstance())
-                }*/
+                }
                 "CashBonus" -> {
                     val title=intent.getStringExtra(MyConstants.INTENT_PASS_WEB_TITLE)?:""
                     topBar.visibility=View.GONE

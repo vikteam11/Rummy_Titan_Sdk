@@ -3,7 +3,7 @@ package com.rummytitans.playcashrummyonline.cardgame.ui.launcher
 import com.rummytitans.playcashrummyonline.cardgame.BuildConfig
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsKey
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.models.LoginResponse
 import com.rummytitans.playcashrummyonline.cardgame.models.VersionModel
 import com.rummytitans.playcashrummyonline.cardgame.ui.BaseViewModel
@@ -26,7 +26,7 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 @HiltViewModel
 class LaunchViewModel @Inject constructor(
-    val prefs: SharedPreferenceStorage,
+    val prefs: SharedPreferenceStorageRummy,
     val gson: Gson, val connectionDetector: ConnectionDetector, var analyticsHelper: AnalyticsHelper
 ) : BaseViewModel<BaseNavigator>() {
 

@@ -7,7 +7,8 @@ import android.util.Base64
 import androidx.annotation.Keep
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
+import com.rummytitans.playcashrummyonline.cardgame.sdk_callbacks.AnalticsCallback
 import com.rummytitans.playcashrummyonline.cardgame.sdk_callbacks.RummySdkOptions
 import com.rummytitans.playcashrummyonline.cardgame.sdk_callbacks.RummyTitansCallback
 import com.rummytitans.playcashrummyonline.cardgame.ui.LaunchActivity
@@ -19,8 +20,9 @@ import java.nio.charset.StandardCharsets
 
 @Keep
 object RummyTitanSDK {
-    internal var rummyCallback:RummyTitansCallback?= null
-    private var rummySdkOptions:RummySdkOptions = RummySdkOptions()
+    internal var rummyCallback: RummyTitansCallback? = null
+    internal var analytiCallback: AnalticsCallback? = null
+    private var rummySdkOptions: RummySdkOptions = RummySdkOptions()
 
     private lateinit var appContext: Context
 
@@ -28,10 +30,12 @@ object RummyTitanSDK {
         appContext = context.applicationContext
     }
 
-    fun setCallback(callback: RummyTitansCallback){
+    fun setCallback(callback: RummyTitansCallback,analticsCallback: AnalticsCallback) {
         rummyCallback = callback
+        analytiCallback = analticsCallback
     }
-    fun setOptions(options: RummySdkOptions){
+
+    fun setOptions(options: RummySdkOptions) {
         rummySdkOptions = options
     }
 
@@ -47,21 +51,27 @@ object RummyTitanSDK {
         appContext.startActivity(intent)
     }
 
-    fun startRummyTitans(context: Context,encodedString : String,
-                         splashResponse:String,
-                         deeplink:String=""){
-        val decodedString=String(Base64.decode(encodedString, Base64.CRLF), StandardCharsets.UTF_8)
-        val splashDecodeString=String(Base64.decode(splashResponse, Base64.CRLF), StandardCharsets.UTF_8)
+    fun startRummyTitans(
+        context: Context, encodedString: String,
+        splashResponse: String? = "",
+        deeplink: String = ""
+    ) {
+        val decodedString =
+            String(Base64.decode(encodedString, Base64.CRLF), StandardCharsets.UTF_8)
+        val splashDecodeString =
+            String(Base64.decode(splashResponse, Base64.CRLF), StandardCharsets.UTF_8)
         println("Decoded String: $decodedString")
-        SharedPreferenceStorage(context).let { prefs->
+        SharedPreferenceStorageRummy(context).let { pref ->
             try {
-               val pref =  SharedPreferenceStorage(context)
                 pref.loginCompleted = true
                 pref.loginResponse = decodedString
                 pref.splashResponse = splashDecodeString
                 pref.appUrl = rummySdkOptions.baseUrl
                 pref.appUrl2 = rummySdkOptions.baseUrl2
-                pref.gamePlayUrl= rummySdkOptions.gamePlayUrl
+                pref.showKycOptions = rummySdkOptions.showKycOptions
+                pref.displayProfileIcon = rummySdkOptions.displayProfileIcon
+                pref.locationDelay = rummySdkOptions.locationDelay
+                pref.gamePlayUrl = rummySdkOptions.gamePlayUrl
                 pref.locationApiTimeLimit = rummySdkOptions.locationDelay
             } catch (e: JsonSyntaxException) {
                 // Handle JSON parsing errors
@@ -70,10 +80,14 @@ object RummyTitanSDK {
             }
 
 
-            val intent = Intent(context, SDKSplashActivity::class.java)
+            val intent = if (splashResponse?.isEmpty() == true) Intent(
+                context,
+                SDKSplashActivity::class.java
+            ) else
+                Intent(context, RummyMainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            if(!TextUtils.isEmpty(deeplink)){
-                intent.putExtra("deeplink",deeplink)
+            if (!TextUtils.isEmpty(deeplink)) {
+                intent.putExtra("deeplink", deeplink)
             }
             context.startActivity(intent)
 

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.profile.updatePhone.UpdatePhoneActivity">
+
+    <data>
+        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+        <import type="android.text.TextUtils" />
+        <import type="android.graphics.Color" />
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.rummytitans.playcashrummyonline.cardgame.ui.profile.updatePhone.UpdatePhoneViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:animateLayoutChanges="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_safe_toolbar"
+            android:backgroundTint="@color/rummy_mainColor"
+            android:layout_alignParentTop="true"
+            android:id="@+id/constraintLayout">
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageView
+                android:id="@+id/icBack"
+                android:layout_width="24dp"
+                android:onClick="@{()->viewModel.navigator.goBack()}"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                app:srcCompat="@drawable/ic_newback"
+                app:tint="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/view4"
+                app:layout_constraintStart_toStartOf="@+id/view4"
+                app:layout_constraintTop_toTopOf="@+id/view4"/>
+
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@{viewModel.updateStep==viewModel.UPDATE_REQUEST_OTP?@string/update_phone_number:@string/verification_code}"
+                tools:text="@string/update_phone_number"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/icBack"
+                android:layout_marginStart="10dp"
+                app:layout_constraintTop_toTopOf="@+id/view4"
+                app:layout_constraintBottom_toBottomOf="@+id/view4"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/loadingLogin"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:theme="@style/RummySdk_ProgressBar"
+            android:background="@drawable/bg_white_progress"
+            android:padding="@dimen/margin_min"
+            android:elevation="10dp"
+            android:layout_centerInParent="true"
+            android:visibility="@{viewModel.isParentLoading? View.VISIBLE: View.GONE}" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/constraintLayout"
+            android:layout_margin="@dimen/dimen_16"
+            android:animateLayoutChanges="true"
+            app:cardBackgroundColor="@color/rummy_black_3"
+            app:cardCornerRadius="@dimen/dimen_4">
+
+            <RelativeLayout
+                android:animateLayoutChanges="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="16dp"
+                android:background="@drawable/box_with_grey_border_rummy">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:visibility="@{viewModel.updateStep==viewModel.UPDATE_REQUEST_OTP?View.VISIBLE:View.GONE}"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/rubik_regular"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:textStyle="normal"
+                        android:textSize="12sp"
+                        android:textColor="@color/text_color2"
+                        android:text="@string/str_current_using_phn"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/rubik_medium"
+                        android:textStyle="normal"
+                        android:textSize="14sp"
+                        android:layout_marginTop="@dimen/margin_min"
+                        android:layout_marginStart="@dimen/margin_min"
+                        android:textColor="@color/text_color8"
+                        android:text="@{viewModel.loginResponse.Mobile ?? ``}"
+                        tools:text="+91-1234567891"
+                        />
+                    <View
+                        android:background="@color/grayBorder"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="@dimen/dimen_16"
+                        android:layout_marginStart="@dimen/margin_min"
+                        android:layout_marginEnd="@dimen/margin_min"
+                        android:layout_marginBottom="@dimen/dimen_16"
+                        android:layout_height="0.7dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/rubik_regular"
+                        android:textStyle="normal"
+                        android:textSize="12sp"
+                        android:layout_marginStart="@dimen/margin_min"
+                        android:layout_marginEnd="@dimen/margin_min"
+                        android:textColor="@color/text_color2"
+                        android:text="@string/str_enter_new_mobile_number"
+                        />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/input_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:theme="@style/RummySdk_Widget.TextInputLayout"
+                        android:layout_marginStart="@dimen/margin_min"
+                        android:layout_marginEnd="@dimen/margin_min">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/editMobileNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/edittext_height"
+                            android:backgroundTint="@color/edtTintColor"
+                            android:fontFamily="@font/rubik_regular"
+                            android:hint="@string/new_mobile_number"
+                            android:imeOptions="actionDone"
+                            android:textColor="@color/text_color8"
+                            android:inputType="phone"
+                            android:maxLength="10"
+                            android:maxLines="1"
+                            android:textSize="12sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+                <include
+                    android:id="@+id/includeVerificationCode"
+                    layout="@layout/layout_verification_code_rummy"
+                    tools:visibility="@{viewModel.updateStep==viewModel.UPDATE_REQUEST_OTP?View.GONE:View.VISIBLE}"
+                    bind:viewModel="@{viewModel}"
+                    />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dimen_16"
+            android:layout_marginHorizontal="@dimen/dimen_16"
+            >
+
+            <Button
+                android:id="@+id/btnSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_primary_box_rummy"
+                tools:backgroundTint="@color/cool_grey"
+                android:backgroundTint="@{viewModel.updateStep==viewModel.UPDATE_REQUEST_OTP?TextUtils.isEmpty(viewModel.mobileNumber)?@color/cool_grey:@color/rummy_maingreen:TextUtils.isEmpty(viewModel.otpText)?@color/cool_grey:@color/rummy_maingreen}"
+                android:fontFamily="@font/rubik_medium"
+                android:onClick="@{()->viewModel.onSubmitClick()}"
+                android:text='@{viewModel.updateStep==viewModel.UPDATE_REQUEST_OTP?@string/send_otp:@string/update_number}'
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="@string/verify_otp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/cool_grey"
+                android:elevation="4dp"
+                android:visibility="gone"/>
+        </RelativeLayout>
+    </RelativeLayout>
+</layout>
+

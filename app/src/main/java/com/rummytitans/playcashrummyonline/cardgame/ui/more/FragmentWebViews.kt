@@ -1,7 +1,7 @@
 package com.rummytitans.playcashrummyonline.cardgame.ui.more
 
 import com.rummytitans.playcashrummyonline.cardgame.BuildConfig
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.databinding.FragmentWebviewsRummyBinding
 import com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseFragment
 import com.rummytitans.playcashrummyonline.cardgame.ui.home.MainNavigationFragment
@@ -35,7 +35,7 @@ class FragmentWebViews : BaseFragment(), MainNavigationFragment {
 
 
     @Inject
-    lateinit var prefs: SharedPreferenceStorage
+    lateinit var prefs: SharedPreferenceStorageRummy
 
 
     companion object {

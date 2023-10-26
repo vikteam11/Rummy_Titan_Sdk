@@ -3,7 +3,7 @@ package com.rummytitans.playcashrummyonline.cardgame.ui.home
 import androidx.core.os.bundleOf
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.playcashrummyonline.cardgame.api.APIInterface
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.models.*
 import com.rummytitans.playcashrummyonline.cardgame.ui.BaseViewModel
 import com.rummytitans.playcashrummyonline.cardgame.ui.home.adapter.RummyCategoryNavigator
@@ -27,7 +27,7 @@ import javax.inject.Inject
 import kotlin.collections.ArrayList
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    val prefs: SharedPreferenceStorage,
+    val prefs: SharedPreferenceStorageRummy,
     val gson: Gson,
     val apiInterface: APIInterface,
     val connectionDetector: ConnectionDetector, val analyticsHelper: AnalyticsHelper

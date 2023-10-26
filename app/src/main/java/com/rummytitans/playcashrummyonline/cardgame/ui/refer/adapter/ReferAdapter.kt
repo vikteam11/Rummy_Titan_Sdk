@@ -62,31 +62,31 @@ class ReferAdapter(
         BaseViewHolder(mBinding.root),
         ToggleViewListener {
         override fun onBind(position: Int) {
-           listResponse?.get(position)?.let {
+            listResponse?.get(position)?.let {
                 mBinding.model = it
                 mBinding.listener=this
-               mBinding.imgUser.setImageResource(getAvtar(it.data.AvtaarId))
-               kotlin.runCatching {
-                   val finalAmt=it.data.EarnAdmount.toDouble().plus(it.data.SignUpAmount.toDouble())
-                   (context?.getString(R.string.rupees)+finalAmt).also { mBinding.txtEarnAmount.text = it }
-               }.onFailure {
-                   (context?.getString(R.string.rupees)+"0.0").also { mBinding.txtEarnAmount.text = it }
-               }
+                mBinding.imgUser.setImageResource(getAvtar(it.data.AvtaarId))
+                kotlin.runCatching {
+                    val finalAmt=it.data.EarnAdmount.toDouble().plus(it.data.SignUpAmount.toDouble())
+                    (context?.getString(R.string.rupees)+finalAmt).also { mBinding.txtEarnAmount.text = it }
+                }.onFailure {
+                    (context?.getString(R.string.rupees)+"0.0").also { mBinding.txtEarnAmount.text = it }
+                }
                 mBinding.executePendingBindings()
             }
         }
 
-       override fun toggleView(){
-           listResponse?.elementAtOrNull(adapterPosition)?.let{
-               it.isViewHide.set(!it.isViewHide.get())
-           }
-           /*Hide if any other view open */
-           if(currentOpenViewPosition >= 0 && currentOpenViewPosition != adapterPosition){
-               listResponse?.elementAtOrNull(currentOpenViewPosition)?.let{
-                   it.isViewHide.set(true)
-               }
-           }
-           currentOpenViewPosition = adapterPosition
+        override fun toggleView(){
+            listResponse?.elementAtOrNull(adapterPosition)?.let{
+                it.isViewHide.set(!it.isViewHide.get())
+            }
+            /*Hide if any other view open */
+            if(currentOpenViewPosition >= 0 && currentOpenViewPosition != adapterPosition){
+                listResponse?.elementAtOrNull(currentOpenViewPosition)?.let{
+                    it.isViewHide.set(true)
+                }
+            }
+            currentOpenViewPosition = adapterPosition
         }
     }
 

@@ -16,7 +16,7 @@ import androidx.viewpager.widget.ViewPager
 import com.rummytitans.playcashrummyonline.cardgame.R
 import com.rummytitans.playcashrummyonline.cardgame.RummyTitanSDK
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsKey
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.databinding.FragmentHomeRummyBinding
 import com.rummytitans.playcashrummyonline.cardgame.models.HeaderItemModel
 import com.rummytitans.playcashrummyonline.cardgame.models.RummyCategoryModel
@@ -50,7 +50,7 @@ class FragmentHome : BaseFragmentLocation(),
     private var timer: Timer? = null
     private var currentOfferPage = 0
     @Inject
-    lateinit var prefs: SharedPreferenceStorage
+    lateinit var prefs: SharedPreferenceStorageRummy
     lateinit var viewModel: HomeViewModel
 
    // @Inject

@@ -4,7 +4,7 @@ import android.os.Build
 import com.rummytitans.playcashrummyonline.cardgame.BuildConfig
 import com.rummytitans.playcashrummyonline.cardgame.MainApplication
 import com.rummytitans.playcashrummyonline.cardgame.api.APIInterface
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.utils.MyConstants
 import android.text.TextUtils
 import com.google.gson.Gson
@@ -64,7 +64,7 @@ class RetrofitModule {
     @Singleton
     @Provides
     @RummySdk
-    fun getInterceptor(pref: SharedPreferenceStorage): Interceptor {
+    fun getInterceptor(pref: SharedPreferenceStorageRummy): Interceptor {
         return Interceptor { chain: Interceptor.Chain ->
             val request = chain.request()
             val httpUrl = request.url

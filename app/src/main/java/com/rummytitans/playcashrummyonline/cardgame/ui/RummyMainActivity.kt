@@ -3,7 +3,7 @@ package com.rummytitans.playcashrummyonline.cardgame.ui
 import com.rummytitans.playcashrummyonline.cardgame.R
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsKey
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.databinding.ActivityHomeRummyBinding
 import com.rummytitans.playcashrummyonline.cardgame.databinding.NotificationBadgeRummyBinding
 import com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseActivity
@@ -40,6 +40,7 @@ import com.rummytitans.playcashrummyonline.cardgame.models.WalletInfoModel
 import com.rummytitans.playcashrummyonline.cardgame.ui.common.CommonFragmentActivity
 import com.rummytitans.playcashrummyonline.cardgame.ui.games.tickets.GamesTicketActivity
 import com.rummytitans.playcashrummyonline.cardgame.ui.more.FragmentMore
+import com.rummytitans.playcashrummyonline.cardgame.ui.profile.ProfileActivity
 import com.rummytitans.playcashrummyonline.cardgame.ui.rakeback.RakeBackFragment
 import com.rummytitans.playcashrummyonline.cardgame.ui.refer.FragmentShare
 import com.rummytitans.playcashrummyonline.cardgame.ui.refer.ReferEarnActivity
@@ -63,7 +64,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
     lateinit var mCurrentFragment: BaseFragment
 
     @Inject
-    lateinit var prefs: SharedPreferenceStorage
+    lateinit var prefs: SharedPreferenceStorageRummy
 
     @Inject
     lateinit var analyticsHelper: AnalyticsHelper
@@ -134,7 +135,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
             binding.imgUser.visibility = View.GONE
             binding.imgBack.visibility = View.VISIBLE
         }else{
-            binding.imgUser.visibility = View.GONE
+            binding.imgUser.visibility = View.VISIBLE
             binding.imgBack.visibility = View.GONE
         }
     }
@@ -199,6 +200,18 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
     private fun initClicks() {
         binding.imgBack.setOnClickListener {
             onBackPressed()
+        }
+
+        binding.imgUser.setOnClickListenerDebounce {
+            viewModel.analyticsHelper.fireEvent(
+                AnalyticsKey.Names.ButtonClick, bundleOf(
+                    AnalyticsKey.Keys.ButtonName to AnalyticsKey.Values.Avtaar ,
+                    AnalyticsKey.Keys.Screen to AnalyticsKey.Values.Home
+                )
+            )
+            startActivity(
+                Intent(this, ProfileActivity::class.java)
+            )
         }
 
         binding.ivRefers.setOnClickListenerDebounce {

@@ -1,7 +1,7 @@
 package com.rummytitans.playcashrummyonline.cardgame.ui.settings.adapter
 
 import com.rummytitans.playcashrummyonline.cardgame.R
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.databinding.ItemTimeTypeRummyBinding
 import com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseViewHolder
 import android.content.Context
@@ -20,7 +20,7 @@ data class MatchTimeTimeModel(
 )
 class MatchTimeTypeAdapter(
     val requestFieldText: ObservableField<String>,
-    val mPref: SharedPreferenceStorage?,
+    val mPref: SharedPreferenceStorageRummy?,
     val themeColor: ObservableField<String>
 ) :
     RecyclerView.Adapter<BaseViewHolder>() {

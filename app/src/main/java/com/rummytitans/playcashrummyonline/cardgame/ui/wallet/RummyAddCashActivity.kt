@@ -3,7 +3,7 @@ package com.rummytitans.playcashrummyonline.cardgame.ui.wallet
 import com.rummytitans.playcashrummyonline.cardgame.BuildConfig
 import com.rummytitans.playcashrummyonline.cardgame.R
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsKey
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.databinding.ActivityRummyAddCashBinding
 import com.rummytitans.playcashrummyonline.cardgame.databinding.DialogWalletRedeemCodeRummyBinding
 import com.rummytitans.playcashrummyonline.cardgame.models.*
@@ -465,7 +465,7 @@ class RummyAddCashActivity :
             layoutInflater, R.layout.dialog_wallet_redeem_code_rummy,
             null, false
         )
-        val model = WalletRedeemCodeModel(SharedPreferenceStorage(this))
+        val model = WalletRedeemCodeModel(SharedPreferenceStorageRummy(this))
 
         dialogView?.let {
             dialogView.item = model

@@ -3,7 +3,7 @@ package com.rummytitans.playcashrummyonline.cardgame.ui.games.tickets
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsKey
 import com.rummytitans.playcashrummyonline.cardgame.api.APIInterface
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.models.GameTicketModel
 import com.rummytitans.playcashrummyonline.cardgame.models.LoginResponse
 import com.rummytitans.playcashrummyonline.cardgame.ui.BaseViewModel
@@ -26,7 +26,7 @@ import java.util.*
 import javax.inject.Inject
 @HiltViewModel
 class GamesTicketViewModel @Inject constructor(
-    val prefs: SharedPreferenceStorage, val gson: Gson, val api: APIInterface,
+    val prefs: SharedPreferenceStorageRummy, val gson: Gson, val api: APIInterface,
     val connectionDetector: ConnectionDetector, val analyticsHelper: AnalyticsHelper
 ) : BaseViewModel<GameTicketNavigator>(conn = connectionDetector) {
     var myDialog: MyDialog? = null

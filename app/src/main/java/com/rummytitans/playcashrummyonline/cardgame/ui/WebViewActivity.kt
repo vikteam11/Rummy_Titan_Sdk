@@ -2,7 +2,7 @@ package com.rummytitans.playcashrummyonline.cardgame.ui
 
 import com.rummytitans.playcashrummyonline.cardgame.BuildConfig
 import com.rummytitans.playcashrummyonline.cardgame.R
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorage
+import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.playcashrummyonline.cardgame.databinding.FragmentWebviewsRummyBinding
 import com.rummytitans.playcashrummyonline.cardgame.ui.deeplink.DeepLinkActivityRummy
 import com.rummytitans.playcashrummyonline.cardgame.utils.*
@@ -29,7 +29,7 @@ class WebViewActivity : AppCompatActivity() {
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
-        val prefs = SharedPreferenceStorage(this)
+        val prefs = SharedPreferenceStorageRummy(this)
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.fragment_webviews_rummy)
         intent.getBooleanExtra(MyConstants.INTENT_PASS_SHOW_TOOLBAR,false).let {
