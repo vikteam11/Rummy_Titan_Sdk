@@ -5,11 +5,11 @@
     <data>
         <import type="android.view.View"/>
         <import type="android.text.TextUtils"/>
-        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+        <import type="com.rummytitans.sdk.cardgame.R" />
 
         <variable
             name="gstModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.models.GstCalculationModel.GSTBifurcationItem" />
+            type="com.rummytitans.sdk.cardgame.models.GstCalculationModel.GSTBifurcationItem" />
 
         <variable
             name="isNote"

@@ -11,7 +11,7 @@
 
         <variable
             name="viewModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.payment.viewmodel.AddCardViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.payment.viewmodel.AddCardViewModel" />
     </data>
 
     <RelativeLayout

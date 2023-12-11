@@ -11,7 +11,7 @@
 
         <variable
             name="model"
-            type="com.rummytitans.playcashrummyonline.cardgame.models.JoinGameConfirmationModel" />
+            type="com.rummytitans.sdk.cardgame.models.JoinGameConfirmationModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -6,7 +6,7 @@
         <import type="android.view.View" />
         <variable
             name="viewModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.models.WalletInfoModel.WalletBonesModel" />
+            type="com.rummytitans.sdk.cardgame.models.WalletInfoModel.WalletBonesModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

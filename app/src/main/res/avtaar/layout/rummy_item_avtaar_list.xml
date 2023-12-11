@@ -6,7 +6,7 @@
         <import type="android.text.TextUtils"/>
         <variable
             name="avtar"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.profile.avtaar.ProfileAvtarModel" />
+            type="com.rummytitans.sdk.cardgame.ui.profile.avtaar.ProfileAvtarModel" />
     </data>
 
 <androidx.cardview.widget.CardView

@@ -10,13 +10,13 @@
 
         <import type="android.graphics.Color" />
 
-        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+        <import type="com.rummytitans.sdk.cardgame.R" />
 
         <import type="com.google.android.material.bottomsheet.BottomSheetBehavior" />
 
         <variable
             name="viewmodel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.refer.viewmodel.ReferViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.refer.viewmodel.ReferViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -41,7 +41,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <com.rummytitans.playcashrummyonline.cardgame.widget.FadingSnackbar
+                    <com.rummytitans.sdk.cardgame.widget.FadingSnackbar
                         android:id="@+id/fadingSnackbar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

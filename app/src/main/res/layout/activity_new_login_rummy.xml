@@ -8,11 +8,11 @@
         <import type="android.view.View" />
 
         <import type="android.graphics.Color" />
-        <import type="com.rummytitans.playcashrummyonline.cardgame.BuildConfig"/>
+        <import type="com.rummytitans.sdk.cardgame.BuildConfig"/>
 
         <variable
             name="viewModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.newlogin.NewLoginViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.newlogin.NewLoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

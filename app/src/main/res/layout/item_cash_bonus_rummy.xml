@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="com.rummytitans.playcashrummyonline.cardgame.models.CashBonusModel" />
+            type="com.rummytitans.sdk.cardgame.models.CashBonusModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

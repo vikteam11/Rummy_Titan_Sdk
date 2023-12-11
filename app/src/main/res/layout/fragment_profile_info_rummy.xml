@@ -10,7 +10,7 @@
 
         <variable
             name="viewmodel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.profile.info.viewmodel.ProfileInfoViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.profile.info.viewmodel.ProfileInfoViewModel" />
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

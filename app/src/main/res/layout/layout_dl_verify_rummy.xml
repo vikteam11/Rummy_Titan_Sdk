@@ -9,14 +9,14 @@
 
         <import type="android.graphics.Color" />
 
-        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
-        <import type="com.rummytitans.playcashrummyonline.cardgame.utils.MyConstants"/>
+        <import type="com.rummytitans.sdk.cardgame.R" />
+        <import type="com.rummytitans.sdk.cardgame.utils.MyConstants"/>
 
         <import type="com.google.android.material.bottomsheet.BottomSheetBehavior"/>
 
         <variable
             name="viewmodel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.verifications.viewmodels.AddressVerificationViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.verifications.viewmodels.AddressVerificationViewModel" />
 
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout

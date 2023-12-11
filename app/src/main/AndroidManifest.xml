@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.rummytitans.playcashrummyonline.cardgame">
+    package="com.rummytitans.sdk.cardgame">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -23,7 +23,7 @@
     </queries>
 
     <application
-        android:name=".MainApplication"
+        android:name="com.rummytitans.sdk.cardgame.MainApplication"
         android:allowBackup="false"
         android:fullBackupContent="@xml/my_backup_file"
         android:hardwareAccelerated="true"
@@ -51,7 +51,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.rummytitans.playcashrummyonline.cardgame.utils.locationservices.uiModules.RequestGPSActivity"
+            android:name="com.rummytitans.sdk.cardgame.utils.locationservices.uiModules.RequestGPSActivity"
             android:exported="false"
             android:theme="@style/Theme.DialogActivity" />
         <activity
@@ -162,7 +162,7 @@
             android:exported="false"
             android:theme="@style/Theme.DialogActivity" />
         <activity
-            android:name="com.rummytitans.playcashrummyonline.cardgame.utils.locationservices.uiModules.RequestPermissionActivity"
+            android:name="com.rummytitans.sdk.cardgame.utils.locationservices.uiModules.RequestPermissionActivity"
             android:exported="false"
             android:theme="@style/Theme.DialogActivity" />
 
@@ -184,8 +184,8 @@
 
         <activity
             android:exported="false"
-            android:name="com.rummytitans.playcashrummyonline.cardgame.ui.refer.RummySDKReferActivity"
-            android:parentActivityName="com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity"
+            android:name="com.rummytitans.sdk.cardgame.ui.refer.RummySDKReferActivity"
+            android:parentActivityName="com.rummytitans.sdk.cardgame.ui.RummyMainActivity"
             android:screenOrientation="portrait" />
 
         <activity android:name=".ui.refer.ReferEarnActivity"
@@ -194,55 +194,55 @@
             android:theme="@style/RummyAppTheme"/>
         <activity
             android:exported="false"
-            android:name="com.rummytitans.playcashrummyonline.cardgame.ui.refer.ShareActivity"
+            android:name="com.rummytitans.sdk.cardgame.ui.refer.ShareActivity"
             android:screenOrientation="portrait"
             android:theme="@style/RummyAppTheme" />
 
         <activity
             android:exported="false"
-            android:name="com.rummytitans.playcashrummyonline.cardgame.ui.contectList.ContactListActivity"
+            android:name="com.rummytitans.sdk.cardgame.ui.contectList.ContactListActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
 
         <activity
             android:exported="false"
-            android:name="com.rummytitans.playcashrummyonline.cardgame.ui.wallet.RummyAddCashActivity"
-            android:parentActivityName="com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity"
+            android:name="com.rummytitans.sdk.cardgame.ui.wallet.RummyAddCashActivity"
+            android:parentActivityName="com.rummytitans.sdk.cardgame.ui.RummyMainActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/RummyAppTheme" />
 
         <activity
             android:exported="true"
-            android:name="com.rummytitans.playcashrummyonline.cardgame.ui.games.tickets.GamesTicketActivity"
+            android:name="com.rummytitans.sdk.cardgame.ui.games.tickets.GamesTicketActivity"
             android:screenOrientation="portrait"
             android:theme="@style/RummyAppTheme" />
 
         <activity
             android:exported="false"
-            android:name="com.rummytitans.playcashrummyonline.cardgame.ui.common.CommonFragmentActivity"
+            android:name="com.rummytitans.sdk.cardgame.ui.common.CommonFragmentActivity"
             android:screenOrientation="portrait"
             android:theme="@style/RummyAppTheme"
             android:windowSoftInputMode="adjustResize|stateVisible" />
 
         <activity
             android:exported="false"
-            android:name="com.rummytitans.playcashrummyonline.cardgame.ui.WebPaymentActivity"
+            android:name="com.rummytitans.sdk.cardgame.ui.WebPaymentActivity"
             android:screenOrientation="portrait"
             android:theme="@style/RummyAppTheme"  />
 
         <activity
             android:exported="false"
-            android:name="com.rummytitans.playcashrummyonline.cardgame.ui.payment.AddCardActivity"
+            android:name="com.rummytitans.sdk.cardgame.ui.payment.AddCardActivity"
             android:screenOrientation="portrait"
             android:theme="@style/RummyAppTheme"  />
 
-        <activity android:name=".widget.cropImage.CropImageActivity"
+        <activity android:name="com.rummytitans.sdk.cardgame.widget.cropImage.CropImageActivity"
             android:theme="@style/CropImage.Theme.Transprent"/>
 
         <activity
             android:exported="false"
-            android:name="com.rummytitans.playcashrummyonline.cardgame.ui.verifications.VerificationActivity"
+            android:name="com.rummytitans.sdk.cardgame.ui.verifications.VerificationActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustResize"
@@ -256,7 +256,7 @@
 
         <activity
             android:exported="false"
-            android:name="com.rummytitans.playcashrummyonline.cardgame.ui.payment.PaymentOptionActivity"
+            android:name="com.rummytitans.sdk.cardgame.ui.payment.PaymentOptionActivity"
             android:screenOrientation="portrait"
             android:theme="@style/RummyAppTheme"  />
 
@@ -272,7 +272,7 @@
             />
         <activity
             android:exported="false"
-            android:name="com.rummytitans.playcashrummyonline.cardgame.ui.profile.updatePhone.UpdatePhoneActivity"
+            android:name="com.rummytitans.sdk.cardgame.ui.profile.updatePhone.UpdatePhoneActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateVisible" />
 

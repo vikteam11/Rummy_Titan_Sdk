@@ -3,11 +3,11 @@
 
     <data>
 
-        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+        <import type="com.rummytitans.sdk.cardgame.R" />
 
         <variable
             name="viewmodel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.wallet.viewmodel.ItemWalletOfferModel" />
+            type="com.rummytitans.sdk.cardgame.ui.wallet.viewmodel.ItemWalletOfferModel" />
     </data>
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"

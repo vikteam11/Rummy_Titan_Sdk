@@ -7,10 +7,10 @@
 
         <import type="android.view.View" />
         <import type="android.text.TextUtils"/>
-        <import type="com.rummytitans.playcashrummyonline.cardgame.RummyTitanSDK"/>
+        <import type="com.rummytitans.sdk.cardgame.RummyTitanSDK"/>
         <variable
             name="viewmodel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.wallet.viewmodel.WalletViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.wallet.viewmodel.WalletViewModel" />
 
         <import type="android.graphics.Color" />
     </data>
@@ -668,7 +668,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="It's a wicket!!" />
 
-                <com.rummytitans.playcashrummyonline.cardgame.widget.ScratchView
+                <com.rummytitans.sdk.cardgame.widget.ScratchView
                     android:id="@+id/scratchView"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"

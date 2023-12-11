@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.joinGame.JoinContestViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.joinGame.JoinContestViewModel" />
 
     </data>
 

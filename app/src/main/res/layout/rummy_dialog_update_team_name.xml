@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.profile.info.viewmodel.ProfileInfoViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.profile.info.viewmodel.ProfileInfoViewModel" />
 
         <import type="android.text.TextUtils" />
 
@@ -15,7 +15,7 @@
 
         <import type="android.graphics.Color" />
 
-        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+        <import type="com.rummytitans.sdk.cardgame.R" />
     </data>
 
     <RelativeLayout

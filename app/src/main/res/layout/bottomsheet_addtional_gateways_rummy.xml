@@ -8,7 +8,7 @@
         <import type="com.google.android.material.bottomsheet.BottomSheetBehavior" />
         <variable
             name="viewModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.payment.viewmodel.PaymentOptionViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.payment.viewmodel.PaymentOptionViewModel" />
 
     </data>
 

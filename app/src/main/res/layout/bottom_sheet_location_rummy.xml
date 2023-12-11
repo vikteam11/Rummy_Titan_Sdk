@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.games.locationBottomSheet.LocationViewModel" />
+            type="com.rummytitans.sdk.cardgame.games.locationBottomSheet.LocationViewModel" />
 
         <import type="android.graphics.Color" />
     </data>

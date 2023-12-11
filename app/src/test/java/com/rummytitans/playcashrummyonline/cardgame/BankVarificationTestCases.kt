@@ -1,7 +1,7 @@
-package com.rummytitans.playcashrummyonline.cardgame
+package com.rummytitans.sdk.cardgame
 
-import com.rummytitans.playcashrummyonline.cardgame.utils.isEmptyString
-import com.rummytitans.playcashrummyonline.cardgame.utils.validIfscCodetestCases
+import com.rummytitans.sdk.cardgame.utils.isEmptyString
+import com.rummytitans.sdk.cardgame.utils.validIfscCodetestCases
 import junit.framework.Assert.assertFalse
 import junit.framework.Assert.assertTrue
 import org.junit.Test

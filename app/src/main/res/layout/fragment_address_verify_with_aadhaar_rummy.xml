@@ -8,11 +8,11 @@
         <import type="android.text.TextUtils" />
         <import type="android.graphics.Color" />
 
-        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+        <import type="com.rummytitans.sdk.cardgame.R" />
 
         <variable
             name="viewmodel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.verifications.viewmodels.AddressVerificationViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.verifications.viewmodels.AddressVerificationViewModel" />
 
     </data>
 

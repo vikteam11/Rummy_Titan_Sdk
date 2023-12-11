@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.deeplink.DeepLinkRummyViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.deeplink.DeepLinkRummyViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -19,7 +19,7 @@
         android:background="@color/rummy_black_3"
         tools:context=".ui.deeplink.DeepLinkActivityRummy">
 
-        <com.rummytitans.playcashrummyonline.cardgame.widget.RoundedImageView
+        <com.rummytitans.sdk.cardgame.widget.RoundedImageView
             android:id="@+id/logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

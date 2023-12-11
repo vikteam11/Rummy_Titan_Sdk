@@ -11,11 +11,11 @@
 
         <import type="androidx.databinding.ObservableBoolean" />
 
-        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+        <import type="com.rummytitans.sdk.cardgame.R" />
 
         <variable
             name="viewmodel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.settings.SettingsViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.settings.SettingsViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -743,7 +743,7 @@
 
             </LinearLayout>
 
-            <com.rummytitans.playcashrummyonline.cardgame.widget.FadingSnackbar
+            <com.rummytitans.sdk.cardgame.widget.FadingSnackbar
                 android:id="@+id/fadingSnackbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

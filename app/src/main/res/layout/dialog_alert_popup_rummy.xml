@@ -10,7 +10,7 @@
 
         <variable
             name="alertModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.utils.alertDialog.AlertdialogModel" />
+            type="com.rummytitans.sdk.cardgame.utils.alertDialog.AlertdialogModel" />
 
     </data>
 

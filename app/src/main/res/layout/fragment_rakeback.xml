@@ -8,7 +8,7 @@
         <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.rakeback.RakeBackViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.rakeback.RakeBackViewModel" />
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

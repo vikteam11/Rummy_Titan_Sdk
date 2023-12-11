@@ -28,9 +28,9 @@
 #juspay
 -dontwarn in.juspay.**
 -keep class androidx.** {*;}
--keep class com.rummytitans.playcashrummyonline.cardgame.models.** {*;}
--keep class com.rummytitans.playcashrummyonline.cardgame.ui.quiz.realtime.question.** {*;}
--keep class com.rummytitans.playcashrummyonline.cardgame.ui.** {*;}
+-keep class com.rummytitans.sdk.cardgame.models.** {*;}
+-keep class com.rummytitans.sdk.cardgame.ui.quiz.realtime.question.** {*;}
+-keep class com.rummytitans.sdk.cardgame.ui.** {*;}
 
 
 -dontwarn com.squareup.okhttp.**

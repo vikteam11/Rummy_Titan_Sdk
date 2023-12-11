@@ -9,7 +9,7 @@
             type="Boolean" />
         <variable
             name="model"
-            type="com.rummytitans.playcashrummyonline.cardgame.models.WithdrawalDetailModel.WithdrawalStatusModel" />
+            type="com.rummytitans.sdk.cardgame.models.WithdrawalDetailModel.WithdrawalStatusModel" />
 
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

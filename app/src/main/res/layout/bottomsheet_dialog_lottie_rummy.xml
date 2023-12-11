@@ -8,11 +8,11 @@
         <import type="android.view.View" />
         <import type="android.text.TextUtils"/>
 
-        <import type="com.rummytitans.playcashrummyonline.cardgame.utils.MyConstants" />
+        <import type="com.rummytitans.sdk.cardgame.utils.MyConstants" />
 
         <variable
             name="model"
-            type="com.rummytitans.playcashrummyonline.cardgame.utils.bottomsheets.models.BottomSheetStatusDataModel" />
+            type="com.rummytitans.sdk.cardgame.utils.bottomsheets.models.BottomSheetStatusDataModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

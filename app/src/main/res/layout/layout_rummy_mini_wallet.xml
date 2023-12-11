@@ -6,7 +6,7 @@
     <data>
         <import type="android.view.View" />
         <import type="android.text.TextUtils"/>
-        <import type="com.rummytitans.playcashrummyonline.cardgame.BuildConfig"/>
+        <import type="com.rummytitans.sdk.cardgame.BuildConfig"/>
         
         <import type="android.graphics.Color" />
 
@@ -20,7 +20,7 @@
 
         <variable
             name="walletInfo"
-            type="com.rummytitans.playcashrummyonline.cardgame.models.WalletInfoModel" />
+            type="com.rummytitans.sdk.cardgame.models.WalletInfoModel" />
 
         <variable
             name="isDataLoading"

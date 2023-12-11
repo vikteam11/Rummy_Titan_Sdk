@@ -9,7 +9,7 @@
         <import type="android.text.TextUtils"/>
         <variable
             name="viewModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.games.tickets.GamesTicketViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.games.tickets.GamesTicketViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

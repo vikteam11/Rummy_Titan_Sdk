@@ -17,7 +17,7 @@
 
         <variable
             name="viewModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.models.WithdrawalMethodModel" />
+            type="com.rummytitans.sdk.cardgame.models.WithdrawalMethodModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

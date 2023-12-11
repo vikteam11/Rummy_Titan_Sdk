@@ -9,7 +9,7 @@
 
         <variable
             name="viewmodel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.wallet.viewmodel.AddCashViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.wallet.viewmodel.AddCashViewModel" />
     </data>
 
     <ScrollView
@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.rummytitans.playcashrummyonline.cardgame.widget.FadingSnackbar
+            <com.rummytitans.sdk.cardgame.widget.FadingSnackbar
                 android:id="@+id/fadingSnackbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

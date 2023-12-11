@@ -3,7 +3,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <import type="android.view.View"/>
-        <variable name="viewmodel" type="com.rummytitans.playcashrummyonline.cardgame.ui.refer.viewmodel.ReferViewModel"/>
+        <variable name="viewmodel" type="com.rummytitans.sdk.cardgame.ui.refer.viewmodel.ReferViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,7 +11,7 @@
             android:layout_height="match_parent">
 
 
-        <com.rummytitans.playcashrummyonline.cardgame.widget.FadingSnackbar
+        <com.rummytitans.sdk.cardgame.widget.FadingSnackbar
                 android:id="@+id/fadingSnackbar"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"

@@ -6,7 +6,7 @@
         <import type="android.graphics.Color"/>
         <variable
             name="data"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.profile.verify.ProfileVerificationItem" />
+            type="com.rummytitans.sdk.cardgame.ui.profile.verify.ProfileVerificationItem" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"

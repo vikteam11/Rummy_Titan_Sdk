@@ -11,7 +11,7 @@
 
         <variable
             name="viewModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.newlogin.NewLoginViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.newlogin.NewLoginViewModel" />
 
     </data>
 

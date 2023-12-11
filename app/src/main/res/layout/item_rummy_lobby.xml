@@ -8,7 +8,7 @@
 
         <variable
             name="lobby"
-            type="com.rummytitans.playcashrummyonline.cardgame.models.RummyLobbyModel" />
+            type="com.rummytitans.sdk.cardgame.models.RummyLobbyModel" />
     </data>
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"

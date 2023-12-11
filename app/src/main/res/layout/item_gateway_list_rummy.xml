@@ -10,7 +10,7 @@
             type="Boolean" />
         <variable
             name="model"
-            type="com.rummytitans.playcashrummyonline.cardgame.models.NewPaymentGateWayModel.GatewayList" />
+            type="com.rummytitans.sdk.cardgame.models.NewPaymentGateWayModel.GatewayList" />
     </data>
 
     <LinearLayout

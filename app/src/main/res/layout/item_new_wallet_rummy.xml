@@ -14,7 +14,7 @@
             type="Boolean" />
         <variable
             name="model"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.payment.viewmodel.ItemGatewayDataModel" />
+            type="com.rummytitans.sdk.cardgame.ui.payment.viewmodel.ItemGatewayDataModel" />
     </data>
 
 

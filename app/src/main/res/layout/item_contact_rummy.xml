@@ -12,11 +12,11 @@
 
         <variable
             name="onClick"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.contectList.OnItemClickListener" />
+            type="com.rummytitans.sdk.cardgame.ui.contectList.OnItemClickListener" />
 
         <variable
             name="model"
-            type="com.rummytitans.playcashrummyonline.cardgame.models.ContactModel" />
+            type="com.rummytitans.sdk.cardgame.models.ContactModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

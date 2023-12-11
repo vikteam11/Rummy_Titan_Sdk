@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <import type="com.rummytitans.playcashrummyonline.cardgame.R"/>
+        <import type="com.rummytitans.sdk.cardgame.R"/>
         <import type="android.text.TextUtils"/>
         <import type="android.view.View"/>
         <variable
             name="alertModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.utils.alertDialog.AlertdialogModel" />
+            type="com.rummytitans.sdk.cardgame.utils.alertDialog.AlertdialogModel" />
     </data>
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"

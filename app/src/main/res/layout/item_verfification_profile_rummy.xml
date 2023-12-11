@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+        <import type="com.rummytitans.sdk.cardgame.R" />
         <import type="android.text.TextUtils"/>
         <import type="android.view.View"/>
         <import type="android.graphics.Color"/>
         <variable
             name="data"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.profile.verify.ProfileVerificationItem" />
+            type="com.rummytitans.sdk.cardgame.ui.profile.verify.ProfileVerificationItem" />
         <variable
             name="hideNextArrow"
             type="Boolean" />

@@ -11,9 +11,9 @@
 
         <variable
             name="viewmodel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.more.module.SupportViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.more.module.SupportViewModel" />
 
-        <import type="com.rummytitans.playcashrummyonline.cardgame.ui.more.FragmentSupport.FollowType" />
+        <import type="com.rummytitans.sdk.cardgame.ui.more.FragmentSupport.FollowType" />
 
     </data>
 

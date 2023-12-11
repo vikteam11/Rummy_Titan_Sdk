@@ -3,11 +3,11 @@
     <data>
         <import type="android.view.View"/>
         <import type="android.text.TextUtils"/>
-        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+        <import type="com.rummytitans.sdk.cardgame.R" />
 
         <variable
             name="tdsModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.models.WithdrawalTdsModel" />
+            type="com.rummytitans.sdk.cardgame.models.WithdrawalTdsModel" />
         <variable
             name="isFinalAmount"
             type="Boolean" />

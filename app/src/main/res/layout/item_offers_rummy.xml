@@ -11,11 +11,11 @@
 
         <import type="android.graphics.Color" />
 
-        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+        <import type="com.rummytitans.sdk.cardgame.R" />
 
         <variable
             name="model"
-            type="com.rummytitans.playcashrummyonline.cardgame.models.AddCashOfferModel.AddCash" />
+            type="com.rummytitans.sdk.cardgame.models.AddCashOfferModel.AddCash" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

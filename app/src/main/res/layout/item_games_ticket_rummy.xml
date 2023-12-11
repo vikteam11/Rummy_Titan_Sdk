@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.rummytitans.playcashrummyonline.cardgame.R"/>
+        <import type="com.rummytitans.sdk.cardgame.R"/>
         <import type="android.view.View"/>
         <variable
             name="isUsed"
             type="Boolean" />
         <variable
             name="model"
-            type="com.rummytitans.playcashrummyonline.cardgame.models.GameTicketModel.TicketsItemModel" />
+            type="com.rummytitans.sdk.cardgame.models.GameTicketModel.TicketsItemModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

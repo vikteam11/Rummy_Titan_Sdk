@@ -12,7 +12,7 @@
 
         <import type="android.graphics.Color" />
 
-        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+        <import type="com.rummytitans.sdk.cardgame.R" />
 
         <variable
             name="selected"
@@ -20,7 +20,7 @@
 
         <variable
             name="model"
-            type="com.rummytitans.playcashrummyonline.cardgame.models.AvailableCouponModel" />
+            type="com.rummytitans.sdk.cardgame.models.AvailableCouponModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

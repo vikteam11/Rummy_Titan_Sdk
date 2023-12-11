@@ -7,7 +7,7 @@
 
         <variable
                 name="model"
-                type="com.rummytitans.playcashrummyonline.cardgame.ui.more.SupportModel" />
+                type="com.rummytitans.sdk.cardgame.ui.more.SupportModel" />
     </data>
 
 

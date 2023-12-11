@@ -6,7 +6,7 @@
         <import type="androidx.core.content.ContextCompat" />
         <variable
             name="model"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.settings.adapter.ThemeColorsModel" />
+            type="com.rummytitans.sdk.cardgame.ui.settings.adapter.ThemeColorsModel" />
     </data>
 
     <com.loopeer.shadow.ShadowView xmlns:android="http://schemas.android.com/apk/res/android"

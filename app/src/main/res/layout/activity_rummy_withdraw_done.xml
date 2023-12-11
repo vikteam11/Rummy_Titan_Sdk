@@ -8,7 +8,7 @@
 
         <import type="android.view.View" />
 
-        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+        <import type="com.rummytitans.sdk.cardgame.R" />
 
         <import type="android.graphics.Color" />
 
@@ -17,7 +17,7 @@
             type="androidx.databinding.ObservableInt" />
          <variable
             name="model"
-            type="com.rummytitans.playcashrummyonline.cardgame.models.WithdrawalSuccessCustomModel" />
+            type="com.rummytitans.sdk.cardgame.models.WithdrawalSuccessCustomModel" />
 
     </data>
 

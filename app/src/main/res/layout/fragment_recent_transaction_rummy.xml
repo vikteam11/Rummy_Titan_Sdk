@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.wallet.viewmodel.RecentTransactionViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.wallet.viewmodel.RecentTransactionViewModel" />
 
         <import type="android.view.View" />
 
@@ -148,7 +148,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <com.rummytitans.playcashrummyonline.cardgame.widget.EndlessRecyclerView
+                <com.rummytitans.sdk.cardgame.widget.EndlessRecyclerView
                     android:id="@+id/rvTransaction"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -181,7 +181,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.rummytitans.playcashrummyonline.cardgame.widget.FadingSnackbar
+                <com.rummytitans.sdk.cardgame.widget.FadingSnackbar
                     android:id="@+id/fadingSnackbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

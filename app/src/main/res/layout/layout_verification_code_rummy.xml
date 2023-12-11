@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.profile.updatePhone.UpdatePhoneViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.profile.updatePhone.UpdatePhoneViewModel" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"

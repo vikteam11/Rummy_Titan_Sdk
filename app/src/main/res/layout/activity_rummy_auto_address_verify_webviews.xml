@@ -10,7 +10,7 @@
         <import type="com.google.android.material.bottomsheet.BottomSheetBehavior"/>
         <variable
             name="viewmodel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.verifications.viewmodels.AddressVerificationViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.verifications.viewmodels.AddressVerificationViewModel" />
 
     </data>
 

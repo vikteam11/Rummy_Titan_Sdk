@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <import type="android.view.View"/>
-        <variable name="viewModel" type="com.rummytitans.playcashrummyonline.cardgame.ui.profile.avtaar.ProfileAvatarViewModel"/>
+        <variable name="viewModel" type="com.rummytitans.sdk.cardgame.ui.profile.avtaar.ProfileAvatarViewModel"/>
     </data>
     <androidx.cardview.widget.CardView
             android:onClick="@{()->viewModel.onClick()}"

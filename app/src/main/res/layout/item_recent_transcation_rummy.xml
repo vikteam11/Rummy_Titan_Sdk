@@ -9,11 +9,11 @@
 
         <import type="android.view.View" />
 
-        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+        <import type="com.rummytitans.sdk.cardgame.R" />
 
         <variable
             name="viewModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.wallet.viewmodel.ItemTransactionViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.wallet.viewmodel.ItemTransactionViewModel" />
     </data>
 
 

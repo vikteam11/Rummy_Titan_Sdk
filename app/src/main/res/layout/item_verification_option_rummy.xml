@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable name="model"
-            type="com.rummytitans.playcashrummyonline.cardgame.models.VerificationOptionModel"
+            type="com.rummytitans.sdk.cardgame.models.VerificationOptionModel"
             />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout

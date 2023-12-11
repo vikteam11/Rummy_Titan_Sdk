@@ -6,14 +6,14 @@
     tools:context=".ui.profile.updatePhone.UpdatePhoneActivity">
 
     <data>
-        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+        <import type="com.rummytitans.sdk.cardgame.R" />
         <import type="android.text.TextUtils" />
         <import type="android.graphics.Color" />
         <import type="android.view.View" />
 
         <variable
             name="viewModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.profile.updatePhone.UpdatePhoneViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.profile.updatePhone.UpdatePhoneViewModel" />
     </data>
 
     <RelativeLayout

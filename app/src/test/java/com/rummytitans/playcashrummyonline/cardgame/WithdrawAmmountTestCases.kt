@@ -1,6 +1,6 @@
-package com.rummytitans.playcashrummyonline.cardgame
+package com.rummytitans.sdk.cardgame
 
-import com.rummytitans.playcashrummyonline.cardgame.utils.validAmount
+import com.rummytitans.sdk.cardgame.utils.validAmount
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test

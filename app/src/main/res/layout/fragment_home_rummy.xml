@@ -8,15 +8,15 @@
 
         <import type="android.view.View" />
 
-        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+        <import type="com.rummytitans.sdk.cardgame.R" />
 
         <import type="android.graphics.Color" />
 
-        <import type="com.rummytitans.playcashrummyonline.cardgame.utils.WebViewUrls" />
+        <import type="com.rummytitans.sdk.cardgame.utils.WebViewUrls" />
 
         <variable
             name="viewmodel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.home.HomeViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.home.HomeViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

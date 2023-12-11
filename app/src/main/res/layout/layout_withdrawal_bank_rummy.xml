@@ -7,7 +7,7 @@
         <import type="android.text.TextUtils"/>
         <variable
             name="viewmodel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.wallet.viewmodel.WithdrawViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.wallet.viewmodel.WithdrawViewModel" />
     </data>
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardBank"

@@ -9,7 +9,7 @@
     android:background="#cc000000">
 
 
-    <com.rummytitans.playcashrummyonline.cardgame.widget.cropImage.CropImageView
+    <com.rummytitans.sdk.cardgame.widget.cropImage.CropImageView
         android:id="@+id/cropImageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

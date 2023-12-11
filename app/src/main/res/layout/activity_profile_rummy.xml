@@ -6,7 +6,7 @@
 
     <data>
 
-        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+        <import type="com.rummytitans.sdk.cardgame.R" />
 
         <import type="android.text.TextUtils" />
 
@@ -20,15 +20,15 @@
 
         <variable
             name="profileViewModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.profile.ProfileViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.profile.ProfileViewModel" />
 
         <variable
             name="profileInfoViewModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.profile.info.viewmodel.ProfileInfoViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.profile.info.viewmodel.ProfileInfoViewModel" />
 
         <variable
             name="verificationViewModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.profile.verify.viewmodel.VerifyViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.verify.viewmodel.VerifyViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -497,7 +497,7 @@
 
             </ScrollView>
 
-            <com.rummytitans.playcashrummyonline.cardgame.widget.FadingSnackbar
+            <com.rummytitans.sdk.cardgame.widget.FadingSnackbar
                 android:id="@+id/fadingSnackbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -517,10 +517,10 @@
             tools:visibility="gone" />
 
 
-        <include
+       <!-- <include
             android:id="@+id/bottomSheetUpdateAvtar"
             layout="@layout/rummy_bottomsheet_update_avtar_dialog"
-            bind:viewmodel="@{profileViewModel}" />
+            bind:viewmodel="@{profileViewModel}" />-->
 
 
         <View

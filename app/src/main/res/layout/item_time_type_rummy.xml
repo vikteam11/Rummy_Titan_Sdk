@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.settings.adapter.MatchTimeTimeModel" />
+            type="com.rummytitans.sdk.cardgame.ui.settings.adapter.MatchTimeTimeModel" />
     </data>
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"

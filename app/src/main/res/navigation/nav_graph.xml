@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/blockUserReasonFragment"
         tools:layout="@layout/fragment_block_user_reasons"
-        android:name="com.rummytitans.playcashrummyonline.cardgame.ui.blockuser.BlockUserReasonFragment"
+        android:name="com.rummytitans.sdk.cardgame.ui.blockuser.BlockUserReasonFragment"
         android:label="BlockUserReasonFragment" >
         <action
             android:id="@+id/action_to_RequestFragment"
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/blockUserRequestFragment"
-        android:name="com.rummytitans.playcashrummyonline.cardgame.ui.blockuser.BlockUserRequestFragment"
+        android:name="com.rummytitans.sdk.cardgame.ui.blockuser.BlockUserRequestFragment"
         tools:layout="@layout/fragment_block_user_request"
         android:label="BlockUserRequestFragment" />
 </navigation>

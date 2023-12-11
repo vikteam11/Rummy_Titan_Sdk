@@ -9,13 +9,13 @@
 
         <import type="android.view.View" />
 
-        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+        <import type="com.rummytitans.sdk.cardgame.R" />
 
         <import type="android.graphics.Color" />
 
         <variable
             name="viewModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.refer.viewmodel.ReferViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.refer.viewmodel.ReferViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

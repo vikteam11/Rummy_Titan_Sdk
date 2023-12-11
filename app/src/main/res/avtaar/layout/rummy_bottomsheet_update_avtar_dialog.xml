@@ -9,7 +9,7 @@
 
         <variable
             name="viewmodel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.profile.ProfileViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.profile.ProfileViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,9 +25,7 @@
         app:behavior_peekHeight="0dp"
         android:paddingHorizontal="16dp"
         android:paddingVertical="16dp"
-        app:bottomSheetStateRummy="@{viewmodel.isAvtarBottomSheetVisible?BottomSheetBehavior.STATE_EXPANDED:BottomSheetBehavior.STATE_HIDDEN}"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-        app:onBottomSheetStateChanged="@{viewmodel.isAvtarBottomSheetVisible}">
+       >
 
 
         <TextView

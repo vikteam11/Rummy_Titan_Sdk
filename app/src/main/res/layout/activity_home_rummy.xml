@@ -10,7 +10,7 @@
             type="androidx.databinding.ObservableBoolean" />
         <variable
             name="viewModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.MainViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.MainViewModel" />
     </data>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:background="@color/black"

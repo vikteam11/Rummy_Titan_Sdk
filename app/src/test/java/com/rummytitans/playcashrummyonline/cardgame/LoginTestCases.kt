@@ -1,8 +1,8 @@
-package com.rummytitans.playcashrummyonline.cardgame
+package com.rummytitans.sdk.cardgame
 
-import com.rummytitans.playcashrummyonline.cardgame.utils.isMobileNumber
-import com.rummytitans.playcashrummyonline.cardgame.utils.validEmailTestCase
-import com.rummytitans.playcashrummyonline.cardgame.utils.validPasswordTestCases
+import com.rummytitans.sdk.cardgame.utils.isMobileNumber
+import com.rummytitans.sdk.cardgame.utils.validEmailTestCase
+import com.rummytitans.sdk.cardgame.utils.validPasswordTestCases
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test

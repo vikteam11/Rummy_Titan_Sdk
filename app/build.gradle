@@ -1,5 +1,5 @@
-apply plugin: 'com.android.library'
-//apply plugin: 'com.android.application'
+//apply plugin: 'com.android.library'
+apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -16,7 +16,7 @@ android {
         targetSdkVersion 33
         versionCode 29
         versionName '1.2.9'
-       // applicationId "com.rummytitans.playcashrummyonline.cardgame"
+        applicationId "com.rummytitans.sdk.cardgame"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
@@ -105,12 +105,6 @@ dependencies {
     kapt "androidx.lifecycle:lifecycle-compiler:$rootProject.lifecycleVersion"
 
 
-// Dagger
-    implementation "com.google.dagger:dagger-android:$rootProject.dagger"
-    implementation "com.google.dagger:dagger-android-support:$rootProject.dagger"
-    kapt "com.google.dagger:dagger-compiler:$rootProject.dagger"
-    kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger"
-
 //firebase
     implementation platform('com.google.firebase:firebase-bom:31.0.2')
     //implementation 'com.google.firebase:firebase-crashlytics-ktx'
@@ -194,7 +188,6 @@ dependencies {
     api "com.amitshekhar.android:rx2-android-networking:$androidNetworkingLibVersion"
     //paging
     implementation "androidx.paging:paging-rxjava2:$rx_paging"
-    annotationProcessor "com.google.dagger:dagger-android-processor:2.24"
 
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
      // hilt

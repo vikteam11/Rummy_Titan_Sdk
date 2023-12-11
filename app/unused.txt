@@ -43778,7 +43778,7 @@ in.myteam11.analytics.PinpointHelper:
     public final io.reactivex.disposables.CompositeDisposable getCompositeDisposable()
     public final android.content.Context getContext()
     public final in.myteam11.models.LoginResponse getLoginResponse()
-    public final in.myteam11.data.SharedPreferenceStorage getPrefs()
+    public final in.myteam11.data.SharedPreferenceStorageRummy getPrefs()
     public final void setContext(android.content.Context)
     public final void setLoginResponse(in.myteam11.models.LoginResponse)
     public final void setPinpointManager(com.amazonaws.mobileconnectors.pinpoint.PinpointManager)
@@ -43970,7 +43970,7 @@ in.myteam11.data.LongPreference:
     public synthetic bridge java.lang.Object getValue(java.lang.Object,kotlin.reflect.KProperty)
     public synthetic bridge void setValue(java.lang.Object,kotlin.reflect.KProperty,java.lang.Object)
 in.myteam11.data.PreferenceStorage
-in.myteam11.data.SharedPreferenceStorage:
+in.myteam11.data.SharedPreferenceStorageRummy:
     public static final java.lang.String LOGIN_AUTHTOKAN
     public static final java.lang.String PREFS_NAME
     public static final java.lang.String PREF_ANDROID_ID
@@ -44059,7 +44059,7 @@ in.myteam11.data.SharedPreferenceStorage:
     public void setSeletedLanguage(java.lang.String)
     public void setSendUsageStatistics(boolean)
     public void setSnackbarIsStopped(boolean)
-in.myteam11.data.SharedPreferenceStorage_Factory
+in.myteam11.data.SharedPreferenceStorageRummy_Factory
 in.myteam11.data.StringPreference:
     public synthetic bridge java.lang.Object getValue(java.lang.Object,kotlin.reflect.KProperty)
     public synthetic bridge void setValue(java.lang.Object,kotlin.reflect.KProperty,java.lang.Object)
@@ -61335,8 +61335,8 @@ in.myteam11.bubbleview.BubbleShowCase:
     private final int FOREGROUND_TEXTVIEW_ID
 in.myteam11.bubbleview.BubbleShowCaseSequence:
     private int currentPosition
-in.myteam11.data.SharedPreferenceStorage:
-    public static final in.myteam11.data.SharedPreferenceStorage$Companion Companion
+in.myteam11.data.SharedPreferenceStorageRummy:
+    public static final in.myteam11.data.SharedPreferenceStorageRummy$Companion Companion
     private final in.myteam11.data.BooleanPreference firstDeposite$delegate
     private final in.myteam11.data.BooleanPreference isEmailSent$delegate
     private final in.myteam11.data.BooleanPreference isFirstSmartechLauch$delegate

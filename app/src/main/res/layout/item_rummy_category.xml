@@ -5,10 +5,10 @@
     <data>
         <import type="android.view.View"/>
         <import type="android.graphics.Color"/>
-        <import type="com.rummytitans.playcashrummyonline.cardgame.R"/>
+        <import type="com.rummytitans.sdk.cardgame.R"/>
         <variable
             name="category"
-            type="com.rummytitans.playcashrummyonline.cardgame.models.RummyCategoryModel" />
+            type="com.rummytitans.sdk.cardgame.models.RummyCategoryModel" />
     </data>
 <androidx.cardview.widget.CardView
     android:layout_width="wrap_content"

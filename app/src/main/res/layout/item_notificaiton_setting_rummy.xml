@@ -4,7 +4,7 @@
     <data>
         <variable
             name="model"
-            type="com.rummytitans.playcashrummyonline.cardgame.models.SubscriptionItemModel" />
+            type="com.rummytitans.sdk.cardgame.models.SubscriptionItemModel" />
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"

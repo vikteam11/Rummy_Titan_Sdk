@@ -5,11 +5,11 @@
 
         <import type="android.view.View" />
 
-        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+        <import type="com.rummytitans.sdk.cardgame.R" />
 
         <variable
             name="viewModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.completeprofile.CompleteProfileViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.completeprofile.CompleteProfileViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -253,7 +253,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
 
-                <com.rummytitans.playcashrummyonline.cardgame.widget.FadingSnackbar
+                <com.rummytitans.sdk.cardgame.widget.FadingSnackbar
                     android:id="@+id/fadingSnackbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

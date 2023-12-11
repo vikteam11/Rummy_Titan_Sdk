@@ -10,13 +10,13 @@
 
         <import type="android.text.TextUtils" />
 
-        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+        <import type="com.rummytitans.sdk.cardgame.R" />
 
         <import type="android.graphics.Color" />
 
         <variable
             name="viewModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.wallet.withdrawal.viewmodel.WithdrawDetailViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.wallet.withdrawal.viewmodel.WithdrawDetailViewModel" />
 
     </data>
 

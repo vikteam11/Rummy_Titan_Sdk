@@ -17,7 +17,7 @@
 
         <variable
             name="viewModel"
-            type="com.rummytitans.playcashrummyonline.cardgame.ui.payment.viewmodel.PaymentOptionViewModel" />
+            type="com.rummytitans.sdk.cardgame.ui.payment.viewmodel.PaymentOptionViewModel" />
         <variable
             name="color"
             type="String" />
