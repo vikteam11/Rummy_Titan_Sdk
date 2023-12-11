@@ -158,9 +158,9 @@
                         android:text="@string/withdrawal_id"
                         android:textColor="@color/text_color3"
                         android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/tvStatus"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvWithdrawId"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/tvStatus" />
+                        app:layout_constraintTop_toTopOf="@+id/tvWithdrawId" />
 
                     <TextView
                         android:id="@+id/tvWithdrawId"
@@ -172,8 +172,7 @@
                         android:textSize="12sp"
                         app:layout_constraintEnd_toStartOf="@id/tvStatus"
                         app:layout_constraintStart_toEndOf="@+id/tvWithdrawIdHint"
-                        app:layout_constraintTop_toTopOf="@+id/tvStatus"
-                        app:layout_constraintBottom_toBottomOf="@id/tvStatus"/>
+                        app:layout_constraintTop_toTopOf="@+id/tvStatus" />
 
                     <TextView
                         android:id="@+id/tvStatus"
@@ -185,8 +184,9 @@
                         android:paddingVertical="4dp"
                         android:textColor="@color/white"
                         android:textSize="10sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvWithdrawId"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@+id/tvWithdrawId" />
 
 
                     <View

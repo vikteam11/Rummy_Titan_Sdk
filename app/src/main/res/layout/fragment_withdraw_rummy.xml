@@ -11,7 +11,6 @@
         <import type="android.graphics.Color" />
 
         <import type="android.text.TextUtils" />
-        <import type="android.R" />
 
         <variable
             name="viewmodel"
@@ -32,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/rummy_azure_two"
+            android:backgroundTint="@color/rummy_mainColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -112,28 +112,6 @@
             android:paddingBottom="12dp"
             app:layout_constraintTop_toBottomOf="@id/constraintLayout">
 
-            <TextView
-                android:id="@+id/textView66"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/rubik_regular"
-                android:text="@string/available_withdrawal_balance"
-                android:textColor="@color/text_color2"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvBalance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/helvetica_bold"
-                android:textColor="@color/text_color8"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView66"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView66"
-                app:setAmmountText='@{viewmodel.currentBalance}' />
 
 
             <TextView
@@ -147,10 +125,9 @@
                 android:textColor="@color/compare_red"
                 android:textSize="10sp"
                 android:visibility="@{TextUtils.isEmpty(viewmodel.withdrawtext)?View.GONE:View.VISIBLE}"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/viewBg"
                 app:layout_constraintStart_toEndOf="@id/ivAlert"
-                app:layout_constraintTop_toBottomOf="@+id/tvBalance"
+                app:layout_constraintTop_toTopOf="parent"
                 bind:text="fsjdfd sdhg fggfjsdjjfasd djhf sdjh fjsfjhsfjhas " />
 
             <ImageView
@@ -174,8 +151,58 @@
                 android:visibility="@{TextUtils.isEmpty(viewmodel.withdrawtext)?View.GONE:View.VISIBLE}"
                 app:layout_constraintBottom_toBottomOf="@id/textView47"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textView66"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textView47" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/bgWin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_withdraw_error"
+                android:backgroundTint="@color/alertGreen"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView47">
+
+                <ImageView
+                    android:id="@+id/imgLineTrophy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_line_trophy"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView66"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/rubik_medium"
+                    android:text="@string/your_winning"
+                    android:textColor="@color/rummy_maingreen"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imgLineTrophy"
+                    app:layout_constraintTop_toTopOf="@+id/imgLineTrophy" />
+
+                <TextView
+                    android:id="@+id/tvBalance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_bold"
+                    android:textColor="@color/rummy_maingreen"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView66"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView66"
+                    app:setAmmountText='@{viewmodel.currentBalance}' />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -184,7 +211,7 @@
             android:layout_height="0dp"
             android:animateLayoutChanges="true"
             android:fillViewport="true"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/bottomBar"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout1">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -197,12 +224,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardBackgroundColor="@color/rummy_black_3"
-                    app:strokeWidth="1dp"
-                    app:strokeColor="@color/grayBorder"
                     android:theme="@style/Theme.MaterialComponents.Light"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:cardBackgroundColor="@color/rummy_black_3"
+                    app:cardCornerRadius="8dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:strokeColor="@color/grayBorder"
+                    app:strokeWidth="1dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -210,63 +237,88 @@
                         android:layout_margin="@dimen/dimen_16"
                         android:orientation="vertical">
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/txtInputLayout"
-                            style="@style/RummySdk_Widget.BoxEditTextV2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:boxStrokeColor="@color/box_stroke_color"
-                            app:boxStrokeWidth="1dp"
-                            android:maxLength="4"
-                            bind:hint="Enter"
-                            android:hint='@{"Enter Amount ("+@string/rupees+viewmodel.withdrawalMethod.getMinLimit+" minimum)"}'
-                            android:textCursorDrawable="@null"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:shapeAppearance="?attr/shapeAppearanceSmallComponent">
-
-                            <androidx.appcompat.widget.AppCompatEditText
-                                android:id="@+id/edtWithdrawAmount"
-                                android:layout_width="match_parent"
-                                android:layout_height="60dp"
-                                android:digits="0123456789"
-                                android:textCursorDrawable="@null"
-                                android:fontFamily="@font/rubik_medium"
-                                android:inputType="number"
-                                android:maxLength="7"
-                                android:paddingStart="20dp"
-                                android:paddingEnd="0dp"
-                                android:imeOptions="actionDone"
-                                android:textColor="@color/text_color8"
-                                android:textSize="16sp"
-                                bind:text="" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
                         <TextView
+                            android:id="@+id/txtEnterAmount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="6dp"
-                            android:layout_marginTop="@dimen/dimen_10"
-                            android:layout_marginBottom="6dp"
-                            android:fontFamily="@font/helvetica_bold"
-                            android:lineSpacingExtra="2sp"
-                            android:text="@string/rupees"
-                            android:textColor="@color/text_color8"
-                            android:textSize="18sp"
-                            app:layout_constraintBottom_toBottomOf="@id/txtInputLayout"
-                            app:layout_constraintStart_toStartOf="@id/txtInputLayout"
-                            app:layout_constraintTop_toTopOf="@id/txtInputLayout" />
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvWithdrawalMethods"
+                            android:fontFamily="@font/rubik_regular"
+                            android:text='@{"Enter Amount (Min."+@string/rupees+viewmodel.withdrawalMethod.getMinLimit+")"}'
+                            android:textColor="@color/text_color2"
+                            android:textSize="10sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <EditText
+                            android:id="@+id/edtWithdrawAmount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="@color/rummy_app_theme_color"
+                            android:digits="0123456789"
+                            android:drawableLeft="@drawable/ic_rupees_rummy"
+                            android:drawableTint="@color/text_color8"
+                            android:fontFamily="@font/rubik_bold"
+                            android:gravity="center"
+                            android:hint="0"
+                            android:textColorHint="@color/text_color2"
+                            android:imeOptions="actionDone"
+                            android:inputType="number"
+                            android:maxLength="8"
+                            android:paddingHorizontal="20dp"
+                            android:singleLine="true"
+                            android:textColor="@color/text_color8"
+                            android:textCursorDrawable="@drawable/cursor_color"
+                            android:textSize="30sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/txtEnterAmount" />
+
+
+                        <!--   <com.google.android.material.textfield.TextInputLayout
+                               android:id="@+id/txtInputLayout"
+                               style="@style/Widget.MyTeam11.BoxEditTextV2"
+                               android:layout_width="match_parent"
+                               android:layout_height="wrap_content"
+                               app:boxStrokeColor="@color/box_stroke_color"
+                               app:boxStrokeWidth="1dp"
+                               android:maxLength="4"
+                               bind:hint="Enter"
+                               android:hint='@{"Enter Amount ("+@string/rupees+viewmodel.withdrawalMethod.getMinLimit+" minimum)"}'
+                               android:textCursorDrawable="@null"
+                               app:layout_constraintEnd_toEndOf="parent"
+                               app:layout_constraintStart_toStartOf="parent"
+                               app:layout_constraintTop_toTopOf="parent"
+                               app:shapeAppearance="?attr/shapeAppearanceSmallComponent">
+
+                               <com.google.android.material.textfield.TextInputEditText
+                                   android:id="@+id/edtWithdrawAmount"
+                                   android:layout_width="match_parent"
+                                   android:layout_height="60dp"
+                                   android:digits="0123456789"
+                                   android:textCursorDrawable="@null"
+                                   android:fontFamily="@font/rubik_medium"
+                                   android:inputType="number"
+                                   android:maxLength="7"
+                                   android:paddingStart="20dp"
+                                   android:paddingEnd="0dp"
+                                   android:imeOptions="actionDone"
+                                   android:textColor="@color/text_color8"
+                                   android:textSize="16sp"
+                                   bind:text="" />
+
+                           </com.google.android.material.textfield.TextInputLayout>-->
+
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvWithdrawalMethods"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:layout_constraintTop_toBottomOf="@id/txtInputLayout"
                             android:layout_marginTop="8dp"
-                            android:clipToPadding="false" />
+                            android:clipToPadding="false"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/edtWithdrawAmount" />
 
                         <TextView
                             android:id="@+id/tvWithdrawalWarning"
@@ -279,9 +331,9 @@
                             android:textColor="@color/compare_red"
                             android:textSize="10sp"
                             android:visibility="@{TextUtils.isEmpty(viewmodel.instantWithdrawalWarning)?View.GONE:View.VISIBLE}"
-                            app:layout_constraintTop_toBottomOf="@id/rvWithdrawalMethods"
                             app:layout_constraintEnd_toEndOf="@id/viewBgWithdrawal"
                             app:layout_constraintStart_toEndOf="@id/ivWithdrawalAlert"
+                            app:layout_constraintTop_toBottomOf="@id/rvWithdrawalMethods"
                             bind:text="fsjdjh fjsfjhsfjhas fsjdjh fjsfjhsfjhas fsjdjh fjsfjhsfjhas fsjdjh fjsfjhsfjhas fsjdjh fjsfjhsfjhasfsjdjh fjsfjhsfjhasfsjdjh fjsfjhsfjhasfsjdjh fjsfjhsfjhasfsjdjh fjsfjhsfjhasfsjdjh fjsfjhsfjhasfsjdjh fjsfjhsfjhas " />
 
                         <ImageView
@@ -316,39 +368,44 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardBackgroundColor="@color/rummy_black_3"
-                    app:strokeWidth="1dp"
-                    app:strokeColor="@color/grayBorder"
                     android:theme="@style/Theme.MaterialComponents.Light"
-                    app:layout_constraintTop_toBottomOf="@id/cardInput">
+                    android:visibility="gone"
+                    app:cardBackgroundColor="@color/rummy_black_3"
+                    app:cardCornerRadius="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/cardInput"
+                    app:strokeColor="@color/grayBorder"
+                    app:strokeWidth="1dp">
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/clTds"
-                        android:layout_margin="@dimen/dimen_16"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_16"
                         android:visibility="@{viewmodel.isTdsCalculating ? View.GONE: View.VISIBLE}">
 
                         <View
                             android:id="@+id/tncHeader"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
                             android:elevation="4dp"
+                            android:visibility="gone"
                             app:layout_constraintBottom_toBottomOf="@id/txtTdsTitle"
                             app:layout_constraintEnd_toEndOf="@id/ivTdsInfo"
                             app:layout_constraintStart_toEndOf="@id/txtTdsTitle"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"/>
+                            app:layout_constraintTop_toTopOf="parent" />
+
                         <TextView
                             android:id="@+id/txtTdsTitle"
-                            android:paddingVertical="4dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/rubik_medium"
+                            android:paddingVertical="4dp"
                             android:text="@string/tds_calculation"
+                            android:visibility="gone"
                             android:textColor="@color/text_color8"
                             android:textSize="14sp"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"/>
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
                             android:id="@+id/ivTdsInfo"
@@ -356,10 +413,57 @@
                             android:layout_height="16dp"
                             android:layout_marginStart="4dp"
                             android:src="@drawable/ic_info"
-                            android:visibility="@{TextUtils.isEmpty(viewmodel.withdrawalModel.TdsUrl)?View.GONE:View.VISIBLE}"
-                            app:layout_constraintStart_toEndOf="@id/txtTdsTitle"
+                            android:visibility="gone"
                             app:layout_constraintBottom_toBottomOf="@id/txtTdsTitle"
-                            app:layout_constraintTop_toTopOf="@id/txtTdsTitle"/>
+                            app:layout_constraintStart_toEndOf="@id/txtTdsTitle"
+                            app:layout_constraintTop_toTopOf="@id/txtTdsTitle" />
+
+                        <LinearLayout
+                            android:id="@+id/bgTds"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/bg_withdraw_error"
+                            android:backgroundTint="@color/rummy_maingreen"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="8dp"
+                            android:weightSum="2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/txtTdsTitle">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1.4"
+                                android:fontFamily="@font/rubik_regular"
+                                android:text="@{viewmodel.withdrawalModel.TDSFreeWithdrawalMessage}"
+                                android:textColor="@color/rummy_maingreen"
+                                android:textSize="12sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/tdsBalance"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight=".6"
+                                android:fontFamily="@font/rubik_bold"
+                                android:gravity="right"
+                                android:text='@{@string/rupees+viewmodel.withdrawalModel.TDSFreeWithdrawalAmount}'
+                                android:textColor="@color/rummy_maingreen"
+                                android:textSize="12sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:setAmmountText='@{viewmodel.currentBalance}' />
+                        </LinearLayout>
 
 
                         <androidx.recyclerview.widget.RecyclerView
@@ -369,7 +473,7 @@
                             android:layout_marginTop="8dp"
                             android:clipToPadding="false"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            app:layout_constraintTop_toBottomOf="@id/txtTdsTitle"/>
+                            app:layout_constraintTop_toBottomOf="@id/bgTds" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -378,12 +482,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:elevation="6dp"
-                        app:shimmer_duration="800"
                         android:visibility="@{viewmodel.isTdsCalculating ? View.VISIBLE : View.GONE}"
+                        app:shimmer_duration="800"
                         app:shimmer_repeat_mode="restart">
 
-                        <include
-                            layout="@layout/shimmer_tds_item_rummy"/>
+                        <include layout="@layout/shimmer_tds_item_rummy" />
 
                     </com.facebook.shimmer.ShimmerFrameLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -391,43 +494,44 @@
                 <include
                     android:id="@+id/includeBankDetail"
                     layout="@layout/layout_withdrawal_bank_rummy"
-                    android:layout_margin="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:viewmodel="@{viewmodel}"
-                    app:layout_constraintTop_toBottomOf="@+id/cardTds"/>
+                    android:layout_margin="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/cardTds"
+                    app:viewmodel="@{viewmodel}" />
 
-                <FrameLayout
-                    android:id="@+id/bottomBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:elevation="10dp"
-                    android:paddingVertical="8dp"
-                    android:layout_marginTop="20dp"
-                    app:layout_constraintVertical_bias="1"
-                    app:layout_constraintTop_toBottomOf="@id/includeBankDetail"
-                    app:layout_constraintBottom_toBottomOf="parent">
 
-                    <TextView
-                        android:id="@+id/btnWithdrawal"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        bind:text="dgdfgdfgdfg"
-                        android:fontFamily="@font/rubik_medium"
-                        android:text="@{viewmodel.withdrawalAmount==0.0?`Withdraw Now`:(viewmodel.withdrawalMethod.withdrawalInstant?`Instantly Withdraw `: `Withdraw Now `)+@string/rupees+viewmodel.withdrawalAmount}"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white"
-                        android:textSize="14sp"
-                        android:enabled="@{viewmodel.isWithdrawButtonEnabled}"
-                        android:layout_marginHorizontal="@dimen/dimen_16"
-                        android:background="@drawable/bg_squre_8dp"
-                        android:backgroundTint="@{viewmodel.withdrawalAmount==0.0 || !viewmodel.isWithdrawButtonEnabled?@color/disabled_button:@color/disabled_button}"/>
-
-                </FrameLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
+
+        <FrameLayout
+            android:id="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:elevation="10dp"
+            android:paddingVertical="8dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/btnWithdrawal"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                bind:text="dgdfgdfgdfg"
+                android:fontFamily="@font/rubik_medium"
+                android:text="@{viewmodel.withdrawalAmount==0.0?`Withdraw Now`:(viewmodel.withdrawalMethod.withdrawalInstant?`Instantly Withdraw `: `Withdraw Now `)+@string/rupees+viewmodel.withdrawalAmount}"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:enabled="@{viewmodel.isWithdrawButtonEnabled}"
+                android:layout_marginHorizontal="@dimen/dimen_16"
+                android:background="@drawable/bg_squre_8dp"
+                android:backgroundTint="@{viewmodel.withdrawalAmount==0.0 || !viewmodel.isWithdrawButtonEnabled?@color/disabled_button:@color/rummy_maingreen}"/>
+
+        </FrameLayout>
 
         <ProgressBar
             android:id="@+id/loadingLogin"

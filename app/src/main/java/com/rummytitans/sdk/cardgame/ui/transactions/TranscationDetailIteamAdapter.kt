@@ -105,6 +105,7 @@ class TransactionDetailItemAdapter(
 
         override fun onBind(position: Int) {
             listResponse?.elementAtOrNull(position)?.let { model ->
+                model.colorCode = getAmountColorCode(mBinding.root.context,model.value)
                 mBinding.model = model
             }
             mBinding.executePendingBindings()

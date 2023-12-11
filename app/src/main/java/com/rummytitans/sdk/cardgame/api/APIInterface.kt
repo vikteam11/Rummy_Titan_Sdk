@@ -431,13 +431,14 @@ interface APIInterface {
 
 
 
-    @POST("myprofile/withdrawV1")
+    @POST("transaction/v1/withdraw")
     fun withdrawMoney(
         @Header(USER_ID) UserId: String,
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
-        @Header(AMMOUNT) ammount: String,
-        @Header(WITHDRAWAL_METHOD) methodId: String
+        @Body map:JsonObject,
+        //@Header(AMMOUNT) ammount: String,
+        //@Header(WITHDRAWAL_METHOD) methodId: String
     ): Single<BaseModel<String>>
 
     @POST("myprofile/WdRquestCancel")
@@ -834,7 +835,7 @@ interface APIInterface {
         @Path("TypeId") TypeId: Int
     ): Single<BaseModel<ArrayList<com.rummytitans.sdk.cardgame.models.TransactionModel>>>
 
-    @GET("transaction/v2/detail/{tranId}/{gameId}")
+    @GET("transaction/v3/detail/{tranId}/{gameId}")
     fun getTransectionDetails(
         @Header(USER_ID) UserId: String,
         @Header(EXPIRE_TOKEN) ExpireToken: String,
@@ -859,7 +860,7 @@ interface APIInterface {
     ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.UsableAmountModel>>
 
 
-    @GET("myprofile/getwdoptionsV3")
+    @GET("transaction/v1/withdrawal/options")
     fun getWithdrawalOptions(
         @Header(USER_ID) UserId: Int,
         @Header(EXPIRE_TOKEN) ExpireToken: String,
@@ -867,7 +868,7 @@ interface APIInterface {
         @Query(LANGUAGE_CODE_1) languageCode: String
     ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.WithdrawModel>>
 
-    @POST("/user/v1/Withdrawal/tds-calculation")
+    @POST("/user/v2/Withdrawal/tds-calculation")
     fun getTdsOnAmount(
         @Header(USER_ID) UserId: Int,
         @Header(EXPIRE_TOKEN) ExpireToken: String,
