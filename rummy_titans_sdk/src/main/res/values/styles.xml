@@ -1,0 +1,195 @@
+<resources>
+
+    <style name="RummyAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/text_color8</item>
+        <item name="colorPrimaryDark">@color/rummy_mainColor</item>
+        <item name="colorAccent">@color/text_color2</item>
+        <item name="android:fontFamily">@font/rubik_regular</item>
+        <item name="android:splitMotionEvents">false</item>
+        <item name="android:windowEnableSplitTouch">false</item>
+        <item name="colorControlNormal">@color/text_color2</item>
+        <item name="android:statusBarColor">@color/rummy_mainColor</item>
+        <item name="android:windowBackground">#000000</item>
+        <item name="android:navigationBarColor">@color/black</item>
+        <item name="android:textColorPrimary">@color/text_color8</item>
+        <item name="android:textColorSecondary">@color/text_color2</item>
+        <item name="cardViewStyle">@style/RummySdk_CardViewStyle</item>
+    </style>
+
+    <style name="RummySdk_addressVerificationDarkHome" parent="RummyAppTheme">
+        <item name="android:statusBarColor">@color/rummy_mainColor</item>
+        <item name="android:navigationBarColor">@color/rummy_black_3</item>
+    </style>
+
+    <style name="RummySdk_DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowMinWidthMinor">16dp</item>
+    </style>
+
+    <style name="RummySdk_CardViewStyle">
+        <item name="cardBackgroundColor">@color/rummy_black_3</item>
+    </style>
+    <!-- Base application theme. -->
+    <style name="RummyAppTheme.Safe" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/rummy_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/rummy_colorPrimary</item>
+        <item name="colorAccent">@color/rummy_colorPrimary</item>
+        <item name="android:fontFamily">@font/rubik_regular</item>
+        <item name="android:splitMotionEvents">false</item>
+        <item name="android:windowEnableSplitTouch">false</item>
+        <item name="colorControlNormal">@color/rummy_colorPrimary</item>
+    </style>
+
+    <style name="Theme.DialogActivity" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+
+
+    <style name="RummySdk_ProgressBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorAccent">@color/rummy_progressTintColor</item>
+    </style>
+
+    <style name="RummySdk_SplashAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@drawable/img_onboarding_rummy_bg</item>
+    </style>
+
+    <style name="RummyAppTheme.FullScreen" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--        <item name="android:windowAnimationStyle">@null</item>-->
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:statusBarColor">@color/rummy_mainColor</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="AppTypeSwitch" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorAccent">@color/rummy_colorPrimary</item>
+    </style>
+
+    <style name="CropImage.Theme.Transprent" parent="Theme.AppCompat">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+    //Buttons
+
+    //Buttons
+
+    <style name="RummySdk_Widget.BorderEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/rounded_rect_border_gray</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/cool_grey</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+        <item name="android:padding">@dimen/margin_min</item>
+        <item name="android:drawablePadding">@dimen/margin_small</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+
+    <style name="RummySdk_Widget.BoxEditTextV2" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/rubik_bold</item>
+        <item name="android:colorAccent">@color/text_color8</item>
+        <item name="hintTextColor">@color/text_color2</item>
+        <item name="android:textColorHint">@color/text_color2</item>
+    </style>
+
+    <style name="RummySdk_Widget.BorderEditTextV2" parent="Widget.AppCompat.EditText">
+        <item name="android:textSize">16sp</item>
+        <item name="backgroundTint">@color/text_color5</item>
+        <item name="android:textColor">@color/gray1</item>
+        <item name="android:textColorHint">@color/text_color2</item>
+        <item name="fontFamily">@font/rubik_medium</item>
+        <item name="android:drawablePadding">@dimen/margin_small</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+
+    <style name="RummySdk_Widget.TextInputLayout" parent="RummyAppTheme.Safe">
+        <item name="colorPrimary">@color/grayBorder</item>
+        <item name="colorPrimaryDark">@color/grayBorder</item>
+        <item name="colorAccent">@color/grayBorder</item>
+        <item name="android:textColorHint">@color/text_color2</item>
+        <item name="colorControlNormal">@color/grayBorder</item>
+        <item name="colorControlActivated">@color/grayBorder</item>
+    </style>
+
+    <style name="RummySdk_TextAppearance.Large" parent="@android:style/TextAppearance.Large">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/gunmetal</item>
+    </style>
+
+    <style name="RummySdk_TextAppearance.Medium" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/gunmetal</item>
+    </style>
+
+    <style name="RummySdk_TextAppearance.Normal" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/gunmetal</item>
+    </style>
+
+    <style name="RummySdk_TextAppearance.Small" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/cool_grey</item>
+    </style>
+
+    <style name="RummySdk_customProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal" />
+
+    <declare-styleable name="Const">
+        <attr name="cl_theme" format="integer" />
+    </declare-styleable>
+
+    <style name="RummySdk_MyTabLayoutTextAppearanceV6" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">11sp</item>
+        <item name="fontFamily">@font/rubik_medium</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="RummyAppTheme.Regular.Small" parent="RummyAppTheme">
+        <item name="android:textSize">8sp</item>
+        <item name="fontFamily">@font/rubik_medium</item>
+    </style>
+
+
+    <style name="RummySdk.TextInputLayout" parent="@style/TextAppearance.AppCompat">
+        <item name="android:textColorHint">@color/text_color2</item>
+        <item name="android:textSize">@dimen/textSize10sp</item>
+        <item name="android:fontFamily">@font/rubik_regular</item>
+    </style>
+
+    <style name="RummySdk.TextInputLayoutActivate" parent="RummyAppTheme.Safe">
+        <item name="colorControlNormal">@color/text_color2</item>
+        <item name="colorControlActivated">@color/text_color2</item>
+        <item name="colorControlHighlight">@color/text_color2</item>
+        <item name="android:colorFocusedHighlight">@color/text_color2</item>
+        <item name="android:textColorHint">@color/text_color2</item>
+
+    </style>
+
+    <style name="RummySdk.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/RummySdk_BottomSheetModal</item>
+    </style>
+
+    <style name="RummySdk_BottomSheetModal" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="RummySdkDatePickerDialogTheme" parent="ThemeOverlay.MaterialComponents.Dialog">
+        <!-- Customize the attributes of the DatePickerDialog here -->
+        <!-- For example, change the background color: -->
+        <item name="android:windowBackground">@color/rummy_black_3</item>
+        <!-- Or change the text color: -->
+        <item name="android:textColorPrimary">@color/text_color2</item>
+    </style>
+</resources>

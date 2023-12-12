@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View"/>
+        <import type="android.text.TextUtils"/>
+        <variable
+            name="hideView"
+            type="androidx.databinding.ObservableBoolean" />
+        <variable
+            name="viewModel"
+            type="com.rummytitans.playcashrummyonline.cardgame.ui.MainViewModel" />
+    </data>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@color/black"
+            android:animateLayoutChanges="true"
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/toolBar"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:elevation="10dp"
+                android:visibility="visible"
+                android:paddingHorizontal="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@color/rummy_azure_two">
+
+                <androidx.constraintlayout.widget.Group
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{viewModel.displayHome &amp;&amp; viewModel.gameTicket >0 ? View.VISIBLE : View.GONE,default=gone}"
+                    app:constraint_referenced_ids="viewBgTicket,ivTicket,txtTicket"/>
+
+                <androidx.constraintlayout.widget.Group
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{!TextUtils.isEmpty(viewModel.balance) &amp;&amp; viewModel.displayHome ? View.VISIBLE : View.GONE,default=gone}"
+                    app:constraint_referenced_ids="viewBgWallet,ivWallet,txtWallet"/>
+
+                <FrameLayout
+                    android:id="@+id/layoutUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imgUser"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/avatar_1"
+                        android:layout_marginStart="8dp"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        app:setAvatar="@{viewModel.userAvtar}" />
+
+                    <ImageView
+                        android:id="@+id/imgBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/ic_newback"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/layoutUser"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </FrameLayout>
+                <ImageView
+                    android:id="@+id/appLogo"
+                    android:layout_width="90dp"
+                    android:layout_height="33dp"
+                    android:layout_marginStart="20dp"
+                    android:background="@drawable/new_app_logo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/layoutUser"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <View
+                    android:id="@+id/viewBgTicket"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/bg_squre_shape"
+                    android:backgroundTint="@color/black_2"
+                    app:setViewBackground="@{@color/black_2}"
+                    app:viewRadius="@{16}"
+                    android:alpha=".15"
+                    app:layout_constraintStart_toStartOf="@+id/ivTicket"
+                    app:layout_constraintEnd_toEndOf="@id/txtTicket"
+                    app:layout_constraintTop_toTopOf="@id/ivTicket"
+                    app:layout_constraintBottom_toBottomOf="@id/ivTicket"/>
+
+
+                <TextView
+                    android:id="@+id/txtTicket"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_medium"
+                    android:gravity="center"
+                    android:text="@{String.valueOf(viewModel.gameTicket)}"
+                    tools:text="111"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toStartOf="@id/viewBgWallet"
+                    app:layout_constraintBottom_toBottomOf="@id/ivTicket"
+                    app:layout_constraintTop_toTopOf="@id/ivTicket" />
+
+                <ImageView
+                    android:id="@+id/ivTicket"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="4dp"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="2dp"
+                    android:src="@drawable/ic_ticket_home"
+                    app:layout_constraintEnd_toStartOf="@id/txtTicket"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+
+                <View
+                    android:id="@+id/viewBgWallet"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/bg_squre_shape"
+                    android:backgroundTint="@color/black_2"
+                    app:setViewBackground="@{@color/black_2}"
+                    app:viewRadius="@{16}"
+                    android:alpha=".15"
+                    app:layout_constraintStart_toStartOf="@+id/ivWallet"
+                    app:layout_constraintEnd_toEndOf="@id/txtWallet"
+                    app:layout_constraintTop_toTopOf="@id/ivWallet"
+                    app:layout_constraintBottom_toBottomOf="@id/ivWallet"/>
+
+
+                <TextView
+                    android:id="@+id/txtWallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_medium"
+                    android:gravity="center"
+                    android:text="@{viewModel.balance}"
+                    tools:text="111"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="8dp"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@id/ivWallet"
+                    app:layout_constraintTop_toTopOf="@id/ivWallet" />
+
+                <ImageView
+                    android:id="@+id/ivWallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="4dp"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="2dp"
+                    android:src="@drawable/ic_wallet_home_fill"
+                    app:tint="@color/rummy_maingreen"
+                    app:layout_constraintEnd_toStartOf="@id/txtWallet"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/ivRefers"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginEnd="6dp"
+                    android:visibility="gone"
+                    android:padding="2dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/ivSupport"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_refer_list"
+                    app:tint="@color/white" />
+
+
+                <ImageView
+                    android:id="@+id/ivSupport"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:layout_marginEnd="6dp"
+                    android:padding="2dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_support_left"
+                    app:tint="@color/white" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:animateLayoutChanges="true"
+                app:layout_constraintBottom_toTopOf="@id/bottom_view"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolBar"
+                app:layout_constraintVertical_bias="1.0" />
+
+
+            <include
+                android:id="@+id/inBadgeRefer"
+                layout="@layout/notification_badge_rummy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_container"
+                app:layout_constraintTop_toBottomOf="@id/bottom_view"
+                app:layout_constraintTop_toTopOf="@id/bottom_view" />
+
+            <include
+                android:id="@+id/inBadgeWallet"
+                layout="@layout/notification_badge_rummy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_container"
+                app:layout_constraintTop_toBottomOf="@id/bottom_view"
+                app:layout_constraintTop_toTopOf="@id/bottom_view" />
+
+            <FrameLayout
+                android:id="@+id/bottom_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:background="@color/black_2"
+                android:elevation="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent">
+
+                <com.google.android.material.bottomnavigation.BottomNavigationView
+                    android:id="@+id/navigation"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@color/rummy_black_3"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="10dp"
+                    app:itemIconSize="24dp"
+                    app:itemIconTint="@color/bottom_selector"
+                    app:itemTextColor="@color/bottom_selector"
+                    app:itemTextAppearanceActive="@style/RummyAppTheme.Regular.Small"
+                    app:itemTextAppearanceInactive="@style/RummyAppTheme.Regular.Small"
+                    app:labelVisibilityMode="labeled"
+                    app:menu="@menu/navigation_rummy" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/toolBar">
+
+                <View
+                    android:id="@+id/viewBgMiniWallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:visibility="@{viewModel.isMiniWalletOpen ? View.VISIBLE : View.GONE,default=visible}"
+                    android:background="#2D000000"/>
+
+                <LinearLayout
+                    android:id="@+id/layout_miniWallet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{viewModel.isMiniWalletOpen() ? View.VISIBLE :View.GONE}">
+
+                    <include
+                        android:id="@+id/bottomSheetMiniWallet"
+                        layout="@layout/layout_rummy_mini_wallet"
+                        app:addCashListener="@{()-> viewModel.addCashListener()}"
+                        app:isDataLoading="@{viewModel.walletLoading}"
+                        app:isGraphVisible="@{viewModel.isGraphVisible}"
+                        app:walletInfo="@{viewModel.walletInfo}" />
+                </LinearLayout>
+            </FrameLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

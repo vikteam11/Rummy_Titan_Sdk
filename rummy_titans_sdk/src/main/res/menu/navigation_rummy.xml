@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_menu"
+        app:showAsAction="withText"
+        android:title="HOME" />
+
+    <item
+        android:id="@+id/navigation_wallet"
+        app:showAsAction="withText"
+        android:icon="@drawable/ic_bg_wallet_rummy"
+        android:title="@string/title_wallet" />
+
+    <item
+        android:id="@+id/navigation_rakeback"
+        android:icon="@drawable/ic_offer_home"
+        app:showAsAction="withText"
+        android:title="@string/rakeback" />
+
+    <item
+        android:id="@+id/navigation_refer"
+        android:icon="@drawable/ic_refer_home_rummy"
+        app:showAsAction="withText"
+        android:title="REFER" />
+
+    <item
+         android:id="@+id/navigation_more"
+         android:icon="@drawable/ic_more"
+         app:showAsAction="withText"
+        android:title="@string/title_more" />
+
+</menu>
