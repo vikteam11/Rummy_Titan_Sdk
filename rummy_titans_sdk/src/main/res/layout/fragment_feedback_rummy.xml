@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.graphics.Color" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewmodel"
+            type="com.rummytitans.playcashrummyonline.cardgame.ui.more.module.FeedbackViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/rummy_mainColor"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/icBack"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                app:tint="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/view4"
+                app:layout_constraintStart_toStartOf="@+id/view4"
+                app:layout_constraintTop_toTopOf="@+id/view4"
+                app:srcCompat="@drawable/ic_newback" />
+
+            <TextView
+                android:id="@+id/txtWithdrawalMTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:gravity="center"
+                android:text="@string/frag_feedback"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/view4"
+                app:layout_constraintStart_toEndOf="@+id/icBack"
+                app:layout_constraintTop_toTopOf="@+id/view4" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <com.rummytitans.playcashrummyonline.cardgame.widget.FadingSnackbar
+            android:id="@+id/fadingSnackbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:elevation="@dimen/margin_micro"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            android:fitsSystemWindows="true"
+            app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dimen_16"
+
+                >
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_16"
+                    android:elevation="4dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:orientation="vertical"
+                    app:cardCornerRadius="@dimen/dimen_4">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_min"
+                        android:background="@drawable/box_with_grey_border_rummy">
+
+
+                        <TextView
+                            android:id="@+id/textView15"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_min"
+                            android:layout_marginTop="@dimen/margin_min"
+                            android:fontFamily="@font/rubik_medium"
+                            android:text="@string/send_us_your_feedback"
+                            android:textColor="@color/text_color8"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/view10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_min"
+                            android:fontFamily="@font/rubik_regular"
+                            android:text="@string/please_share_your_suggestion_or_found_a_bug"
+                            android:textColor="@color/text_color2"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+
+                        <LinearLayout
+                            android:id="@+id/editStates"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="4dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/view10">
+
+
+                        </LinearLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/layout1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/view10">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/inputLayout"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_min"
+                                android:layout_marginEnd="@dimen/margin_min"
+                                android:fontFamily="@font/rubik_regular"
+                                android:hint="@string/select_feedback_category"
+                                android:theme="@style/RummySdk.TextInputLayoutActivate"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <androidx.appcompat.widget.AppCompatEditText
+                                    android:id="@+id/edtFeedback"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/rubik_regular"
+                                    android:backgroundTint="@color/edtTintColor"
+                                    android:imeOptions="actionNext"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:inputType="none"
+                                    android:focusableInTouchMode="false"
+                                    android:editable="false"
+                                    app:drawableTint="@color/silver_two"
+                                    android:drawableEnd="@drawable/ic_arrow_down"
+                                    android:textColor="@color/text_color8"
+                                    android:textSize="12sp" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+                            <Spinner
+                                android:id="@+id/spnFeedbackType"
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:background="@null"
+                                android:spinnerMode="dropdown"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:popupBackground="@color/text_color5"
+                                app:adapter="@{viewmodel.feedbackList}"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/inputLayout" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/inputLayout1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_min"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="@dimen/margin_min"
+                            android:fontFamily="@font/rubik_regular"
+                            android:hint="@string/frag_feedback_title"
+                            android:theme="@style/RummySdk.TextInputLayoutActivate"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/layout1">
+
+                            <androidx.appcompat.widget.AppCompatEditText
+                                android:id="@+id/editTitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/rubik_regular"
+                                android:backgroundTint="@color/edtTintColor"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:textColor="@color/text_color8"
+                                android:textSize="12sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/inputLayout2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_min"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="@dimen/margin_min"
+                            android:fontFamily="@font/rubik_regular"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:paddingBottom="@dimen/margin_min"
+                            android:hint="@string/frag_feedback_your_massage"
+                            android:theme="@style/RummySdk.TextInputLayoutActivate"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/inputLayout1">
+
+                            <androidx.appcompat.widget.AppCompatEditText
+                                android:id="@+id/editMessage"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:fontFamily="@font/rubik_regular"
+                                android:imeOptions="actionDone"
+                                android:backgroundTint="@color/edtTintColor"
+                                android:maxLength="300"
+                                android:paddingTop="10dp"
+                                android:gravity="top"
+                                android:paddingBottom="10dp"
+                                android:textColor="@color/text_color8"
+                                android:textSize="12sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginStart="@dimen/dimen_16"
+            android:layout_marginEnd="@dimen/dimen_16"
+            android:layout_marginBottom="@dimen/dimen_16"
+            android:background="@drawable/bg_squre_shape"
+            android:backgroundTint="@color/rummy_maingreen"
+            android:fontFamily="@font/rubik_medium"
+            android:foreground="?selectableItemBackground"
+            android:text='@string/frag_feedback_submit'
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:background="@color/colorPrimary" />
+
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_white_progress"
+            android:elevation="10dp"
+            android:padding="@dimen/margin_min"
+            android:theme="@style/RummySdk_ProgressBar"
+            android:visibility="@{viewmodel.isLoading?View.VISIBLE:View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
+
+
+

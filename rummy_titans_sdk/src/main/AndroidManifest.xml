@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.rummytitans.playcashrummyonline.cardgame">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!--     <uses-permission android:name="android.permission.SEND_SMS" /> -->
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <queries>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+        </intent>
+    </queries>
+
+    <application
+        android:name=".MainApplication"
+        android:allowBackup="false"
+        android:fullBackupContent="@xml/my_backup_file"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:installLocation="preferExternal"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/RummyAppTheme"
+        android:usesCleartextTraffic="true"
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:allowBackup, android:fullBackupContent">
+        <activity
+            android:name=".ui.LaunchActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+        <activity
+            android:name=".ui.newlogin.RummyNewLoginActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.rummytitans.playcashrummyonline.cardgame.utils.locationservices.uiModules.RequestGPSActivity"
+            android:exported="false"
+            android:theme="@style/Theme.DialogActivity" />
+        <activity
+            android:name=".ui.deeplink.DeepLinkActivityRummy"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:parentActivityName=".ui.RummyMainActivity"
+            android:screenOrientation="portrait">
+            <tools:validation testUrl="https://rummytitans.io/open/asdkf" />
+
+            <!--<intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="rummytitans.io"
+                    android:pathPrefix="/open/"
+                    android:scheme="https" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="rummytitandeeplink" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="rummytitansdeeplink" />
+            </intent-filter>-->
+        </activity>
+        <activity
+            android:name=".ui.launcher.SDKSplashActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/RummySdk_SplashAppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <intent-filter
+                android:autoVerify="true"
+                tools:targetApi="m">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="rummytitans.onelink.me"
+                    android:pathPrefix="/FOzv"
+                    android:scheme="https" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="open"
+                    android:scheme="@string/appsflyer_open_app_link" />
+            </intent-filter>
+
+            <!-- Firebase App Links -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="rummytitans.page.link"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.RummyMainActivity"
+            android:alwaysRetainTaskState="true"
+            android:configChanges="orientation|screenSize"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/RummySdk_addressVerificationDarkHome" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <activity
+            android:name=".games.locationBottomSheet.LocationBottomSheetActivity"
+            android:exported="false"
+            android:theme="@style/Theme.DialogActivity" />
+        <activity
+            android:name="com.rummytitans.playcashrummyonline.cardgame.utils.locationservices.uiModules.RequestPermissionActivity"
+            android:exported="false"
+            android:theme="@style/Theme.DialogActivity" />
+
+        <activity
+            android:name=".utils.permissions.PermissionActivity"
+            android:exported="false"
+            android:theme="@style/Theme.DialogActivity" />
+
+        <activity
+            android:name=".games.rummy.RummyWebViewActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/RummyAppTheme.FullScreen" />
+        <activity
+            android:name=".ui.WebViewActivity"
+            android:exported="false"
+            android:theme="@style/RummyAppTheme"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:exported="false"
+            android:name="com.rummytitans.playcashrummyonline.cardgame.ui.refer.ReferActivity"
+            android:parentActivityName="com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".ui.refer.ReferEarnActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/RummyAppTheme"/>
+        <activity
+            android:exported="false"
+            android:name="com.rummytitans.playcashrummyonline.cardgame.ui.refer.ShareActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/RummyAppTheme" />
+
+        <activity
+            android:exported="false"
+            android:name="com.rummytitans.playcashrummyonline.cardgame.ui.contectList.ContactListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:exported="false"
+            android:name="com.rummytitans.playcashrummyonline.cardgame.ui.wallet.RummyAddCashActivity"
+            android:parentActivityName="com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/RummyAppTheme" />
+
+        <activity
+            android:exported="true"
+            android:name="com.rummytitans.playcashrummyonline.cardgame.ui.games.tickets.GamesTicketActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/RummyAppTheme" />
+
+        <activity
+            android:exported="false"
+            android:name="com.rummytitans.playcashrummyonline.cardgame.ui.common.CommonFragmentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/RummyAppTheme"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+
+        <activity
+            android:exported="false"
+            android:name="com.rummytitans.playcashrummyonline.cardgame.ui.WebPaymentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/RummyAppTheme"  />
+
+        <activity
+            android:exported="false"
+            android:name="com.rummytitans.playcashrummyonline.cardgame.ui.payment.AddCardActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/RummyAppTheme"  />
+
+        <activity android:name=".widget.cropImage.CropImageActivity"
+            android:theme="@style/CropImage.Theme.Transprent"/>
+
+        <activity
+            android:exported="false"
+            android:name="com.rummytitans.playcashrummyonline.cardgame.ui.verifications.VerificationActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/RummyAppTheme"  />
+
+        <activity
+            android:exported="false"
+            android:name=".ui.verifications.WebAutoAddressVerifyActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/RummyAppTheme" />
+
+        <activity
+            android:exported="false"
+            android:name="com.rummytitans.playcashrummyonline.cardgame.ui.payment.PaymentOptionActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/RummyAppTheme"  />
+
+        <activity android:name=".ui.verifications.AddressVerificationActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/RummyAppTheme"  />
+
+    </application>
+
+</manifest>

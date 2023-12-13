@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.graphics.Color" />
+        <import type="android.view.View"/>
+        <import type="com.google.android.material.bottomsheet.BottomSheetBehavior"/>
+        <variable
+            name="viewmodel"
+            type="com.rummytitans.playcashrummyonline.cardgame.ui.verifications.viewmodels.AddressVerificationViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_safe_toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <FrameLayout
+                android:id="@+id/layoutBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/view4"
+                app:layout_constraintStart_toStartOf="@+id/view4"
+                app:layout_constraintTop_toTopOf="@+id/view4">
+
+                <ImageView
+                    android:id="@+id/icBack"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="8dp"
+                    app:tint="@color/white"
+                    app:srcCompat="@drawable/ic_newback" />
+
+                <ImageView
+                    android:id="@+id/icCross"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="8dp"
+                    app:tint="@color/white"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/ic_cross_uncheck" />
+            </FrameLayout>
+
+
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:fontFamily="@font/rubik_medium"
+                app:layout_constraintBottom_toBottomOf="@+id/view4"
+                app:layout_constraintEnd_toEndOf="@+id/view4"
+                app:layout_constraintStart_toEndOf="@+id/layoutBack"
+                app:layout_constraintTop_toTopOf="@+id/view4" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"/>
+
+        <FrameLayout
+            android:id="@+id/loading"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ProgressBar
+                android:layout_gravity="center"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/bg_white_progress"
+                android:elevation="10dp"
+                android:padding="@dimen/margin_min"
+                android:theme="@style/RummySdk_ProgressBar"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

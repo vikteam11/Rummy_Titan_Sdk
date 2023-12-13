@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.text.TextUtils" />
+
+        <import type="android.view.View" />
+        <import type="android.graphics.Color"/>
+
+        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+
+        <variable
+            name="viewModel"
+            type="com.rummytitans.playcashrummyonline.cardgame.ui.wallet.viewmodel.ItemTransactionViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp">
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/rubik_regular"
+            android:text="@{viewModel.data.date}"
+            android:textColor="@color/text_color8"
+            android:textSize="10sp"
+            android:visibility="@{viewModel.data.isDateShow ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/cardView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="sfgsgfsdfsdgsdg" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:elevation="4dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDate">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{()->viewModel.expandCollapse()}"
+                    app:layout_constraintBottom_toTopOf="@+id/detailLayout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/txtDateTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@{viewModel.data.Dateon}"
+                        android:textColor="@color/silver_two"
+                        android:textSize="10sp"
+                        android:visibility="gone"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="09:23PM NOV 18, 2018" />
+
+                    <TextView
+                        android:id="@+id/txtTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_min"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/rubik_regular"
+                        android:text="@{viewModel.data.Title}"
+                        android:textColor="@color/text_color8"
+                        android:textSize="10sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtDateTime"
+                        tools:text="Contest Win" />
+
+
+                    <TextView
+                        android:id="@+id/txtAmmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_min"
+                        android:fontFamily="@font/rubik_medium"
+                        android:text='@{(viewModel.data.IsCr==0?"+":"-")+@string/rupees+String.valueOf(viewModel.data.Amount)}'
+                        android:textColor="@{viewModel.data.IsCr==0?@color/rummy_maingreen:@color/alertRed}"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="₹350" />
+
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/ic_arrow_up"
+                        android:onClick="@{()->viewModel.expandCollapse()}"
+                        android:rotation="@{viewModel.data.showDetailView==1 ? 0 : 180}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:setSrcCompact="@{@drawable/ic_arrow_up}"
+                        app:tint="@color/silver_two" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/detailLayout"
+                    android:padding="8dp"
+                    android:visibility="@{viewModel.data.showDetailView==1?View.VISIBLE:View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/clView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guide1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.5" />
+
+                    <TextView
+                        android:id="@+id/tvWithdrawIdHint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/rubik_regular"
+                        android:text="@string/withdrawal_id"
+                        android:textColor="@color/text_color3"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvStatus"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tvStatus" />
+
+                    <TextView
+                        android:id="@+id/tvWithdrawId"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/rubik_medium"
+                        android:text="@{viewModel.data.TxnId}"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tvWithdrawIdHint"
+                        app:layout_constraintTop_toBottomOf="@+id/tvStatus" />
+
+                    <TextView
+                        android:id="@+id/tvStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_squre_shape"
+                        android:backgroundTint="@{viewModel.data.withdrawalStatusColor}"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="4dp"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <View
+                        android:id="@+id/div1"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/grayBorder"
+                        app:layout_constraintTop_toBottomOf="@+id/tvWithdrawId"
+                        tools:layout_editor_absoluteX="8dp" />
+
+                    <TextView
+                        android:id="@+id/tvWithdrawAmountHint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_16"
+                        android:fontFamily="@font/rubik_regular"
+                        android:text="@string/withdrawal_amount"
+                        android:textColor="@color/text_color3"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/div1" />
+
+                    <TextView
+                        android:id="@+id/tvWithdrawAmount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/rubik_medium"
+                        android:text="@{@string/rupees+String.valueOf(viewModel.data.Amount)}"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toStartOf="@+id/guide1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvWithdrawAmountHint" />
+
+                    <TextView
+                        android:id="@+id/tvBankHint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_16"
+                        android:fontFamily="@font/rubik_regular"
+                        android:text="@string/bank_account"
+                        android:textColor="@color/text_color3"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toEndOf="@+id/guide1"
+                        app:layout_constraintTop_toBottomOf="@+id/div1" />
+
+                    <TextView
+                        android:id="@+id/tvBank"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/rubik_medium"
+                        android:text="@{viewModel.data.BankAccount}"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/guide1"
+                        app:layout_constraintTop_toBottomOf="@+id/tvWithdrawAmountHint" />
+
+                    <LinearLayout
+                        android:id="@+id/layoutTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="35dp"
+                        android:layout_marginHorizontal="8dp"
+                        android:gravity="center"
+                        android:background="@drawable/bg_squre_shape"
+                        android:backgroundTint="@color/text_color5"
+                        android:layout_marginTop="@dimen/dimen_20"
+                        app:layout_constraintTop_toBottomOf="@+id/tvBank" >
+
+                        <TextView
+                            android:id="@+id/tvPlacedOnHint"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/rubik_regular"
+                            android:text="@{@string/placed_on+' '}"
+                            android:textColor="@color/text_color2"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:id="@+id/tvPlacedOn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/rubik_medium"
+                            app:date="@{viewModel.data.Dateon}"
+                            app:inputPattern="@{`MM/dd/yyyy h:mm:ss a`}"
+                            app:outputPattern="@{`h:mm a, d MMM yyyy`}"
+                            tools:text=" 11:01 OM, 07 June 2021"
+                            android:textColor="@color/text_color8"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="@dimen/dimen_8"
+                        android:background="@drawable/box_grey_border_rummy"
+                        android:backgroundTint="@color/rummy_maingreen"
+                        android:gravity="center"
+                        android:insetTop="0dp"
+                        android:onClick="@{()->viewModel.sendToWithdrawalDetail.invoke()}"
+                        android:insetBottom="0dp"
+                        android:text="@string/track_your_request"
+                        android:textAllCaps="true"
+                        android:fontFamily="@font/rubik_medium"
+                        android:textColor="@color/rummy_maingreen"
+                        android:textSize="13sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/layoutTime" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

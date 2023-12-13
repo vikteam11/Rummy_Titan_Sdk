@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View"/>
+        <variable name="viewmodel" type="com.rummytitans.playcashrummyonline.cardgame.ui.refer.viewmodel.ReferViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        <com.rummytitans.playcashrummyonline.cardgame.widget.FadingSnackbar
+                android:id="@+id/fadingSnackbar"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:elevation="@dimen/margin_micro"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/constraintLayout">
+
+            <View
+                    android:id="@+id/view4"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_white_box"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageView
+                    android:id="@+id/icBack"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_newback"
+                    app:tint="@color/gunmetal"
+                    app:layout_constraintBottom_toBottomOf="@+id/view4"
+                    app:layout_constraintStart_toStartOf="@+id/view4"
+                    app:layout_constraintTop_toTopOf="@+id/view4"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:text="@string/act_refer_title"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="10dp"
+                    android:textAllCaps="true"
+                    android:textColor="@color/gunmetal"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toEndOf="@+id/icBack"
+                    app:layout_constraintTop_toTopOf="@+id/view4"
+                    app:layout_constraintBottom_toBottomOf="@+id/view4"/>
+
+            <TextView
+                    android:id="@+id/txtOptionText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="2dp"
+                    android:text="@string/act_refer_invite_friends"
+                    android:padding="10dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="?colorPrimary"
+                    app:layout_constraintBottom_toBottomOf="@+id/view4"
+                    app:layout_constraintEnd_toEndOf="@+id/view4"
+                    app:layout_constraintTop_toTopOf="@+id/view4"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+                app:layout_constraintHorizontal_bias="0.0" app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

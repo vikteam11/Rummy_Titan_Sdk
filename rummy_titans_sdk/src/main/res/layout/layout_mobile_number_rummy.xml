@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.graphics.Color" />
+
+        <variable
+            name="viewModel"
+            type="com.rummytitans.playcashrummyonline.cardgame.ui.newlogin.NewLoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutMobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="@{viewModel.loginStep==viewModel.MOBILE_NUMBER?View.VISIBLE:View.GONE}"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/textView51"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_24"
+            android:fontFamily="@font/rubik_medium"
+            android:text="@{@string/welcome_txt+``}"
+            android:textColor="@color/gray1"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView52"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="@dimen/dimen_16"
+            android:layout_marginEnd="40dp"
+            android:fontFamily="@font/rubik_regular"
+            android:gravity="center"
+            android:textColor="@color/gray2"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView51"
+
+            />
+
+        <TextView
+            android:id="@+id/hintMobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_medium"
+            android:textSize="12sp"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/gray1"
+            android:layout_marginTop="24dp"
+            android:gravity="center_horizontal"
+            android:text="@string/mobile_number"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView52"/>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            app:TextInputTintColor="@{@color/grey4}"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hintMobile">
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/editMobileNumber"
+                style="@style/RummySdk_Widget.BorderEditTextV2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:backgroundTint="@color/grey4"
+                android:paddingBottom="20dp"
+                android:digits="1234567890"
+                android:hint="@string/enter_your_phone_number"
+                android:textColor="@color/gray1"
+                android:imeOptions="actionDone"
+                android:inputType="textNoSuggestions|phone"
+                android:importantForAutofill="no"
+                android:maxLength="10"
+                android:maxLines="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/inputotp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:visibility="@{viewModel.referCode?View.VISIBLE:View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_phone">
+
+            <TextView
+                android:id="@+id/hintReferCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rubik_medium"
+                android:textSize="12sp"
+                android:layout_marginStart="4dp"
+                android:textColor="@color/gray1"
+                android:text="@string/refer_code"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputLayout1"
+                app:TextInputTintColor="@{@color/secondary}"
+                android:theme="@style/RummySdk_Widget.TextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="9"
+                app:hintEnabled="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hintReferCode"
+                tools:visibility="visible">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/editReferCode"
+                    style="@style/RummySdk_Widget.BorderEditTextV2"
+                    android:backgroundTint="@color/gray1"
+                    android:layout_width="match_parent"
+                    android:fontFamily="@font/rubik_medium"
+                    android:layout_height="@dimen/edittext_height"
+                    android:focusable="false"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textColor="@color/gray1"
+                    android:text="@{viewModel.userReferCode}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/ivCloseReferCode"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="20dp"
+                android:onClick="@{()->viewModel.addRemoveReferCode(false)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/inputLayout1"
+                app:srcCompat="@drawable/ic_delete"
+                app:tint="@color/gray1" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="40dp"
+                android:layout_height="2dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone"
+                android:background="@color/gunmetal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/textView53"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/i_have"
+            android:fontFamily="@font/rubik_regular"
+            android:textColor="@color/gray2"
+            android:textSize="12sp"
+            android:visibility="@{viewModel.referCode?View.GONE:View.VISIBLE}"
+            app:layout_constraintEnd_toStartOf="@+id/textView54"
+            app:layout_constraintTop_toBottomOf="@id/inputotp" />
+
+        <TextView
+            android:id="@+id/textView54"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_medium"
+            android:onClick="@{()->viewModel.addRemoveReferCode(true)}"
+            android:text="@{` `+@string/refer_code}"
+            android:textColor="@color/gray2"
+            android:textSize="12sp"
+            android:visibility="@{viewModel.referCode?View.GONE:View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textView53"
+            app:setUnderline="@{true}"
+            tools:visibility="visible" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

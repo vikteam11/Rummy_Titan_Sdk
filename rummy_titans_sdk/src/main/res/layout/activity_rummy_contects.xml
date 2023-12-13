@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.graphics.Color" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.rummytitans.playcashrummyonline.cardgame.ui.contectList.viewModel.ContactsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/topBar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/bg_safe_toolbar"
+            android:backgroundTint="@color/rummy_mainColor"
+            android:elevation="10dp"
+            android:padding="@dimen/margin_min"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/icBack"
+                android:layout_width="@dimen/icon_size_24"
+                android:layout_height="@dimen/icon_size_24"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:onClick="@{()->viewModel.onBackPressed()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.49"
+                app:srcCompat="@drawable/ic_newback" />
+
+
+            <TextView
+                android:id="@+id/textView39"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:text="@string/select_contacts"
+                android:textAppearance="@style/RummySdk_TextAppearance.Normal"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/icBack"
+                app:layout_constraintStart_toEndOf="@+id/icBack"
+                app:layout_constraintTop_toTopOf="@+id/icBack" />
+
+            <ImageView
+                android:id="@+id/refresh"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/refresh"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clTab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/bg_tabbar"
+            android:elevation="5dp"
+            app:layout_constraintTop_toBottomOf="@id/topBar">
+
+
+            <EditText
+                android:id="@+id/search_name"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/text_color5"
+                android:hint="@string/search_contact"
+                android:imeOptions="actionSend"
+                android:paddingHorizontal="20dp"
+                android:singleLine="true"
+                android:textColor="@color/text_color2"
+                android:textColorHint="@color/text_color2"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:theme="@style/RummySdk_Widget.TextInputLayout"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+          
+            <ImageView
+                android:id="@+id/search"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/search_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/search_name"
+                app:srcCompat="@drawable/ic_search"
+                app:tint="@color/silver" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/contactList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_below="@id/clTab"
+            android:clipToPadding="false"
+            android:paddingBottom="150dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clTab" />
+
+        <ProgressBar
+            android:id="@+id/loadingLogin"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_white_progress"
+            android:elevation="10dp"
+            android:padding="@dimen/margin_min"
+            android:theme="@style/RummySdk_ProgressBar"
+            android:visibility="@{viewModel.isLoading() ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/invite"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_primary_box_rummy"
+            android:backgroundTint="@{(viewModel.invitesCount.equals(``))? @color/text_color2 : @color/rummy_maingreen}"
+            android:elevation="@dimen/margin_micro"
+            android:fontFamily="@font/rubik_medium"
+            android:gravity="center"
+            android:onClick="@{()->viewModel.onInviteBtn()}"
+            android:orientation="horizontal"
+            android:text="@{`invite `+viewModel.invitesCount}"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="mutableBottomSheetState"
+            type="androidx.lifecycle.MutableLiveData&lt;Integer&gt;" />
+
+        <variable
+            name="bottomSheetState"
+            type="androidx.lifecycle.LiveData&lt;Integer&gt;" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_button_8dp"
+        android:backgroundTint="@color/rummy_black_3">
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:background="@drawable/vertical_dashed_line"
+            android:backgroundTint="@color/grayBorder"
+            app:layout_constraintBottom_toTopOf="@id/txtStep5"
+            app:layout_constraintEnd_toEndOf="@id/txtStep1"
+            app:layout_constraintStart_toStartOf="@id/txtStep1"
+            app:layout_constraintTop_toBottomOf="@id/txtStep1" />
+
+        <ImageView
+            android:id="@+id/imgIcon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_current_location"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgCross"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:padding="8dp"
+            android:src="@drawable/ic_cross_uncheck"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/text_color8" />
+
+        <TextView
+            android:id="@+id/txtMsg1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="22dp"
+            android:fontFamily="@font/rubik_medium"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="10sp"
+            android:text="@string/allow_location_title"
+            android:textColor="@color/text_color8"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgIcon" />
+
+        <TextView
+            android:id="@+id/txtMsg2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/rubik_regular"
+            android:gravity="center_horizontal"
+            android:text="@string/location_on_description"
+            android:textColor="@color/text_color2"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtMsg1" />
+
+        <TextView
+            android:id="@+id/txtMsg3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/rubik_medium"
+            android:gravity="center_horizontal"
+            android:text="@string/follow_the_steps_to_enable_location_access"
+            android:textColor="@color/text_color8"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtMsg2" />
+
+        <TextView
+            android:id="@+id/txtStep1"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/circle_cool_gray_rummy"
+            android:backgroundTint="@color/grayBorder"
+            android:fontFamily="@font/rubik_medium"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@color/text_color8"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="@id/txtStep2"
+            app:layout_constraintTop_toBottomOf="@id/txtMsg3" />
+
+        <TextView
+            android:id="@+id/txtStep1Desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/rubik_regular"
+            android:gravity="center"
+            android:text="@string/open_phone_settings"
+            android:textColor="@color/text_color8"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/txtStep1"
+            app:layout_constraintStart_toEndOf="@id/txtStep1"
+            app:layout_constraintTop_toTopOf="@id/txtStep1" />
+
+        <TextView
+            android:id="@+id/txtStep2"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/circle_cool_gray_rummy"
+            android:backgroundTint="@color/grayBorder"
+            android:fontFamily="@font/rubik_medium"
+            android:gravity="center"
+            android:text="2"
+            android:textColor="@color/text_color8"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toStartOf="@id/txtStep2Desc"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtStep1" />
+
+        <TextView
+            android:id="@+id/txtStep2Desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/rubik_regular"
+            android:gravity="center"
+            android:text="@string/go_to_apps_manage_apps"
+            android:textColor="@color/text_color8"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/txtStep2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/txtStep2"
+            app:layout_constraintTop_toTopOf="@id/txtStep2" />
+
+        <TextView
+            android:id="@+id/txtStep3"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/circle_cool_gray_rummy"
+            android:backgroundTint="@color/grayBorder"
+            android:fontFamily="@font/rubik_medium"
+            android:gravity="center"
+            android:text="3"
+            android:textColor="@color/text_color8"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="@id/txtStep2"
+            app:layout_constraintTop_toBottomOf="@id/txtStep2" />
+
+        <TextView
+            android:id="@+id/txtStep3Desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/rubik_regular"
+            android:gravity="center"
+            android:text="@string/select_myteam11"
+            android:textColor="@color/text_color8"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/txtStep3"
+            app:layout_constraintStart_toEndOf="@id/txtStep3"
+            app:layout_constraintTop_toTopOf="@id/txtStep3" />
+
+        <TextView
+            android:id="@+id/txtStep4"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/circle_cool_gray_rummy"
+            android:backgroundTint="@color/grayBorder"
+            android:fontFamily="@font/rubik_medium"
+            android:gravity="center"
+            android:text="4"
+            android:textColor="@color/text_color8"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="@id/txtStep2"
+            app:layout_constraintTop_toBottomOf="@id/txtStep3" />
+
+        <TextView
+            android:id="@+id/txtStep4Desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/rubik_regular"
+            android:gravity="center"
+            android:text="@string/select_permissions"
+            android:textColor="@color/text_color8"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/txtStep4"
+            app:layout_constraintStart_toEndOf="@id/txtStep4"
+            app:layout_constraintTop_toTopOf="@id/txtStep4" />
+
+        <TextView
+            android:id="@+id/txtStep5"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/circle_cool_gray_rummy"
+            android:backgroundTint="@color/grayBorder"
+            android:fontFamily="@font/rubik_medium"
+            android:gravity="center"
+            android:text="5"
+            android:textColor="@color/text_color8"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="@id/txtStep2"
+            app:layout_constraintTop_toBottomOf="@id/txtStep4" />
+
+        <TextView
+            android:id="@+id/txtStep5Desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/rubik_regular"
+            android:gravity="center"
+            android:text="@string/enable_location"
+            android:textColor="@color/text_color8"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/txtStep5"
+            app:layout_constraintStart_toEndOf="@id/txtStep5"
+            app:layout_constraintTop_toTopOf="@id/txtStep5" />
+
+        <TextView
+            android:id="@+id/btnEnableLocation"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginVertical="20dp"
+            android:background="@drawable/bg_primary_box_rummy"
+            android:fontFamily="@font/rubik_medium"
+            android:gravity="center"
+            android:text="@string/enable_location"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtStep5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

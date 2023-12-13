@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <data>
+
+        <import type="android.view.View"/>
+        <import type="android.text.TextUtils"/>
+        <variable
+            name="mutableBottomSheetState"
+            type="androidx.lifecycle.MutableLiveData&lt;Integer&gt;" />
+
+        <variable
+            name="bottomSheetState"
+            type="androidx.lifecycle.LiveData&lt;Integer&gt;" />
+
+        <variable
+            name="viewModel"
+            type="com.rummytitans.playcashrummyonline.cardgame.ui.payment.viewmodel.PaymentOptionViewModel" />
+        <variable
+            name="color"
+            type="String" />
+
+        <import type="android.graphics.Color" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        app:behavior_hideable="true"
+        app:bottomSheetState="@{bottomSheetState}"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        app:onBottomSheetStateChanged="@{mutableBottomSheetState}">
+
+        <ImageView
+            android:id="@+id/imgSlideDownIndicator"
+            android:layout_width="@dimen/icon_size_large"
+            android:layout_height="@dimen/margin_micro"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/rounded_rect_white" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_button_8dp"
+            android:backgroundTint="@color/rummy_black_3"
+            android:layout_marginTop="4dp"
+            android:paddingBottom="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgSlideDownIndicator">
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.66" />
+
+            <TextView
+                android:id="@+id/labelConfirmation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/rubik_medium"
+                android:text="@{viewModel.linkOtpSend ?`Enter OTP received on `+viewModel.loginResponse.Mobile : `Link `+viewModel.linkedWallet.Title}"
+                android:textColor="@color/text_color8"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgPaytm" />
+
+            <ImageView
+                android:id="@+id/imgPaytm"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:padding="2dp"
+                android:background="@color/text_color5"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:setImageUrl="@{viewModel.linkedWallet.Image}" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/labelConfirmation">
+
+                <TextView
+                    android:id="@+id/tvMobileNumber"
+                    style="@style/RummySdk_Widget.BorderEditTextV2"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edittext_height"
+                    android:background="@drawable/box_grey_border_rummy"
+                    android:backgroundTint="@color/transparent"
+                    android:fontFamily="@font/rubik_medium"
+                    android:maxLength="10"
+                    android:maxLines="1"
+                    android:gravity="center"
+                    android:text="@{viewModel.loginResponse.Mobile}"
+                    android:textColor="@color/cool_grey"
+                    android:textSize="14sp"
+                    android:visibility="@{!viewModel.linkOtpSend ? View.VISIBLE :View.GONE}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <com.chaos.view.PinView
+                    android:id="@+id/otpView"
+                    style="@style/PinWidget.PinView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="true"
+                    android:focusable="true"
+                    android:hint="&#45;&#45;&#45;&#45;&#45;&#45;"
+                    android:imeOptions="actionDone"
+                    android:inputType="number"
+                    android:textColor="@color/cool_grey"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:visibility="@{viewModel.linkOtpSend ? View.VISIBLE :View.GONE}"
+                    app:itemCount="6"
+                    app:itemHeight="@dimen/edittext_height"
+                    app:itemSpacing="8dp"
+                    app:itemWidth="42dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lineColor="@color/grayBorder"
+                    app:lineWidth="1dp"
+                    app:viewType="line" />
+
+                <TextView
+                    android:id="@+id/textView226"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/rubik_regular"
+                    android:text="@{viewModel.wrongOtpErrorMsg}"
+                    android:textColor="@color/redVariant1"
+                    android:textSize="12sp"
+                    android:visibility="@{viewModel.linkOtpSend &amp;&amp; !TextUtils.isEmpty(viewModel.wrongOtpErrorMsg) ? View.VISIBLE :View.GONE,default=visible}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/otpView"
+                    app:layout_constraintTop_toBottomOf="@+id/otpView" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/txtInfoInvite2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text='@{"Don`t have a "+viewModel.linkedWallet.Title +" account, we will create one for you."}'
+                android:textColor="@color/text_color2"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/guideLeft"
+                app:layout_constraintStart_toStartOf="@+id/guideRight"
+                app:layout_constraintTop_toBottomOf="@+id/layout_mobile" />
+
+
+            <TextView
+                android:id="@+id/txtCancel"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:text="@{viewModel.linkOtpSend ? `Back` : `Cancel`}"
+                android:onClick="@{()->viewModel.linkOtpSend ? viewModel.backToLink() :viewModel.toggleLinkWalletSheet()}"
+                android:textSize="12sp"
+                android:textAppearance="@style/RummySdk_TextAppearance.Medium"
+                android:textColor="@color/text_color2"
+                app:layout_constraintEnd_toStartOf="@+id/txtLink"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtInfoInvite2" />
+
+            <TextView
+                android:id="@+id/txtLink"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="@dimen/dimen_16"
+                android:background="@drawable/bg_squre_shape"
+                android:backgroundTint="@color/rummy_maingreen"
+                android:elevation="@dimen/margin_micro"
+                android:gravity="center"
+                android:text="@{!viewModel.linkOtpSend ? `PROCEED` : `LINK`}"
+                android:alpha="@{!viewModel.linkOtpSend ? 1.0f : viewModel.validForPinview ? 1.0f :0.5f,default=0.5}"
+                android:textAppearance="@style/RummySdk_TextAppearance.Medium"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txtCancel"
+                app:layout_constraintTop_toBottomOf="@+id/txtInfoInvite2" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

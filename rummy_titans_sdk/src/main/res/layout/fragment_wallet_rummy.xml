@@ -1,0 +1,690 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+        <import type="android.text.TextUtils"/>
+        <import type="com.rummytitans.playcashrummyonline.cardgame.RummyTitanSDK"/>
+        <variable
+            name="viewmodel"
+            type="com.rummytitans.playcashrummyonline.cardgame.ui.wallet.viewmodel.WalletViewModel" />
+
+        <import type="android.graphics.Color" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black">
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipeRefresh"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:refreshing='@{viewmodel.isSwipeLoading}'>
+
+                <androidx.core.widget.NestedScrollView
+                    android:id="@+id/scrollView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fillViewport="true">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingBottom="10dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/topView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:elevation="4dp"
+                            android:paddingBottom="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <com.github.mikephil.charting.charts.PieChart
+                                android:id="@+id/piechart"
+                                android:layout_width="72dp"
+                                android:layout_height="72dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="16dp"
+                                android:visibility="@{viewmodel.isGraphVisible?View.VISIBLE:View.INVISIBLE}"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:visibility="visible" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="8dp"
+                                android:visibility="gone"
+                                app:layout_constraintTop_toTopOf="@+id/txtYourWinning2"
+                                app:srcCompat="@drawable/ic_info"
+                                app:tint="@color/steel_grey" />
+
+                            <ImageView
+                                android:id="@+id/imageView27"
+                                android:layout_width="18dp"
+                                android:layout_height="28dp"
+                                android:textSize="13sp"
+                                android:visibility="@{viewmodel.isGraphVisible?View.VISIBLE:View.GONE}"
+                                app:layout_constraintBottom_toBottomOf="@+id/piechart"
+                                app:layout_constraintEnd_toEndOf="@+id/piechart"
+                                app:layout_constraintStart_toStartOf="@+id/piechart"
+                                app:layout_constraintTop_toTopOf="@+id/piechart"
+                                app:srcCompat="@drawable/ic_rupees_rummy"
+                                app:tint="@color/white"/>
+
+                            <TextView
+                                android:id="@+id/textView61"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:fontFamily="@font/rubik_regular"
+                                android:text="@string/frag_wallet_total_balance"
+                                android:textColor="@color/text_color2"
+                                android:textSize="12sp"
+                                app:layout_constraintBottom_toTopOf="@+id/txtYourWinning2"
+                                app:layout_constraintStart_toEndOf="@+id/piechart"
+                                app:layout_constraintTop_toTopOf="@+id/piechart"
+                                app:layout_constraintVertical_chainStyle="packed" />
+
+                            <TextView
+                                android:id="@+id/txtYourWinning2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginBottom="3dp"
+                                android:fontFamily="@font/rubik_medium"
+                                android:textColor="@color/text_color8"
+                                android:textSize="18sp"
+                                app:layout_constraintBottom_toTopOf="@+id/imageView62"
+                                app:layout_constraintStart_toStartOf="@+id/textView61"
+                                app:layout_constraintTop_toBottomOf="@+id/textView61"
+                                app:setAmmountText='@{viewmodel.walletInfo.Balance.TotalAmount}'
+                                tools:text="2000" />
+
+                            <ImageView
+                                android:id="@+id/imageView62"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                app:layout_constraintBottom_toBottomOf="@+id/piechart"
+                                app:layout_constraintStart_toStartOf="@+id/txtYourWinning2"
+                                app:layout_constraintTop_toBottomOf="@+id/txtYourWinning2"
+                                app:srcCompat="@drawable/ic_nc_wallet_stetment_rummy" />
+
+                            <TextView
+                                android:id="@+id/btnMyRecentTransactions"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:fontFamily="@font/rubik_regular"
+                                android:text="View Statement"
+                                android:textColor="@color/faded_orange"
+                                android:textSize="12sp"
+                                app:layout_constraintBottom_toBottomOf="@+id/imageView62"
+                                app:layout_constraintStart_toEndOf="@+id/imageView62"
+                                app:layout_constraintTop_toTopOf="@+id/imageView62" />
+
+
+                            <Button
+                                android:id="@+id/btnTopAddCash"
+                                android:layout_width="100dp"
+                                android:layout_height="30dp"
+                                android:layout_marginEnd="16dp"
+                                android:background="@drawable/bg_white_box"
+                                android:backgroundTint="@color/rummy_maingreen"
+                                android:elevation="3dp"
+                                android:fontFamily="@font/rubik_medium"
+                                android:gravity="center"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:text="@{`+ Add Cash`}"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:onClick="@{()->viewmodel.onAddCashClick()}"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvBones"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clipToPadding="false"
+                            android:paddingTop="12dp"
+                            tools:visibility="gone"
+                            android:visibility="@{viewmodel.walletInfo.Balance.BonusList.empty?View.GONE:View.VISIBLE}"
+                            android:paddingHorizontal="12dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/topView"/>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/btnGstBonus"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="8dp"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginEnd="12dp"
+                            app:cardElevation="4dp"
+                            android:visibility="@{viewmodel.isGstBonusShow?View.VISIBLE:View.GONE}"
+                            app:cardBackgroundColor="@color/RummyalertOrange"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/rvBones">
+
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="55dp"
+                                android:backgroundTint="@color/rummy_black_3"
+                                android:background="@drawable/bg_squre_8dp"
+                                android:layout_marginTop="1dp"
+                                android:padding="10dp">
+
+                                <ImageView
+                                    android:id="@+id/imageView63"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:srcCompat="@drawable/ic_gst_plus" />
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toStartOf="@+id/imageView63"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/rubik_regular"
+                                        android:text="@{viewmodel.depositBonusVal.name}"
+                                        android:textColor="@color/text_color2"
+                                        android:textSize="10sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:fontFamily="@font/rubik_medium"
+                                        android:singleLine="true"
+                                        android:text="@{viewmodel.depositBonusVal.value.toString()}"
+                                        android:textColor="@color/text_color8"
+                                        android:textSize="14sp" />
+
+
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:orientation="vertical"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    android:gravity="center"
+                                    app:layout_constraintStart_toEndOf="@+id/imageView63"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <TextView
+                                        android:id="@+id/textView1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/rubik_regular"
+                                        android:text="@{viewmodel.gstBonusVal.name}"
+                                        android:textColor="@color/text_color2"
+                                        android:textSize="10sp"
+                                        />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:fontFamily="@font/rubik_medium"
+                                        android:singleLine="true"
+                                        android:textColor="@color/text_color8"
+                                        android:textSize="14sp"
+                                        android:text="@{viewmodel.gstBonusVal.value.toString()}"
+                                        />
+
+
+
+                                </LinearLayout>
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/btnScratchCard"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_marginTop="16dp"
+                            app:setViewBackground="@{@color/rummy_black_3}"
+                            app:strokeColor="@{@color/grayBorder}"
+                            android:visibility="gone"
+                            app:viewRadius="@{4}"
+                            android:foreground="?attr/selectableItemBackground"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/btnGstBonus">
+
+                            <ImageView
+                                android:id="@+id/image"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginBottom="16dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_nc_scratchcard"
+                                app:tint="@color/text_color8"/>
+
+                            <TextView
+                                android:id="@+id/textView41"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="7dp"
+                                android:fontFamily="@font/rubik_medium"
+                                android:text="@string/scratch_cards"
+                                android:textColor="@color/text_color8"
+                                android:textSize="12sp"
+                                app:layout_constraintBottom_toTopOf="@id/textHeader"
+                                app:layout_constraintStart_toEndOf="@id/image"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_chainStyle="packed" />
+
+                            <TextView
+                                android:id="@+id/textHeader"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/rubik_regular"
+                                android:singleLine="true"
+                                android:text="@string/check_your_scratched_rewards_here"
+                                android:textColor="@color/text_color2"
+                                android:textSize="12sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/textView41"
+                                app:layout_constraintTop_toBottomOf="@+id/textView41" />
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_marginEnd="16dp"
+                                android:rotation="270"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_arrow_down"
+                                app:tint="@color/text_color8" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/btn_tickets"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="12dp"
+                            app:setViewBackground="@{@color/rummy_black_3}"
+                            app:strokeColor="@{@color/grayBorder}"
+                            app:viewRadius="@{4}"
+                            android:foreground="?attr/selectableItemBackground"
+                            app:layout_constraintTop_toBottomOf="@+id/btnWithdrawMoney">
+
+                            <TextView
+                                android:id="@+id/textView100"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="16dp"
+                                android:fontFamily="@font/rubik_medium"
+                                android:text="Rummy Tickets"
+                                android:textColor="@color/text_color8"
+                                android:textSize="12sp"
+                                app:layout_constraintBottom_toTopOf="@+id/textView900"
+                                app:layout_constraintStart_toEndOf="@+id/iv_logo_ticket"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+
+                            <TextView
+                                android:id="@+id/textView900"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="16dp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/rubik_regular"
+                                android:singleLine="true"
+                                android:text="@{viewmodel.walletInfo.GameTicketMesage}"
+                                android:textColor="@{TextUtils.isEmpty(viewmodel.walletInfo.GameTicketMesageColor)?@color/text_color2:Color.parseColor(viewmodel.walletInfo.GameTicketMesageColor)}"
+                                android:textSize="12sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/textView100"
+                                app:layout_constraintTop_toBottomOf="@+id/textView100" />
+
+                            <ImageView
+                                android:id="@+id/iv_logo_ticket"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_marginStart="16dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_games_ticket"
+                                app:tint="@color/text_color8"/>
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_marginEnd="16dp"
+                                android:rotation="270"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_arrow_down"
+                                app:tint="@color/text_color8" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/btnWithdrawMoney"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="12dp"
+                            android:visibility="@{RummyTitanSDK.INSTANCE.option.showKycOptions ? View.VISIBLE :View.GONE}"
+                            app:setViewBackground="@{@color/rummy_black_3}"
+                            app:strokeColor="@{@color/grayBorder}"
+                            app:viewRadius="@{4}"
+                            android:foreground="?attr/selectableItemBackground"
+                            app:layout_constraintTop_toBottomOf="@+id/btnScratchCard">
+
+                            <TextView
+                                android:id="@+id/textView104"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="16dp"
+                                android:fontFamily="@font/rubik_medium"
+                                android:text="@string/withdraw_money"
+                                android:textColor="@color/text_color8"
+                                android:textSize="12sp"
+                                app:layout_constraintBottom_toTopOf="@+id/textView105"
+                                app:layout_constraintStart_toEndOf="@+id/textView106"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.0"
+                                app:layout_constraintVertical_chainStyle="packed" />
+
+
+                            <TextView
+                                android:id="@+id/textView105"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="16dp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/rubik_regular"
+                                android:singleLine="true"
+                                android:text="@string/wallt_verified"
+                                android:textColor="@color/text_color2"
+                                android:textSize="12sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/textView104"
+                                app:layout_constraintTop_toBottomOf="@+id/textView104"
+                                />
+
+                            <View
+                                android:id="@+id/bgView"
+                                setViewBackground="@{@color/grapeFruit_two}"
+                                viewRadius="@{4}"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_margin="8dp"
+                                android:alpha=".1"
+                                android:visibility="@{viewmodel.isVerified?View.GONE:View.VISIBLE}"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/textView105" />
+
+                            <TextView
+                                android:id="@+id/txtVerifyAccount"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/rubik_regular"
+                                android:gravity="center"
+                                android:padding="8dp"
+                                android:text="@string/verify_account_withdrawl_modey"
+                                android:textColor="@color/grapeFruit_two"
+                                android:textSize="10sp"
+                                android:visibility="@{viewmodel.isVerified?View.GONE:View.VISIBLE}"
+                                app:layout_constraintBottom_toBottomOf="@id/bgView"
+                                app:layout_constraintEnd_toEndOf="@id/bgView"
+                                app:layout_constraintStart_toStartOf="@id/bgView"
+                                app:layout_constraintTop_toTopOf="@id/bgView" />
+
+                            <ImageView
+                                android:id="@+id/textView106"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_marginStart="16dp"
+                                app:layout_constraintBottom_toBottomOf="@+id/textView105"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/textView104"
+                                app:srcCompat="@drawable/ic_nc_withdrawmoney"
+                                app:tint="@color/text_color8" />
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_marginEnd="16dp"
+                                android:rotation="270"
+                                app:layout_constraintBottom_toBottomOf="@+id/textView105"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/textView104"
+                                app:srcCompat="@drawable/ic_arrow_down"
+                                app:tint="@color/text_color8" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/btnRedeem"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="12dp"
+                            app:setViewBackground="@{@color/rummy_black_3}"
+                            app:strokeColor="@{@color/grayBorder}"
+                            app:viewRadius="@{4}"
+                            android:foreground="?attr/selectableItemBackground"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_tickets">
+
+                            <TextView
+                                android:id="@+id/textView114"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="16dp"
+                                android:fontFamily="@font/rubik_medium"
+                                android:text="@string/frag_wallet_redeem_coupon"
+                                android:textColor="@color/text_color8"
+                                android:textSize="12sp"
+                                app:layout_constraintBottom_toTopOf="@+id/textView115"
+                                app:layout_constraintStart_toEndOf="@+id/textView1060"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_chainStyle="packed" />
+
+
+                            <TextView
+                                android:id="@+id/textView115"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="16dp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/rubik_regular"
+                                android:singleLine="true"
+                                android:text="@string/redeem_your_rummy_titans_nets_chips_here"
+                                android:textColor="@color/text_color2"
+                                android:textSize="12sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/textView114"
+                                app:layout_constraintTop_toBottomOf="@+id/textView114" />
+
+                            <ImageView
+                                android:id="@+id/textView1060"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_marginStart="16dp"
+                                app:layout_constraintBottom_toBottomOf="@+id/textView115"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/textView114"
+                                app:srcCompat="@drawable/ic_nc_redeemcoupon"
+                                app:tint="@color/text_color8" />
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_marginEnd="16dp"
+                                android:rotation="270"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_arrow_down"
+                                app:tint="@color/text_color8" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.core.widget.NestedScrollView>
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <View
+            android:id="@+id/bgViewLayer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#8000"
+            android:onClick="@{()->viewmodel.hideSheet()}"
+            android:visibility="@{viewmodel.isBottomSheetVisible||viewmodel.isScratchCardVisible? View.VISIBLE:View.GONE}"
+            tools:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/loadingLogin"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_white_progress"
+            android:elevation="10dp"
+            android:padding="@dimen/margin_min"
+            android:theme="@style/RummySdk_ProgressBar"
+            android:visibility="@{viewmodel.isLoading() ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="@{viewmodel.isScratchCardVisible? View.VISIBLE:View.GONE}">
+
+
+            <ImageView
+                android:id="@+id/imgCloseScratchCard"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/txtMainTitle"
+                app:srcCompat="@drawable/ic_circle_close" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutCoupon"
+                android:layout_width="310dp"
+                android:layout_height="183dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_success_scratch"
+                tools:visibility="gone">
+
+
+                <TextView
+                    android:id="@+id/textView42"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:text="@{viewmodel.scratchCardResponse}"
+                    android:textColor="#eb7a3d"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="It's a wicket!!" />
+
+                <com.rummytitans.playcashrummyonline.cardgame.widget.ScratchView
+                    android:id="@+id/scratchView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:elevation="20dp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

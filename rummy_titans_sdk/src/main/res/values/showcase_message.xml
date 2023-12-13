@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string name="showcase_withdrawal">Withdrawal</string>
+    <string name="showcase_withdrawal_description">Withdraw your earnings from here after completing KYC.</string>
+
+
+</resources>

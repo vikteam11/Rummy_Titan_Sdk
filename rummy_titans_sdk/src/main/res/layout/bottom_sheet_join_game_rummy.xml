@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.rummytitans.playcashrummyonline.cardgame.ui.joinGame.JoinContestViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutBottomSheetJoin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:behavior_hideable="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@drawable/bottom_button"
+        android:backgroundTint="@color/text_color6"
+        app:behavior_peekHeight="0dp"
+        android:elevation="5dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_button"
+            android:backgroundTint="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/labelConfirmation"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:elevation="3dp"
+                android:background="@drawable/bottom_button"
+                android:backgroundTint="@color/text_color6"
+                android:fontFamily="@font/rubik_medium"
+                android:gravity="center"
+                android:text="@string/bs_join_confirmation"
+                android:textAllCaps="true"
+                android:textAppearance="@style/RummySdk_TextAppearance.Medium"
+                android:textColor="@color/text_color8"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/rummy_black_3"
+                app:layout_constraintTop_toBottomOf="@+id/labelConfirmation"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <androidx.constraintlayout.widget.Group
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="@{viewModel.isLoading() ? View.INVISIBLE : View.VISIBLE}"
+                app:constraint_referenced_ids="constraintLayout16,txtTerms,btnJoinContest"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view1">
+
+
+                <TextView
+                    android:id="@+id/txtEntryFeeHint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_medium"
+                    android:text="Entry Fee"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/text_color3"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/txtEntryFees"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:setDoublePrice="@{viewModel.joinConfirmModel.entryFee}"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtEntryFeeHint"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/txtEntryFeeHint"
+                    app:layout_constraintVertical_bias=".0"
+                    tools:text="1450" />
+
+
+                <TextView
+                    android:id="@+id/lableUsableAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/rubik_medium"
+                    android:text="@string/bs_join_usable_balance"
+                    android:textColor="@color/text_color3"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view10" />
+
+                <TextView
+                    android:id="@+id/lableUsableAmount2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_regular"
+                    android:text="@string/bs_join_winning_unutilized"
+                    android:textColor="@color/text_color1"
+                    android:textSize="11sp"
+                    app:layout_constraintStart_toStartOf="@+id/lableUsableAmount"
+                    app:layout_constraintTop_toBottomOf="@+id/lableUsableAmount" />
+
+                <TextView
+                    android:id="@+id/txtUsableBalance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:setDoublePrice="@{viewModel.joinConfirmModel.usableBalance}"
+                    app:layout_constraintBottom_toBottomOf="@+id/lableUsableAmount2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/lableUsableAmount"
+                    app:layout_constraintVertical_bias=".0"
+                    tools:text="1450" />
+
+                <View
+                    android:id="@+id/view10"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/rummy_black_3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtEntryFeeHint" />
+
+
+                <TextView
+                    android:id="@+id/txtBonusHint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_medium"
+                    android:text="Bonus"
+                    android:layout_marginTop="16dp"
+                    android:textColor="@color/text_color3"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/lableUsableAmount2" />
+
+                <TextView
+                    android:id="@+id/txtBonus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_medium"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    tools:text="123"
+                    app:setDoublePrice="@{viewModel.joinConfirmModel.bonus}"
+                    app:layout_constraintTop_toBottomOf="@id/lableUsableAmount2"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtBonusHint"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/txtBonusHint"/>
+
+                <TextView
+                    android:id="@+id/txtTicketHint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:drawablePadding="5dp"
+                    android:fontFamily="@font/rubik_medium"
+                    android:text="Game Ticket"
+                    android:gravity="center"
+                    android:textColor="@color/orange"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txtBonusHint"
+                    app:drawableStartCompat="@drawable/ic_yellow_ticket" />
+
+
+                <TextView
+                    android:id="@+id/txGolderTicketAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    tools:text="123"
+                    app:setDoublePrice="@{viewModel.joinConfirmModel.ticket}"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtTicketHint"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/txtTicketHint" />
+
+                <View
+                    android:id="@+id/view11"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/rummy_black_3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtTicketHint" />
+
+
+                <TextView
+                    android:id="@+id/txtHintTotalAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/rubik_medium"
+                    android:text="Total Amount"
+                    android:textColor="@color/text_color3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view11" />
+
+
+                <TextView
+                    android:id="@+id/txtTotalAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtHintTotalAmount"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/txtHintTotalAmount"
+                    app:layout_constraintVertical_bias=".0"
+                    app:setDoublePrice="@{viewModel.joinConfirmModel.totalAmount}"
+                    tools:text="1450" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/txtTerms"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="16dp"
+                android:background="@drawable/bg_squre"
+                android:backgroundTint="@color/rummy_black_3"
+                android:fontFamily="@font/rubik_regular"
+                android:gravity="center"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="10dp"
+                android:text="@{viewModel.joinConfirmModel.disclaimer}"
+                android:textColor="@color/text_color2"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.468"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout16"
+                tools:text="fdgjkdfgkldjfgdfkgjdiofgjfdiough jeiorut 9tj giorjg iorfgjiorgjio gjiogj gfdio gjroigjhepo iruhv" />
+
+            <Button
+                android:id="@+id/btnJoinContest"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:minWidth="164dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="15dp"
+                android:paddingHorizontal="8dp"
+                android:layout_marginHorizontal="24dp"
+                android:background="@drawable/bg_squre_shape"
+                android:backgroundTint="@color/rummy_maingreen"
+                android:fontFamily="@font/rubik_medium"
+                android:gravity="center"
+                android:textAllCaps="true"
+                android:text="PLAY NOW"
+                app:playGameConfirmText="@{viewModel.joinConfirmModel}"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtTerms"/>
+
+            <ProgressBar
+                android:id="@+id/loading"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:elevation="10dp"
+                android:indeterminateTint="@color/text_color8"
+                android:padding="@dimen/margin_min"
+                android:theme="@style/RummySdk_ProgressBar"
+                android:visibility="@{viewModel.isLoading() ?  View.VISIBLE:View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="gone" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.TextUtils" />
+
+        <import type="android.view.View" />
+
+        <import type="android.graphics.Color" />
+
+        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+
+        <variable
+            name="viewmodel"
+            type="com.rummytitans.playcashrummyonline.cardgame.ui.verifications.viewmodels.BankVerificationViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnVerifyBankAccount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:paddingBottom="5dp">
+
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/frag_bank_verification_verify_your_bank_account"
+                    android:textColor="@color/text_color8"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/layout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/layout" />
+
+                <View
+                    android:id="@+id/view10"
+                    android:layout_width="0dp"
+                    android:layout_height="0.4dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/silver"
+                    app:layout_constraintEnd_toEndOf="@+id/layout"
+                    app:layout_constraintStart_toStartOf="@+id/layout"
+                    app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="25dp"
+                    android:gravity="center"
+                    android:text="@string/frag_bank_verification_transfer_your_winnings_to_your_bank_account_for_withdrawing_money_from_myteam11_please_verify_your_bank_account_by_following_below_steps"
+                    android:textColor="@color/text_color2"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/layout"
+                    app:layout_constraintStart_toStartOf="@+id/layout"
+                    app:layout_constraintTop_toBottomOf="@+id/view10" />
+
+
+                <FrameLayout
+                    android:id="@+id/frameLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="130dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="11dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/bg_image_upload"
+                    android:backgroundTint="@color/grayBorder"
+                    app:layout_constraintEnd_toEndOf="@+id/layout"
+                    app:layout_constraintStart_toStartOf="@+id/layout"
+                    app:layout_constraintTop_toBottomOf="@+id/textView18">
+
+
+                    <TextView
+                        android:id="@+id/btnSelectBankProof"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="20dp"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:text="@string/frag_bank_verification_upload_bank_account_proof"
+                        android:textColor="@color/cool_grey"
+                        android:textSize="10sp"
+                        android:visibility='@{TextUtils.isEmpty(viewmodel.getImageUrl)?View.VISIBLE:View.GONE}'
+                        app:setCompactDrawableTop="@{R.drawable.ic_dummy_bank_account}" />
+
+                    <ImageView
+                        android:id="@+id/imgPanCard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        android:visibility='@{TextUtils.isEmpty(viewmodel.getImageUrl)?View.GONE:View.VISIBLE}'
+                        app:srcCompat="@drawable/dummy_avtar"
+                        tools:visibility="gone" />
+
+
+                    <ImageView
+                        android:id="@+id/imgDeleteImage"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="end|bottom"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/button_delete"
+                        android:elevation="3dp"
+                        android:padding="3dp"
+                        android:visibility='@{TextUtils.isEmpty(viewmodel.getImageUrl)?View.GONE:View.VISIBLE}'
+                        app:setSrcCompact="@{R.drawable.ic_delete}" />
+
+                </FrameLayout>
+
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/editBankFullName"
+                    style="@style/RummySdk_Widget.BorderEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:digits=" qwertzuiopasdfghjklyxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
+                    android:hint="@string/frag_bank_verification_full_name"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/text_color8"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/layout"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/layout"
+                    app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+                    tools:text="Shahid Khan" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/hint1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/frag_bank_verification_enter_full_name"
+                    android:textColor="@color/grey3"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="@id/layout"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/layout"
+                    app:layout_constraintTop_toBottomOf="@+id/editBankFullName" />
+
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/editAccountNumber"
+                    style="@style/RummySdk_Widget.BorderEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:digits="0123456789"
+                    android:hint="@string/frag_bank_verification_account_number"
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/text_color8"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/layout"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/layout"
+                    app:layout_constraintTop_toBottomOf="@+id/hint1"
+                    tools:text="1234567890123456" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/hint2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/frag_bank_verification_enter_account_number"
+                    android:textColor="@color/grey3"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="@id/layout"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/layout"
+                    app:layout_constraintTop_toBottomOf="@+id/editAccountNumber" />
+
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/editReEnterAccountNumber"
+                    style="@style/RummySdk_Widget.BorderEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:digits="0123456789"
+                    android:hint="@string/frag_bank_verification_re_enter_account_number"
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/gunmetal"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/layout"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/layout"
+                    app:layout_constraintTop_toBottomOf="@+id/hint2"
+                    tools:text="1234567890123456" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/hint3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/frag_bank_verification_re_enter_account_number"
+                    android:textColor="@color/grey3"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="@id/layout"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/layout"
+                    app:layout_constraintTop_toBottomOf="@+id/editReEnterAccountNumber" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/editIFSCCode"
+                    style="@style/RummySdk_Widget.BorderEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:digits="0123456789qwertzuiopasdfghjklyxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
+                    android:hint="@string/frag_bank_verification_ifsc_code"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/gunmetal"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/layout"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/layout"
+                    app:layout_constraintTop_toBottomOf="@+id/hint3"
+                    tools:text="ICIC0000012" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/hin4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/frag_bank_verification_enter_ifsc_code"
+                    android:textColor="@color/grey3"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="@id/layout"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/layout"
+                    app:layout_constraintTop_toBottomOf="@+id/editIFSCCode" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/editBankName"
+                    style="@style/RummySdk_Widget.BorderEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:hint="@string/frag_bank_verification_bank_name"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/gunmetal"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/layout"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/layout"
+                    app:layout_constraintTop_toBottomOf="@+id/hin4"
+                    tools:text="ICICI" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/hin5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/frag_bank_verification_name_of_your_bank"
+                    android:textColor="@color/grey3"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="@id/layout"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/layout"
+                    app:layout_constraintTop_toBottomOf="@+id/editBankName" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/editBankBranch"
+                    style="@style/RummySdk_Widget.BorderEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:hint="@string/frag_bank_verification_bank_branch"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/text_color8"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/layout"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/layout"
+                    app:layout_constraintTop_toBottomOf="@+id/hin5"
+                    tools:text="Rajasthan" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/hin6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/frag_bank_verification_name_of_your_branch"
+                    android:textColor="@color/grey3"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/layout"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/layout"
+                    app:layout_constraintTop_toBottomOf="@+id/editBankBranch"
+                    app:layout_constraintVertical_bias="0.0" />
+
+
+                <ProgressBar
+                    android:id="@+id/loading"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_white_progress"
+                    android:elevation="10dp"
+                    android:padding="@dimen/margin_min"
+                    android:theme="@style/RummySdk_ProgressBar"
+                    android:visibility="@{viewmodel.isProgressLoading?View.VISIBLE:View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <com.rummytitans.playcashrummyonline.cardgame.widget.FadingSnackbar
+            android:id="@+id/fadingSnackbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:elevation="@dimen/margin_micro"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnVerifyBankAccount"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/bg_squre_shape"
+            android:backgroundTint="@color/rummy_maingreen"
+            android:layout_marginBottom="16dp"
+            android:layout_marginHorizontal="16dp"
+            android:enabled="@{!viewmodel.isProgressLoading()}"
+            android:foreground="?selectableItemBackground"
+            android:text="@string/frag_bank_verification_verify_bank_account"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

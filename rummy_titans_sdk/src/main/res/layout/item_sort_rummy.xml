@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.rummytitans.playcashrummyonline.cardgame.ui.wallet.SortItemModel" />
+        <import type="kotlin.jvm.functions.Function0"/>
+        <import type="kotlin.Unit"/>
+        <variable name="sortClick" type="Function0&lt;Unit>"/>
+
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:paddingStart="8dp"
+        android:paddingEnd="2dp"
+        android:onClick="@{()->sortClick.invoke()}"
+        xmlns:tools="http://schemas.android.com/tools">
+        <ImageView
+            android:id="@+id/sort"
+            android:alpha="@{viewModel.sortType==1?1f:.4f}"
+            android:background="@{viewModel.sortType==1 ? @drawable/ic_green_checked : @drawable/ic_green_uncheck}"
+            android:padding="2dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"/>
+        <TextView
+            android:layout_weight="2"
+            tools:text="thisis"
+            android:layout_marginStart="4dp"
+            android:text="@{viewModel.title}"
+            android:layout_width="0dp"
+            android:textSize="14sp"
+            android:fontFamily="@font/rubik_medium"
+            android:textColor="@{viewModel.sortType==1?@color/rummy_maingreen:@color/text_color8}"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+</layout>

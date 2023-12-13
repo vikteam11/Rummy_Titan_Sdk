@@ -1,0 +1,419 @@
+<resources>
+    <string name="app_name">RummyTitans</string>
+    <string name="app_name_rummy">RummyTitans</string>
+    <!--    google login api-->
+
+    <!-- truecaller Release Key - UbOFzed8bf12d0df942d29997a218b9176c0e -->
+    <!-- truecaller Debug Key - 3iE8V5350a24074664fd59932b158c3c8a120-->
+    <!-- truecaller avinash Debug Key - xmPPhf0f0f079f1fb4bdba785d4945e39b98d-->
+    <!--live truecaller new  __tvomb7svrmtu1kx5qguqwdk6oxv-klblwp6fehx54-->
+    <!--debug avi system truecaller new  3vk5fnz8kqj8xr9eligykxxdfouydgob2nko_lyc0uq-->
+
+    <string name="playstore_url">https://play.google.com/store/apps/details?id=</string>
+
+    <string name="appsflyer_open_app_link">rummytitansopenapp</string>
+
+
+    <!-- <string name="youtube_api_key">AIzaSyBVd2LOOPlLefvuCkhk0tgjThZIUSLgNpM</string>-->
+
+
+    <string name="txt_or">or</string>
+    <string name="change_language">Do you want to change language ?</string>
+    <string name="allow_notifications">Go to settings and allow notifications for RummyTitans</string>
+    <string name="txt_sign_up_continue">Continue</string>
+    <string name="txt_enter_otp">Enter OTP</string>
+    <string name="allow_contacts_msg">Please permit the permission through the Settings to access your contacts.</string>
+    <string name="permission_description">Select Permission -> Enable Permission</string>
+
+    <string name="no_contact_pls_update">You haven\'t sync your contacts yet, Please sync your contacts first</string>
+
+    <string name="do_you_realy_wants_update_contacts">Do you want to update your Contacts?</string>
+
+    <!-- Error messages -->
+    <string name="err_invalid_email">Please enter a valid email address!</string>
+    <string name="err_invalid_mobile_number">Please enter a valid mobile number!</string>
+    <string name="err_invalid_otp">Please enter a valid OTP!</string>
+    <string name="fantasy_point_system">Fantasy Point System</string>
+    <string name="how_to_play">How To Play</string>
+    <string name="about_us">About Us</string>
+    <string name="faq_s">FAQs</string>
+    <string name="legalities">Legalities</string>
+    <string name="terms_amp_conditions"><![CDATA[Terms & Conditions]]></string>
+    <string name="tutorial_videos">Tutorial Videos</string>
+
+    <!-- Create Team Messages-->
+    <string name="refer_terms_amp_conditions"><![CDATA[Refer Terms & Conditions]]></string>
+
+
+    <string name="err_session_expired">Session Expired! Please login again to continue!</string>
+    <string name="live_chat">@string/eng_menu_live_chat</string>
+    <string name="myteam11_blog">RummyTitans Blog</string>
+    <string name="add_cash">Add Cash</string>
+    <string name="add_cash_to_wallet">Add Cash to Wallet</string>
+    <string name="add">ADD</string>
+    <string name="get">GET</string>
+    <string name="total_get">TOTAL GET</string>
+    <string name="action">ACTION</string>
+
+    <!-- this strings are used when we need only english words like user in hindi and we want english keys-->
+    <string name="eng_menu_refer">Refer &amp; Earn</string>
+    <string name="eng_menu_follow_us">Follow Us</string>
+    <string name="eng_menu_live_chat">Live Chat</string>
+    <!--ends-->
+
+    <string name="each_of_the_above_offers_can_be_availed_once_per_user">Each of the above offers can be availed once per user.</string>
+    <string name="act_payment_card_number">Card Number</string>
+    <string name="act_refer_title">Refer</string>
+    <string name="act_refer_invite_friends">+INVITE FRIENDS</string>
+    <string name="act_verification_pan_card_verification">PAN CARD VERIFICATION</string>
+    <string name="act_verification_bank_verification">BANK ACCOUNT VERIFICATION</string>
+    <string name="bs_join_confirmation">Confirmation</string>
+    <string name="bs_join_usable_balance">Usable Balance</string>
+    <string name="bs_join_winning_unutilized">(Winning + Unutilized)</string>
+    <string name="frag_wallet_total_balance">Total Balance</string>
+    <string name="frag_wallet_unutilized">Unutilized</string>
+    <string name="frag_wallet_offer_available">Offer Available</string>
+    <string name="select_contacts">Select Contact</string>
+    <string name="dialog_no_internet">No Internet</string>
+    <string name="dialog_no_internet_found_check_your_connection_or_try_again">No Internet found. Check your connection or try again.</string>
+    <string name="cancel">Cancel</string>
+    <string name="retry">Retry</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="dialog_progress_please_wait_while_we_initialize_your_payment">Please wait, while we initialize your
+        payment!
+    </string>
+    <string name="dialog_times_up">Times Up</string>
+    <string name="dialog_times_up_go_back">Go Back</string>
+    <string name="frag_bank_verification_verify_your_bank_account">VERIFY YOUR BANK ACCOUNT</string>
+    <string name="frag_bank_verification_transfer_your_winnings_to_your_bank_account_for_withdrawing_money_from_myteam11_please_verify_your_bank_account_by_following_below_steps">
+        Transfer your Winnings to your Bank Account. For withdrawing money from RummyTitans, please verify your Bank
+        account by following below steps.
+    </string>
+    <string name="frag_bank_verification_upload_bank_account_proof">Upload Bank Account Proof\n(We accept Passbook front page image, Online Bank account statement screenshot, Cancelled Cheque Image)</string>
+    <string name="frag_bank_verification_full_name">Full Name</string>
+    <string name="frag_bank_verification_enter_full_name">Enter Full Name</string>
+    <string name="frag_bank_verification_account_number">Account Number</string>
+    <string name="frag_bank_verification_enter_account_number">Enter Account Number</string>
+    <string name="frag_bank_verification_re_enter_account_number">Re-Enter Account Number</string>
+    <string name="frag_bank_verification_ifsc_code">IFSC Code</string>
+    <string name="frag_bank_verification_enter_ifsc_code">Enter IFSC Code</string>
+    <string name="frag_bank_verification_bank_name">Bank Name</string>
+    <string name="frag_bank_verification_name_of_your_bank">Name of Your Bank</string>
+    <string name="frag_bank_verification_bank_branch">Bank Branch</string>
+    <string name="frag_bank_verification_name_of_your_branch">Name of Your Branch</string>
+    <string name="frag_bank_verification_verify_bank_account">VERIFY Bank Account</string>
+    <string name="frag_cash_bonus_add_cash">+ ADD CASH</string>
+    <string name="frag_cash_bonus_remaining">Remaining</string>
+    <string name="frag_cash_bonus_used">Used</string>
+    <string name="frag_feedback">Feedback</string>
+    <string name="frag_feedback_title">Title</string>
+    <string name="frag_feedback_your_massage">Your Message</string>
+    <string name="frag_feedback_submit">Submit</string>
+    <string name="frag_follow_us_facebook">Facebook</string>
+    <string name="frag_follow_us_twitter">Twitter</string>
+    <string name="frag_follow_us_instagram">Instagram</string>
+    <string name="frag_follow_us_youtube">YouTube</string>
+    <string name="frag_more_follow_us">@string/eng_menu_follow_us</string>
+    <string name="frag_pan_add_your_pan_card_details">ADD YOUR PAN CARD DETAILS</string>
+    <string name="frag_pan_upload_pan_card_image_or_pdf">UPLOAD PAN CARD IMAGE</string><!--// OR PDF-->
+    <string name="frag_pan_name_on_pan_card">Pan Card Holder Name</string>
+    <string name="frag_pan_enter_name_on_pan_card">Enter Name on Pan Card</string>
+    <string name="frag_pan_pan_number">Pan Number</string>
+    <string name="frag_pan_enter_pan_card_number">Enter Pan Card Number</string>
+    <string name="frag_pan_date_of_birth">Date Of Birth</string>
+    <string name="frag_pan_select_dob">Select DOB</string>
+    <string name="frag_pan_select_state">Select State</string>
+    <string name="frag_pan_verify_pan_card">VERIFY PAN CARD</string>
+    <string name="search_contact">Search Contact With Name</string>
+    <string name="frag_recent_transactions">Recent Transactions</string>
+    <string name="frag_recent_transactions_add_cash">+ ADD CASH</string>
+    <string name="frag_refer_refer_amp_earn">@string/eng_menu_refer</string>
+    <string name="frag_invite_friend">Invite Contacts</string>
+    <string name="share">SHARE</string>
+    <string name="language_discription">We Offer Two Languages</string>
+    <string name="notification_discription">Manage notifications as per your need</string>
+    <string name="theme_change">Colour Theme</string>
+    <string name="theme_discription">Customise your app as per your preference</string>
+    <string name="match_time_type">Match Time</string>
+    <string name="match_discription">Set the time format best suitable to you</string>
+    <string name="manage_notification">Manage Notifications</string>
+    <string name="frag_support_our_customer_support_is_available_24_7">We are RummyTitans Help Desk team. we are available for 24x7 you have many options to contact us.</string>
+    <string name="frag_support_email_us">Email Us</string>
+    <string name="frag_support_call_now">Call Now</string>
+    <string name="frag_support_faq">FAQ</string>
+    <string name="frag_verify_email">Email</string>
+    <string name="frag_verify_verify">Verify</string>
+    <string name="frag_verify_mobile">Mobile</string>
+    <string name="frag_verify_pan_card">Pan Card</string>
+    <string name="frag_withdrawal_withdrawal_now">WITHDRAWAL NOW</string>
+    <string name="version">Version</string>
+    <string name="please_enter_valid_cvv_code">Please enter valid CVV code!</string>
+    <string name="something_went_wrong">Something Went Wrong!</string>
+    <string name="something_went_wrong_restart">Something Went Wrong! Please Restart App</string>
+    <string name="please_enter_correct_cvv_code">Please enter correct CVV code!</string>
+    <string name="please_enter_a_valid_card_number">Please enter a valid card number.</string>
+    <string name="something_went_wrong_try_again">Something Went Wrong! Please try again</string>
+    <string name="card_deleted_succesfully">Card deleted successfully!</string>
+    <string name="code_copied">Refer Code Copied!</string>
+    <string name="select_your_state">Select Your State</string>
+    <string name="please_wait_fetching_refer_code">Please wait while we are fetching your Refer code.</string>
+    <string name="please_verify_your_email_first">Please verify your Email Address first to verify your PAN Card</string>
+    <string name="please_verify_your_pan_first">Please verify your PAN Card first to verify your Bank Details</string>
+    <string name="withdraw_money">Withdraw Money</string>
+    <string name="withdraw_money_need_grater_then">Withdrawal amount need be greater than ₹</string>
+    <string name="withdraw_money_need_grater_then1"> to process your request!</string>
+    <string name="withdraw_money_should_not_exced">Withdrawal amount should not exceed the winning amount.</string>
+    <string name="withdraw_money_should_not_exced1">Withdrawal amount should not exceed 50000</string>
+    <string name="oops_minimum_limit_od_add_ammount">Oops! Minimum limit of add amount is 10 rupees.</string>
+    <string name="permission_denied">Permission Denied</string>
+    <string name="withdrawal_ammount_should_not_exceed">Withdrawal amount should not exceed the winning amount.</string>
+    <string name="enter_your_name">Enter Your Name</string>
+    <string name="enter_your_acc_number">Enter Your Account Number</string>
+    <string name="reenter_your_acc_number">Re Enter Your Account Number</string>
+    <string name="acc_number_not_matched">Account Number Not Matched</string>
+    <string name="enter_ifsc_code">Enter IFSC Code</string>
+    <string name="enter_valid_ifsc_code">Enter Valid IFSC Code</string>
+    <string name="enter_bank_name">Enter Bank Name</string>
+    <string name="enter_bank_branch">Enter Bank Branch</string>
+    <string name="select_pan_card_image">Select Pan Card Image</string>
+    <string name="enter_name_on_card">Enter Name On Pan Card</string>
+    <string name="enter_pan_number">Enter Pan Number</string>
+    <string name="select_dob">Select Date of Birth</string>
+    <string name="enter_valid_pan_number">Enter Valid Pan Number</string>
+    <string name="select_state">Please Select State</string>
+    <string name="only_jpg_png_pdf_supported">Only JPG, PNG file format supported</string>
+    <string name="unable_to_retrieve_file">"Unable to retrieve file!"</string>
+    <string name="select_bank_proof">Select Bank Account Proof</string>
+    <string name="txt_transaction_id">Transaction ID</string>
+    <string name="txt_status">Status</string>
+    <string name="txt_invite_friends">Invite Friends</string>
+    <string name="rupees">₹</string>
+    <string name="err_login_account_to_continue">Please login with your account to Join contest.</string>
+
+    <string name="invite">Invite</string>
+    <string name="enter_title">Enter title</string>
+    <string name="enter_your_message">Enter your message</string>
+    <string name="enter_a_explained_message">Enter a explained message</string>
+    <string name="oops_minimum_char_req">Oops! Minimum 20 words required to share your feedback.</string>
+    <string name="try_again">Try Again</string>
+    <string name="tab_cricket">CRICKET</string>
+    <string name="frag_withdraw_max_limit" translatable="false">Please check maximum amount for the selected withdrawal
+        option.
+    </string>
+
+    <string name="payment_option">Payment Options</string>
+    <string name="add_new_card">Add New Card</string>
+    <string name="please_enter_name_on_card">Please Enter Name on Card</string>
+
+    <string name="wallt_verified">Get your Money to Your Bank Account</string>
+    <string name="frag_wallet_money_you_add">Money you added</string>
+    <string name="frag_wallet_redeem_coupon">Redeem Coupon</string>
+    <string name="redeem">Redeem Now</string>
+    <string name="only_redeem">Redeem</string>
+    <string name="redeem_your_rummy_titans_nets_chips_here">Redeem your RummyTitans Coupon</string>
+    <string name="activity_addcash_total_available_balance_after_add_cash">After Adding Cash</string>
+    <string name="no_transaction_found">No Transaction Found</string>
+
+    <string name="camera">Take a Photo</string>
+    <string name="gallery">Choose from Gallery</string>
+
+    <!-- settings -->
+    <string name="language">Language</string>
+    <string name="scratch_cards">Scratch Cards</string>
+    <string name="you_earned">You Earned</string>
+    <string name="varified">VARIFIED</string>
+    <string name="how_it_works">How does it work?</string>
+
+    <string name="quiz">Quiz</string>
+
+    <string name="customize_quiz">Customize your quiz preference</string>
+    <string name="reminder">Reminder</string>
+    <string name="reminder_desc">Turn ON/Off the Quiz Reminder</string>
+    <string name="sound">Sound</string>
+    <string name="sound_desc">Turn ON/Off the Quiz Sound</string>
+    <string name="exit">EXIT</string>
+
+    <string name="add_withdrawal_amount">Add withdrawal amount</string>
+    <string name="title_unutilized_amount">unutilized amount</string>
+    <string name="rummy_ticket">Rummy Tickets</string>
+    <string name="date">Date:</string>
+    <string name="enter_your_phone_number_to_continue_your_fantasy_journey_with_myteam11">Enter your mobile number to continue your rummy journey with RummyTitans.</string>
+    <string name="verification_code">Verification Code</string>
+    <string name="enter_the_code_that_has_just_arrived_at_this_number">Enter the code that has just arrived at this number</string>
+    <string name="edit">Edit</string>
+    <string name="enter_your_email_address_and_password_to_continue_your_fantasy_journey_with_myteam11">Enter your email address and password to continue your rummy journey with RummyTitans.</string>
+
+    <string name="responsible_gaming_text">Responsible Gaming</string>
+    <string name="privacypolicy_term_login_title"><![CDATA[By Clicking on Get OTP or login, I hereby confirm to be 18 years old & provide my acceptance to Terms & Conditions , and Privacy Policy of RummyTitans.]]></string>
+    <string name="welcome_to_rummy_titans">Welcome to RummyTitans</string>
+    <string name="need_help">Need Help?</string>
+    <string name="refer_code">Refer Code</string>
+    <string name="you_have_entered_wrong_verification_code">You have entered wrong verification code.</string>
+    <string name="i_did_not_get_the_code">I did not get the code ?</string>
+    <string name="resend">Resend</string>
+    <string name="email">Email</string>
+    <string name="term_condition"><![CDATA[Terms & Conditions]]></string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="invalid_wallet_redeem_code">Please enter a valid redeem code!</string>
+    <string name="i_have">I have</string>
+    <string name="frag_support_call_us">Call Us</string>
+    <string name="frag_support_chat_with_us">Chat With Us</string>
+    <string name="frag_support_chat_available_24_7">Available 24x7</string>
+    <string name="frag_support_everything_is_here">Everything is here</string>
+
+    <string name="send_otp">GET OTP</string>
+    <string name="login">LOGIN</string>
+    <string name="your_date_of_birth">Your Date of Birth</string>
+    <string name="little_more">Little More</string>
+    <string name="not_available_state_msg">If you are from Assam, Odisha, Telangana, Nagaland,Tamil Nadu ,Arunachal Pradesh, Sikkim &amp; Andhra Pradesh then we will not accept your registration request.</string>
+    <string name="our_platform_requires_minimum_age_18">Our platform requires minimum age 18.</string>
+    <string name="pan">PAN</string>
+    <string name="bank">BANK</string>
+    <string name="okay">Okay</string>
+    <string name="ok">Ok</string>
+    <string name="update">Update</string>
+    <string name="cards_holder_name">Card Holder Name</string>
+    <string name="add_Card_mestro_skit_expiry">If your Maestro card does not have Expiry date/CVV, skip them.</string>
+    <string name="enter_cvv_message_hint">A three-digit code on your credit/debit card which you can find on back of your card.</string>
+    <string name="time">Time</string>
+    <string name="apply">Apply</string>
+    <string name="total_balance_available">Total Balance Available</string>
+    <string name="available_coupons">Available Coupons</string>
+    <string name="verify_account_withdrawl_modey">To withdraw winning amount please verify your account first.</string>
+    <string name="withdrawal_request_success">Withdrawal Request Success</string>
+    <string name="withdrawal_camelCase">Withdrawal</string>
+    <string name="error_valid_upiCode">Please Enter Valid Upi Code.</string>
+    <string name="no_transaction_available_yet">No transaction available yet</string>
+    <string name="select_feedback_category">Select Feedback Category</string>
+    <string name="send_us_your_feedback">Send us your feedback!</string>
+    <string name="please_share_your_suggestion_or_found_a_bug">Please share your suggestion or found a bug?</string>
+    <string name="refer_new_friend">Refer New Friend</string>
+    <string name="location_service">Location Service</string>
+    <string name="text_allow">Allow</string>
+
+    <string name="please_verify_email_pan_to_verify_bank">Please verify your email address and pan card first to verify your bank account</string>
+    <string name="available_tickets_title">Available Tickets</string>
+    <string name="redeemed_expired_tickets_title">Redeemed/Expired Tickets</string>
+    <string name="please_enter_verification_code">Please enter a verification code.</string>
+    <string name="check_your_scratched_rewards_here">Check your scratched rewards here</string>
+    <string name="bank_account">Bank Account</string>
+    <string name="paytm_account">Paytm Account</string>
+    <string name="available_withdrawal_balance">Available Withdrawal Balance</string>
+    <string name="withdrawal_details">Withdrawal Details</string>
+    <string name="withdrawal_amount">Withdrawal Amount</string>
+    <string name="cancel_withdrawal_request">Cancel Withdrawal Request</string>
+    <string name="track_withdrawal_request">Track Withdrawal Request</string>
+    <string name="withdrawal_id">Withdrawal ID :</string>
+    <string name="track_your_request">Track Your Request</string>
+    <string name="back_to_wallet">Back To Wallet</string>
+    <string name="branch_name">Branch Name</string>
+    <string name="bank_name">Bank Name</string>
+    <string name="ifsc_code">IFSC Code</string>
+    <string name="cancel_request">Cancel Request</string>
+    <string name="are_you_surecancel_withdrawal_request">Are you sure you want to cancel your withdrawal request?</string>
+
+    <string name="invalid_detail_msg">Invalid Credentials. Please enter the registered details.</string>
+    <string name="invalid_detail_error_msg">Please enter valid detail.</string>
+    <string name="match_times_up_desc">Deadline to join this contest has been exceeded! Please select another slot or match to create teams.</string>
+    <string name="live_chat_support">Live Chat Support</string>
+    <string name="refer_and_earn">Refer and Earn</string>
+    <string name="title_support">Support</string>
+
+    <string name="upload_adhar_information">In case you are uploading single page e-Aadhaar, please crop front &amp; back page separately to upload the same.</string>
+
+    <string name="upload_from_gallery">UPLOAD FROM GALLERY</string>
+    <string name="make_sure_your_details_are_legible">Make sure your details are legible and clear in the document.\nSupported file type: .jpeg, .png\nSize up to 5MB</string>
+    <string name="capture_form_camera">Capture From Camera</string>
+    <string name="user_must_be_18_years_of_age_">User must be 18 years of age or above to play pay-to-play contest on RummyTitans.</string>
+    <string name="user_must_not_be_a_resident">User must not be a resident of Andhra Pradesh, Assam, Nagaland, Odisha, Sikkim, Tamil Nadu and Telangana.</string>
+    <string name="i_hereby_confirm_that_my_attached">I hereby confirm that my attached documents are credible and binding.</string>
+    <string name="document_upload_failed">Document Upload Failed</string>
+    <string name="doc_failed_description">There was an issue while uploading your document. Sorry for the inconvinience.</string>
+    <string name="document_uploaded">Document Uploaded!</string>
+    <string name="doc_success_description">Your document have been successfully uploaded.</string>
+    <string name="information_uploading">Information Uploading</string>
+    <string name="submit">Submit</string>
+    <string name="information_update">Information Update</string>
+    <string name="upload_front">Upload Front</string>
+    <string name="game_bonus">Game Bonus</string>
+    <string name="back_alert">Are you sure you want to exit?.</string>
+
+    <string name="enter_your_phone_number">Enter Your Mobile Number</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="verifyAddress">Verify Address</string>
+    <string name="open_phone_settings">Open Phone <b>Settings</b></string>
+    <string name="driving_license_number">Driving License Number</string>
+
+    <string name="not_linked_with_mobile_number">Not linked with Mobile Number?</string>
+    <string name="complete_kyc_with_other_methods">Complete KYC with other methods</string>
+    <string name="it_takes_1_to_3_minutes">It takes 1 to 3 minutes to verify</string>
+    <string name="note">Note:</string>
+
+
+    <string name="go_to_apps_manage_apps">Go to <b>Apps / Manage Apps</b></string>
+    <string name="select_myteam11">Select <b>MyTeam11</b></string>
+    <string name="select_permissions">Select <b>Permissions</b></string>
+    <string name="enable_location">Enable <b>Location</b></string>
+    <string name="follow_the_steps_to_enable_location_access">Follow the steps to enable location access</string>
+    <string name="location_on_description">To continue on this app, we need to ensure that you’re not from a restricted state.</string>
+    <string name="allow_location_title">Allow location permission</string>
+    <string name="select">Select</string>
+    <string name="aadhaar_verification">Aadhaar Verification</string>
+    <string name="restricted_location_found">Restricted Location Found</string>
+    <string name="restricted_location_msg">Uh-oh! You can\'t proceed further as you are from a restricted state.</string>
+    <string name="quick_guide">Quick Guide</string>
+    <string name="how_to_verify">How To Verify</string>
+
+    <string name="tds_calculation">TDS Calculation</string>
+    <string name="withdrawal_limit_exceed">The amount exceeds daily withdrawal limit!</string>
+    <string name="instant_withdrawal_done_header">Instant Withdrawal</string>
+    <string name="normal_withdrawal_done_header">Withdrawal</string>
+    <string name="rakeback">RAKEBACK</string>
+    <string name="app_up_to_date">App up to date.</string>
+    <string name="new_version_available">New Version Available.</string>
+    <string name="upload_dl_desc"><![CDATA[Enter your Driving License number & DOB (as mentioned in your DL) below]]></string>
+    <string name="upload_dl_title">Update your Driving License details</string>
+    <string name="upload_aadhaar_title">Upload your Aadhaar Card</string>
+    <string name="upload_aadhaar_desc"><![CDATA[Please upload the front & back side of your Aadhaar card]]></string>
+    <string name="enter_aadhar_number">Enter your Aadhaar number</string>
+    <string name="enter_aadhar_hint">Enter your 12 digit Aadhaar number</string>
+    <string name="hide_mathods">Hide Methods</string>
+    <string name="view_other_mathods">View Other Methods</string>
+    <string name="txt_continue">Continue</string>
+    <string name="varify_aadhar">Verify Aadhaar via OTP</string>
+    <string name="upload_aadhar">Upload Aadhaar</string>
+    <string name="upload_license">Upload Driving License</string>
+
+
+    <string name="address_verification_note_text">Note: Once a document is submitted, it cannot be used on any other account.</string>
+    <string name="verification_failed">Verification Failed</string>
+    <string name="go_back">Go Back</string>
+    <string name="address_verification_failed">Address Verification Failed</string>
+    <string name="address_verification_failed_description">Due to internal issues, we are unable to process your address verification at the moment. Please try again after sometime.</string>
+    <string name="replay">Replay</string>
+
+    <string name="supportEmail">support@rummytitans.com</string>
+
+
+    <string name="payment_failed">Payment Failed!</string>
+    <string name="payment_pending">Payment Pending!</string>
+    <string name="payment_success">Payment Successful!</string>
+    <string name="payment_failed_msg">If the amount was deducted, you\'ll receive a refund within 5 working days.</string>
+    <string name="payment_pending_msg">Your transaction is pending. In case this payment fails, you\'ll receive a refund within 5 working days.</string>
+    <string name="payment_succcess_msg">Your transaction was completed successfully!</string>
+    <string name="done">Done</string>
+    <string name="redeemable_rakeback">Redeemable Rakeback</string>
+    <string name="history">History</string>
+    <string name="rake_back_amount">Rake-Back Amount</string>
+    <string name="redemption_available">Redemption Available</string>
+    <string name="gst_calculation" translatable="false">GST Calculation</string>
+    <string name="frag_refer_received" translatable="false">Received</string>
+    <string name="welcome_txt">Welcome to RummyTitans</string>
+
+    <string name="placed_on">Placed On : </string>
+
+</resources>
+
+
+

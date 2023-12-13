@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.TextUtils" />
+
+        <import type="android.view.View" />
+
+        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+
+        <import type="android.graphics.Color" />
+
+        <variable
+            name="viewModel"
+            type="com.rummytitans.playcashrummyonline.cardgame.ui.refer.viewmodel.ReferViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/black">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/topBar"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@color/rummy_mainColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/icBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:onClick="@{()->viewModel.navigator.goBack()}"
+                android:padding="10dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_newback" />
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgUser"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/avatar_1"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/icBack"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/titile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="@string/frag_refer_refer_amp_earn"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imgUser"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+       <androidx.core.widget.NestedScrollView
+           android:layout_width="match_parent"
+           android:layout_height="0dp"
+           android:fillViewport="true"
+           android:paddingBottom="50dp"
+           android:clipToPadding="false"
+           app:layout_constraintBottom_toTopOf="@id/btnInviteContact"
+           app:layout_constraintTop_toBottomOf="@id/topBar">
+
+           <androidx.constraintlayout.widget.ConstraintLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:visibility="@{viewModel.isLoading() ? View.GONE : View.VISIBLE}">
+
+                   <androidx.cardview.widget.CardView
+                       android:id="@+id/cardView3"
+                       android:layout_width="match_parent"
+                       android:layout_height="100dp"
+                       android:layout_marginStart="16dp"
+                       android:layout_marginTop="16dp"
+                       android:layout_marginEnd="16dp"
+                       app:cardCornerRadius="4dp"
+                       app:cardElevation="5dp"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toTopOf="parent">
+
+                       <ImageView
+                           android:id="@+id/headerImage"
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:scaleType="fitXY"
+                           app:setImageUrl="@{viewModel.referContent.banner}" />
+                   </androidx.cardview.widget.CardView>
+
+                   <TextView
+                       android:id="@+id/textView164"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginStart="13dp"
+                       android:fontFamily="@font/rubik_medium"
+                       android:text="Your Referral Code"
+                       android:textColor="@color/text_color8"
+                       android:textSize="12sp"
+                       android:layout_marginTop="13dp"
+                       app:layout_constraintEnd_toEndOf="@+id/textView20"
+                       app:layout_constraintStart_toStartOf="@+id/textView20"
+                       app:layout_constraintTop_toBottomOf="@+id/textView20"
+                       app:layout_constraintVertical_chainStyle="packed" />
+
+                   <androidx.constraintlayout.widget.ConstraintLayout
+                       android:id="@+id/constraintLayout9"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_margin="8dp"
+                       android:background="@drawable/bg_refer_code"
+                       android:backgroundTint="@color/rummy_mainColor"
+                       android:padding="8dp"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toBottomOf="@+id/textView164">
+
+                       <TextView
+                           android:id="@+id/textView163"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginEnd="10dp"
+                           android:fontFamily="@font/rubik_medium"
+                           android:text="@{viewModel.referCode}"
+                           android:textColor="@color/text_color8"
+                           android:textSize="26sp"
+                           app:layout_constraintBottom_toBottomOf="parent"
+                           app:layout_constraintEnd_toStartOf="@+id/imgCopy"
+                           app:layout_constraintStart_toStartOf="parent"
+                           app:layout_constraintTop_toTopOf="parent"
+                           tools:text="dfgdfgdgdfgdfgd" />
+
+
+                       <ImageView
+                           android:id="@+id/imgCopy"
+                           android:layout_width="24dp"
+                           android:layout_height="24dp"
+                           app:layout_constraintBottom_toBottomOf="parent"
+                           app:layout_constraintEnd_toEndOf="parent"
+                           app:layout_constraintTop_toTopOf="parent"
+                           app:layout_constraintVertical_chainStyle="packed"
+                           app:srcCompat="@drawable/ic_copy_icon"
+                           android:backgroundTint="@color/rummy_mainColor"
+                           android:background="@drawable/bg_primary_box_rummy"
+                           app:tint="@color/white" />
+                   </androidx.constraintlayout.widget.ConstraintLayout>
+
+                   <TextView
+                       android:id="@+id/textView20"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_marginStart="16dp"
+                       android:layout_marginTop="16dp"
+                       android:layout_marginEnd="16dp"
+                       android:fontFamily="@font/rubik_regular"
+                       android:gravity="center"
+                       app:normalSpanText="@{TextUtils.isEmpty(viewModel.referContent.referMessage)?``:viewModel.referContent.referMessage}"
+                       boldSpanText="@{@string/rupees+1000}"
+                       android:textColor="@color/text_color2"
+                       android:textSize="14sp"
+                       android:visibility="@{TextUtils.isEmpty(viewModel.referContent.referMessage)?View.GONE:View.VISIBLE}"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toBottomOf="@+id/cardView3" />
+
+                   <TextView
+                       android:id="@+id/btnHowItWorks"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="26dp"
+                       android:fontFamily="@font/rubik_medium"
+                       android:text="@string/how_it_works"
+                       setUnderline="@{true}"
+                       android:textColor="@color/text_color8"
+                       android:textSize="12sp"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toBottomOf="@+id/constraintLayout9" />
+
+
+                   <androidx.recyclerview.widget.RecyclerView
+                       android:id="@+id/rvContent"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="8dp"
+                       android:layout_marginHorizontal="16dp"
+                       app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toBottomOf="@id/btnHowItWorks"
+                       tools:itemCount="4"
+                       tools:listitem="@layout/item_refer_content_rummy" />
+
+                   <TextView
+                       android:id="@+id/txtTermsAndCondition"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="20dp"
+                       android:text="@string/refer_terms_amp_conditions"
+                       android:textColor="@color/text_color8"
+                       android:textSize="10sp"
+                       android:fontFamily="@font/rubik_regular"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toBottomOf="@+id/rvContent" />
+
+
+                   <View
+                       android:layout_width="0dp"
+                       android:layout_height="1dp"
+                       android:background="@color/silver_two"
+                       app:layout_constraintEnd_toEndOf="@id/txtTermsAndCondition"
+                       app:layout_constraintStart_toStartOf="@id/txtTermsAndCondition"
+                       app:layout_constraintTop_toBottomOf="@id/txtTermsAndCondition" />
+
+               </androidx.constraintlayout.widget.ConstraintLayout>
+
+       </androidx.core.widget.NestedScrollView>
+        <Button
+            android:id="@+id/btnInviteContact"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_border_cool_gray"
+            android:backgroundTint="@color/rummy_mainColor"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="@string/frag_invite_friend"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/rubik_medium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnShare"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btnShare"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_primary_box_rummy"
+            android:backgroundTint="@color/rummy_maingreen"
+            android:text="@string/share"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:enabled="@{!viewModel.sharingData}"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/rubik_medium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toEndOf="@+id/btnInviteContact" />
+
+        <ProgressBar
+            android:id="@+id/loadingLogin"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_white_progress"
+            android:elevation="10dp"
+            android:padding="@dimen/margin_min"
+            android:theme="@style/RummySdk_ProgressBar"
+            android:visibility="@{viewModel.isLoading() || viewModel.contactLoading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

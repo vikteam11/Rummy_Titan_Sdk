@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.rummytitans.playcashrummyonline.cardgame.ui.payment.viewmodel.PaymentOptionViewModel" />
+
+        <variable
+            name="mutableBottomSheetState"
+            type="androidx.lifecycle.MutableLiveData&lt;Integer&gt;" />
+
+        <variable
+            name="bottomSheetState"
+            type="androidx.lifecycle.LiveData&lt;Integer&gt;" />
+
+        <variable
+            name="color"
+            type="String" />
+
+        <import type="android.graphics.Color" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottomSheetAddUpi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:behavior_hideable="true"
+        android:clickable="true"
+        android:focusable="true"
+        app:bottomSheetState="@{bottomSheetState}"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        app:onBottomSheetStateChanged="@{mutableBottomSheetState}">
+
+        <ImageView
+            android:id="@+id/imgSlideDownIndicator"
+            android:layout_width="@dimen/icon_size_large"
+            android:layout_height="@dimen/margin_micro"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/rounded_rect_white" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_button_8dp"
+            android:backgroundTint="@color/text_color5"
+            android:layout_marginTop="4dp"
+            android:paddingBottom="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgSlideDownIndicator">
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.66" />
+
+            <TextView
+                android:id="@+id/labelConfirmation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Add New UPI ID"
+                android:textSize="12sp"
+                android:textColor="@color/text_color8"
+                android:textAppearance="@style/RummySdk_TextAppearance.Medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/view9"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/silver"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/labelConfirmation" />
+
+            <TextView
+                android:id="@+id/textview25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Enter UPI ID"
+                android:visibility="visible"
+                android:textColor="@color/text_color8"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/guideRight"
+                app:layout_constraintTop_toBottomOf="@+id/view9" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_upi"
+                android:theme="@style/RummySdk.TextInputLayoutActivate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Enter Upi Id"
+                app:hintEnabled="false"
+                android:textColorHint="@color/text_color2"
+                app:layout_constraintEnd_toStartOf="@+id/guideLeft"
+                app:layout_constraintStart_toStartOf="@+id/guideRight"
+                app:layout_constraintTop_toBottomOf="@+id/textview25">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/editUpi"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edittext_height"
+                    android:imeOptions="actionDone"
+                    android:maxLines="1"
+                    android:text=""
+                    android:inputType="text"
+                    android:backgroundTint="@color/grayBorder"
+                    android:hint="Ex: MobileNumber@upi"
+                    android:textColor="@color/gunmetal"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutUpi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:visibility="gone"
+                android:layout_marginHorizontal="16dp"
+                app:layout_constraintEnd_toStartOf="@+id/guideLeft"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideRight"
+                app:layout_constraintTop_toBottomOf="@+id/input_upi">
+
+                <TextView
+                    android:id="@+id/txtUpi1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"
+                    android:text="`@okicici`"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/paleGreyThree"
+                    android:textColor="@color/gunmetal"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textSize="@dimen/textSize10sp" />
+
+                <TextView
+                    android:id="@+id/txtUpi2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"
+                    android:text="`@ybl`"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/paleGreyThree"
+                    android:textColor="@color/gunmetal"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textSize="@dimen/textSize10sp" />
+
+                <TextView
+                    android:id="@+id/txtUpi3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"
+                    android:layout_marginStart="8dp"
+                    android:text="`@oksbi`"
+                    android:background="@color/paleGreyThree"
+                    android:textColor="@color/gunmetal"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textSize="@dimen/textSize10sp" />
+
+                <TextView
+                    android:id="@+id/txtUpi4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"
+                    android:text="`@okaxis`"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/paleGreyThree"
+                    android:textColor="@color/gunmetal"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textSize="@dimen/textSize10sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtInfoInvite2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="UPI ID is in the format of mobilenumber@bank or username@bank"
+                android:textColor="@color/text_color2"
+                android:textSize="12sp"
+                android:fontFamily="@font/rubik_regular"
+                app:layout_constraintEnd_toStartOf="@+id/guideLeft"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideRight"
+                app:layout_constraintTop_toBottomOf="@+id/layoutUpi" />
+
+
+            <CheckBox
+                android:id="@+id/checkbox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:onCheckedChanged="@{(compoundButton, checked) -> viewModel.onCheckedChange(compoundButton, checked)}"
+                android:text="Securely save UPI ID for feature transitions"
+                android:textColor="@color/cool_grey"
+                android:textSize="@dimen/textSize10sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toStartOf="@+id/guideLeft"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideRight"
+                app:layout_constraintTop_toBottomOf="@+id/txtInfoInvite2" />
+
+            <TextView
+                android:id="@+id/txtAdd"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/bg_squre_shape"
+                android:backgroundTint="@color/rummy_maingreen"
+                android:elevation="@dimen/margin_micro"
+                android:gravity="center"
+                android:alpha="@{viewModel.validUpiCode ?1.0f :0.5f,default=0.5}"
+                android:text="ADD &amp; PAY"
+                android:textAppearance="@style/RummySdk_TextAppearance.Medium"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/txtCancel"
+                app:layout_constraintTop_toBottomOf="@+id/checkbox" />
+
+            <TextView
+                android:id="@+id/txtCancel"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:text="Cancel"
+                android:textSize="12sp"
+                android:onClick="@{()->viewModel.hideAllSheet()}"
+                android:textAppearance="@style/RummySdk_TextAppearance.Medium"
+                android:textColor="@color/cool_grey"
+                app:layout_constraintEnd_toStartOf="@+id/txtAdd"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkbox" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:src="@drawable/img_payments_upi"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtAdd" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

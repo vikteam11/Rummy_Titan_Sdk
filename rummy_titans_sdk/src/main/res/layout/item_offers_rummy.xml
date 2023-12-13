@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.text.TextUtils" />
+
+        <import type="android.view.View" />
+
+        <import type="android.graphics.Color" />
+
+        <import type="com.rummytitans.playcashrummyonline.cardgame.R" />
+
+        <variable
+            name="model"
+            type="com.rummytitans.playcashrummyonline.cardgame.models.AddCashOfferModel.AddCash" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".35" />
+
+        <View
+            android:id="@+id/viewBg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="12dp"
+            android:alpha="@{model.isSelected ?0.10f:1.0f}"
+            android:background="@drawable/bg_squre_shape"
+            android:backgroundTint="@{model.isSelected ? @color/rummy_maingreen : @color/text_color6}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ivSelect"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="11dp"
+            android:scaleType="fitStart"
+            app:layout_constraintStart_toStartOf="@id/viewBg"
+            android:src="@drawable/img_recomd_tag"
+            android:visibility="@{model.Popular ? View.VISIBLE :View.GONE,default=gone}"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_medium"
+            app:setAmountFormat="@{model.Add}"
+            app:placeHolder='@{@string/rupees}'
+            app:placeHolderAtStart="@{true}"
+            android:textColor="@{model.isSelected ? @color/rummy_maingreen : @color/text_color8}"
+            android:textSize="12sp"
+            android:paddingHorizontal="10dp"
+            app:layout_constraintEnd_toStartOf="@id/guideline14"
+            android:paddingVertical="12dp"
+            app:layout_constraintStart_toStartOf="@id/viewBg"
+            app:layout_constraintTop_toTopOf="@id/viewBg"
+            app:layout_constraintBottom_toBottomOf="@id/viewBg"/>
+
+        <TextView
+            android:id="@+id/tvCashBonus"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toEndOf="@id/viewBg"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/rubik_medium"
+            android:textColor="@{model.isSelected ? @color/rummy_maingreen : @color/text_color8}"
+            android:textSize="12sp"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintBottom_toBottomOf="@id/viewBg"
+            app:layout_constraintStart_toEndOf="@id/guideline14"
+            app:layout_constraintTop_toTopOf="@id/viewBg"
+            app:placeHolder='@{@string/rupees}'
+            app:placeHolderAtStart="@{true}"
+            app:setAmountFormat="@{model.Get}" />
+
+        <TextView
+            android:id="@+id/tvPercent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/rubik_medium"
+            android:text="@{model.percent}"
+            android:textColor="@{model.isSelected ? @color/rummy_maingreen : @color/text_color8}"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/viewBg"
+            app:layout_constraintTop_toTopOf="@id/viewBg"
+            app:layout_constraintBottom_toBottomOf="@id/viewBg"/>
+
+        <ImageView
+            android:id="@+id/ivSelect"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="8dp"
+            android:src="@{model.isSelected ? @drawable/ic_green_checked: @drawable/ic_green_uncheck,default=@drawable/ic_green_uncheck}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
