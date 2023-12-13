@@ -41,6 +41,7 @@
     <string name="txt_email_or_mobile">Enter Email / Mobile Number</string>
     <string name="txt_sign_up_now">SIGN UP NOW</string>
     <string name="txt_enter_email">Enter Email</string>
+    <string name="txt_enter_your_email">Enter Your Email</string>
     <string name="txt_enter_password">Enter Password</string>
     <string name="txt_or">or</string>
     <string name="txt_sign_in">Sign In</string>
@@ -115,7 +116,11 @@
     <string name="err_invalid_mobile_number">Please enter a valid mobile number!</string>
     <string name="err_invalid_otp">Please enter a valid OTP!</string>
     <string name="contentDescriptionAvatar">Image Avatar</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="err_enter_otp">Please Enter 6 Digit OTP</string>
+    <string name="otp_you_entered_invalid">The OTP you entered is invailid. Please enter the correct OTP</string>
     <string name="contentDescriptionAvatarSelection">contentDescriptionAvatar selection</string>
+    <string name="click_on_the_verification_link">Click on the Verification Link sent to you on your entered email address.</string>
     <string name="title_match_fixture">Fixtures</string>
     <string name="title_match_live">Live</string>
     <string name="title_match_completed">"Completed "</string>
@@ -895,6 +900,7 @@
     <string name="enter_your_phone_number_to_continue_your_fantasy_journey_with_myteam11">Enter your mobile number to continue your rummy journey with RummyTitans.</string>
     <string name="verification_code">Verification Code</string>
     <string name="enter_the_code_that_has_just_arrived_at_this_number">Enter the code that has just arrived at this number</string>
+    <string name="enter_the_otp_sent_on_your_email_address_at">Enter the OTP sent on your email address at</string>
     <string name="edit">Edit</string>
     <string name="enter_your_email_address_and_password_to_continue_your_fantasy_journey_with_myteam11">Enter your email address and password to continue your rummy journey with RummyTitans.</string>
     <string name="hint_email">Email Address</string>

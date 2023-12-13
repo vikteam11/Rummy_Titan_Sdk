@@ -3,7 +3,7 @@ package com.rummytitans.sdk.cardgame.ui.deeplink
 import com.rummytitans.sdk.cardgame.R
 import com.rummytitans.sdk.cardgame.databinding.ActivityDeepLinkRummyBinding
 import com.rummytitans.sdk.cardgame.models.MatchModel
-import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
+import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.base.BaseActivity
 import com.rummytitans.sdk.cardgame.utils.*
 import com.rummytitans.sdk.cardgame.widget.MyDialog

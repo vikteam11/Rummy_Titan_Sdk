@@ -12,7 +12,7 @@ import com.rummytitans.sdk.cardgame.databinding.DialogWalletRedeemCodeRummyBindi
 import com.rummytitans.sdk.cardgame.databinding.FragmentWalletRummyBinding
 import com.rummytitans.sdk.cardgame.models.HeaderItemModel
 import com.rummytitans.sdk.cardgame.models.WalletInfoModel
-import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
+import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.base.BaseFragment
 import com.rummytitans.sdk.cardgame.ui.common.CommonFragmentActivity
 import com.rummytitans.sdk.cardgame.ui.games.tickets.GamesTicketActivity

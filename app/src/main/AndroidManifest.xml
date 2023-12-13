@@ -58,7 +58,7 @@
             android:name=".ui.deeplink.DeepLinkActivityRummy"
             android:exported="true"
             android:launchMode="singleTask"
-            android:parentActivityName=".ui.RummyMainActivity"
+            android:parentActivityName="com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity"
             android:screenOrientation="portrait">
             <tools:validation testUrl="https://rummytitans.io/open/asdkf" />
 
@@ -139,7 +139,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.RummyMainActivity"
+            android:name="com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity"
             android:alwaysRetainTaskState="true"
             android:configChanges="orientation|screenSize"
             android:exported="false"
@@ -185,7 +185,7 @@
         <activity
             android:exported="false"
             android:name="com.rummytitans.sdk.cardgame.ui.refer.RummySDKReferActivity"
-            android:parentActivityName="com.rummytitans.sdk.cardgame.ui.RummyMainActivity"
+            android:parentActivityName="com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity"
             android:screenOrientation="portrait" />
 
         <activity android:name=".ui.refer.ReferEarnActivity"
@@ -207,7 +207,7 @@
         <activity
             android:exported="false"
             android:name="com.rummytitans.sdk.cardgame.ui.wallet.RummyAddCashActivity"
-            android:parentActivityName="com.rummytitans.sdk.cardgame.ui.RummyMainActivity"
+            android:parentActivityName="com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/RummyAppTheme" />

@@ -6,7 +6,6 @@ import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
 import com.rummytitans.sdk.cardgame.databinding.ActivityGamesWebViewerRummyBinding
 import com.rummytitans.sdk.cardgame.models.GamesResponseModel
 import com.rummytitans.sdk.cardgame.models.LoginResponse
-import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.base.BaseFragment
 import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
 import com.rummytitans.sdk.cardgame.utils.*
@@ -33,6 +32,7 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.ViewModelProvider
+import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
 import kotlinx.android.synthetic.main.activity_games_web_viewer_rummy.*
 import org.json.JSONObject

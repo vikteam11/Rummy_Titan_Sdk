@@ -60,6 +60,7 @@ object AnalyticsKey {
         const val BannerClicked = "BannerClicked"
         const val PlayNowClicked = "PlayNowClicked"
         const val PlayNow = "PlayNow"
+        const val EmailVerified = "EmailVerified"
         const val RedeemRakebackAmountDone = "RedeemRakebackAmountDone"
     }
 
@@ -89,6 +90,7 @@ object AnalyticsKey {
         const val More = "More"
         const val MainTabClicked = "MainTabClicked"
         const val Rakeback = "Rakeback"
+        const val Verification="Verification"
     }
 
     object Keys {
@@ -190,6 +192,7 @@ status*/
         const val ChatWithUs = "ChatWithUs"
         const val EmailUs = "EmailUs"
         const val FAQ = "FAQ"
+        const val VerifyEmail="VerifyEmail"
         const val Facebook = "Facebook"
         const val Twitter = "Twitter"
         const val Instagram = "Instagram"
@@ -218,7 +221,7 @@ status*/
         const val LiveChat = "LiveChat"
         const val UpdateApp = "UpdateApp"
         const val CallUs = "CallUs"
-
+        const val VerifyOtp="verifyotp"
         const val ViewOtherMethods="ViewOtherMethods"
         const val HideMethods="HideMethods"
         const val VerifyAadhaarViaOTP="VerifyAadhaarViaOTP"
@@ -243,6 +246,7 @@ status*/
         const val ViewAllNB="ViewAllNB"
         const val AddUPI="AddUPI"
         const val RedeemRakebackAmount="RedeemRakebackAmount"
+        const val ViaLink="vialink"
     }
 
 }

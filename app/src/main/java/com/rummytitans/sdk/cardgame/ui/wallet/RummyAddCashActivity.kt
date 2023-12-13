@@ -36,7 +36,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.jakewharton.rxbinding2.widget.RxTextView
-import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
+import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.home.adapter.WalletOffersAdapter
 import com.rummytitans.sdk.cardgame.ui.wallet.adapter.AddCashBannerAdapter
 import com.rummytitans.sdk.cardgame.ui.wallet.adapter.GstCalculationAdapter

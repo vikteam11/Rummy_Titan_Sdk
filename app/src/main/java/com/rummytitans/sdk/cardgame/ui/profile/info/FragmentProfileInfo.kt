@@ -3,7 +3,7 @@ package com.rummytitans.sdk.cardgame.ui.profile.info
 import com.rummytitans.sdk.cardgame.R
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
 import com.rummytitans.sdk.cardgame.models.LoginResponse
-import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
+import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.base.BaseFragment
 import com.rummytitans.sdk.cardgame.ui.home.MainNavigationFragment
 import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity

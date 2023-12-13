@@ -9,6 +9,7 @@ import android.content.res.Resources
 import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.InsetDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
 import android.os.Build
@@ -838,6 +839,22 @@ fun bottomSheetIsDragable(view:View,flag:Boolean){
 @BindingAdapter("bottomSheetStateRummy")
 fun bottomSheetStateRummy(view: View, event: Int) {
     BottomSheetBehavior.from(view).state = event
+}
+
+@BindingAdapter(value = ["topPadding", "bottomPadding","leftPadding","rightPadding"], requireAll = false)
+fun setPadding(view: View, topPadding:Int=0, bottomPadding:Int=0,leftPadding:Int=0,rightPadding:Int=0) {
+    view.setPadding(leftPadding, topPadding, rightPadding, bottomPadding)
+}
+
+@BindingAdapter("removeDefaultPadding")
+fun removeDefaultPadding(editText: EditText,removePadding:Boolean){
+    runCatching {
+        if (removePadding && editText.background is InsetDrawable) {
+            val insetDrawable = editText.background as InsetDrawable
+            val originalDrawable = insetDrawable.drawable
+            editText.background = originalDrawable
+        }
+    }
 }
 
 

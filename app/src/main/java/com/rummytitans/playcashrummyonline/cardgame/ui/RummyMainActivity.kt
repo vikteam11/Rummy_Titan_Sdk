@@ -1,16 +1,4 @@
 package com.rummytitans.playcashrummyonline.cardgame.ui
-
-import com.rummytitans.playcashrummyonline.cardgame.R
-import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsHelper
-import com.rummytitans.playcashrummyonline.cardgame.analytics.AnalyticsKey
-import com.rummytitans.playcashrummyonline.cardgame.data.SharedPreferenceStorageRummy
-import com.rummytitans.playcashrummyonline.cardgame.databinding.ActivityHomeRummyBinding
-import com.rummytitans.playcashrummyonline.cardgame.databinding.NotificationBadgeRummyBinding
-import com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseActivity
-import com.rummytitans.playcashrummyonline.cardgame.ui.base.BaseFragment
-import com.rummytitans.playcashrummyonline.cardgame.ui.deeplink.DeepLinkActivityRummy
-import com.rummytitans.playcashrummyonline.cardgame.ui.home.FragmentHome
-import com.rummytitans.playcashrummyonline.cardgame.utils.*
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -34,28 +22,43 @@ import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 //import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
-import com.rummytitans.playcashrummyonline.cardgame.RummyTitanSDK
-import com.rummytitans.playcashrummyonline.cardgame.games.rummy.RummyWebViewActivity
-import com.rummytitans.playcashrummyonline.cardgame.models.WalletInfoModel
-import com.rummytitans.playcashrummyonline.cardgame.ui.common.CommonFragmentActivity
-import com.rummytitans.playcashrummyonline.cardgame.ui.games.tickets.GamesTicketActivity
-import com.rummytitans.playcashrummyonline.cardgame.ui.more.FragmentMore
-import com.rummytitans.playcashrummyonline.cardgame.ui.profile.ProfileActivity
-import com.rummytitans.playcashrummyonline.cardgame.ui.rakeback.RakeBackFragment
-import com.rummytitans.playcashrummyonline.cardgame.ui.refer.FragmentShare
-import com.rummytitans.playcashrummyonline.cardgame.ui.refer.ReferEarnActivity
-import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.FragmentWallet
-import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.RummyAddCashActivity
-import com.rummytitans.playcashrummyonline.cardgame.ui.wallet.adapter.WalletBonusAdapter
-import com.rummytitans.playcashrummyonline.cardgame.utils.alertDialog.AlertdialogModel
-import com.rummytitans.playcashrummyonline.cardgame.utils.bottomsheets.BottomSheetAlertDialog
+import com.rummytitans.sdk.cardgame.R
+import com.rummytitans.sdk.cardgame.RummyTitanSDK
+import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
+import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
+import com.rummytitans.sdk.cardgame.databinding.ActivityHomeRummyBinding
+import com.rummytitans.sdk.cardgame.databinding.NotificationBadgeRummyBinding
+import com.rummytitans.sdk.cardgame.games.rummy.RummyWebViewActivity
+import com.rummytitans.sdk.cardgame.models.WalletInfoModel
+import com.rummytitans.sdk.cardgame.ui.ActiveGameNavigator
+import com.rummytitans.sdk.cardgame.ui.MainViewModel
+import com.rummytitans.sdk.cardgame.ui.base.BaseActivity
+import com.rummytitans.sdk.cardgame.ui.base.BaseFragment
+import com.rummytitans.sdk.cardgame.ui.common.CommonFragmentActivity
+import com.rummytitans.sdk.cardgame.ui.deeplink.DeepLinkActivityRummy
+import com.rummytitans.sdk.cardgame.ui.games.tickets.GamesTicketActivity
+import com.rummytitans.sdk.cardgame.ui.home.FragmentHome
+import com.rummytitans.sdk.cardgame.ui.more.FragmentMore
+import com.rummytitans.sdk.cardgame.ui.profile.ProfileActivity
+import com.rummytitans.sdk.cardgame.ui.rakeback.RakeBackFragment
+import com.rummytitans.sdk.cardgame.ui.refer.FragmentShare
+import com.rummytitans.sdk.cardgame.ui.refer.ReferEarnActivity
+import com.rummytitans.sdk.cardgame.ui.wallet.FragmentWallet
+import com.rummytitans.sdk.cardgame.ui.wallet.RummyAddCashActivity
+import com.rummytitans.sdk.cardgame.ui.wallet.adapter.WalletBonusAdapter
+import com.rummytitans.sdk.cardgame.utils.MyConstants
+import com.rummytitans.sdk.cardgame.utils.alertDialog.AlertdialogModel
+import com.rummytitans.sdk.cardgame.utils.bottomsheets.BottomSheetAlertDialog
+import com.rummytitans.sdk.cardgame.utils.checkAndSetLanguage
+import com.rummytitans.sdk.cardgame.utils.inTransaction
+import com.rummytitans.sdk.cardgame.utils.setOnClickListenerDebounce
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_home_rummy.*
 import javax.inject.Inject
 
-@AndroidEntryPoint
+
 class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener,
-   ActiveGameNavigator {
+    ActiveGameNavigator {
 
    // @Inject
     //lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -66,8 +69,6 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
     @Inject
     lateinit var prefs: SharedPreferenceStorageRummy
 
-    @Inject
-    lateinit var analyticsHelper: AnalyticsHelper
 
     @Inject
     lateinit var gson: Gson
@@ -119,7 +120,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
         replaceFragment(FragmentHome())
         handleDeepLink()
         handleTabs()
-        analyticsHelper.fireEvent(
+        viewModel.analyticsHelper.fireEvent(
             AnalyticsKey.Names.GameScreenLaunched
         )
         viewModel.displayHome.set(true)
@@ -516,8 +517,8 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
             }
 
         }
-        analyticsHelper.addTrigger(AnalyticsKey.Keys.Screen,tabName)
-        analyticsHelper.fireEvent(
+        viewModel.analyticsHelper.addTrigger(AnalyticsKey.Keys.Screen,tabName)
+        viewModel.analyticsHelper.fireEvent(
             AnalyticsKey.Names.ButtonClick, bundleOf(
                 AnalyticsKey.Keys.TabName to tabName,
                 AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.HOME
