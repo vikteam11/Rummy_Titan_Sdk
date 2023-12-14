@@ -20,7 +20,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jakewharton.rxbinding2.widget.RxTextView
-import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
+import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.profile.completeprofile.AvatarAdapter
 import com.rummytitans.sdk.cardgame.utils.LocaleHelper
 import io.reactivex.android.schedulers.AndroidSchedulers

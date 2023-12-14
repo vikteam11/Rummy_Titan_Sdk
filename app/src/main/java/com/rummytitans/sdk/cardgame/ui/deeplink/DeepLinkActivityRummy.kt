@@ -4,7 +4,7 @@ import com.rummytitans.sdk.cardgame.R
 import com.rummytitans.sdk.cardgame.databinding.ActivityDeepLinkRummyBinding
 import com.rummytitans.sdk.cardgame.models.MatchModel
 
-import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
+import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.base.BaseActivity
 import com.rummytitans.sdk.cardgame.utils.*
 import com.rummytitans.sdk.cardgame.widget.MyDialog
@@ -16,7 +16,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.appsflyer.AppsFlyerLib
-import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import com.rummytitans.sdk.cardgame.ui.games.tickets.GamesTicketActivity
 import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
@@ -276,9 +275,7 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
         if(!TextUtils.isEmpty(tabName)){
             intent.putExtra(MyConstants.INTENT_PASS_SELECT_TAB,tabName)
         }
-        deeplinkStr?.let { deeplink->
-
-        }
+        deeplinkStr?.let { deeplink-> }
         startActivity(intent)
         finish()
     }

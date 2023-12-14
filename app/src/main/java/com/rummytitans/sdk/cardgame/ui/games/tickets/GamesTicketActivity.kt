@@ -12,7 +12,7 @@ import android.text.TextUtils
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
+import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.utils.locationservices.uiModules.CurrentLocationBaseActivity
 import javax.inject.Inject
 

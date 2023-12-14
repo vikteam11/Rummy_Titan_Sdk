@@ -33,7 +33,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.ViewModelProvider
 import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
-import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
 import kotlinx.android.synthetic.main.activity_games_web_viewer_rummy.*
 import org.json.JSONObject

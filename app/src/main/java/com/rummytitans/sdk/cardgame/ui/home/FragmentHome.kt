@@ -22,7 +22,7 @@ import com.rummytitans.sdk.cardgame.models.HeaderItemModel
 import com.rummytitans.sdk.cardgame.models.RummyCategoryModel
 import com.rummytitans.sdk.cardgame.models.RummyLobbyModel
 import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
-import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
+import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.MainViewModel
 import com.rummytitans.sdk.cardgame.ui.base.BaseFragmentLocation
 import com.rummytitans.sdk.cardgame.ui.deeplink.DeepLinkActivityRummy

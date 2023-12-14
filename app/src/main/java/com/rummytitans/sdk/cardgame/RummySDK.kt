@@ -6,13 +6,11 @@ import android.text.TextUtils
 import android.util.Base64
 import androidx.annotation.Keep
 import com.google.gson.JsonSyntaxException
-import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.sdk.cardgame.sdk_callbacks.AnalticsCallback
 import com.rummytitans.sdk.cardgame.sdk_callbacks.RummySdkOptions
 import com.rummytitans.sdk.cardgame.sdk_callbacks.RummyTitansCallback
 import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
-import com.rummytitans.sdk.cardgame.ui.LaunchActivity
 import com.rummytitans.sdk.cardgame.ui.launcher.SDKSplashActivity
 import java.nio.charset.StandardCharsets
 

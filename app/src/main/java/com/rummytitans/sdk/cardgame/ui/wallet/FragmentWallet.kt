@@ -12,7 +12,6 @@ import com.rummytitans.sdk.cardgame.databinding.DialogWalletRedeemCodeRummyBindi
 import com.rummytitans.sdk.cardgame.databinding.FragmentWalletRummyBinding
 import com.rummytitans.sdk.cardgame.models.HeaderItemModel
 import com.rummytitans.sdk.cardgame.models.WalletInfoModel
-import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.base.BaseFragment
 import com.rummytitans.sdk.cardgame.ui.common.CommonFragmentActivity
 import com.rummytitans.sdk.cardgame.ui.games.tickets.GamesTicketActivity
@@ -49,6 +48,7 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
+import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
 import com.rummytitans.sdk.cardgame.ui.wallet.winning_conversion.WinningConversionBottomSheet
 import com.rummytitans.sdk.cardgame.ui.wallet.winning_conversion.WinningConversionCallback

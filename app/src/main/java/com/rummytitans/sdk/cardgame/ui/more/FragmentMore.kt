@@ -21,7 +21,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
-import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
+import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.WebChatActivity
 import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
 import javax.inject.Inject
@@ -164,7 +164,7 @@ class FragmentMore : BaseFragment(), MainNavigationFragment, MoreNavigator,
 
             5 -> {
                 buttonName = AnalyticsKey.Values.UpdateApp
-                (activity as? RummyMainActivity )?.onAppUpdate()
+                (activity as? RummyMainActivity)?.onAppUpdate()
             }
         }
 

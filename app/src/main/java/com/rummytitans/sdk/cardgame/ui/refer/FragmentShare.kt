@@ -6,7 +6,6 @@ import com.rummytitans.sdk.cardgame.databinding.ActivityRummyShareBinding
 import com.rummytitans.sdk.cardgame.databinding.DialogAlertNotificationRummyBinding
 import com.rummytitans.sdk.cardgame.models.ReferModel
 import com.rummytitans.sdk.cardgame.models.TempContactModel
-import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.WebViewActivity
 import com.rummytitans.sdk.cardgame.ui.base.BaseFragment
 import com.rummytitans.sdk.cardgame.ui.home.MainNavigationFragment
@@ -28,6 +27,7 @@ import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
 import com.rummytitans.sdk.cardgame.ui.contectList.ContactListActivity
 import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity

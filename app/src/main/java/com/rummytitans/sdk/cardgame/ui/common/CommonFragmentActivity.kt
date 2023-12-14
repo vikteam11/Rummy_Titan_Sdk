@@ -21,7 +21,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.appsflyer.AppsFlyerLib
-import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
+import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.profile.info.FragmentProfileInfo
 import com.rummytitans.sdk.cardgame.ui.verify.FragmentVerify
 import com.rummytitans.sdk.cardgame.ui.refer.FragmentRefer

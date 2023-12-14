@@ -113,7 +113,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity"
+            android:name=".ui.RummyMainActivity"
             android:alwaysRetainTaskState="true"
             android:configChanges="orientation|screenSize"
             android:exported="false"

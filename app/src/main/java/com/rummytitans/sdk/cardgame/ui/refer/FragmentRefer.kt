@@ -5,7 +5,7 @@ import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
 import com.rummytitans.sdk.cardgame.databinding.DialogAlertNotificationRummyBinding
 import com.rummytitans.sdk.cardgame.databinding.FragmentReferRummyBinding
 import com.rummytitans.sdk.cardgame.models.TempContactModel
-import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
+import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.base.BaseFragment
 import com.rummytitans.sdk.cardgame.ui.contectList.ContactListActivity
 import com.rummytitans.sdk.cardgame.ui.home.MainNavigationFragment

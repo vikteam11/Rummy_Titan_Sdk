@@ -1,13 +1,4 @@
 package com.rummytitans.sdk.cardgame.ui
-import com.rummytitans.sdk.cardgame.analytics.AnalyticsHelper
-import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
-import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
-import com.rummytitans.sdk.cardgame.ui.base.BaseActivity
-import com.rummytitans.sdk.cardgame.ui.base.BaseFragment
-import com.rummytitans.sdk.cardgame.ui.deeplink.DeepLinkActivityRummy
-import com.rummytitans.sdk.cardgame.ui.home.FragmentHome
-import com.rummytitans.sdk.cardgame.utils.*
-package com.rummytitans.playcashrummyonline.cardgame.ui
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -29,21 +20,21 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationView
-//import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
-=import com.rummytitans.sdk.cardgame.R
+import com.rummytitans.sdk.cardgame.R
 import com.rummytitans.sdk.cardgame.RummyTitanSDK
+import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
+import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.sdk.cardgame.databinding.ActivityHomeRummyBinding
 import com.rummytitans.sdk.cardgame.databinding.NotificationBadgeRummyBinding
 import com.rummytitans.sdk.cardgame.games.rummy.RummyWebViewActivity
 import com.rummytitans.sdk.cardgame.models.WalletInfoModel
-import com.rummytitans.sdk.cardgame.ui.common.CommonFragmentActivity
-import com.rummytitans.sdk.cardgame.ui.games.tickets.GamesTicketActivity
-import com.rummytitans.sdk.cardgame.ui.ActiveGameNavigator
-import com.rummytitans.sdk.cardgame.ui.MainViewModel
+import com.rummytitans.sdk.cardgame.ui.base.BaseActivity
+import com.rummytitans.sdk.cardgame.ui.base.BaseFragment
 import com.rummytitans.sdk.cardgame.ui.common.CommonFragmentActivity
 import com.rummytitans.sdk.cardgame.ui.deeplink.DeepLinkActivityRummy
 import com.rummytitans.sdk.cardgame.ui.games.tickets.GamesTicketActivity
+import com.rummytitans.sdk.cardgame.ui.home.FragmentHome
 import com.rummytitans.sdk.cardgame.ui.more.FragmentMore
 import com.rummytitans.sdk.cardgame.ui.profile.ProfileActivity
 import com.rummytitans.sdk.cardgame.ui.rakeback.RakeBackFragment
@@ -52,33 +43,17 @@ import com.rummytitans.sdk.cardgame.ui.refer.ReferEarnActivity
 import com.rummytitans.sdk.cardgame.ui.wallet.FragmentWallet
 import com.rummytitans.sdk.cardgame.ui.wallet.RummyAddCashActivity
 import com.rummytitans.sdk.cardgame.ui.wallet.adapter.WalletBonusAdapter
+import com.rummytitans.sdk.cardgame.utils.*
 import com.rummytitans.sdk.cardgame.utils.alertDialog.AlertdialogModel
 import com.rummytitans.sdk.cardgame.utils.bottomsheets.BottomSheetAlertDialog
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_home_rummy.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener,
-   ActiveGameNavigator {
-
-import com.rummytitans.sdk.cardgame.utils.MyConstants
-import com.rummytitans.sdk.cardgame.utils.alertDialog.AlertdialogModel
-import com.rummytitans.sdk.cardgame.utils.bottomsheets.BottomSheetAlertDialog
-import com.rummytitans.sdk.cardgame.utils.checkAndSetLanguage
-import com.rummytitans.sdk.cardgame.utils.inTransaction
-import com.rummytitans.sdk.cardgame.utils.setOnClickListenerDebounce
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_home_rummy.container
-import kotlinx.android.synthetic.main.activity_home_rummy.fragment_container
-import javax.inject.Inject
-
-
-class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener,
     ActiveGameNavigator {
 
-   // @Inject
-    //lateinit var viewModelFactory: ViewModelProvider.Factory
+
     lateinit var viewModel: MainViewModel
 
     lateinit var mCurrentFragment: BaseFragment
@@ -86,14 +61,8 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
     @Inject
     lateinit var prefs: SharedPreferenceStorageRummy
 
-    @Inject
-    lateinit var analyticsHelper: AnalyticsHelper
-
-    @Inject
-    lateinit var gson: Gson
 
     lateinit var binding: ActivityHomeRummyBinding
-    lateinit var badgeBinding: NotificationBadgeRummyBinding
     var isNotificationApiCalled = false
     var pokerData = ""
     var gameID = ""
@@ -102,23 +71,10 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
 
     companion object {
         val FRAGMENT_ID = R.id.fragment_container
-        const val REFER_CLICK = 1
-        const val COUPON_CLICK = 2
-        const val RANK_CLICK = 3
-        const val SPORTSTIGER_CLICK = 4
-        const val SUPPORT_CLICK = 5
-        const val POLL_CLICK = 6
-        const val FEEDBACK_CLICK = 7
-        const val CHAT_CLICK = 9
-        const val SETTING_CLICK = 10
-        const val FAV_TEAM = 12
-        const val TAG="MainActivity"
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        checkAndSetLanguage(this)
         pokerData = intent?.getStringExtra(MyConstants.INTENT_POKER_DATA) ?: ""
         gameID = intent?.getStringExtra(MyConstants.INTENT_GAME_DATA) ?: ""
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
@@ -404,8 +360,9 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
             piechart.data = data
             piechart.description.isEnabled = false
             //if(MyConstants.CURRENT_APP_TYPE != 1){
-            piechart.setHoleColor(ContextCompat.getColor(this@RummyMainActivity,R.color.text_color6))
-  
+                piechart.setHoleColor(ContextCompat.getColor(this@RummyMainActivity,
+                    R.color.text_color6
+                ))
             //}
         }
 
@@ -461,10 +418,10 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
         }
         //show badges when user move different tab
         if(fragment !is FragmentShare && viewModel.walletBalance.value?.showReferBadge()==true){
-            binding.inBadgeRefer.root.visibility = View.VISIBLE
+            binding.inBadgeRefer.rootView.visibility = View.VISIBLE
         }
         if(fragment !is FragmentWallet && viewModel.walletBalance.value?.showWalletBadge()==true ){
-            binding.inBadgeWallet.root.visibility = View.VISIBLE
+            binding.inBadgeWallet.rootView.visibility = View.VISIBLE
         }
         if(viewModel.displayHome.get()){
             viewModel.getWalletDetail()
@@ -474,15 +431,15 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
     private fun observeWalletData(){
         viewModel.walletBalance.observe(this){
             if(it.showWalletBadge()){
-                setUpPopupWindow(it.WalletTabMesage?:"", R.id.navigation_wallet,binding.inBadgeWallet)
+                setUpPopupWindow(it.WalletTabMesage?:"", R.id.navigation_wallet,binding.)
             }else{
-                binding.inBadgeWallet.root.visibility = View.GONE
+                binding.inBadgeWallet.rootView.visibility = View.GONE
             }
 
             if(it.showReferBadge()){
                 setUpPopupWindow(it.ReferTabMesage?:"", R.id.navigation_refer,binding.inBadgeRefer)
             }else{
-                binding.inBadgeRefer.root.visibility = View.GONE
+                binding.inBadgeRefer.rootView.visibility = View.GONE
             }
         }
 
@@ -512,7 +469,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
                 if (mCurrentFragment is FragmentWallet)
                     return false
                 tabName = AnalyticsKey.Values.Wallet
-                binding.inBadgeWallet.root.visibility = View.GONE
+                binding.inBadgeRefer.root.visibility = View.GONE
                 replaceFragment(FragmentWallet.newInstance(false))
             }
             R.id.navigation_rakeback -> {
@@ -525,7 +482,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
                 if (mCurrentFragment is FragmentShare)
                     return false
                 tabName = AnalyticsKey.Values.Refer
-                binding.inBadgeRefer.root.visibility = View.GONE
+                binding.inBadgeRefer.rootView.visibility = View.GONE
                 replaceFragment(FragmentShare.newInstance(null,true))
             }
             R.id.navigation_more -> {
@@ -549,7 +506,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
 
     private fun hideKeyboard() {
         val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(container?.windowToken, 0)
+        imm.hideSoftInputFromWindow(binding.container?.windowToken, 0)
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -574,7 +531,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
         requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        val currentFragment = supportFragmentManager.findFragmentById(fragment_container.id)
+        val currentFragment = supportFragmentManager.findFragmentById(binding.fragmentContainer.id)
         currentFragment?.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
