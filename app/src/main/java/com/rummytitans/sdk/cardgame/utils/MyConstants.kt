@@ -173,6 +173,7 @@ object MyConstants {
     const val INTENT_PASS_WITHDRAWAL = "intent_pass_withdrawal"
     const val INTENT_PASS_KYS_NOTES = "intent_pass_kyc_notes"
     const val INTENT_PASS_DOC_SELECTED = "INTENT_PASS_DOC_SELECTED"
+    const val INTENT_PASS_WINNING_CONVERSION = "INTENT_PASS_WINNING_CONVERSION"
 
     const val WICKET_KEEPER = "WICKET-KEEPER"
     const val BATSMAN = "BATSMEN"

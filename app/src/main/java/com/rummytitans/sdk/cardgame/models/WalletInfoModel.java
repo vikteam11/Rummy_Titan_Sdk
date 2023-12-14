@@ -32,6 +32,8 @@ public class WalletInfoModel {
     public boolean PanVerify;
     @SerializedName("AddressVerify")
     public boolean AddressVerify;
+    @SerializedName("ConvertWinningToDeposit")
+    public boolean ConvertWinningToDeposit;
 
 
     public static class Offer {

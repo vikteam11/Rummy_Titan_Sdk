@@ -3,7 +3,6 @@ package com.rummytitans.sdk.cardgame.ui.deeplink
 import com.rummytitans.sdk.cardgame.R
 import com.rummytitans.sdk.cardgame.databinding.ActivityDeepLinkRummyBinding
 import com.rummytitans.sdk.cardgame.models.MatchModel
-import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.base.BaseActivity
 import com.rummytitans.sdk.cardgame.utils.*
 import com.rummytitans.sdk.cardgame.widget.MyDialog
@@ -15,6 +14,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.appsflyer.AppsFlyerLib
+import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import com.rummytitans.sdk.cardgame.ui.games.tickets.GamesTicketActivity
 import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
@@ -23,7 +23,7 @@ import com.rummytitans.sdk.cardgame.ui.wallet.withdrawal.WithdrawDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 //import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 //import com.google.firebase.ktx.Firebase
-import javax.inject.Inject
+
 @AndroidEntryPoint
 class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
 

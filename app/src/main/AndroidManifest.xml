@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.rummytitans.sdk.cardgame">
 
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -12,6 +13,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <queries>
         <intent>
@@ -58,37 +62,7 @@
             android:name=".ui.deeplink.DeepLinkActivityRummy"
             android:exported="true"
             android:launchMode="singleTask"
-            android:parentActivityName=".ui.RummyMainActivity"
             android:screenOrientation="portrait">
-            <tools:validation testUrl="https://rummytitans.io/open/asdkf" />
-
-            <!--<intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="rummytitans.io"
-                    android:pathPrefix="/open/"
-                    android:scheme="https" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="rummytitandeeplink" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="rummytitansdeeplink" />
-            </intent-filter>-->
         </activity>
         <activity
             android:name=".ui.launcher.SDKSplashActivity"
@@ -185,7 +159,6 @@
         <activity
             android:exported="false"
             android:name="com.rummytitans.sdk.cardgame.ui.refer.RummySDKReferActivity"
-            android:parentActivityName="com.rummytitans.sdk.cardgame.ui.RummyMainActivity"
             android:screenOrientation="portrait" />
 
         <activity android:name=".ui.refer.ReferEarnActivity"
@@ -207,7 +180,6 @@
         <activity
             android:exported="false"
             android:name="com.rummytitans.sdk.cardgame.ui.wallet.RummyAddCashActivity"
-            android:parentActivityName="com.rummytitans.sdk.cardgame.ui.RummyMainActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/RummyAppTheme" />

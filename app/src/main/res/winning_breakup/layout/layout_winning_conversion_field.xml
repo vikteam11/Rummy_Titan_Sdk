@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <import type="android.text.TextUtils"/>
+        <import type="android.graphics.Color"/>
+        <variable
+            name="viewModel"
+            type="com.rummytitans.sdk.cardgame.ui.wallet.winning_conversion.WinningConversionViewModel" />
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:visibility="@{viewModel.conversionStep == 2 ? View.VISIBLE : View.GONE}"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:id="@+id/txtWinningHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_regular"
+            android:gravity="center_horizontal"
+            android:text="Total Winning "
+            android:textColor="@color/text_color8"
+            android:textSize="12sp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtWinning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_medium"
+            android:gravity="center_horizontal"
+            android:text="@{`₹` + viewModel.totalWinningAmount}"
+            android:textColor="@color/text_color8"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/txtWinningHint"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_regular"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:text="@{viewModel.title}"
+            android:textColor="@color/cool_grey"
+            android:textSize="10sp"
+            app:layout_constraintTop_toBottomOf="@id/txtWinning"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <View
+            android:id="@+id/viewBgEdtLine"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/inputAmount"
+            app:layout_constraintTop_toTopOf="@id/inputAmount"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:hintEnabled="false"
+            android:gravity="center"
+            app:errorTextColor="@color/error_red"
+            app:boxStrokeWidth="0dp"
+            app:boxBackgroundColor="@color/transparent"
+            app:TextInputTintColor="@{@color/transparent}"
+            android:theme="@style/RummySdk.TextInputLayoutActivate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtHint">
+
+            <EditText
+                android:id="@+id/edtAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="80dp"
+                android:layout_marginHorizontal="16dp"
+                android:background="@color/transparent"
+                android:backgroundTint="@color/transparent"
+                android:digits="0123456789"
+                android:drawableStart="@drawable/ic_rupee_rummy_small"
+                app:drawableTint="@color/text_color8"
+                android:fontFamily="@font/rubik_medium"
+                android:gravity="center"
+                android:hint="0"
+                android:textColorHint="@color/text_color6"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:maxLength="8"
+                android:paddingHorizontal="20dp"
+                android:singleLine="true"
+                android:textColor="@color/text_color8"
+                android:textCursorDrawable="@drawable/cursor_color_rummy"
+                android:textSize="32sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/txtError"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_regular"
+            android:gravity="start"
+            android:layout_marginTop="8dp"
+            android:text="@{viewModel.errorMessage}"
+            android:textColor="@color/error_red"
+            android:textSize="10sp"
+            android:visibility="@{TextUtils.isEmpty(viewModel.errorMessage) ? View.INVISIBLE : View.VISIBLE}"
+            app:layout_constraintTop_toBottomOf="@id/viewBaseLine"
+            app:layout_constraintEnd_toEndOf="@id/viewBaseLine"
+            app:layout_constraintStart_toStartOf="@id/viewBaseLine" />
+
+        <View
+            android:id="@+id/viewBaseLine"
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@{TextUtils.isEmpty(viewModel.errorMessage) ? @color/rummy_maingreen : @color/error_red }"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/inputAmount"/>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvRange"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal"
+            tools:itemCount="6"
+            android:clipToPadding="false"
+            android:layout_marginStart="16dp"
+            tools:listitem="@layout/item_winning_conversion_range"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/txtError"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <View
+            android:id="@+id/viewBg"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:background="@drawable/bg_squre_8dp"
+            android:backgroundTint="@color/input_field"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rvRange"/>
+
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.depositAmount > 0.0 ? View.VISIBLE :View.GONE}"
+            app:constraint_referenced_ids="ivWallet,txtDepositHint,txtDeposit,viewBg"/>
+
+        <ImageView
+            android:id="@+id/ivWallet"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/img_wallet_big"
+            app:layout_constraintBottom_toBottomOf="@+id/viewBg"
+            app:layout_constraintStart_toStartOf="@id/viewBg"
+            app:layout_constraintTop_toTopOf="@id/viewBg" />
+
+
+        <TextView
+            android:id="@+id/txtDepositHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_regular"
+            android:gravity="center_horizontal"
+            android:text="You will get"
+            android:textColor="@color/text_color2"
+            android:textSize="12sp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintBottom_toTopOf="@id/txtDeposit"
+            app:layout_constraintTop_toTopOf="@id/ivWallet"
+            app:layout_constraintStart_toEndOf="@id/ivWallet" />
+
+        <TextView
+            android:id="@+id/txtDeposit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_medium"
+            android:layout_marginEnd="18dp"
+            android:textColor="@color/text_color8"
+            android:textSize="14sp"
+            app:setDecimalAmount="@{viewModel.depositAmount}"
+            app:placeHolderAtStart="@{true}"
+            app:placeHolder="@{`₹`}"
+            android:layout_marginStart="8dp"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintTop_toBottomOf="@id/txtDepositHint"
+            app:layout_constraintBottom_toBottomOf="@id/ivWallet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivWallet"  />
+
+
+        <TextView
+            android:id="@+id/btnConvert"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:fontFamily="@font/rubik_medium"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="16dp"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:textAllCaps="true"
+            android:gravity="center"
+            android:background="@drawable/bg_squre"
+            android:backgroundTint="@{ viewModel.depositAmount >0.0 ? @color/rummy_maingreen : @color/gray2}"
+            android:text="Convert Now"
+            app:layout_constraintTop_toBottomOf="@id/viewBg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -138,7 +138,7 @@ class CommonFragmentActivity : BaseActivity() {
                 "CashBonus" -> {
                     val title=intent.getStringExtra(MyConstants.INTENT_PASS_WEB_TITLE)?:""
                     topBar.visibility=View.GONE
-                    addFragment(FragmentCashBonus.newInstance())
+                    addFragment(FragmentCashBonus.newInstance(title=title))
                 }
 
                 "withdraw" -> {

@@ -1234,6 +1234,41 @@
     <string name="gst_calculation" translatable="false">GST Calculation</string>
 
 
+    <array name="text_sizes">
+        <item>14sp</item>
+        <item>16sp</item>
+        <item>18sp</item>
+        <item>20sp</item>
+    </array>
+
+    <array name="text_sizes_14">
+        <item>10sp</item>
+        <item>12sp</item>
+        <item>13sp</item>
+        <item>14sp</item>
+    </array>
+
+    <array name="text_sizes_12">
+        <item>9sp</item>
+        <item>10sp</item>
+        <item>11sp</item>
+        <item>12sp</item>
+    </array>
+
+    <array name="text_sizes_10">
+        <item>8sp</item>
+        <item>9sp</item>
+        <item>10sp</item>
+    </array>
+
+    <array name="text_sizes_24">
+        <item>24sp</item>
+        <item>23sp</item>
+        <item>22sp</item>
+        <item>21sp</item>
+        <item>20sp</item>
+    </array>
+
 </resources>
 
 

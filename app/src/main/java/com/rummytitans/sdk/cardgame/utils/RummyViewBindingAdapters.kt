@@ -1148,3 +1148,31 @@ fun setJoinOrAddCashText(view: TextView?, usableAmountModel: JoinGameConfirmatio
         }
     }
 }
+
+
+@BindingAdapter(value = ["plainText", "amountText"], requireAll = true)
+fun TextView.setAllSpanBold(
+    plainText: String, amountText: List<String>
+) {
+    val ss = SpannableString(plainText)
+    try {
+        for (i in 0..amountText.size.minus(1)) {
+            ss.setSpan(
+                FontSpan(ResourcesCompat.getFont(context, R.font.rubik_bold)),
+                plainText.indexOf(amountText[i]),
+                plainText.indexOf(amountText[i]) + amountText[i].length,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            ss.setSpan(
+                ForegroundColorSpan(context.getColorInt(R.color.text_color8)),
+                plainText.indexOf(amountText[i]),
+                plainText.indexOf(amountText[i]) + amountText[i].length,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
+        text = ss
+        movementMethod = LinkMovementMethod.getInstance()
+    } catch (e: Exception) {
+        text = plainText
+    }
+}

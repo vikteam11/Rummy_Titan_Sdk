@@ -89,6 +89,7 @@ object AnalyticsKey {
         const val More = "More"
         const val MainTabClicked = "MainTabClicked"
         const val Rakeback = "Rakeback"
+        const val WinningConversion = "WinningConversion"
     }
 
     object Keys {
@@ -144,19 +145,9 @@ object AnalyticsKey {
         const val UsableBalance = "usablebalance"
         const val Bonus = "bonus"
         const val RedeemAmount = "RedeemAmount"
-
-        /*
-        * gameid
-gamename
-gametype
-tableid
-entryfee
-winningamount
-gameticket
-gameticketid
-usablebalance
-bonus
-status*/
+        const val UserWinning = "userWinning"
+        const val Cbrange = "cbrange"
+        const val Convertedamount = "convertedamount"
 
     }
 
@@ -243,6 +234,16 @@ status*/
         const val ViewAllNB="ViewAllNB"
         const val AddUPI="AddUPI"
         const val RedeemRakebackAmount="RedeemRakebackAmount"
+
+        const val Deposit = "Deposit"
+        const val WantToConvert = "WantToConvert"
+        const val StillWantToWithdraw = "WantToConvert"
+        const val ConvertNowDone = "ConvertNowDone"
+        const val Close = "Close"
+
+
+        const val MyTeam11DepositeBonus = "MyTeam11PromoBonus"
+        const val MyTeam11ConversionBonus = "MyTeam11WinningConversionBonus"
     }
 
 }

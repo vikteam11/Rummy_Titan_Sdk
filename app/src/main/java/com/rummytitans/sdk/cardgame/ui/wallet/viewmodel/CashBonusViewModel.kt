@@ -16,6 +16,7 @@ import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import retrofit2.http.Url
 import javax.inject.Inject
 @HiltViewModel
 class CashBonusViewModel @Inject constructor(
@@ -40,11 +41,11 @@ class CashBonusViewModel @Inject constructor(
     val selectedColor = ObservableField(if (prefs.onSafePlay) safeColor else regularColor)
     var title = ""
 
-    fun fetchCashBonus() {
+    fun fetchCashBonus(url: String,) {
         if (!connectionDetector.isConnected) {
             myDialog?.noInternetDialog {
                 isLoading.set(true)
-                fetchCashBonus()
+                fetchCashBonus(url)
             }
             isLoading.set(false)
             isSwipeLoading.set(false)
@@ -53,6 +54,7 @@ class CashBonusViewModel @Inject constructor(
 
         compositeDisposable.add(
             apiInterface.getCashBonusList(
+                url,
                 loginResponse.UserId,
                 loginResponse.ExpireToken,
                 loginResponse.AuthExpire
