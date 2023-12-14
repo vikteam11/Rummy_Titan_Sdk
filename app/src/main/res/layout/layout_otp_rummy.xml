@@ -8,20 +8,69 @@
         <import type="android.view.View" />
 
         <variable
-            name="viewModel"
-            type="com.rummytitans.sdk.cardgame.ui.newlogin.NewLoginViewModel" />
+            name="loginStep"
+            type="Integer" />
+
+        <variable
+            name="isTitleOrSubTitleChange"
+            type="Boolean" />
+
+        <variable
+            name="otp"
+            type="Integer" />
+
+        <variable
+            name="twoWayProcess"
+            type="Integer" />
+
+        <variable
+            name="mobileNumber"
+            type="androidx.databinding.ObservableField&lt;String>" />
+
+        <variable
+            name="wrongOtp"
+            type="androidx.databinding.ObservableBoolean" />
+
+        <variable
+            name="wrongOtpErrorMSg"
+            type="androidx.databinding.ObservableField&lt;String>" />
+
+        <variable
+            name="timeIsOver"
+            type="androidx.databinding.ObservableBoolean" />
+
+        <variable
+            name="remainTimeText"
+            type="androidx.databinding.ObservableField&lt;String>" />
+
+        <variable
+            name="myConstant"
+            type="com.rummytitans.sdk.cardgame.utils.MyConstants" />
+
+
+        <import type="kotlin.jvm.functions.Function0" />
+
+        <import type="kotlin.Unit" />
+
+        <variable
+            name="onEditModile"
+            type="Function0&lt;Unit>" />
+
+        <variable
+            name="onResetOtp"
+            type="Function0&lt;Unit>" />
+
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
         android:focusable="true"
-        tools:visibility="gone"
+        tools:visibility="visible"
         android:id="@+id/layoutOTP"
         android:animateLayoutChanges="true"
-        app:visibility="@{viewModel.loginStep==viewModel.OTP || viewModel.loginStep==viewModel.TWO_WAY_PROCESS?View.VISIBLE:View.GONE}">
+        app:visibility="@{loginStep == otp || loginStep == twoWayProcess?View.VISIBLE:View.GONE}">
 
 
 
@@ -29,11 +78,11 @@
             android:id="@+id/textView58"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_24"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/rubik_medium"
-            android:text="@string/verification_code"
-            android:textColor="@color/gunmetal"
-            android:textSize="20sp"
+            android:text="@{isTitleOrSubTitleChange?@string/txt_enter_otp:@string/verification_code}"
+            android:textColor="@{isTitleOrSubTitleChange?@color/text_color8:@color/gunmetal}"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -41,11 +90,11 @@
 
         <TextView
             android:id="@+id/textView59"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/enter_the_code_that_has_just_arrived_at_this_number"
-            android:textColor="@color/gray2"
+            android:text="@{isTitleOrSubTitleChange?@string/enter_the_otp_sent_on_your_email_address_at:@string/enter_the_code_that_has_just_arrived_at_this_number}"
+            android:textColor="@{isTitleOrSubTitleChange?@color/text_color2:@color/gray2}"
             android:textSize="12sp"
             android:fontFamily="@font/rubik_regular"
             app:layout_constraintEnd_toEndOf="parent"
@@ -54,36 +103,35 @@
 
 
         <TextView
-            android:id="@+id/textView60"
+            android:id="@+id/txt_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            app:setDummyMobile='@{viewModel.mobileNumber}'
-            app:isTwoWayVerification="@{viewModel.loginStep==viewModel.TWO_WAY_PROCESS}"
-            android:textColor="@color/cool_grey"
+            app:setDummyMobile='@{mobileNumber}'
+            app:isTwoWayVerification="@{loginStep==myConstant.TWO_WAY_PROCESS}"
+            android:textColor="@{isTitleOrSubTitleChange?@color/text_color2:@color/gray2}"
+            android:fontFamily="@font/rubik_medium"
+            app:setUnderline="@{isTitleOrSubTitleChange}"
             android:textSize="12sp"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintEnd_toStartOf="@id/textView61"
             app:layout_constraintStart_toStartOf="@+id/textView59"
+            app:layout_constraintEnd_toEndOf="@+id/textView59"
             app:layout_constraintTop_toBottomOf="@id/textView59"
             tools:text="9680236633" />
 
 
         <TextView
-            android:id="@+id/textView61"
+            android:id="@+id/txt_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
             android:layout_marginTop="3dp"
-            android:fontFamily="@font/rubik_medium"
-            android:onClick="@{()->viewModel.editMobileNumber()}"
+            android:layout_marginStart="4dp"
             android:text="@string/edit"
-            android:textColor="@color/gray1"
+            android:textColor="@{isTitleOrSubTitleChange?@color/text_color8:@color/gray1}"
+            android:fontFamily="@font/rubik_bold"
+            android:onClick="@{()-> onEditModile.invoke()}"
             android:textSize="12sp"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            android:visibility="@{viewModel.loginStep==viewModel.TWO_WAY_PROCESS?View.GONE:View.VISIBLE}"
-            app:layout_constraintEnd_toEndOf="@+id/textView59"
-            app:layout_constraintStart_toEndOf="@id/textView60"
+            android:visibility="@{loginStep==myConstant.TWO_WAY_PROCESS?View.GONE:View.VISIBLE}"
+            app:layout_constraintStart_toEndOf="@id/txt_email"
             app:layout_constraintTop_toBottomOf="@id/textView59"
             app:setUnderline="@{true}" />
 
@@ -93,27 +141,24 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/rubik_medium"
             android:textSize="12sp"
-            android:textColor="@color/gray1"
-            android:letterSpacing="0.02"
+            android:textColor="@color/text_color2"
             android:layout_marginTop="24dp"
-            android:lineSpacingExtra="10sp"
-            android:gravity="center_horizontal"
             android:text="@string/txt_enter_otp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView60"/>
-
+            android:visibility="@{isTitleOrSubTitleChange?View.GONE:View.VISIBLE,default=gone}"
+            app:layout_constraintStart_toStartOf="@+id/otpView"
+            app:layout_constraintTop_toBottomOf="@+id/txt_email"/>
 
 
         <com.chaos.view.PinView
             android:id="@+id/otpView"
             style="@style/PinWidget.PinView"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:cursorVisible="true"
-            android:layout_marginTop="23dp"
+            android:layout_marginTop="20dp"
             android:hint="&#45;&#45;&#45;&#45;&#45;&#45;"
             android:inputType="number"
-            android:textColor="@color/gunmetal"
+            android:textColor="@{isTitleOrSubTitleChange?@color/text_color8:@color/gunmetal}"
             android:textSize="18sp"
             android:textStyle="bold"
             app:itemCount="6"
@@ -122,10 +167,11 @@
             app:itemSpacing="8dp"
             android:imeOptions="actionDone"
             app:itemWidth="42dp"
+            android:textColorHint="@color/text_color2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/hintOtp"
-            app:lineColor="@{viewModel.wrongOtp?@color/grapfruit_two:@color/silver}"
+            app:lineColor="@{wrongOtp?@color/grapfruit_two:@color/silver}"
             app:lineWidth="1dp"
             app:viewType="line" />
 
@@ -135,10 +181,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/rubik_regular"
-            android:text="@{viewModel.wrongOtpErrorMSg}"
+            android:text="@{wrongOtpErrorMSg}"
             android:textColor="@color/grapfruit_two"
             android:textSize="12sp"
-            android:visibility="@{viewModel.wrongOtp?View.VISIBLE:View.GONE}"
+            android:visibility="@{wrongOtp?View.VISIBLE:View.GONE}"
             app:layout_constraintEnd_toStartOf="@+id/textView224"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/otpView"
@@ -156,7 +202,7 @@
             android:textColor="@color/cool_grey"
             android:textSize="12sp"
             tools:visibility="gone"
-            android:visibility="@{viewModel.timeIsOver?View.VISIBLE:View.GONE}"
+            android:visibility="@{timeIsOver?View.VISIBLE:View.GONE}"
             app:layout_constraintEnd_toStartOf="@+id/textView63"
             app:layout_constraintTop_toBottomOf="@+id/textView226" />
 
@@ -166,12 +212,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/rubik_medium"
-            android:onClick="@{()->viewModel.resendOTP()}"
+            android:onClick="@{()-> onResetOtp.invoke()}"
             android:text="@string/resend"
             tools:visibility="gone"
             android:textColor="@color/gunmetal"
             android:textSize="12sp"
-            android:visibility="@{viewModel.timeIsOver?View.VISIBLE:View.GONE}"
+            android:visibility="@{timeIsOver?View.VISIBLE:View.GONE}"
             app:layout_constraintEnd_toEndOf="@+id/otpView"
             app:layout_constraintTop_toTopOf="@id/textView62"
             app:setUnderline="@{true}" />
@@ -184,10 +230,10 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="3dp"
             android:fontFamily="@font/rubik_medium"
-            android:text="@{viewModel.remainTimeText}"
+            android:text="@{remainTimeText}"
             android:textColor="@color/gunmetal"
             android:textSize="12sp"
-            android:visibility="@{viewModel.timeIsOver?View.GONE:View.VISIBLE}"
+            android:visibility="@{timeIsOver || isTitleOrSubTitleChange?View.GONE:View.VISIBLE}"
             app:layout_constraintEnd_toStartOf="@+id/textView225"
             app:layout_constraintTop_toBottomOf="@+id/otpView"
             tools:text="59"
@@ -201,7 +247,7 @@
             android:text="sec"
             android:textColor="@color/cool_grey"
             android:textSize="12sp"
-            android:visibility="@{viewModel.timeIsOver?View.GONE:View.VISIBLE}"
+            android:visibility="@{timeIsOver || isTitleOrSubTitleChange?View.GONE:View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="@+id/otpView"
             app:layout_constraintTop_toTopOf="@+id/textView224"
             tools:visibility="visible" />

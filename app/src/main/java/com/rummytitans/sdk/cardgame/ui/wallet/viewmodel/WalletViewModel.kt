@@ -63,11 +63,16 @@ class WalletViewModel @Inject constructor(
     var bonusSubList= arrayListOf<WalletInfoModel.WalletBonesModel>()
     var depositBonusVal = ObservableField<WalletInfoModel.WalletBonesModel>()
     var gstBonusVal = ObservableField<WalletInfoModel.WalletBonesModel>()
+    var conversionBonusVal = ObservableField<WalletInfoModel.WalletBonesModel>()
+
     //first time user fill data code
     var pincode = ObservableField<String>("")
     var date = ObservableField<String>("")
     var isAddressVerified=true
     var addressVerificationRejectMsg=""
+
+    var convertWinningToDeposit = ObservableBoolean(false)
+
     //reset profileForm data of firsttime user
     fun resetFormData() {
         date.set("")
@@ -130,6 +135,8 @@ class WalletViewModel @Inject constructor(
                     }
                     isAddressVerified=it.Response?.AddressVerify?:false
                     addressVerificationRejectMsg=it.Message?:""
+                    convertWinningToDeposit.set(it.Response?.ConvertWinningToDeposit?:false)
+
                     if (it.Status) {
                         isGraphVisible.set(true)
 
@@ -168,6 +175,8 @@ class WalletViewModel @Inject constructor(
 
                         depositBonusVal.set(getBonusSubItem(0))
                         gstBonusVal.set(getBonusSubItem(1))
+                        conversionBonusVal.set(getBonusSubItem(2))
+
                         with(it.Response.Balance) {
                             if (prefs.userTotalAmount != TotalAmount.toString()) {
                                 var credit = "0.0"

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <import type="android.view.View"/>
+        <import type="android.graphics.Color"/>
+        <variable
+            name="viewModel"
+            type="com.rummytitans.sdk.cardgame.ui.wallet.winning_conversion.WinningConversionViewModel" />
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:visibility="@{viewModel.conversionStep==1 ? View.VISIBLE : View.GONE}"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lotti_anim"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:elevation="3dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_rawRes="@raw/winning_convert_anim"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true" />
+
+        <TextView
+            android:id="@+id/txtWinningHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_regular"
+            android:gravity="center_horizontal"
+            android:text="Total Winning "
+            android:layout_marginTop="16dp"
+            android:textColor="@color/text_color8"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@id/txtWinning"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lotti_anim" />
+
+        <TextView
+            android:id="@+id/txtWinning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_medium"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:text="@{`₹`+viewModel.totalWinningAmount}"
+            android:textColor="@color/text_color8"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/txtWinningHint"
+            app:layout_constraintTop_toBottomOf="@id/lotti_anim" />
+
+        <TextView
+            android:id="@+id/txtBenefit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/rubik_regular"
+            android:gravity="center_horizontal"
+            android:text="Benefits of Conversion"
+            android:visibility="@{viewModel.benefits.size() > 0 ? View.VISIBLE : View.GONE}"
+            android:textColor="@color/text_color8"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtWinning" />
+
+        <LinearLayout
+            android:id="@+id/layoutBenefit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtBenefit">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvBenefit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
+                tools:itemCount="2"
+                tools:listitem="@layout/item_winning_conversion_benifit" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/btnConvert"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_squre"
+            android:backgroundTint="@color/rummy_maingreen"
+            android:fontFamily="@font/rubik_medium"
+            android:gravity="center"
+            android:text="Convert Now"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layoutBenefit" />
+
+
+        <TextView
+            android:id="@+id/btnWithdraw"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/rubik_medium"
+            android:gravity="center"
+            android:text="Still want to withdraw"
+            android:textAllCaps="false"
+            android:textColor="@color/text_color8"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnConvert"
+            app:setUnderline="@{true}" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

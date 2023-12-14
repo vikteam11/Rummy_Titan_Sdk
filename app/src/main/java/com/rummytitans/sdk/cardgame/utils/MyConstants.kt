@@ -21,9 +21,10 @@ object MyConstants {
     const val SPLASH_URL = GAME_STAG
     const val APP_CURRENT_URL = STAGING_URL
     //const val APP_CURRENT_URL2 = "http://15.207.63.62:7000/"
-    const val GAME_PLAY_URL = "https://n2.mt11games.com:7000"
+
+     const val GAME_PLAY_URL = "https://n2.mt11games.com:7000"
     //const val GAME_PLAY_URL = "https://rummytitans.mt11games.com/"
-    //const val GAME_PLAY_URL = "https://rummy.myteam11.games/"
+  //  const val GAME_PLAY_URL = "https://rummy.myteam11.games/"
 
     const val UPDATE_EVENT_URL = "https://logs.mt11games.com/"
     const val REQUEST_UPDATE_VERIFY_DETAILS=999
@@ -32,7 +33,8 @@ object MyConstants {
     const val TEST_ACCOUNT_EMAIL="vinubagda@gmail.com"
     const val TEST_ACCOUNT_MOBILE="5828666143"
     const val TEST_ACCOUNT_USER_ID=12337310
-
+    val OTP = 2
+    var TWO_WAY_PROCESS = 3
     const val STANDLONE_GAME_TYPE = 1
     const val STANDLONE_GAME_ID = 9
     const val GAME_RELOAD = 9911
@@ -173,6 +175,7 @@ object MyConstants {
     const val INTENT_PASS_WITHDRAWAL = "intent_pass_withdrawal"
     const val INTENT_PASS_KYS_NOTES = "intent_pass_kyc_notes"
     const val INTENT_PASS_DOC_SELECTED = "INTENT_PASS_DOC_SELECTED"
+    const val INTENT_PASS_WINNING_CONVERSION = "INTENT_PASS_WINNING_CONVERSION"
 
     const val WICKET_KEEPER = "WICKET-KEEPER"
     const val BATSMAN = "BATSMEN"

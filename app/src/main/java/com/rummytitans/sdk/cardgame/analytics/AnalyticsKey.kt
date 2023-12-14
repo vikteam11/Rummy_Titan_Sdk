@@ -60,6 +60,7 @@ object AnalyticsKey {
         const val BannerClicked = "BannerClicked"
         const val PlayNowClicked = "PlayNowClicked"
         const val PlayNow = "PlayNow"
+        const val EmailVerified = "EmailVerified"
         const val RedeemRakebackAmountDone = "RedeemRakebackAmountDone"
     }
 
@@ -89,6 +90,8 @@ object AnalyticsKey {
         const val More = "More"
         const val MainTabClicked = "MainTabClicked"
         const val Rakeback = "Rakeback"
+        const val WinningConversion = "WinningConversion"
+        const val Verification="Verification"
     }
 
     object Keys {
@@ -144,19 +147,9 @@ object AnalyticsKey {
         const val UsableBalance = "usablebalance"
         const val Bonus = "bonus"
         const val RedeemAmount = "RedeemAmount"
-
-        /*
-        * gameid
-gamename
-gametype
-tableid
-entryfee
-winningamount
-gameticket
-gameticketid
-usablebalance
-bonus
-status*/
+        const val UserWinning = "userWinning"
+        const val Cbrange = "cbrange"
+        const val Convertedamount = "convertedamount"
 
     }
 
@@ -190,6 +183,7 @@ status*/
         const val ChatWithUs = "ChatWithUs"
         const val EmailUs = "EmailUs"
         const val FAQ = "FAQ"
+        const val VerifyEmail="VerifyEmail"
         const val Facebook = "Facebook"
         const val Twitter = "Twitter"
         const val Instagram = "Instagram"
@@ -218,7 +212,7 @@ status*/
         const val LiveChat = "LiveChat"
         const val UpdateApp = "UpdateApp"
         const val CallUs = "CallUs"
-
+        const val VerifyOtp="verifyotp"
         const val ViewOtherMethods="ViewOtherMethods"
         const val HideMethods="HideMethods"
         const val VerifyAadhaarViaOTP="VerifyAadhaarViaOTP"
@@ -243,6 +237,14 @@ status*/
         const val ViewAllNB="ViewAllNB"
         const val AddUPI="AddUPI"
         const val RedeemRakebackAmount="RedeemRakebackAmount"
+        const val Deposit = "Deposit"
+        const val WantToConvert = "WantToConvert"
+        const val StillWantToWithdraw = "WantToConvert"
+        const val ConvertNowDone = "ConvertNowDone"
+        const val Close = "Close"
+        const val MyTeam11DepositeBonus = "MyTeam11PromoBonus"
+        const val MyTeam11ConversionBonus = "MyTeam11WinningConversionBonus"
+        const val ViaLink="vialink"
     }
 
 }

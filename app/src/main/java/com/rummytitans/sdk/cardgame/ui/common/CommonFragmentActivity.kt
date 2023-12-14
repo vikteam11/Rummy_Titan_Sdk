@@ -21,7 +21,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.appsflyer.AppsFlyerLib
-import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
+import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.profile.info.FragmentProfileInfo
 import com.rummytitans.sdk.cardgame.ui.verify.FragmentVerify
 import com.rummytitans.sdk.cardgame.ui.refer.FragmentRefer
@@ -138,7 +138,7 @@ class CommonFragmentActivity : BaseActivity() {
                 "CashBonus" -> {
                     val title=intent.getStringExtra(MyConstants.INTENT_PASS_WEB_TITLE)?:""
                     topBar.visibility=View.GONE
-                    addFragment(FragmentCashBonus.newInstance())
+                    addFragment(FragmentCashBonus.newInstance(title=title))
                 }
 
                 "withdraw" -> {

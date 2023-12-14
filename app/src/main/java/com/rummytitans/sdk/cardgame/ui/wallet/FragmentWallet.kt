@@ -12,7 +12,7 @@ import com.rummytitans.sdk.cardgame.databinding.DialogWalletRedeemCodeRummyBindi
 import com.rummytitans.sdk.cardgame.databinding.FragmentWalletRummyBinding
 import com.rummytitans.sdk.cardgame.models.HeaderItemModel
 import com.rummytitans.sdk.cardgame.models.WalletInfoModel
-import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
+import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.base.BaseFragment
 import com.rummytitans.sdk.cardgame.ui.common.CommonFragmentActivity
 import com.rummytitans.sdk.cardgame.ui.games.tickets.GamesTicketActivity
@@ -50,8 +50,9 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
+import com.rummytitans.sdk.cardgame.ui.wallet.winning_conversion.WinningConversionBottomSheet
+import com.rummytitans.sdk.cardgame.ui.wallet.winning_conversion.WinningConversionCallback
 import com.rummytitans.sdk.cardgame.widget.ScratchView
-import kotlinx.android.synthetic.main.fragment_wallet_rummy.*
 import java.util.*
 
 class FragmentWallet : BaseFragment(),
@@ -64,14 +65,17 @@ class FragmentWallet : BaseFragment(),
     private var mRedeemCouponDialog: Dialog? = null
     var isBubbleShowcaseVisible = false
     private var mShowCaseBuilder:BubbleShowCaseBuilder?= null
+    private var showWinningConvert = false
 
     companion object {
         const val REQUEST_CODE_UPDATE_WALLET = 1011
-        fun newInstance(isActivity: Boolean, reddemCode: String = ""): FragmentWallet {
+        fun newInstance(isActivity: Boolean, reddemCode: String = "",winningConvert:Boolean=false): FragmentWallet {
             val frag = FragmentWallet()
             val bundle = Bundle()
             bundle.putBoolean("isActivity", isActivity)
             bundle.putString(MyConstants.INTENT_PASS_OPEN_REDDEM, reddemCode)
+            bundle.putBoolean(MyConstants.INTENT_PASS_WINNING_CONVERSION, winningConvert)
+
             frag.arguments = bundle
             return frag
         }
@@ -90,7 +94,7 @@ class FragmentWallet : BaseFragment(),
                 changeActivityOrientation(Configuration.ORIENTATION_PORTRAIT)
         }
         setTheme(inflater)
-        setLanguage()
+      //  setLanguage()
         viewModel = ViewModelProvider(
             this
         ).get(WalletViewModel::class.java)
@@ -122,11 +126,11 @@ class FragmentWallet : BaseFragment(),
                 }
             }
             setGraph(it)
-
-            binding.rvBones.apply {
-                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                adapter = WalletBonusAdapter(it.Balance.BonusList,this@FragmentWallet) { onClickBonusItem() }
-            }
+            (binding.rvBones.adapter as? WalletBonusAdapter)?.updateItems(it.Balance.BonusList)
+        }
+        binding.rvBones.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = WalletBonusAdapter(arrayListOf(),this@FragmentWallet) { onClickBonusItem() }
         }
 
         binding.btnTickets.setOnClickListener {
@@ -143,13 +147,13 @@ class FragmentWallet : BaseFragment(),
             }
         }
 
-        swipeRefresh.setOnRefreshListener {
+        binding.swipeRefresh.setOnRefreshListener {
             viewModel.isLoading.set(false)
             viewModel.isSwipeLoading.set(true)
             viewModel.fetchWalletData()
         }
 
-        btnMyRecentTransactions.setOnClickListener {
+        binding.btnMyRecentTransactions.setOnClickListener {
             viewModel.analyticsHelper.fireEvent(
                 AnalyticsKey.Names.ButtonClick, bundleOf(
                     AnalyticsKey.Keys.ButtonName to AnalyticsKey.Values.ViewStatement,
@@ -166,9 +170,7 @@ class FragmentWallet : BaseFragment(),
             )
         }
 
-        btnScratchCard.setOnClickListener {
-
-        }
+        binding.btnScratchCard.setOnClickListener {}
 
         binding.btnRedeem.setOnClickListener {
             viewModel.analyticsHelper.fireEvent(
@@ -180,35 +182,12 @@ class FragmentWallet : BaseFragment(),
             showRedeemCouponCodeDialog()
         }
 
-        btnWithdrawMoney.setOnClickListener {
-            if(!viewModel.isAddressVerified){
-                launchAddressVerificationScreen("")
-            }else if (!viewModel.isVerified.get()) {
-                //showError(getString(R.string.fragm_wallet_withdrawal_verify_message))
-                startActivity(Intent(requireContext(), CommonFragmentActivity::class.java)
-                    .putExtra(MyConstants.INTENT_PASS_COMMON_TYPE, "verify"))
-            } else {
-                viewModel.analyticsHelper.apply {
-                    addTrigger(AnalyticsKey.Screens.Wallet,AnalyticsKey.Screens.WithdrawMoney)
-                    fireEvent(
-                        AnalyticsKey.Names.ButtonClick, bundleOf(
-                            AnalyticsKey.Keys.ButtonName to AnalyticsKey.Values.WithdrawMoney,
-                            AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.Wallet
-                        )
-                    )
-                }
-                activity?.startActivityForResult(
-                    Intent(activity, CommonFragmentActivity::class.java)
-                        .putExtra(MyConstants.INTENT_PASS_COMMON_TYPE, "withdraw")
-                        .putExtra(
-                            "currentBalance", viewModel.walletInfo.value?.Balance?.Winning ?: 0.0
-                        )
-                        .putExtra("widText", viewModel.walletInfo.value?.UserInfo?.WidText ?: "")
-                        .putExtra(
-                            "totalWinnig", viewModel.walletInfo.value?.Balance?.Winning ?: 0.0
-                        ),REQUEST_CODE_UPDATE_WALLET
-                )
-            }
+        binding.btnWithdrawMoney.setOnClickListener {
+             if(viewModel.convertWinningToDeposit.get()){
+                 showWinningConversionBottomSheet()
+             }else{
+                 performWithdraw()
+             }
         }
 
         binding.scratchView.setRevealListener(object :ScratchView.IRevealListener {
@@ -228,12 +207,80 @@ class FragmentWallet : BaseFragment(),
             viewModel.closeScratch()
         }
 
+        binding.layDepositBonus.setOnClickListener{
+            viewModel.analyticsHelper.fireEvent(
+                AnalyticsKey.Names.ButtonClick, bundleOf(
+                    AnalyticsKey.Keys.ButtonName to AnalyticsKey.Values.MyTeam11DepositeBonus,
+                    AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.Wallet
+                )
+            )
+
+            startActivity(
+                Intent(requireActivity(), CommonFragmentActivity::class.java)
+                    .putExtra(MyConstants.INTENT_PASS_COMMON_TYPE, "CashBonus")
+                    .putExtra(MyConstants.INTENT_PASS_WEB_TITLE, "Deposit Bonus"))
+
+        }
+
+        binding.layConversionBonus.setOnClickListener{
+            viewModel.analyticsHelper.fireEvent(
+                AnalyticsKey.Names.ButtonClick, bundleOf(
+                    AnalyticsKey.Keys.ButtonName to AnalyticsKey.Values.MyTeam11ConversionBonus,
+                    AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.Wallet
+                )
+            )
+            startActivity(
+                Intent(requireActivity(), CommonFragmentActivity::class.java)
+                    .putExtra(MyConstants.INTENT_PASS_COMMON_TYPE, "CashBonus")
+                    .putExtra(MyConstants.INTENT_PASS_WEB_TITLE, "Conversion Bonus"))
+
+        }
+
+
         hideKeyboard()
         viewModel.analyticsHelper.apply {
             fireEvent(
                 AnalyticsKey.Names.ScreenLoadDone, bundleOf(
                     AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.Wallet
                 )
+            )
+        }
+
+        if(showWinningConvert){
+            showWinningConvert = false
+            binding.root.postDelayed({
+                binding.btnWithdrawMoney.performClick()
+            },100)
+        }
+    }
+
+    private fun performWithdraw() {
+        if(!viewModel.isAddressVerified){
+            launchAddressVerificationScreen("")
+        }else if (!viewModel.isVerified.get()) {
+            //showError(getString(R.string.fragm_wallet_withdrawal_verify_message))
+            startActivity(Intent(requireContext(), CommonFragmentActivity::class.java)
+                .putExtra(MyConstants.INTENT_PASS_COMMON_TYPE, "verify"))
+        } else {
+            viewModel.analyticsHelper.apply {
+                addTrigger(AnalyticsKey.Screens.Wallet,AnalyticsKey.Screens.WithdrawMoney)
+                fireEvent(
+                    AnalyticsKey.Names.ButtonClick, bundleOf(
+                        AnalyticsKey.Keys.ButtonName to AnalyticsKey.Values.WithdrawMoney,
+                        AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.Wallet
+                    )
+                )
+            }
+            activity?.startActivityForResult(
+                Intent(activity, CommonFragmentActivity::class.java)
+                    .putExtra(MyConstants.INTENT_PASS_COMMON_TYPE, "withdraw")
+                    .putExtra(
+                        "currentBalance", viewModel.walletInfo.value?.Balance?.Winning ?: 0.0
+                    )
+                    .putExtra("widText", viewModel.walletInfo.value?.UserInfo?.WidText ?: "")
+                    .putExtra(
+                        "totalWinnig", viewModel.walletInfo.value?.Balance?.Winning ?: 0.0
+                    ),REQUEST_CODE_UPDATE_WALLET
             )
         }
     }
@@ -335,7 +382,7 @@ class FragmentWallet : BaseFragment(),
         activity?.window
             ?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
         val imm = activity?.getSystemService(INPUT_METHOD_SERVICE) as? InputMethodManager
-        imm?.hideSoftInputFromWindow(container.windowToken, 0)
+        imm?.hideSoftInputFromWindow(binding.container.windowToken, 0)
     }
 
     //fill teamnane dob etc for new users.
@@ -502,22 +549,22 @@ class FragmentWallet : BaseFragment(),
     }
 
     override fun handleError(throwable: Throwable?) {
-        swipeRefresh.isRefreshing = false
+        binding.swipeRefresh.isRefreshing = false
         println(throwable?.message.toString())
         throwable?.message?.let { showErrorMessageView(it) }
     }
 
     override fun showError(message: String?) {
-        swipeRefresh.isRefreshing = false
+        binding.swipeRefresh.isRefreshing = false
         message?.let { showErrorMessageView(it) }
     }
 
     override fun showError(message: Int?) {
-        swipeRefresh.isRefreshing = false
+        binding.swipeRefresh.isRefreshing = false
     }
 
     override fun showMessage(message: String?) {
-        swipeRefresh.isRefreshing = false
+        binding.swipeRefresh.isRefreshing = false
         message?.let { showMessageView(it) }
     }
 
@@ -531,7 +578,7 @@ class FragmentWallet : BaseFragment(),
 
 
     private fun setGraph(walletInfoData: WalletInfoModel) {
-        val l = piechart.legend
+        val l = binding.piechart.legend
         l.verticalAlignment = Legend.LegendVerticalAlignment.TOP
         l.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
         l.orientation = Legend.LegendOrientation.VERTICAL
@@ -595,19 +642,19 @@ class FragmentWallet : BaseFragment(),
         val dataSet = PieDataSet(graphValues, "")
         dataSet.sliceSpace = 0f
         val data = PieData(dataSet)
-        piechart.isDrawHoleEnabled = true
-        piechart.transparentCircleRadius = 0f
-        piechart.holeRadius = 85f
+        binding.piechart.isDrawHoleEnabled = true
+        binding.piechart.transparentCircleRadius = 0f
+        binding.piechart.holeRadius = 85f
         dataSet.setColors(*colorArrayList.toIntArray())
         data.setValueTextSize(1f)
         data.setValueTextColor(Color.TRANSPARENT)
-        piechart.animateXY(1400, 1400)
-        piechart.setEntryLabelColor(Color.TRANSPARENT)
-        piechart.highlightValues(null)
+        binding.piechart.animateXY(1400, 1400)
+        binding.piechart.setEntryLabelColor(Color.TRANSPARENT)
+        binding.piechart.highlightValues(null)
         data.setValueFormatter(PercentFormatter())
-        piechart.data = data
-        piechart.description.isEnabled = false
-        piechart.setHoleColor(ContextCompat.getColor(requireContext(),R.color.black))
+        binding.piechart.data = data
+        binding.piechart.description.isEnabled = false
+        binding.piechart.setHoleColor(ContextCompat.getColor(requireContext(),R.color.black))
 
 
     }
@@ -616,16 +663,43 @@ class FragmentWallet : BaseFragment(),
 
     override fun performBonusListClick(model: WalletInfoModel.WalletBonesModel) {
         if (model.walletType == 2) {
+            val title = viewModel.walletInfo.value?.Balance?.BonusList?.singleOrNull { it.isbouns }?.name
+                ?: getString(R.string.game_bonus)
+
             arguments?.getBoolean("isActivity")?.let {
                 if (it)
                     addFragment(FragmentCashBonus.newInstance(it))
                 else startActivity(
                     Intent(requireActivity(), CommonFragmentActivity::class.java)
-                        .putExtra(MyConstants.INTENT_PASS_COMMON_TYPE, "CashBonus"))
+                        .putExtra(MyConstants.INTENT_PASS_COMMON_TYPE, "CashBonus")
+                        .putExtra(MyConstants.INTENT_PASS_WEB_TITLE,title )
+                )
             }
         }
         if(model.walletType == 1 && viewModel.bonusSubList.size >=2){
             viewModel.isGstBonusShow.set(!viewModel.isGstBonusShow.get())
+        }
+    }
+
+    var bottomSheet : WinningConversionBottomSheet? = null
+    private fun showWinningConversionBottomSheet() {
+        val winning = viewModel.walletInfo.value?.Balance?.Winning?:0.0
+        if(winning > 0.0) {
+            bottomSheet =   WinningConversionBottomSheet.newInstance(
+                winning,
+                object : WinningConversionCallback {
+                    override fun onWinningDeposit() {
+                        viewModel.fetchWalletData()
+                    }
+
+                    override fun sendToWithDraw() {
+                        performWithdraw()
+                    }
+                }
+            )
+            bottomSheet?.show(childFragmentManager, "")
+        }else{
+            showErrorMessageView("You don't have sufficient balance to process.")
         }
     }
 

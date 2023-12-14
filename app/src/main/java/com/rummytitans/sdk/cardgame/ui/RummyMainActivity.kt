@@ -7,6 +7,7 @@ import com.rummytitans.sdk.cardgame.ui.base.BaseFragment
 import com.rummytitans.sdk.cardgame.ui.deeplink.DeepLinkActivityRummy
 import com.rummytitans.sdk.cardgame.ui.home.FragmentHome
 import com.rummytitans.sdk.cardgame.utils.*
+package com.rummytitans.playcashrummyonline.cardgame.ui
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -30,13 +31,18 @@ import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 //import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
-import com.rummytitans.sdk.cardgame.R
+=import com.rummytitans.sdk.cardgame.R
 import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import com.rummytitans.sdk.cardgame.databinding.ActivityHomeRummyBinding
 import com.rummytitans.sdk.cardgame.databinding.NotificationBadgeRummyBinding
 import com.rummytitans.sdk.cardgame.games.rummy.RummyWebViewActivity
 import com.rummytitans.sdk.cardgame.models.WalletInfoModel
 import com.rummytitans.sdk.cardgame.ui.common.CommonFragmentActivity
+import com.rummytitans.sdk.cardgame.ui.games.tickets.GamesTicketActivity
+import com.rummytitans.sdk.cardgame.ui.ActiveGameNavigator
+import com.rummytitans.sdk.cardgame.ui.MainViewModel
+import com.rummytitans.sdk.cardgame.ui.common.CommonFragmentActivity
+import com.rummytitans.sdk.cardgame.ui.deeplink.DeepLinkActivityRummy
 import com.rummytitans.sdk.cardgame.ui.games.tickets.GamesTicketActivity
 import com.rummytitans.sdk.cardgame.ui.more.FragmentMore
 import com.rummytitans.sdk.cardgame.ui.profile.ProfileActivity
@@ -56,7 +62,23 @@ import javax.inject.Inject
 class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener,
    ActiveGameNavigator {
 
+import com.rummytitans.sdk.cardgame.utils.MyConstants
+import com.rummytitans.sdk.cardgame.utils.alertDialog.AlertdialogModel
+import com.rummytitans.sdk.cardgame.utils.bottomsheets.BottomSheetAlertDialog
+import com.rummytitans.sdk.cardgame.utils.checkAndSetLanguage
+import com.rummytitans.sdk.cardgame.utils.inTransaction
+import com.rummytitans.sdk.cardgame.utils.setOnClickListenerDebounce
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_home_rummy.container
+import kotlinx.android.synthetic.main.activity_home_rummy.fragment_container
+import javax.inject.Inject
 
+
+class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener,
+    ActiveGameNavigator {
+
+   // @Inject
+    //lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel: MainViewModel
 
     lateinit var mCurrentFragment: BaseFragment
@@ -67,7 +89,8 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
     @Inject
     lateinit var analyticsHelper: AnalyticsHelper
 
-
+    @Inject
+    lateinit var gson: Gson
 
     lateinit var binding: ActivityHomeRummyBinding
     lateinit var badgeBinding: NotificationBadgeRummyBinding
@@ -96,7 +119,6 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         checkAndSetLanguage(this)
-        //FirebaseMessaging.getInstance().subscribeToTopic("global")
         pokerData = intent?.getStringExtra(MyConstants.INTENT_POKER_DATA) ?: ""
         gameID = intent?.getStringExtra(MyConstants.INTENT_GAME_DATA) ?: ""
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
@@ -116,7 +138,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
         replaceFragment(FragmentHome())
         handleDeepLink()
         handleTabs()
-        analyticsHelper.fireEvent(
+        viewModel.analyticsHelper.fireEvent(
             AnalyticsKey.Names.GameScreenLaunched
         )
         viewModel.displayHome.set(true)
@@ -284,7 +306,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
         if(viewModel.isMiniWalletOpen.get()){
             return
         }
-        val anim = AnimationUtils.loadAnimation(this,R.anim.bottom_sheet_slide_down)
+        val anim = AnimationUtils.loadAnimation(this, R.anim.bottom_sheet_slide_down)
         binding.layoutMiniWallet.startAnimation(anim)
         viewModel.isMiniWalletOpen.set(true)
     }
@@ -293,7 +315,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
         if(!viewModel.isMiniWalletOpen.get()){
             return
         }
-        val anim = AnimationUtils.loadAnimation(this,R.anim.bottom_sheet_slide_up)
+        val anim = AnimationUtils.loadAnimation(this, R.anim.bottom_sheet_slide_up)
         binding.layoutMiniWallet.startAnimation(anim)
         binding.root.postDelayed({
             viewModel.isMiniWalletOpen.set(false)
@@ -382,7 +404,8 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
             piechart.data = data
             piechart.description.isEnabled = false
             //if(MyConstants.CURRENT_APP_TYPE != 1){
-                piechart.setHoleColor(ContextCompat.getColor(this@RummyMainActivity,R.color.text_color6))
+            piechart.setHoleColor(ContextCompat.getColor(this@RummyMainActivity,R.color.text_color6))
+  
             //}
         }
 
@@ -451,13 +474,13 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
     private fun observeWalletData(){
         viewModel.walletBalance.observe(this){
             if(it.showWalletBadge()){
-                setUpPopupWindow(it.WalletTabMesage?:"",R.id.navigation_wallet,binding.inBadgeWallet)
+                setUpPopupWindow(it.WalletTabMesage?:"", R.id.navigation_wallet,binding.inBadgeWallet)
             }else{
                 binding.inBadgeWallet.root.visibility = View.GONE
             }
 
             if(it.showReferBadge()){
-                setUpPopupWindow(it.ReferTabMesage?:"",R.id.navigation_refer,binding.inBadgeRefer)
+                setUpPopupWindow(it.ReferTabMesage?:"", R.id.navigation_refer,binding.inBadgeRefer)
             }else{
                 binding.inBadgeRefer.root.visibility = View.GONE
             }
@@ -513,8 +536,9 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
             }
 
         }
-        analyticsHelper.addTrigger(AnalyticsKey.Keys.Screen,tabName)
-        analyticsHelper.fireEvent(
+
+        viewModel.analyticsHelper.addTrigger(AnalyticsKey.Keys.Screen,tabName)
+        viewModel.analyticsHelper.fireEvent(
             AnalyticsKey.Names.ButtonClick, bundleOf(
                 AnalyticsKey.Keys.TabName to tabName,
                 AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.HOME
@@ -562,7 +586,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
                 performBack()
             }
         }else{
-            binding.navigation.selectedItemId=R.id.navigation_home
+            binding.navigation.selectedItemId= R.id.navigation_home
         }
     }
 

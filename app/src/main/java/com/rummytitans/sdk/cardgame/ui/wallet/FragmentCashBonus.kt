@@ -17,7 +17,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
 import com.rummytitans.sdk.cardgame.ui.wallet.adapter.CashBonusAdapter
-import kotlinx.android.synthetic.main.fragment_cash_bonus_rummy.*
 
 class FragmentCashBonus : BaseFragment(), MainNavigationFragment,
     BaseNavigator {
@@ -29,12 +28,14 @@ class FragmentCashBonus : BaseFragment(), MainNavigationFragment,
     lateinit var adapter: CashBonusAdapter
 
     var type = 1
+    var url = ""
 
     companion object {
-        fun newInstance(isActivity: Boolean=false): FragmentCashBonus {
+        fun newInstance(isActivity: Boolean=false,title:String=""): FragmentCashBonus {
             val frag = FragmentCashBonus()
             val bundle = Bundle()
             bundle.putBoolean("isActivity", isActivity)
+            bundle.putString("title", title)
             frag.arguments = bundle
             return frag
         }
@@ -57,8 +58,6 @@ class FragmentCashBonus : BaseFragment(), MainNavigationFragment,
         arguments?.getBoolean("isActivity")?.let {
             viewModel.isAvtivity.set(it)
         }
-
-
         binding.executePendingBindings()
         return binding.root
     }
@@ -67,23 +66,33 @@ class FragmentCashBonus : BaseFragment(), MainNavigationFragment,
         super.onViewCreated(view, savedInstanceState)
         viewModel.navigator = this
         viewModel.isLoading.set(true)
-        viewModel.fetchCashBonus()
-        icBack.setOnClickListener { activity?.onBackPressed() }
+
+        binding.icBack.setOnClickListener { requireActivity().onBackPressed() }
+
+        url =
+            if (viewModel.title.equals("Credit Bonus", ignoreCase = true) || viewModel.title.equals(
+                    "Game Bonus",
+                    ignoreCase = true
+                )
+            ) "transaction/v1/bonus/list"
+            else if (viewModel.title.equals("Conversion Bonus", ignoreCase = true)) "transaction/v1/conversion-bonus/list"
+            else "transaction/v1/promo-bonus/list"
 
 
-        rvCashBonus?.layoutManager = LinearLayoutManager(activity)
+        viewModel.fetchCashBonus(url)
 
+        binding.rvCashBonus.layoutManager = LinearLayoutManager(requireActivity())
         adapter = CashBonusAdapter(ArrayList())
-        rvCashBonus?.adapter = adapter
+        binding.rvCashBonus.adapter = adapter
 
         viewModel.listmodel.observe(viewLifecycleOwner, Observer {
             adapter.updateItems(it)
         })
 
-        swipeRefresh?.setOnRefreshListener {
+        binding.swipeRefresh.setOnRefreshListener {
             viewModel.isLoading.set(false)
             viewModel.isSwipeLoading.set(true)
-            viewModel.fetchCashBonus()
+            viewModel.fetchCashBonus(url)
         }
 
     }
@@ -95,12 +104,12 @@ class FragmentCashBonus : BaseFragment(), MainNavigationFragment,
 
     override fun handleError(throwable: Throwable?) {
         println(throwable?.message.toString())
-        swipeRefresh?.isRefreshing = false
+        binding.swipeRefresh?.isRefreshing = false
         throwable?.message?.let { showErrorMessageView(it) }
     }
 
     override fun showError(message: String?) {
-        swipeRefresh?.isRefreshing = false
+        binding.swipeRefresh?.isRefreshing = false
         message?.let { showErrorMessageView(it) }
     }
 
@@ -109,7 +118,7 @@ class FragmentCashBonus : BaseFragment(), MainNavigationFragment,
     }
 
     override fun showMessage(message: String?) {
-        swipeRefresh?.isRefreshing = false
+        binding.swipeRefresh?.isRefreshing = false
     }
 
 

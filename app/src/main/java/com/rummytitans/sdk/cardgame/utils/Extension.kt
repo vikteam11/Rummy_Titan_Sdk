@@ -18,6 +18,7 @@ import android.util.Base64
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.webkit.URLUtil
 import android.widget.EditText
 import android.widget.ImageView
@@ -630,6 +631,12 @@ fun sendToInternalBrowser(activity: Context, webUrl: String,title: String="") {
     )
 }
 
+fun hideKeyboard(view: View,context: Activity) {
+    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(view?.windowToken, 0)
+}
+
+
 fun setAddMoreGatewayItem(gateway: NewPaymentGateWayModel.GatewayList?) {
     when(gateway?.Type?:0){
         1 ->{
@@ -696,3 +703,6 @@ fun Double.decimalFormat():Double{
 fun String.isMyTeamDeeplink():Boolean{
     return this.contains("myteam11storedeeplink:",true) || this.contains("myTeamDeepLink:",true)
 }
+fun Double.formatInString():String =
+    DecimalFormat("##.##").format(this)
+

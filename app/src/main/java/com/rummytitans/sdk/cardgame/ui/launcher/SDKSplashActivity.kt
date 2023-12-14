@@ -1,7 +1,7 @@
 package com.rummytitans.sdk.cardgame.ui.launcher
 
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
-import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
+import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
 
 import com.rummytitans.sdk.cardgame.widget.MyDialog
 import android.content.Intent
@@ -9,8 +9,6 @@ import android.os.Bundle
 import android.provider.Settings
 import android.text.TextUtils
 import android.util.Log
-import android.widget.Toast
-import androidx.annotation.Keep
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
@@ -32,7 +30,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.dialog_internet_rummy.*
-import javax.inject.Inject
+
 @AndroidEntryPoint
 class SDKSplashActivity : AppCompatActivity(),
     BaseNavigator {

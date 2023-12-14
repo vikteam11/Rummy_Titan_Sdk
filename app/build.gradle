@@ -73,7 +73,8 @@ android {
         main {
             res.srcDirs = [
                     'src/main/res',
-                    'src/main/res/avtaar'
+                    'src/main/res/avtaar',
+                    'src/main/res/winning_breakup'
             ]
         }
     }
@@ -97,7 +98,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'androidx.core:core-ktx:1.5.0-beta01'
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
-    implementation "com.google.android.material:material:$rootProject.materialVersion"
+    implementation "com.google.android.material:material:1.5.0"
 
 // Architecture Components
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"

@@ -337,12 +337,28 @@ interface APIInterface {
         @Header(AUTH_EXPIRE) AuthExpire: String
     ): Single<BaseModel<Any>>
 
-    @POST("myprofile/verificationmailrummy")
+    @POST("/account/v1/sendverificationmail")
     fun sendVerificationEmail(
         @Header(USER_ID) UserId: String,
         @Header(EXPIRE_TOKEN) ExpireToken: String,
-        @Header(AUTH_EXPIRE) AuthExpire: String
-    ): Single<BaseModel<String>>
+        @Header(AUTH_EXPIRE) AuthExpire: String,
+        @Body map:JsonObject
+    ): Single<BaseModel<Any>>
+
+    @POST("/account/v1/verify-email")
+    fun verifyEmail(
+        @Header(USER_ID) UserId: String,
+        @Header(EXPIRE_TOKEN) ExpireToken: String,
+        @Header(AUTH_EXPIRE) AuthExpire: String,
+        @Body map:JsonObject
+    ): Single<BaseModel<Any>>
+
+    @GET("/account/v1/email/verificationstatus")
+    fun verificationStatus(
+        @Header(USER_ID) UserId: String,
+        @Header(EXPIRE_TOKEN) ExpireToken: String,
+        @Header(AUTH_EXPIRE) AuthExpire: String,
+    ): Single<BaseModel<EmailVerificationStatusModel>>
 
     @POST("myprofile/emailchange")
     fun updateEmailAddress(
@@ -818,13 +834,13 @@ interface APIInterface {
 
     @GET("v1/myteam11/banners")
     fun getHeaders(): Single<com.rummytitans.sdk.cardgame.models.HeaderBaseResponse>
-    @POST("myprofile/getbonudamount")
-
+    @GET
     fun getCashBonusList(
+        @Url url: String,
         @Header(USER_ID) UserId: Int,
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String
-    ): Single<BaseModel<ArrayList<com.rummytitans.sdk.cardgame.models.CashBonusModel>>>
+    ): Single<BaseModel<ArrayList<CashBonusModel>>>
 
     @GET("transaction/v2/list/{TypeId}/{PageNo}")
     fun getRecentTransactions(
@@ -1009,6 +1025,28 @@ interface APIInterface {
         @Body json:JsonObject
     ): Single<BaseModel<GstCalculationModel>>
 
+    @POST("profile/v1/update")
+    fun updateProfileData(
+        @Header(USERID) userId: String,
+        @Header(EXPIRETOKEN) expireToken: String,
+        @Header(AUTHEXPIRE) authExpire: String,
+        @Body json:JsonObject
+    ): Single<BaseModel<Any>>
+
+    @GET("transaction/v1/calculate/winning-to-deposit")
+    fun getWinningConversionRange(
+        @Header(USERID) userId: String,
+        @Header(EXPIRETOKEN) expireToken: String,
+        @Header(AUTHEXPIRE) authExpire: String,
+    ): Single<BaseModel<WinningConversionContentModel>>
+
+    @POST("transaction/v1/convert/winning-to-deposit")
+    fun convertToDeposit(
+        @Header(USERID) userId: String,
+        @Header(EXPIRETOKEN) expireToken: String,
+        @Header(AUTHEXPIRE) authExpire: String,
+        @Body json: JsonObject
+    ): Single<BaseModel<List<WinningConversionContentModel.WinningConversionBenefitModel>>>
 
     companion object {
         const val TRANSACTION_ID = "TxnId"

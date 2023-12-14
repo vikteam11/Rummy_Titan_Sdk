@@ -1,5 +1,6 @@
 package com.rummytitans.sdk.cardgame.ui.verify.viewmodel
 
+import android.os.CountDownTimer
 import com.rummytitans.sdk.cardgame.R
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
@@ -16,14 +17,20 @@ import com.rummytitans.sdk.cardgame.utils.WebViewUrls
 import com.rummytitans.sdk.cardgame.utils.locationservices.utils.emptyJson
 import com.rummytitans.sdk.cardgame.widget.MyDialog
 import android.text.TextUtils
+import android.util.Log
+import androidx.core.os.bundleOf
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
+import com.google.gson.JsonObject
+import com.rummytitans.sdk.cardgame.utils.bottomsheets.models.BottomSheetStatusDataModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.util.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 @HiltViewModel
 class VerifyViewModel @Inject constructor(
@@ -33,23 +40,34 @@ class VerifyViewModel @Inject constructor(
     val connectionDetector: ConnectionDetector,
     val analyticsHelper: AnalyticsHelper
 ) : BaseViewModel<VerificationNavigator>() {
+    val loginStep = MyConstants.OTP
     val data = MutableLiveData<ProfileVerificationModel>()
     val loginResponse: LoginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
     var isLoading = ObservableBoolean(false)
+    var isValidEmailVerify = ObservableBoolean(false)
+    var isShowPinViewError = ObservableBoolean(false)
     var myDialog: MyDialog? = null
     var isSwipeLoading = ObservableBoolean(false)
+    var wrongOtp = ObservableBoolean(false)
+    var wrongOtpErrorMSg = ObservableField("")
 
-
+    var email = ObservableField("")
+    private var otpTimer: CountDownTimer? = null
+    var remainTimeText = ObservableField<String>()
     val verificationInfo: LiveData<ProfileVerificationModel>
         get() = data
-
+    var timer : Timer?= Timer()
+    private var intervalEmailStatus = 5000
+    var timeIsOver = ObservableBoolean(false)
     val regularColor = prefs.regularColor
     val safeColor = prefs.safeColor
     val selectedColor = ObservableField(if (prefs.onSafePlay) safeColor else regularColor)
     var isVrified = ObservableBoolean(false)
-
-    fun getHowtoVerifyWebUrls(): String {
-        return WebViewUrls.AppDefaultURL + WebViewUrls.SHORT_HowtoVerify
+    private var countTimer = 0;
+    init {
+        kotlin.runCatching {
+            wrongOtpErrorMSg.set(navigator.getStringResource(R.string.you_have_entered_wrong_verification_code))
+        }
     }
 
 
@@ -85,10 +103,10 @@ class VerifyViewModel @Inject constructor(
 
                     if (it.Status) {
                         data.value = it.Response
-                        isVrified.set(it.Response.EmailVerify and it.Response.MobileVerify and it.Response.PanVerify and it.Response.BankVerify)
+                        isVrified.set(it.Response.profileVerified())
                         it.Response.apply {
                             val status = when {
-                                BankVerify -> "AccountNumber"
+                                BankVerify -> "Bank"
                                 PanVerify -> "PAN"
                                 EmailVerify -> "Email"
                                 MobileVerify -> "Phone"
@@ -97,13 +115,15 @@ class VerifyViewModel @Inject constructor(
                             analyticsHelper.setJsonUserProperty(
                                 emptyJson().apply {
                                     put(AnalyticsKey.Properties.VerificationStatus, status)
-                                    if (status == "Email" || status == "PAN" || status == "AccountNumber")
+                                    if (status == "Email" || status == "PAN" || status == "Bank")
                                         put(AnalyticsKey.Properties.Email, loginResponse.Email)
                                 }
                             )
                         }
-                    }
-                    navigator.showMessage(it.Message)
+                        navigator.showMessage(it.Message)
+                    }else
+                        navigator.showError(it.Message)
+
                 }), ({
                     navigator.handleError(it)
                     isSwipeLoading.set(false)
@@ -112,25 +132,32 @@ class VerifyViewModel @Inject constructor(
         )
     }
 
-    fun verifyEmail() {
-        if (TextUtils.isEmpty(verificationInfo.value?.Email)) {
-            navigator.showError(R.string.err_invalid_email)
-            return
-        }
+    fun verifyEmail(emailValue : String) {
+        analyticsHelper.fireEvent(
+            AnalyticsKey.Names.ButtonClick, bundleOf(
+                AnalyticsKey.Keys.ButtonName to AnalyticsKey.Values.VerifyEmail,
+                AnalyticsKey.Keys.Email to emailValue,
+                AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.Verification,
+            )
+        )
         if (!connectionDetector.isConnected) {
             myDialog?.noInternetDialog {
-                verifyEmail()
+                verifyEmail(emailValue)
             }
             isLoading.set(false)
             isSwipeLoading.set(false)
             return
         }
         isLoading.set(true)
+        val json = JsonObject()
+        json.addProperty("email",emailValue)
+        val apiInterface = getApiEndPointObject(prefs.appUrl2?:"")
         compositeDisposable.add(
             apiInterface.sendVerificationEmail(
                 loginResponse.UserId.toString(),
                 loginResponse.ExpireToken,
-                loginResponse.AuthExpire
+                loginResponse.AuthExpire,
+                json
             )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -138,9 +165,161 @@ class VerifyViewModel @Inject constructor(
                     isLoading.set(false)
                     if (it.Status) {
                         navigatorAct.fireBranchEvent(loginResponse.UserId)
-                        navigator.showMessage(it.Message)
+                        //navigator.showMessage(it.Message)
+                        Log.e("loginstep == ", loginStep.toString())
+                        email.set(emailValue ?: "")
+                        navigatorAct.showVerifyEmailDialog()
+                        runTimerVerificationStatus()
                     } else {
                         navigator.showError(it.Message)
+                    }
+                }), ({
+                    isLoading.set(false)
+                    navigator.handleError(it)
+                }))
+        )
+    }
+
+    fun runTimerVerificationStatus(){
+        countTimer = 0
+        timer = Timer()
+        timer?.scheduleAtFixedRate(object : TimerTask() {
+            override fun run() {
+                Log.e("runcommnad>>>>>>>>","check email verification")
+                checkEmailVerificationStatus()
+
+            }
+        }, 100, intervalEmailStatus.toLong())
+
+
+
+    }
+
+    fun onEmailVerify(emailValue : String,otpValue : String) {
+        analyticsHelper.fireEvent(
+            AnalyticsKey.Names.ButtonClick, bundleOf(
+                AnalyticsKey.Keys.ButtonName to AnalyticsKey.Values.VerifyOtp,
+                AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.Verification,
+            )
+        )
+        isShowPinViewError.set(false)
+        if (!connectionDetector.isConnected) {
+            myDialog?.noInternetDialog {
+                onEmailVerify(emailValue,otpValue)
+            }
+            isLoading.set(false)
+            isSwipeLoading.set(false)
+            return
+        }
+        isLoading.set(true)
+        val json = JsonObject()
+        json.addProperty("email",emailValue)
+        json.addProperty("otp",otpValue)
+        val apiInterface = getApiEndPointObject(prefs.appUrl2?:"")
+        compositeDisposable.add(
+            apiInterface.verifyEmail(
+                loginResponse.UserId.toString(),
+                loginResponse.ExpireToken,
+                loginResponse.AuthExpire,
+                json
+            )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(({
+                    isLoading.set(false)
+                    if (it.Status) {
+                        analyticsHelper.fireEvent(
+                            AnalyticsKey.Names.EmailVerified, bundleOf(
+                                AnalyticsKey.Keys.Type to AnalyticsKey.Values.VerifyOtp,
+                                AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.Verification,
+                            )
+                        )
+                        stopVerificationTimer()
+                        navigatorAct.dismissVerifyEmailOtpDialog()
+                        data.value?.EmailVerify = true
+                        data.value?.Email = email.get()
+                        data.value = data.value
+                        navigatorAct.showUploadingSheet(
+                            BottomSheetStatusDataModel().apply {
+                                title = "Email Verification Successful!"
+                                description = it.Message
+                                positiveButtonName= "Ok,Got it"
+                                btnColorRes = R.color.turtle_Green
+                                isSuccess = false
+                                allowCross = true
+                                animationFileId = R.raw.withdrawal_done_anim
+                                showSuccessAnim  = R.raw.success_blast_anim
+                            }
+                        )
+
+
+                    } else {
+                        isShowPinViewError.set(true)
+                        wrongOtpErrorMSg.set(navigator.getStringResource(R.string.otp_you_entered_invalid))
+                    }
+                }), ({
+                    isLoading.set(false)
+                    navigator.handleError(it)
+                }))
+        )
+    }
+
+    fun checkEmailVerificationStatus() {
+        if(data.value?.EmailVerify==true){
+            stopVerificationTimer()
+            return
+        }
+        if (!connectionDetector.isConnected) {
+            myDialog?.noInternetDialog {
+                checkEmailVerificationStatus()
+            }
+            return
+        }
+        val apiInterface = getApiEndPointObject(prefs.appUrl2?:"")
+        compositeDisposable.add(
+            apiInterface.verificationStatus(
+                loginResponse.UserId.toString(),
+                loginResponse.ExpireToken,
+                loginResponse.AuthExpire,
+            )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(({
+                    if (it.Status) {
+                        countTimer++
+                        intervalEmailStatus = it.Response.timer * 1000
+
+                        if(countTimer == it.Response.count)
+                            stopVerificationTimer()
+
+                        if(it.Response.isIsVerified){
+                            analyticsHelper.fireEvent(
+                                AnalyticsKey.Names.EmailVerified, bundleOf(
+                                    AnalyticsKey.Keys.Type to AnalyticsKey.Values.ViaLink,
+                                    AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.Verification,
+                                )
+                            )
+                            stopVerificationTimer()
+                            data.value?.EmailVerify = true
+                            data.value?.Email = email.get()
+                            data.value = data.value
+                            navigatorAct.dismissVerifyEmailOtpDialog()
+                            navigatorAct.showUploadingSheet(
+                                BottomSheetStatusDataModel().apply {
+                                    title = "Email Verification Successful!"
+                                    description = it.Message
+                                    positiveButtonName= "Ok,Got it"
+                                    btnColorRes = R.color.turtle_Green
+                                    isSuccess = false
+                                    allowCross = true
+                                    animationFileId = R.raw.withdrawal_done_anim
+                                    showSuccessAnim  = R.raw.success_blast_anim
+                                }
+                            )
+
+
+                        }
+
                     }
                 }), ({
                     navigator.handleError(it)
@@ -148,10 +327,15 @@ class VerifyViewModel @Inject constructor(
         )
     }
 
-    fun updateEmail(email: String) {
+    fun stopVerificationTimer() {
+        timer?.cancel()
+        timer = null
+    }
+
+    fun updateEmail(emailValue: String) {
         if (!connectionDetector.isConnected) {
             myDialog?.noInternetDialog {
-                updateEmail(email)
+                updateEmail(emailValue)
             }
             isLoading.set(false)
             isSwipeLoading.set(false)
@@ -163,7 +347,7 @@ class VerifyViewModel @Inject constructor(
                 loginResponse.UserId.toString(),
                 loginResponse.ExpireToken,
                 loginResponse.AuthExpire,
-                email
+                emailValue
             )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -172,7 +356,8 @@ class VerifyViewModel @Inject constructor(
                     if (it.Status) {
                         navigatorAct.emailChangeDone()
                         fetchVerificationData()
-                        navigator.showMessage(it.Message)
+                        //navigator.showMessage(it.Message)
+
                     } else {
                         navigator.showError(it.Message)
                     }
@@ -214,7 +399,7 @@ class VerifyViewModel @Inject constructor(
         )
     }
 
-    fun getVerificationItems(addEmail:Boolean = false):ArrayList<ProfileVerificationItem>{
+    fun getVerificationItems(addEmail:Boolean = false): ArrayList<ProfileVerificationItem> {
         val list =  verificationInfo.value?.let {
             arrayListOf(
                 ProfileVerificationItem(
@@ -256,10 +441,10 @@ class VerifyViewModel @Inject constructor(
                 ProfileVerificationItem(
                     MyConstants.VERIFY_ITEM_ADDRESS,
                     when{
-                        addEmail -> "Address"
-                        it.AddressType == 1 -> "Aadhaar Card"
-                        it.AddressType == 2 -> "Driving License"
-                        else -> "Address"
+                        addEmail -> navigator.getStringResource(R.string.address)
+                        it.AddressType==1 ->{navigator.getStringResource(R.string.aadhaar_card)}
+                        it.AddressType==2 ->{navigator.getStringResource(R.string.driving_license)}
+                        else -> navigator.getStringResource(R.string.address)
                     },
                     it.AddressNo,
                     isVerified = it.AddressVerified,
@@ -294,4 +479,36 @@ class VerifyViewModel @Inject constructor(
         return list
     }
 
+    fun editMobileNumber() {
+    }
+
+    fun resendOTP() {
+
+    }
+
+    fun startTimer() {
+        otpTimer?.cancel()
+        var hms = ""
+        otpTimer = object : CountDownTimer(59 * 1000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                hms = String.format(
+                    "%02d",
+                    TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
+                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)
+                    )
+                )
+                remainTimeText.set(hms)
+            }
+
+            override fun onFinish() {
+                timeIsOver.set(true)
+            }
+        }.start()
+    }
+
+    fun finishTimer() {
+        otpTimer?.onFinish()
+        timeIsOver.set(false)
+        wrongOtp.set(false)
+    }
 }
