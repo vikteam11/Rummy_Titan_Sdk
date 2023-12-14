@@ -7,6 +7,7 @@ public class WithdrawalSuccessCustomModel implements Serializable {
     public String ID;
     public String Message;
     public String AccountNo;
+    public String Title;
     public String TnxId;
     public String RequestDate;
     public Double AmountWithdrawal;

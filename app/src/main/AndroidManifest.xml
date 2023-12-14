@@ -248,6 +248,10 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateVisible" />
 
+        <activity
+            android:exported="false" android:name=".ui.wallet.withdrawal.WithdrawalDoneActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

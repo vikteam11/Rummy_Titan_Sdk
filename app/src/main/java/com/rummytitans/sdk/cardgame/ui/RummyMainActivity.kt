@@ -1,6 +1,12 @@
 package com.rummytitans.sdk.cardgame.ui
-
-
+import com.rummytitans.sdk.cardgame.analytics.AnalyticsHelper
+import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
+import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
+import com.rummytitans.sdk.cardgame.ui.base.BaseActivity
+import com.rummytitans.sdk.cardgame.ui.base.BaseFragment
+import com.rummytitans.sdk.cardgame.ui.deeplink.DeepLinkActivityRummy
+import com.rummytitans.sdk.cardgame.ui.home.FragmentHome
+import com.rummytitans.sdk.cardgame.utils.*
 package com.rummytitans.playcashrummyonline.cardgame.ui
 import android.content.Intent
 import android.graphics.Color
@@ -23,24 +29,21 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+//import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
-import com.rummytitans.sdk.cardgame.R
+=import com.rummytitans.sdk.cardgame.R
 import com.rummytitans.sdk.cardgame.RummyTitanSDK
-import com.rummytitans.sdk.cardgame.analytics.AnalyticsHelper
-import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
-import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.sdk.cardgame.databinding.ActivityHomeRummyBinding
 import com.rummytitans.sdk.cardgame.databinding.NotificationBadgeRummyBinding
 import com.rummytitans.sdk.cardgame.games.rummy.RummyWebViewActivity
 import com.rummytitans.sdk.cardgame.models.WalletInfoModel
+import com.rummytitans.sdk.cardgame.ui.common.CommonFragmentActivity
+import com.rummytitans.sdk.cardgame.ui.games.tickets.GamesTicketActivity
 import com.rummytitans.sdk.cardgame.ui.ActiveGameNavigator
 import com.rummytitans.sdk.cardgame.ui.MainViewModel
-import com.rummytitans.sdk.cardgame.ui.base.BaseActivity
-import com.rummytitans.sdk.cardgame.ui.base.BaseFragment
 import com.rummytitans.sdk.cardgame.ui.common.CommonFragmentActivity
 import com.rummytitans.sdk.cardgame.ui.deeplink.DeepLinkActivityRummy
 import com.rummytitans.sdk.cardgame.ui.games.tickets.GamesTicketActivity
-import com.rummytitans.sdk.cardgame.ui.home.FragmentHome
 import com.rummytitans.sdk.cardgame.ui.more.FragmentMore
 import com.rummytitans.sdk.cardgame.ui.profile.ProfileActivity
 import com.rummytitans.sdk.cardgame.ui.rakeback.RakeBackFragment
@@ -49,6 +52,16 @@ import com.rummytitans.sdk.cardgame.ui.refer.ReferEarnActivity
 import com.rummytitans.sdk.cardgame.ui.wallet.FragmentWallet
 import com.rummytitans.sdk.cardgame.ui.wallet.RummyAddCashActivity
 import com.rummytitans.sdk.cardgame.ui.wallet.adapter.WalletBonusAdapter
+import com.rummytitans.sdk.cardgame.utils.alertDialog.AlertdialogModel
+import com.rummytitans.sdk.cardgame.utils.bottomsheets.BottomSheetAlertDialog
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_home_rummy.*
+import javax.inject.Inject
+
+@AndroidEntryPoint
+class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener,
+   ActiveGameNavigator {
+
 import com.rummytitans.sdk.cardgame.utils.MyConstants
 import com.rummytitans.sdk.cardgame.utils.alertDialog.AlertdialogModel
 import com.rummytitans.sdk.cardgame.utils.bottomsheets.BottomSheetAlertDialog
@@ -73,6 +86,8 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
     @Inject
     lateinit var prefs: SharedPreferenceStorageRummy
 
+    @Inject
+    lateinit var analyticsHelper: AnalyticsHelper
 
     @Inject
     lateinit var gson: Gson
@@ -87,10 +102,23 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
 
     companion object {
         val FRAGMENT_ID = R.id.fragment_container
+        const val REFER_CLICK = 1
+        const val COUPON_CLICK = 2
+        const val RANK_CLICK = 3
+        const val SPORTSTIGER_CLICK = 4
+        const val SUPPORT_CLICK = 5
+        const val POLL_CLICK = 6
+        const val FEEDBACK_CLICK = 7
+        const val CHAT_CLICK = 9
+        const val SETTING_CLICK = 10
+        const val FAV_TEAM = 12
+        const val TAG="MainActivity"
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        checkAndSetLanguage(this)
         pokerData = intent?.getStringExtra(MyConstants.INTENT_POKER_DATA) ?: ""
         gameID = intent?.getStringExtra(MyConstants.INTENT_GAME_DATA) ?: ""
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
@@ -376,9 +404,8 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
             piechart.data = data
             piechart.description.isEnabled = false
             //if(MyConstants.CURRENT_APP_TYPE != 1){
-                piechart.setHoleColor(ContextCompat.getColor(this@RummyMainActivity,
-                    R.color.text_color6
-                ))
+            piechart.setHoleColor(ContextCompat.getColor(this@RummyMainActivity,R.color.text_color6))
+  
             //}
         }
 
@@ -509,6 +536,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
             }
 
         }
+
         viewModel.analyticsHelper.addTrigger(AnalyticsKey.Keys.Screen,tabName)
         viewModel.analyticsHelper.fireEvent(
             AnalyticsKey.Names.ButtonClick, bundleOf(

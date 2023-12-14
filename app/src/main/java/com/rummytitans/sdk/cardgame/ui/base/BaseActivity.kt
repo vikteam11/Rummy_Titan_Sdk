@@ -168,8 +168,9 @@ open class BaseActivity : AppCompatActivity(),
     override fun logoutUser() {
         //HaptikSDK.logout(this)
         //finishAffinity()
-        startActivity(Intent(this, RummyNewLoginActivity::class.java))
-        //RummyTitanSDK.rummyCallback?.logoutUser()
+      
+        RummyTitanSDK.rummyCallback?.logoutUser()
+
     }
 
     override fun getStringResource(resourseId: Int) =

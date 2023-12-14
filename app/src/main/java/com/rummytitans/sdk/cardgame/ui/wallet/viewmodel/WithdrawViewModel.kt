@@ -1,5 +1,7 @@
 package com.rummytitans.sdk.cardgame.ui.wallet.viewmodel
 
+import android.app.Activity
+import android.content.Context
 import com.rummytitans.sdk.cardgame.R
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
@@ -11,6 +13,7 @@ import com.rummytitans.sdk.cardgame.ui.wallet.WithdrawalNavigator
 import com.rummytitans.sdk.cardgame.utils.ConnectionDetector
 import com.rummytitans.sdk.cardgame.widget.MyDialog
 import android.text.TextUtils
+import android.view.inputmethod.InputMethodManager
 import androidx.core.os.bundleOf
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
@@ -85,14 +88,15 @@ class WithdrawViewModel @Inject constructor(
 
         isWithdrawButtonEnabled.set(false)
         isLoading.set(true)
-
+        val json = JsonObject()
+        json.addProperty("Amount",withdrawalAmount.get().toString())
+        json.addProperty("WithdrawalOption", withdrawalMethod.get()?.ID.toString())
         compositeDisposable.add(
             apiInterface.withdrawMoney(
                 loginResponse.UserId.toString(),
                 loginResponse.ExpireToken,
                 loginResponse.AuthExpire,
-                withdrawalAmount.get().toString(),
-                withdrawalMethod.get()?.ID.toString()
+              json
             )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -134,7 +138,7 @@ class WithdrawViewModel @Inject constructor(
                     withdrawalModel.value?.BankDetail?.AccountNo
 
                 it.TnxId = apiResponse?.TnxId?:""
-
+                    it.Title =  apiResponse?.Title?:""
                 it.RequestDate = apiResponse?.ReauestDate?:""
                 it.Message = apiResponse?.Message?:extraMsg
                 it.AmountWithdrawal = finalWithdrawal?.amount?:0.0
@@ -204,11 +208,11 @@ class WithdrawViewModel @Inject constructor(
         )
     }
 
-    fun getTdsOnAmount(amount:Int) {
+    fun getTdsOnAmount(amount:Int,context: Activity) {
         if (!connectionDetector.isConnected) {
             myDialog?.noInternetDialog {
                 isLoading.set(true)
-                getTdsOnAmount(amount)
+                getTdsOnAmount(amount,context)
             }
             isLoading.set(true)
             return
@@ -231,6 +235,7 @@ class WithdrawViewModel @Inject constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(({
                     isTdsCalculating.set(false)
+                    hideKeyboard(context)
                     isWithdrawButtonEnabled.set(it.Status)
                     if (it.Status){
                         if(it.Response.isNotEmpty()){
@@ -247,6 +252,11 @@ class WithdrawViewModel @Inject constructor(
                     isTdsCalculating.set(false)
                 }))
         )
+    }
+
+    private fun hideKeyboard(context: Activity) {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(context.currentFocus?.windowToken, 0)
     }
 
 }

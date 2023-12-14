@@ -15,7 +15,7 @@
         <variable
             name="withdrawalStatusView"
             type="androidx.databinding.ObservableInt" />
-         <variable
+        <variable
             name="model"
             type="com.rummytitans.sdk.cardgame.models.WithdrawalSuccessCustomModel" />
 
@@ -85,7 +85,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/rubik_regular"
                 android:gravity="center"
-                android:text="@{model.withdrawalHeader+` (After TDS)`}"
+                android:text="@{model.Title}"
                 android:textColor="@color/text_color8"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -140,7 +140,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/TvTxnId"
-                tools:textColor="@color/colorPrimary" />
+                tools:textColor="@color/rummy_colorPrimary" />
 
 
             <TextView
@@ -262,6 +262,8 @@
             <FrameLayout
                 android:id="@+id/tvBackToWallet"
                 android:elevation="15dp"
+                app:shadowColor="@color/black"
+                app:shadowMarginTop="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

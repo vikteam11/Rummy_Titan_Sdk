@@ -16,7 +16,10 @@ public class WithdrawModel {
     public String ErrorMessage;
     @SerializedName("TDSTnC")
     public String TdsUrl ;
-
+    @SerializedName("TDSFreeWithdrawalMessage")
+    public String TDSFreeWithdrawalMessage ;
+    @SerializedName("TDSFreeWithdrawalAmount")
+    public double TDSFreeWithdrawalAmount ;
     public static class WithdrawOption {
         @SerializedName("ID")
         public int ID;

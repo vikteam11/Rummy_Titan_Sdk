@@ -291,7 +291,7 @@ class FragmentWithdraw : BaseFragment(), MainNavigationFragment,
                     binding.shimmerViewContainer.startShimmer()
                     binding.cardTds.visibility = View.VISIBLE
                     viewModel.withdrawalAmount.set(amount)
-                    viewModel.getTdsOnAmount(amount)
+                    viewModel.getTdsOnAmount(amount,requireActivity())
                 }else{
                     viewModel.withdrawalAmount.set(0)
                     binding.cardTds.visibility = View.GONE

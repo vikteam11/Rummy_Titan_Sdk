@@ -35,6 +35,7 @@ public class BaseModel<T> implements Serializable {
     public String StateName;
     public String NotificationKey;
     public String TnxId;
+    public String Title;
     public String ReauestDate;
     public String SharingUrl;
     public String SharingMessage;
