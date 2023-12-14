@@ -1,6 +1,7 @@
 package com.rummytitans.sdk.cardgame.ui
 
-//import com.google.firebase.messaging.FirebaseMessaging
+
+package com.rummytitans.playcashrummyonline.cardgame.ui
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -32,6 +33,8 @@ import com.rummytitans.sdk.cardgame.databinding.ActivityHomeRummyBinding
 import com.rummytitans.sdk.cardgame.databinding.NotificationBadgeRummyBinding
 import com.rummytitans.sdk.cardgame.games.rummy.RummyWebViewActivity
 import com.rummytitans.sdk.cardgame.models.WalletInfoModel
+import com.rummytitans.sdk.cardgame.ui.ActiveGameNavigator
+import com.rummytitans.sdk.cardgame.ui.MainViewModel
 import com.rummytitans.sdk.cardgame.ui.base.BaseActivity
 import com.rummytitans.sdk.cardgame.ui.base.BaseFragment
 import com.rummytitans.sdk.cardgame.ui.common.CommonFragmentActivity
@@ -49,6 +52,7 @@ import com.rummytitans.sdk.cardgame.ui.wallet.adapter.WalletBonusAdapter
 import com.rummytitans.sdk.cardgame.utils.MyConstants
 import com.rummytitans.sdk.cardgame.utils.alertDialog.AlertdialogModel
 import com.rummytitans.sdk.cardgame.utils.bottomsheets.BottomSheetAlertDialog
+import com.rummytitans.sdk.cardgame.utils.checkAndSetLanguage
 import com.rummytitans.sdk.cardgame.utils.inTransaction
 import com.rummytitans.sdk.cardgame.utils.setOnClickListenerDebounce
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,7 +60,7 @@ import kotlinx.android.synthetic.main.activity_home_rummy.container
 import kotlinx.android.synthetic.main.activity_home_rummy.fragment_container
 import javax.inject.Inject
 
-@AndroidEntryPoint
+
 class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener,
     ActiveGameNavigator {
 
@@ -69,8 +73,6 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
     @Inject
     lateinit var prefs: SharedPreferenceStorageRummy
 
-    @Inject
-    lateinit var analyticsHelper: AnalyticsHelper
 
     @Inject
     lateinit var gson: Gson
@@ -108,7 +110,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
         replaceFragment(FragmentHome())
         handleDeepLink()
         handleTabs()
-        analyticsHelper.fireEvent(
+        viewModel.analyticsHelper.fireEvent(
             AnalyticsKey.Names.GameScreenLaunched
         )
         viewModel.displayHome.set(true)
@@ -507,8 +509,8 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
             }
 
         }
-        analyticsHelper.addTrigger(AnalyticsKey.Keys.Screen,tabName)
-        analyticsHelper.fireEvent(
+        viewModel.analyticsHelper.addTrigger(AnalyticsKey.Keys.Screen,tabName)
+        viewModel.analyticsHelper.fireEvent(
             AnalyticsKey.Names.ButtonClick, bundleOf(
                 AnalyticsKey.Keys.TabName to tabName,
                 AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.HOME

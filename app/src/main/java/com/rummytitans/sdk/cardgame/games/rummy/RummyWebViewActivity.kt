@@ -27,6 +27,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.gson.Gson
 import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
+import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
+import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
 import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
 import com.rummytitans.sdk.cardgame.ui.wallet.RummyAddCashActivity
 import kotlinx.android.synthetic.main.activity_games_web_viewer_rummy.*

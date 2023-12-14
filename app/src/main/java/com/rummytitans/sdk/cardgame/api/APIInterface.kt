@@ -337,12 +337,28 @@ interface APIInterface {
         @Header(AUTH_EXPIRE) AuthExpire: String
     ): Single<BaseModel<Any>>
 
-    @POST("myprofile/verificationmailrummy")
+    @POST("/account/v1/sendverificationmail")
     fun sendVerificationEmail(
         @Header(USER_ID) UserId: String,
         @Header(EXPIRE_TOKEN) ExpireToken: String,
-        @Header(AUTH_EXPIRE) AuthExpire: String
-    ): Single<BaseModel<String>>
+        @Header(AUTH_EXPIRE) AuthExpire: String,
+        @Body map:JsonObject
+    ): Single<BaseModel<Any>>
+
+    @POST("/account/v1/verify-email")
+    fun verifyEmail(
+        @Header(USER_ID) UserId: String,
+        @Header(EXPIRE_TOKEN) ExpireToken: String,
+        @Header(AUTH_EXPIRE) AuthExpire: String,
+        @Body map:JsonObject
+    ): Single<BaseModel<Any>>
+
+    @GET("/account/v1/email/verificationstatus")
+    fun verificationStatus(
+        @Header(USER_ID) UserId: String,
+        @Header(EXPIRE_TOKEN) ExpireToken: String,
+        @Header(AUTH_EXPIRE) AuthExpire: String,
+    ): Single<BaseModel<EmailVerificationStatusModel>>
 
     @POST("myprofile/emailchange")
     fun updateEmailAddress(

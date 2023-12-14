@@ -128,17 +128,22 @@
 
                     <include
                         android:id="@+id/includeOTPVerify"
-                        layout="@layout/layout_otp_rummy"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/includeMobileNumber"
-                        app:layout_constraintVertical_bias="0"
-                        bind:viewModel="@{viewModel}" />
+                        layout="@layout/layout_otp_rummy"
+                        app:loginStep="@{viewModel.loginStep}"
+                        app:otp="@{2}"
+                        app:isTitleOrSubTitleChange="@{false}"
+                        app:twoWayProcess="@{3}"
+                        app:mobileNumber="@{viewModel.mobileNumber}"
+                        app:wrongOtp="@{viewModel.wrongOtp}"
+                        app:wrongOtpErrorMSg="@{viewModel.wrongOtpErrorMSg}"
+                        app:timeIsOver="@{viewModel.timeIsOver}"
+                        app:remainTimeText="@{viewModel.remainTimeText}"
+                        app:onEditModile="@{viewModel::editMobileNumber}"
+                        app:onResetOtp="@{viewModel::resendOTP}"
+                        app:layout_constraintTop_toBottomOf="@id/textView"
+                        />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

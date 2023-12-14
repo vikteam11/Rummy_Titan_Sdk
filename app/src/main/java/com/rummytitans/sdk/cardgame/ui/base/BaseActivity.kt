@@ -29,6 +29,7 @@ import com.rummytitans.sdk.cardgame.RummyTitanSDK
 //import com.onesignal.OSInAppMessageAction
 //import com.onesignal.OneSignal
 import com.rummytitans.sdk.cardgame.models.MatchModel
+import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
 import com.tapadoo.alerter.Alerter
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
@@ -166,9 +167,9 @@ open class BaseActivity : AppCompatActivity(),
     @CallSuper
     override fun logoutUser() {
         //HaptikSDK.logout(this)
-        finishAffinity()
-      //  startActivity(Intent(this, RummyNewLoginActivity::class.java))
-        RummyTitanSDK.rummyCallback?.logoutUser()
+        //finishAffinity()
+        startActivity(Intent(this, RummyNewLoginActivity::class.java))
+        //RummyTitanSDK.rummyCallback?.logoutUser()
     }
 
     override fun getStringResource(resourseId: Int) =

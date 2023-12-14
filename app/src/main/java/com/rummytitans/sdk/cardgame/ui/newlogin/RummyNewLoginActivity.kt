@@ -25,7 +25,7 @@ import com.rummytitans.sdk.cardgame.AdvertisingIdClient
 import com.rummytitans.sdk.cardgame.R
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
 import com.rummytitans.sdk.cardgame.databinding.ActivityNewLoginRummyBinding
-import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
+import com.rummytitans.playcashrummyonline.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.base.BaseActivity
 import com.rummytitans.sdk.cardgame.utils.*
 import com.rummytitans.sdk.cardgame.widget.MyDialog
