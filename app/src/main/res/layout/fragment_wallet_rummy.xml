@@ -71,6 +71,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="8dp"
                                 android:visibility="gone"
+                                app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="@+id/txtYourWinning2"
                                 app:srcCompat="@drawable/ic_info"
                                 app:tint="@color/steel_grey" />
@@ -200,13 +201,37 @@
                                 android:layout_marginTop="1dp"
                                 android:padding="10dp">
 
+                                <androidx.constraintlayout.widget.Guideline
+                                    android:id="@+id/guideline1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    app:layout_constraintGuide_percent="0.34"/>
+
+                                <!-- Guideline 2: Divide the screen into thirds -->
+                                <androidx.constraintlayout.widget.Guideline
+                                    android:id="@+id/guideline2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    app:layout_constraintGuide_percent="0.68"/>
+
                                 <ImageView
                                     android:id="@+id/imageView63"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="@+id/guideline1"
+                                    app:layout_constraintStart_toStartOf="@id/guideline1"                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:srcCompat="@drawable/ic_gst_plus" />
+
+                                <ImageView
+                                    android:id="@+id/imageView64"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="@+id/guideline2"
+                                    app:layout_constraintStart_toStartOf="@id/guideline2"
                                     app:layout_constraintTop_toTopOf="parent"
                                     app:srcCompat="@drawable/ic_gst_plus" />
 
@@ -221,56 +246,112 @@
                                     app:layout_constraintTop_toTopOf="parent">
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/rubik_regular"
+                                        android:gravity="center"
                                         android:text="@{viewmodel.depositBonusVal.name}"
                                         android:textColor="@color/text_color2"
-                                        android:textSize="10sp" />
+                                        android:textSize="10sp"
+                                        android:maxLines="1"
+                                        app:autoSizeTextType="uniform"
+                                        app:autoSizePresetSizes="@array/text_sizes_10"/>
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="2dp"
                                         android:fontFamily="@font/rubik_medium"
                                         android:singleLine="true"
+                                        android:gravity="center"
                                         android:text="@{viewmodel.depositBonusVal.value.toString()}"
                                         android:textColor="@color/text_color8"
-                                        android:textSize="14sp" />
+                                        android:textSize="14sp"
+                                        android:maxLines="1"
+                                        app:autoSizeTextType="uniform"
+                                        app:autoSizePresetSizes="@array/text_sizes_14"/>
 
 
                                 </LinearLayout>
+
                                 <LinearLayout
+                                    android:id="@+id/layDepositBonus"
                                     android:layout_width="0dp"
                                     android:layout_height="0dp"
                                     android:orientation="vertical"
                                     app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintEnd_toStartOf="@id/imageView64"
                                     android:gravity="center"
                                     app:layout_constraintStart_toEndOf="@+id/imageView63"
                                     app:layout_constraintTop_toTopOf="parent">
 
                                     <TextView
                                         android:id="@+id/textView1"
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:gravity="center"
                                         android:fontFamily="@font/rubik_regular"
                                         android:text="@{viewmodel.gstBonusVal.name}"
                                         android:textColor="@color/text_color2"
                                         android:textSize="10sp"
+                                        android:maxLines="1"
+                                        app:autoSizeTextType="uniform"
+                                        app:autoSizePresetSizes="@array/text_sizes_10"
                                         />
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:fontFamily="@font/rubik_medium"
+                                        android:textColor="@color/text_color8"
+                                        android:textSize="14sp"
+                                        android:gravity="center"
+                                        android:maxLines="1"
+                                        app:autoSizeTextType="uniform"
+                                        app:autoSizePresetSizes="@array/text_sizes_14"
+                                        android:text="@{viewmodel.gstBonusVal.value.toString()}"
+                                        />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/layConversionBonus"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:layout_marginStart="5dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toEndOf="@+id/imageView64"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/rubik_regular"
+                                        android:text="@{viewmodel.conversionBonusVal.name}"
+                                        android:textColor="@color/text_color2"
+                                        android:textSize="10sp"
+                                        android:gravity="center"
+                                        android:maxLines="1"
+                                        app:autoSizeTextType="uniform"
+                                        app:autoSizePresetSizes="@array/text_sizes_10"/>
+
+                                    <TextView
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="2dp"
                                         android:fontFamily="@font/rubik_medium"
                                         android:singleLine="true"
+                                        android:gravity="center"
+                                        android:text="@{viewmodel.conversionBonusVal.value.toString()}"
                                         android:textColor="@color/text_color8"
                                         android:textSize="14sp"
-                                        android:text="@{viewmodel.gstBonusVal.value.toString()}"
-                                        />
-
+                                        android:maxLines="1"
+                                        app:autoSizeTextType="uniform"
+                                        app:autoSizePresetSizes="@array/text_sizes_14"/>
 
 
                                 </LinearLayout>

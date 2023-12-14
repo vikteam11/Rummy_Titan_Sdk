@@ -25,12 +25,11 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.google.gson.Gson
-import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
 import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
+import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
 import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
 import com.rummytitans.sdk.cardgame.ui.wallet.RummyAddCashActivity
 import kotlinx.android.synthetic.main.activity_games_web_viewer_rummy.*
-import javax.inject.Inject
 
 
 class RummyWebViewActivity() : BaseActivity(), RummyNavigator {
@@ -313,7 +312,7 @@ class RummyWebViewActivity() : BaseActivity(), RummyNavigator {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        startActivity(Intent(this,RummyMainActivity::class.java).putExtra(MyConstants.CALL_RECENT_MATCH_API,true))
+        startActivity(Intent(this, RummyMainActivity::class.java).putExtra(MyConstants.CALL_RECENT_MATCH_API,true))
         exitFromGame()
     }
 }

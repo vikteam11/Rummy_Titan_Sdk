@@ -696,3 +696,6 @@ fun Double.decimalFormat():Double{
 fun String.isMyTeamDeeplink():Boolean{
     return this.contains("myteam11storedeeplink:",true) || this.contains("myTeamDeepLink:",true)
 }
+fun Double.formatInString():String =
+    DecimalFormat("##.##").format(this)
+
