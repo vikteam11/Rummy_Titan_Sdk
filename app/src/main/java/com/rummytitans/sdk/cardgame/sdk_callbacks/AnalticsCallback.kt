@@ -11,5 +11,6 @@ interface AnalticsCallback {
     fun fireEventSDK(key: String, bundle: Bundle? = Bundle())
     fun setUserPropertySDK(property: String, value: String)
     fun setJsonUserPropertySDK(json: JSONObject,update : Boolean = false)
+    fun setCleverTapUserLocationSDK(lat:Double ,long:Double)
     fun setUserDataToToolsSDK()
 }

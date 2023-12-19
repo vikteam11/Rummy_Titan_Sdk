@@ -36,6 +36,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.jakewharton.rxbinding2.widget.RxTextView
+import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.home.adapter.WalletOffersAdapter
 import com.rummytitans.sdk.cardgame.ui.wallet.adapter.AddCashBannerAdapter
@@ -594,6 +595,7 @@ class RummyAddCashActivity :
     }
     override fun onLocationFound(lat: Double, log: Double) {
         viewModel.saveCurrentTime(userLatLog = "$lat,$log")
+        RummyTitanSDK.analytiCallback?.setCleverTapUserLocationSDK(lat,log)
     }
 
     override fun onValidLocationFound() {

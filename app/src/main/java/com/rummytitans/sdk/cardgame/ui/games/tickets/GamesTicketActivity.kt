@@ -12,6 +12,8 @@ import android.text.TextUtils
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import com.rummytitans.sdk.cardgame.RummyTitanSDK
+import com.rummytitans.sdk.cardgame.di.anotation.RummySdk
 import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.utils.locationservices.uiModules.CurrentLocationBaseActivity
 import javax.inject.Inject
@@ -110,6 +112,7 @@ class GamesTicketActivity : CurrentLocationBaseActivity(), GameTicketNavigator {
 
     override fun onLocationFound(lat: Double, log: Double) {
         mViewModel.saveUserLocation(userLatLog = "$lat,$log")
+        RummyTitanSDK.analytiCallback?.setCleverTapUserLocationSDK(lat,log)
     }
 
     override fun onBackPressed() {

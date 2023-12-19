@@ -317,6 +317,7 @@ class FragmentHome : BaseFragmentLocation(),
 
     override fun onLocationFound(lat: Double, log: Double) {
         viewModel.saveCurrentTime(userLatLog = "$lat,$log")
+        RummyTitanSDK.analytiCallback?.setCleverTapUserLocationSDK(lat,log)
     }
 
     override fun onValidLocationFound() {
