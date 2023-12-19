@@ -9,15 +9,15 @@ import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.rummytitans.sdk.cardgame.BuildConfig
+import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsHelper
+import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
 import com.rummytitans.sdk.cardgame.api.APIInterface
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
-import com.rummytitans.sdk.cardgame.models.LoginResponse
-import com.rummytitans.sdk.cardgame.models.VersionModel
-import com.rummytitans.sdk.cardgame.models.WalletBalanceModel
-import com.rummytitans.sdk.cardgame.models.WalletInfoModel
+import com.rummytitans.sdk.cardgame.models.*
 import com.rummytitans.sdk.cardgame.utils.ConnectionDetector
 import com.rummytitans.sdk.cardgame.utils.MyConstants
+import com.rummytitans.sdk.cardgame.utils.locationservices.utils.emptyJson
 import com.rummytitans.sdk.cardgame.widget.MyDialog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -81,7 +81,7 @@ class MainViewModel @Inject constructor(
         if (!connectionDetector.isConnected) {
             return
         }
-        /*compositeDisposable.add(
+        compositeDisposable.add(
             apiInterface.getProfileIno(
                 loginResponse.UserId.toString(),
                 loginResponse.ExpireToken,
@@ -93,11 +93,38 @@ class MainViewModel @Inject constructor(
                     if (it.Status) {
                         userAvtar.set(it.Response.AvtarId)
                         prefs.PinCode = it.Response.PinCode
+                        if(!prefs.isUserLoginOnCleverTap){
+                            setUserProperty(it.Response,prefs.isUserLoginOnCleverTap)
+                            prefs.isUserLoginOnCleverTap = true
+                        }
                     }
                 }), ({
                 }))
-        )*/
+        )
     }
+
+    private fun setUserProperty(model: ProfileInfoModel?, update:Boolean = false) {
+        RummyTitanSDK.analytiCallback?.setJsonUserPropertySDK(emptyJson().apply {
+            put(AnalyticsKey.Properties.Mobile, model?.Mobile)
+            put(AnalyticsKey.Properties.Email, model?.Email)
+            put(AnalyticsKey.Properties.UserID, model?.UserId)
+            put(AnalyticsKey.Properties.FullName, model?.Name)
+            put(AnalyticsKey.Properties.Gender, model?.Gender)
+            put(AnalyticsKey.Properties.DOB, model?.DOB)
+            put(AnalyticsKey.Properties.State, model?.StateName)
+            put(AnalyticsKey.Properties.RegistrationDate,model?.AccountCreatedDate)
+            model?.Name?.split(" ")?.let {list->
+                if (list.isEmpty()) return@let
+                list.elementAtOrNull(0)?.let {fName->
+                    put(AnalyticsKey.Properties.FirstName, fName)
+                }
+                list.elementAtOrNull(1)?.let {lName->
+                    put(AnalyticsKey.Properties.LastName, lName)
+                }
+            }
+        },update)
+    }
+
 
     fun toggleMiniWallet(){
         isMiniWalletOpen.set(!isMiniWalletOpen.get())

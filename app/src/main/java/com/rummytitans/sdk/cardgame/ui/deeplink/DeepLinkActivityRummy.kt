@@ -9,6 +9,7 @@ import com.rummytitans.sdk.cardgame.ui.base.BaseActivity
 import com.rummytitans.sdk.cardgame.utils.*
 import com.rummytitans.sdk.cardgame.widget.MyDialog
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.text.TextUtils
@@ -72,6 +73,17 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
         }
 
         binding.executePendingBindings()
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+
+        // On Android 12, Raise notification clicked event when Activity is already running in activity backstack
+        if(intent?.getBooleanExtra("isFromClever",false) == true) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                deepLinkOnNewIntent(intent.extras)
+            }
+        }
     }
 
     private fun fetchDataFromFirebaseDynamicLink(){
@@ -282,7 +294,11 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
 }
 
 interface DeepLinkNavigator {
-    fun sendToContestActivity(matchModel: MatchModel?)
-    fun finishAllAndCallMainActivity()
-    fun finishActivity()
+    fun sendToContestActivity(matchModel: MatchModel?){}
+    fun finishAllAndCallMainActivity(){}
+    fun finishActivity(){}
+    fun deepLinkOnNewIntent(bundle: Bundle?){}
 }
+
+
+

@@ -16,6 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
+import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import com.rummytitans.sdk.cardgame.databinding.FragmentChangePasswordRummyBinding
 import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
 import kotlinx.android.synthetic.main.fragment_change_password_rummy.*
@@ -156,8 +157,7 @@ class FragmentChangePassword : BaseFragment(), MainNavigationFragment,
 
     override fun logoutUser() {
         showError(R.string.err_session_expired)
-        activity?.finishAffinity()
-        startActivity(Intent(activity, RummyNewLoginActivity::class.java))
+        RummyTitanSDK.rummyCallback?.logoutUser()
     }
 
     override fun getStringResource(resourseId: Int) = getString(resourseId)

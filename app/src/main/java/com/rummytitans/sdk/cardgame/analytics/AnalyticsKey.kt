@@ -15,6 +15,7 @@ object AnalyticsKey {
         const val Gender = "Gender"
         const val DOB = "DOB"
         const val State = "State"
+        const val RegistrationDate = "RegistrationDate"
         const val DeviceID = "DeviceID"
         const val TeamName = "TeamName"
         const val VerificationStatus = "VerificationStatus"

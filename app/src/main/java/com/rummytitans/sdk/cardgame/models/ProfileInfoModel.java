@@ -34,4 +34,7 @@ public class ProfileInfoModel {
     public int AvtarId;
     @SerializedName("REferAmount")
     public String REferAmount;
+
+    @SerializedName("AccountCreatedDate")
+    public String AccountCreatedDate;
 }

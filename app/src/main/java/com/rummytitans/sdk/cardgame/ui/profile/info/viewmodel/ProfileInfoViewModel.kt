@@ -20,6 +20,7 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
+import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -291,11 +292,11 @@ class ProfileInfoViewModel
         isEditable.value = false
     }
 
-    fun updateProfile(name: String, dob: String, gender: String, address: String, pincode: String,email:String) {
+    fun updateProfile(name: String, dob: String, gender: String, address: String, pincode: String,email:String,phone:String) {
 
         if (!connectionDetector.isConnected) {
             myDialog?.noInternetDialog {
-                updateProfile(name, dob, gender, address, pincode,email)
+                updateProfile(name, dob, gender, address, pincode,email,phone)
             }
             isLoading.set(false)
             isSwipeLoading.set(false)
@@ -347,9 +348,10 @@ class ProfileInfoViewModel
                             else -> "Other"
                         }
 
-                        analyticsHelper.setJsonUserProperty(emptyJson().apply {
+                        RummyTitanSDK.analytiCallback?.setJsonUserPropertySDK(emptyJson().apply {
                             put(AnalyticsKey.Properties.FullName, name)
                             put(AnalyticsKey.Properties.Gender, gender)
+                            put(AnalyticsKey.Properties.Mobile, phone)
                             put(AnalyticsKey.Properties.DOB, modifyDobForSmartech(dob))
                             put(AnalyticsKey.Properties.State, selectedState)
                             name.split(" ").let {list->
@@ -361,7 +363,7 @@ class ProfileInfoViewModel
                                     put(AnalyticsKey.Properties.LastName, lName)
                                 }
                             }
-                        })
+                        },true)
                         navigatorAct.updateProfileDataSuccess(it.Message)
                     } else navigator.showError(it.Message)
 

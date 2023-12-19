@@ -81,6 +81,7 @@ interface PreferenceStorageRummy {
     var isDeviceIDSet: Boolean
     var isTeamNameSet: Boolean
     var userTotalAmount: String?
+    var isUserLoginOnCleverTap: Boolean
     var winnerMatchIdList: String?
     var firstPaidLeagueJoined: Boolean
     var firstFreeLeagueJoined: Boolean
@@ -164,7 +165,7 @@ class SharedPreferenceStorageRummy @Inject constructor(@ApplicationContext conte
     override var firstPassPurchased by BooleanPreference(prefs, PREF_FIRST_PASS_PURCHASED, false)
 
     override var userTotalAmount by StringPreference(prefs, PREF_USER_TOTAL_AMOUNT, "")
-
+    override var isUserLoginOnCleverTap by BooleanPreference(prefs, PREF_USER_LOGIN_CLEVER_TAP, false)
     override var isShowCaseDone by BooleanPreference(prefs, PREF_SHOWCASE_DONE, false)
     override var firstOpen by BooleanPreference(prefs, PREF_FIRST_OPEN, true)
     override var isQuizSoundOn by BooleanPreference(prefs, PREF_QUIZ_SOUND_ON, false)
@@ -400,6 +401,7 @@ class SharedPreferenceStorageRummy @Inject constructor(@ApplicationContext conte
         const val PREF_FIRST_PAID_JOINED = "pref_is_first_paid_joined"
         const val PREF_FIRST_FREE_JOINED = "pref_is_first_free_joined"
         const val PREF_USER_TOTAL_AMOUNT = "pref_user_total_amount"
+        const val PREF_USER_LOGIN_CLEVER_TAP = "pref_user_login_clever_tap"
         const val PREF_FIRST_DEPOSITE = "pref_first_deposite"
         const val PREF_FIRST_PASS_PURCHASED = "pref_first_pass_purchased"
         const val LOGIN_AUTHTOKAN = "login_Auth_tokan"

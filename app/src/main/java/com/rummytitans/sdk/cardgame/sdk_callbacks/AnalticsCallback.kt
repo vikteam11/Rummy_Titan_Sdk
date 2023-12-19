@@ -10,6 +10,6 @@ interface AnalticsCallback {
     fun fireAttributesEventSDK(eventName: String?, userId: String?)
     fun fireEventSDK(key: String, bundle: Bundle? = Bundle())
     fun setUserPropertySDK(property: String, value: String)
-    fun setJsonUserPropertySDK(json: JSONObject)
+    fun setJsonUserPropertySDK(json: JSONObject,update : Boolean = false)
     fun setUserDataToToolsSDK()
 }

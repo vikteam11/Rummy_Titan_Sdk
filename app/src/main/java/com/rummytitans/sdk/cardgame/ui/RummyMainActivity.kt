@@ -418,10 +418,10 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
         }
         //show badges when user move different tab
         if(fragment !is FragmentShare && viewModel.walletBalance.value?.showReferBadge()==true){
-            binding.inBadgeRefer.rootView.visibility = View.VISIBLE
+            binding.inBadgeRefer.root.visibility = View.VISIBLE
         }
         if(fragment !is FragmentWallet && viewModel.walletBalance.value?.showWalletBadge()==true ){
-            binding.inBadgeWallet.rootView.visibility = View.VISIBLE
+            binding.inBadgeWallet.root.visibility = View.VISIBLE
         }
         if(viewModel.displayHome.get()){
             viewModel.getWalletDetail()
@@ -431,15 +431,15 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
     private fun observeWalletData(){
         viewModel.walletBalance.observe(this){
             if(it.showWalletBadge()){
-                setUpPopupWindow(it.WalletTabMesage?:"", R.id.navigation_wallet,binding.)
+                setUpPopupWindow(it.WalletTabMesage?:"", R.id.navigation_wallet,binding.inBadgeWallet)
             }else{
-                binding.inBadgeWallet.rootView.visibility = View.GONE
+                binding.inBadgeWallet.root.visibility = View.GONE
             }
 
             if(it.showReferBadge()){
                 setUpPopupWindow(it.ReferTabMesage?:"", R.id.navigation_refer,binding.inBadgeRefer)
             }else{
-                binding.inBadgeRefer.rootView.visibility = View.GONE
+                binding.inBadgeRefer.root.visibility = View.GONE
             }
         }
 
@@ -482,7 +482,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
                 if (mCurrentFragment is FragmentShare)
                     return false
                 tabName = AnalyticsKey.Values.Refer
-                binding.inBadgeRefer.rootView.visibility = View.GONE
+                binding.inBadgeRefer.root.visibility = View.GONE
                 replaceFragment(FragmentShare.newInstance(null,true))
             }
             R.id.navigation_more -> {

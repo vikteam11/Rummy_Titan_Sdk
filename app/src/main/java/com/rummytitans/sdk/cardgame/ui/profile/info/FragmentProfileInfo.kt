@@ -32,6 +32,7 @@ import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import com.rummytitans.sdk.cardgame.databinding.FragmentProfileInfoRummyBinding
 import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
 import kotlinx.android.synthetic.main.fragment_profile_info_rummy.*
@@ -170,7 +171,8 @@ class FragmentProfileInfo : BaseFragment(),
                     gender,
                     editAddress.text.toString(),
                     editPinCode.text.toString(),
-                    editEmailAddress.text.toString()
+                    editEmailAddress.text.toString(),
+                            editPhone.text.toString()
                 )
             }
         }
@@ -220,8 +222,7 @@ class FragmentProfileInfo : BaseFragment(),
 
     override fun logoutUser() {
         showErrorMessageView(R.string.err_session_expired)
-        activity?.finishAffinity()
-        startActivity(Intent(activity, RummyNewLoginActivity::class.java))
+        RummyTitanSDK.rummyCallback?.logoutUser()
     }
 
     override fun getStringResource(resourseId: Int) = getString(resourseId)
