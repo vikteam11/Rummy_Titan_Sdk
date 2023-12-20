@@ -13,4 +13,7 @@ class AlertdialogModel(val title:String="",
                        val imgRes:Int=0, val imgUrl:String="",
                        val onCloseClick:()->Unit={},
                        var showClose:Boolean = false,
-                       val isDefaultImgPositive:Byte= ALERT_DIALOG_EMPTY)
+                       val isDefaultImgPositive:Byte= ALERT_DIALOG_EMPTY,
+                       var hyperLink : String = "",
+                       var url:String = ""
+)

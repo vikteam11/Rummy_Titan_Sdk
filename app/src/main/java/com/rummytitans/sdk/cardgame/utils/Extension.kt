@@ -42,6 +42,7 @@ import com.jakewharton.rxbinding2.widget.TextViewAfterTextChangeEvent
 import com.rummytitans.sdk.cardgame.BuildConfig
 import com.rummytitans.sdk.cardgame.R
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
+import com.rummytitans.sdk.cardgame.databinding.BottomSheetDialogAlertWarningsBinding
 import com.rummytitans.sdk.cardgame.models.LoginResponse
 import com.rummytitans.sdk.cardgame.models.NewPaymentGateWayModel
 import com.rummytitans.sdk.cardgame.ui.WebViewActivity
@@ -50,6 +51,8 @@ import com.rummytitans.sdk.cardgame.ui.deeplink.DeepLinkActivityRummy
 import com.rummytitans.sdk.cardgame.ui.verifications.RummySDKAddressVerificationActivity
 import com.rummytitans.sdk.cardgame.utils.MyConstants.DATE_TYPE
 import com.rummytitans.sdk.cardgame.utils.MyConstants.HOURS_TYPE
+import com.rummytitans.sdk.cardgame.utils.alertDialog.AlertdialogModel
+import com.rummytitans.sdk.cardgame.utils.bottomsheets.BottomSheetDialogBinding
 import com.rummytitans.sdk.cardgame.utils.bottomsheets.LottieBottomSheetDialog
 import com.rummytitans.sdk.cardgame.utils.bottomsheets.WebViewBottomSheetDialog
 import com.rummytitans.sdk.cardgame.utils.bottomsheets.models.BottomSheetStatusDataModel
@@ -692,6 +695,35 @@ fun Context.showBottomSheetWebView(
         color = color,
         title = title
     ).show()
+}
+
+
+fun Context.showBottomSheetTNC(
+    url: String,
+    title:String,
+    desc:String,
+    hyperLink:String
+){
+    BottomSheetDialogBinding<BottomSheetDialogAlertWarningsBinding>(
+        this,
+        R.layout.bottom_sheet_dialog_alert_warnings
+    ).apply {
+        binding.imgCross.setOnClickListener {
+            dismiss()
+        }
+        binding.alertModel = AlertdialogModel(
+            title = title,
+            description = desc,
+            showClose = true,
+            url = url,
+            hyperLink = hyperLink,
+            onPositiveClick = {
+                sendToCloseAbleInternalBrowser(context,url,title)
+            }
+        )
+        binding.executePendingBindings()
+        show()
+    }
 }
 
 fun Double.decimalFormat():Double{

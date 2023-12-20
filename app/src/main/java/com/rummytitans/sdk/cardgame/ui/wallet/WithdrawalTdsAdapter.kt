@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rummytitans.sdk.cardgame.ui.base.BaseViewHolder
+import com.rummytitans.sdk.cardgame.utils.setOnClickListenerDebounce
 
 class WithdrawalTdsAdapter(
     var listResponse: List<WithdrawalTdsModel>,
@@ -34,8 +35,18 @@ class WithdrawalTdsAdapter(
             binding.tdsModel = listResponse[position]
             binding.isFinalAmount = (position == listResponse.size-1)
 
-            binding.toolTip.setOnClickListener {view->
-                listener.showToolTipMessage(view,listResponse[position].toolTip)
+            binding.ivToolTip.setOnClickListenerDebounce(1000) {view->
+                when(listResponse[position].type){
+                    1-> listener.showToolTipMessage(view,listResponse[position].value)
+                    2->  listener.showWebUrl(listResponse[position].title,listResponse[position].value)
+                    3-> listener.showPopUp(listResponse[position].title,listResponse[position].value,"","")
+                    4-> {
+                        val hyperString = listResponse[position].value2.substringBefore(",")
+                        val urlToOpen = listResponse[position].value2.substringAfter(",")
+                        listener.showPopUp(listResponse[position].title,listResponse[position].value,urlToOpen,hyperString)
+                    }
+                }
+
             }
             binding.executePendingBindings()
         }

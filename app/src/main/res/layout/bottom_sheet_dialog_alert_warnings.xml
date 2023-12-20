@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+        <import type="android.text.TextUtils"/>
+        <variable
+            name="colorCode"
+            type="String" />
+
+        <variable
+            name="alertModel"
+            type="com.rummytitans.sdk.cardgame.utils.alertDialog.AlertdialogModel" />
+
+        <import type="android.graphics.Color" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutBottomSheetJoin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="15dp"
+        tools:visibility="visible"
+        android:background="@drawable/bottom_button"
+        android:backgroundTint="@color/text_color5">
+
+        <TextView
+            android:id="@+id/txtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:fontFamily="@font/rubik_medium"
+            android:gravity="start"
+            android:text="@{alertModel.title}"
+            android:textColor="@color/text_color8"
+            android:textSize="14sp"
+            android:visibility="@{TextUtils.isEmpty(alertModel.title) ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/imgCross"
+            app:layout_constraintEnd_toStartOf="@id/imgCross"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/imgCross" />
+
+
+        <ImageView
+            android:id="@+id/imgCross"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:padding="4dp"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_cross_new"
+            android:visibility="@{alertModel.showClose ? View.VISIBLE :View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/text_color8" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgCross">
+
+            <TextView
+                android:id="@+id/txtTerms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:background="@drawable/bg_squre_shape"
+                android:backgroundTint="@color/rummy_black_3"
+                android:fontFamily="@font/rubik_regular"
+                android:justificationMode="inter_word"
+               android:padding="8dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:clickableText="@{alertModel.hyperLink}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:spannableText="@{alertModel.description}"
+                app:urlToOpen="@{alertModel.onPositiveClick}" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

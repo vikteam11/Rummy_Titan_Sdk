@@ -763,6 +763,46 @@ fun setTextColorDynamiclly(
     view.text = ssBuilder
 }
 
+@BindingAdapter(value = ["spannableText", "clickableText", "urlToOpen"], requireAll = true)
+fun TextView.setSpannableTexts(
+    spannableText: String, clickableText:String,urlToOpen:()->Unit) {
+    val ss = SpannableString(spannableText)
+    try {
+        val clickableSpan = object : ClickableSpan() {
+
+            override fun onClick(widget: View) {
+                urlToOpen()
+            }
+
+            override fun updateDrawState(ds: TextPaint) {
+                super.updateDrawState(ds)
+                ds.isUnderlineText = true
+            }
+        }
+        ss.setSpan(
+            FontSpan(ResourcesCompat.getFont(context, R.font.rubik_bold)),
+            spannableText.indexOf(clickableText),
+            spannableText.indexOf(clickableText) + clickableText.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        ss.setSpan(
+            clickableSpan, spannableText.indexOf(clickableText),
+            spannableText.indexOf(clickableText) + clickableText.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        ss.setSpan(
+            ForegroundColorSpan(context.getColorInt(R.color.rummy_mainColor)),
+            spannableText.indexOf(clickableText),
+            spannableText.indexOf(clickableText) + clickableText.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        text = ss
+        movementMethod = LinkMovementMethod.getInstance()
+    } catch (e: Exception) {
+        text = spannableText
+    }
+}
+
 @BindingAdapter(value = ["plainText", "clickableText", "languageCode"], requireAll = true)
 fun setClickableText(
     view: TextView, plainText: String, clickableText: List<String>, languageCode: String

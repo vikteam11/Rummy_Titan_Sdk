@@ -9,10 +9,6 @@ import com.rummytitans.sdk.cardgame.ui.common.CommonFragmentActivity
 import com.rummytitans.sdk.cardgame.ui.home.MainNavigationFragment
 import com.rummytitans.sdk.cardgame.ui.wallet.viewmodel.WithdrawViewModel
 import com.rummytitans.sdk.cardgame.ui.wallet.withdrawal.WithdrawalDoneActivity
-import com.rummytitans.sdk.cardgame.utils.MyConstants
-import com.rummytitans.sdk.cardgame.utils.setOnClickListenerDebounce
-import com.rummytitans.sdk.cardgame.utils.showBottomSheetWebView
-import com.rummytitans.sdk.cardgame.utils.showToolTip
 import com.rummytitans.sdk.cardgame.widget.MyDialog
 import android.app.Activity
 import android.app.Dialog
@@ -34,6 +30,7 @@ import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
 import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
 import com.rummytitans.sdk.cardgame.ui.wallet.WithdrawalTdsAdapter
 import com.rummytitans.sdk.cardgame.ui.wallet.WithdrawalMethodsAdapter
+import com.rummytitans.sdk.cardgame.utils.*
 import com.rummytitans.sdk.cardgame.widget.inputFilter.InputRegexFilter
 import com.rummytitans.sdk.cardgame.widget.inputFilter.MaxAmountRegexFilter
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -47,9 +44,6 @@ import javax.inject.Inject
 class FragmentWithdraw : BaseFragment(), MainNavigationFragment,
     BaseNavigator, WithdrawalNavigator,WithDrawTdsListener,
     WithdrawalMethodSelectionListener {
-
-
-    var alertWithdrawalDialog: Dialog? = null
     lateinit var binding: FragmentWithdrawRummyBinding
     lateinit var viewModel: WithdrawViewModel
     private val REQUEST_WITHDRAWAL_DONE = 11
@@ -110,16 +104,14 @@ class FragmentWithdraw : BaseFragment(), MainNavigationFragment,
 
         viewModel.withdrawalModel.observe(viewLifecycleOwner) {
             val filter=
-                InputRegexFilter(
-                    "^[1-9][0-9]*"
-                )
+                com.rummytitans.sdk.cardgame.widget.inputFilter.InputRegexFilter("^[1-9][0-9]*")
             val maxLimit= it.WithdrawalOptions.map { it.Limit }.maxByOrNull {limit-> limit }!!
             val textLength= if(viewModel.currentBalance.value?:100.0 > maxLimit)
                 maxLimit.toInt()
             else
                 viewModel.currentBalance.value?.toInt()?:100
             binding.edtWithdrawAmount.filters = arrayOf(filter,
-                MaxAmountRegexFilter(
+                com.rummytitans.sdk.cardgame.widget.inputFilter.MaxAmountRegexFilter(
                     textLength
                 ) {
                     kotlin.runCatching {
@@ -390,15 +382,13 @@ class FragmentWithdraw : BaseFragment(), MainNavigationFragment,
             startActivity(
                 Intent(context, WebViewActivity::class.java)
                     .putExtra(MyConstants.INTENT_PASS_WEB_URL, withdrawalMethod.TnCUrl)
-                    .putExtra(MyConstants.INTENT_PASS_WEB_TITLE, getString(R.string.app_name_rummy))
+                    .putExtra(MyConstants.INTENT_PASS_WEB_TITLE, getString(R.string.app_name))
             )
         }
     }
 
     override fun onUpdateRequired(message: String) {
-        if (activity is CommonFragmentActivity) {
-            //(activity as? CommonFragmentActivity)?.showAppUpdateDialog(message)
-        }
+
     }
 
     override fun goBack() {
@@ -437,11 +427,29 @@ class FragmentWithdraw : BaseFragment(), MainNavigationFragment,
             showToolTip(act,view,tooltip, ViewTooltip.Position.TOP,4000L)
         }
     }
+    override fun showWebUrl(title : String,url: String) {
+        activity?.showBottomSheetWebView(
+            url = url,
+            color = viewModel.selectedColor.get() ?: "",
+            title
+        )
+    }
+
+    override fun showPopUp(title: String, desc: String, url: String,hyperLink: String) {
+        activity?.showBottomSheetTNC(
+            url = url,
+            title = title,
+            desc = desc,
+            hyperLink
+        )
+    }
 }
 
 
 interface WithDrawTdsListener{
     fun showToolTipMessage(view:View,tooltip:String)
+    fun showWebUrl(title : String,url:String)
+    fun showPopUp(title : String,desc:String,url:String,hyperLink : String)
 }
 
 interface WithdrawalNavigator {
