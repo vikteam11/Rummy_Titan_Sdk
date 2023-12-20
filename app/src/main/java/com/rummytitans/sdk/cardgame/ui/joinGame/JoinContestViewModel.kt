@@ -14,6 +14,8 @@ import androidx.core.os.bundleOf
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.rummytitans.sdk.cardgame.BuildConfig
@@ -42,6 +44,8 @@ class JoinContestViewModel @Inject constructor(
     val joinConfirmModel = ObservableField(JoinGameConfirmationModel())
     var lobby: RummyLobbyModel?= null
     var isAddressVerified = true
+    private val _bonusList = MutableLiveData<List<JoinGameConfirmationModel.JoinGameBonus>>()
+    val bonusList: LiveData<List<JoinGameConfirmationModel.JoinGameBonus>> = _bonusList
 
     fun confirmLobby(stakeId:String) {
         if (!connectionDetector.isConnected) {
@@ -74,6 +78,8 @@ class JoinContestViewModel @Inject constructor(
                     isAddressVerified = it.Response.IsAddressVerified
                     if (it.Status) {
                         joinConfirmModel.set(it.Response)
+                        _bonusList.value = it.Response?.bonusList?: listOf()
+
                         if(lobby?.tagShow() == false && !isAddressVerified){
                             navigatorAct.sendToAddressVerification()
                         }

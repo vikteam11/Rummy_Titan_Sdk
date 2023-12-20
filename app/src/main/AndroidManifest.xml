@@ -76,7 +76,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>-->
 
-            <intent-filter
+            <!--<intent-filter
                 android:autoVerify="true"
                 tools:targetApi="m">
                 <action android:name="android.intent.action.VIEW" />
@@ -100,7 +100,7 @@
                     android:scheme="@string/appsflyer_open_app_link" />
             </intent-filter>
 
-            <!-- Firebase App Links -->
+            &lt;!&ndash; Firebase App Links &ndash;&gt;
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
 
@@ -110,7 +110,7 @@
                 <data
                     android:host="rummytitans.page.link"
                     android:scheme="https" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
         <activity
             android:name=".ui.RummyMainActivity"

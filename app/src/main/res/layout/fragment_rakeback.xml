@@ -84,7 +84,10 @@
                                 android:fontFamily="@font/rubik_medium"
                                 android:text="@string/redeemable_rakeback"
                                 android:textColor="@color/input_field"
-                                android:textSize="14sp" />
+                                android:textSize="14sp"
+                                android:maxLines="2"
+                                app:autoSizeTextType="uniform"
+                                app:autoSizePresetSizes="@array/text_sizes_14"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -146,7 +149,8 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/to_be_redeemed_card"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="60dp"
                     android:layout_gravity="center"
                     android:elevation="5dp"
                     android:layout_marginTop="6dp"
@@ -226,7 +230,8 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/total_earn_card"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="60dp"
                     android:layout_gravity="center"
                     android:elevation="5dp"
                     android:layout_marginTop="6dp"

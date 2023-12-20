@@ -20,6 +20,7 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -113,14 +114,18 @@ class ProfileInfoViewModel
             isLoading.set(false)
             return
         }
+        val newTeamName =  teamName.get().toString()
+        val json = JsonObject()
+        json.addProperty(APIInterface.TEAMNAME,newTeamName)
+        json.addProperty(APIInterface.DEVICE_ID_2,prefs.androidId.toString())
+
         compositeDisposable.add(
-            apiInterface.updateTeamName(
-                loginResponse.UserId,
-                teamName.get().toString(),
+            apiInterface.updateProfileData(
+                loginResponse.UserId.toString(),
                 loginResponse.ExpireToken,
                 loginResponse.AuthExpire,
-                prefs.androidId.toString()
-            ).subscribeOn(Schedulers.io())
+                json
+       ).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     if (it.Status) {
@@ -304,13 +309,23 @@ class ProfileInfoViewModel
         }
 
         if (!validation(gender)) return
+
+        val json = JsonObject()
+
+        json.addProperty("Name",name)
+        json.addProperty("DOB",dob)
+        json.addProperty("Gender",gender)
+        json.addProperty("Address",address)
+        json.addProperty(APIInterface.EMAIL,email)
+        json.addProperty("State",selectedState)
+
         isLoading.set(true)
         compositeDisposable.add(
-            apiInterface.updateProfile(
+            apiInterface.updateProfileData(
                 loginResponse.UserId.toString(),
                 loginResponse.ExpireToken,
                 loginResponse.AuthExpire,
-                name, dob, gender, address, pincode, selectedState,email
+                json
             )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

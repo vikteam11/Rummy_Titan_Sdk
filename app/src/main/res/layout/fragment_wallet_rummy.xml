@@ -156,6 +156,9 @@
                                 android:text="@{`+ Add Cash`}"
                                 android:textColor="@color/white"
                                 android:textSize="12sp"
+                                android:maxLines="1"
+                                app:autoSizeTextType="uniform"
+                                app:autoSizePresetSizes="@array/text_sizes_12"
                                 android:onClick="@{()->viewmodel.onAddCashClick()}"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -252,7 +255,7 @@
                                         android:gravity="center"
                                         android:text="@{viewmodel.depositBonusVal.name}"
                                         android:textColor="@color/text_color2"
-                                        android:textSize="10sp"
+                                        android:textSize="9sp"
                                         android:maxLines="1"
                                         app:autoSizeTextType="uniform"
                                         app:autoSizePresetSizes="@array/text_sizes_10"/>
@@ -293,7 +296,7 @@
                                         android:fontFamily="@font/rubik_regular"
                                         android:text="@{viewmodel.gstBonusVal.name}"
                                         android:textColor="@color/text_color2"
-                                        android:textSize="10sp"
+                                        android:textSize="9sp"
                                         android:maxLines="1"
                                         app:autoSizeTextType="uniform"
                                         app:autoSizePresetSizes="@array/text_sizes_10"
@@ -333,7 +336,7 @@
                                         android:fontFamily="@font/rubik_regular"
                                         android:text="@{viewmodel.conversionBonusVal.name}"
                                         android:textColor="@color/text_color2"
-                                        android:textSize="10sp"
+                                        android:textSize="9sp"
                                         android:gravity="center"
                                         android:maxLines="1"
                                         app:autoSizeTextType="uniform"
@@ -533,7 +536,7 @@
 
                             <TextView
                                 android:id="@+id/textView105"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="16dp"
                                 android:ellipsize="end"
@@ -542,10 +545,14 @@
                                 android:text="@string/wallt_verified"
                                 android:textColor="@color/text_color2"
                                 android:textSize="12sp"
+                                app:autoSizeTextType="uniform"
+                                android:layout_marginEnd="4dp"
+                                android:maxLines="1"
+                                app:autoSizePresetSizes="@array/text_sizes_12"
+                                app:layout_constraintEnd_toStartOf="@id/ivArrowWi"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="@+id/textView104"
-                                app:layout_constraintTop_toBottomOf="@+id/textView104"
-                                />
+                                app:layout_constraintTop_toBottomOf="@+id/textView104"/>
 
                             <View
                                 android:id="@+id/bgView"
@@ -589,6 +596,7 @@
                                 app:tint="@color/text_color8" />
 
                             <ImageView
+                                android:id="@+id/ivArrowWi"
                                 android:layout_width="32dp"
                                 android:layout_height="32dp"
                                 android:layout_marginEnd="16dp"

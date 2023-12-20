@@ -2,12 +2,15 @@ package com.rummytitans.sdk.cardgame.ui
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.provider.Settings
+import android.text.TextUtils
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.PopupWindow
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.forEach
@@ -85,6 +88,14 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
         binding.viewModel = viewModel
 
         binding.navigation.setOnNavigationItemSelectedListener(this)
+
+        kotlin.runCatching {
+            if (TextUtils.isEmpty(viewModel.prefs.androidId)) {
+                Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)?.let {
+                    viewModel.prefs.androidId = it
+                }
+            }
+        }
 
         initUI()
         observeWalletData()
@@ -548,19 +559,31 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
     }
 
     private fun performBack() {
-        BottomSheetAlertDialog(
-            this, AlertdialogModel(
-                if(viewModel.gameTicket.get() > 0) "Free Tickets still available" else "",
-                getString(R.string.back_alert),
-                getString(R.string.go_back),
-                "Play",
-                onNegativeClick = {
-                    RummyTitanSDK.rummyCallback?.sdkFinish()
-                    finish()
-                },
-            ),
-            viewModel.selectedColor.get()?:""
-        ).show()
+        if(RummyTitanSDK.getOption().currentAppType  == MyConstants.APP_RUMMY){
+            if (doubleBackToExitPressedOnce) {
+                RummyTitanSDK.rummyCallback?.sdkFinish()
+                finish()
+                return
+            }
+            this.doubleBackToExitPressedOnce = true
+            Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
+            binding.root.postDelayed({ doubleBackToExitPressedOnce = false }, 1500)
+
+        }else{
+            BottomSheetAlertDialog(
+                this, AlertdialogModel(
+                    if(viewModel.gameTicket.get() > 0) "Free Tickets still available" else "",
+                    getString(R.string.back_alert),
+                    getString(R.string.go_back),
+                    "Play",
+                    onNegativeClick = {
+                        RummyTitanSDK.rummyCallback?.sdkFinish()
+                        finish()
+                    },
+                ),
+                viewModel.selectedColor.get()?:""
+            ).show()
+        }
     }
 
     override fun onDestroy() {

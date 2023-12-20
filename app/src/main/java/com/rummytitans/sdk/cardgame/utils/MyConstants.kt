@@ -249,6 +249,8 @@ object MyConstants {
     const val VERIFY_ITEM_BANK = 4
     const val VERIFY_ITEM_ADDRESS = 5
 
+    const val APP_RUMMY = 8
+
     fun countDown(from: Long, to: Long): Observable<Long> {
         return Observable.zip(
             (Observable.range(from.toInt(), to.toInt())),

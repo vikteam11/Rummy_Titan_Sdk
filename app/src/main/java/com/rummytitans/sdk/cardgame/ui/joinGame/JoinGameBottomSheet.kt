@@ -19,6 +19,7 @@ import com.rummytitans.sdk.cardgame.databinding.BottomSheetJoinGameRummyBinding
 import com.rummytitans.sdk.cardgame.models.RummyLobbyModel
 import com.rummytitans.sdk.cardgame.ui.base.BaseActivity
 import com.rummytitans.sdk.cardgame.games.rummy.RummyWebViewActivity
+import com.rummytitans.sdk.cardgame.ui.home.adapter.RummyLobbyBonusAdapter
 import com.rummytitans.sdk.cardgame.ui.wallet.RummyAddCashActivity
 import com.rummytitans.sdk.cardgame.utils.MyConstants
 import com.rummytitans.sdk.cardgame.utils.launchAddressVerificationScreen
@@ -89,6 +90,14 @@ class JoinGameBottomSheet : BottomSheetDialogFragment(), JoinGameSheetNavigator{
 
         mBinding.btnJoinContest.setOnClickListenerDebounce {
             performPlayNowAction()
+        }
+
+        mBinding.rvBonus.adapter = RummyLobbyBonusAdapter(arrayListOf())
+
+        viewModel.bonusList.observe(viewLifecycleOwner){
+            (mBinding.rvBonus.adapter as? RummyLobbyBonusAdapter)?.updateData(
+                it
+            )
         }
     }
 

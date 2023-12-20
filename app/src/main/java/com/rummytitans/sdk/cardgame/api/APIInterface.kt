@@ -125,10 +125,6 @@ interface APIInterface {
         @Header(EXPIRETOKEN) ExpireToken: String,
         @Header(AUTHEXPIRE) AuthExpire: String
     ): Single<BaseModel<Any>>
-
-
-
-
     @POST("users/forgotpasswordnew")
     fun forgotPasswordSendOTP(
         @Header(MOBILE_NUMBER) Mobile_Number: String,
@@ -723,7 +719,7 @@ interface APIInterface {
         @Header(CONTEST_CODE) leaugeCode: String
     ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.CreatePrivateContestModel>>
 
-    @POST("v2/wallet/buy-in-range")
+    @POST("v3/wallet/buy-in-range")
     fun confirmLobby(
         @Header(USER_ID) UserId: Int,
         @Header(EXPIRETOKEN) AuthExpire: String,

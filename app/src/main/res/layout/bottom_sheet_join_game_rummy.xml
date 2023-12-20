@@ -155,33 +155,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtEntryFeeHint" />
 
-
-                <TextView
-                    android:id="@+id/txtBonusHint"
-                    android:layout_width="wrap_content"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvBonus"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/rubik_medium"
-                    android:text="Bonus"
-                    android:layout_marginTop="16dp"
-                    android:textColor="@color/text_color3"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/lableUsableAmount2" />
-
-                <TextView
-                    android:id="@+id/txtBonus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/rubik_medium"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/white"
-                    android:textSize="12sp"
-                    tools:text="123"
-                    app:setDoublePrice="@{viewModel.joinConfirmModel.bonus}"
+                    android:layout_marginTop="8dp"
+                    android:overScrollMode="never"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@id/lableUsableAmount2"
-                    app:layout_constraintBottom_toBottomOf="@+id/txtBonusHint"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/txtBonusHint"/>
+                    />
 
                 <TextView
                     android:id="@+id/txtTicketHint"
@@ -195,7 +179,7 @@
                     android:textColor="@color/orange"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/txtBonusHint"
+                    app:layout_constraintTop_toBottomOf="@id/rvBonus"
                     app:drawableStartCompat="@drawable/ic_yellow_ticket" />
 
 

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="model"
+            type="com.rummytitans.sdk.cardgame.models.JoinGameConfirmationModel.JoinGameBonus" />
+
+        <variable
+            name="showLine"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/black"
+        android:paddingVertical="8dp">
+
+        <TextView
+            android:id="@+id/txtBonusHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_medium"
+            android:text="@{model.Name}"
+            tools:text="Bonus"
+            android:textColor="@color/text_color3"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtBonus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_medium"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            tools:text="555"
+            android:text="@{model.Name}"
+            app:layout_constraintBottom_toBottomOf="@+id/txtBonusHint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txtBonusHint"
+            app:setDoublePrice="@{model.Val}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

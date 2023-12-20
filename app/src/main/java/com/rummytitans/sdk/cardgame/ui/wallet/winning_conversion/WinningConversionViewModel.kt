@@ -14,6 +14,7 @@ import com.rummytitans.sdk.cardgame.models.LoginResponse
 import com.rummytitans.sdk.cardgame.models.WinningConversionContentModel
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
 import com.rummytitans.sdk.cardgame.utils.ConnectionDetector
+import com.rummytitans.sdk.cardgame.utils.formatInString
 import com.rummytitans.sdk.cardgame.widget.MyDialog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -56,6 +57,7 @@ class WinningConversionViewModel @Inject constructor(
 
 
     val depositAmount = ObservableField(0.0)
+    val depositAmountStr = ObservableField("")
     val depositAmountMessage = ObservableField("")
     val errorMessage = ObservableField("")
     val cashBonusAmt = ObservableField("")
@@ -67,6 +69,7 @@ class WinningConversionViewModel @Inject constructor(
         selectWinningAmount.set(winningAmount)
         val bonusAmount = (percent/100)*winningAmount
         depositAmount.set(winningAmount+bonusAmount)
+        depositAmountStr.set("₹${depositAmount.get()?.formatInString()} Total Deposit")
     }
     fun changeConversionStep(step:Int){
         conversionStep.set(step)
@@ -164,8 +167,8 @@ class WinningConversionViewModel @Inject constructor(
                     }
                     if(it.Status){
                         depositAmountMessage.set(
-                            "Your winnings ₹${selectWinningAmount.get()} have been successfully converted into deposits " +
-                                    "₹${depositAmount.get()}"
+                            "Your winnings ₹${selectWinningAmount.get()?.formatInString()} have been successfully converted into deposits " +
+                                    "₹${depositAmount.get()?.formatInString()}"
                         )
                         depositAmountList.clear()
                         depositAmountList.add("₹${selectWinningAmount.get()}")

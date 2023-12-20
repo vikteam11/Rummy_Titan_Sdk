@@ -19,6 +19,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.rummytitans.sdk.cardgame.models.SportTabs
 import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
 import com.rummytitans.sdk.cardgame.ui.profile.avtaar.ProfileAvtarModel
@@ -168,13 +169,14 @@ class ProfileViewModel @Inject constructor(
             }
             return
         }
-
+        val json = JsonObject()
+        json.addProperty("AvatarId",avtaarId.toString())
         compositeDisposable.add(
-            apiInterface.changeUserAvtaar(
+            apiInterface.updateProfileData(
                 loginResponse.UserId.toString(),
                 loginResponse.ExpireToken,
                 loginResponse.AuthExpire,
-                avtaarId.toString()
+                json
             )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
