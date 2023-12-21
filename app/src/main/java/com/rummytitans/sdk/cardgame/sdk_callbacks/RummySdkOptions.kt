@@ -11,4 +11,5 @@ data class RummySdkOptions(
     val displayProfileIcon :Boolean = true,
     val showKycOptions :Boolean = true,
     val locationDelay :Long = 0L,
+    val fbInstanceId :String = "",
 )

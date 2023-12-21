@@ -69,6 +69,7 @@ object RummyTitanSDK {
                 pref.locationDelay = rummySdkOptions.locationDelay
                 pref.gamePlayUrl = rummySdkOptions.gamePlayUrl
                 pref.locationApiTimeLimit = rummySdkOptions.locationDelay
+                pref.instanceId = rummySdkOptions.fbInstanceId
             } catch (e: JsonSyntaxException) {
                 // Handle JSON parsing errors
                 e.printStackTrace()

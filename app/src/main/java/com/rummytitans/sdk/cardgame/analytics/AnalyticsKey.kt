@@ -243,8 +243,8 @@ object AnalyticsKey {
         const val StillWantToWithdraw = "WantToConvert"
         const val ConvertNowDone = "ConvertNowDone"
         const val Close = "Close"
-        const val MyTeam11DepositeBonus = "MyTeam11PromoBonus"
-        const val MyTeam11ConversionBonus = "MyTeam11WinningConversionBonus"
+        const val MyTeam11DepositeBonus = "RummyTitansPromoBonus"
+        const val MyTeam11ConversionBonus = "RummyTitansWinningConversionBonus"
         const val ViaLink="vialink"
     }
 

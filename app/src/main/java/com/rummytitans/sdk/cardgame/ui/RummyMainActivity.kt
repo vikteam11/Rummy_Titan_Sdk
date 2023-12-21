@@ -43,8 +43,10 @@ import com.rummytitans.sdk.cardgame.ui.profile.ProfileActivity
 import com.rummytitans.sdk.cardgame.ui.rakeback.RakeBackFragment
 import com.rummytitans.sdk.cardgame.ui.refer.FragmentShare
 import com.rummytitans.sdk.cardgame.ui.refer.ReferEarnActivity
+import com.rummytitans.sdk.cardgame.ui.wallet.FragmentCashBonus
 import com.rummytitans.sdk.cardgame.ui.wallet.FragmentWallet
 import com.rummytitans.sdk.cardgame.ui.wallet.RummyAddCashActivity
+import com.rummytitans.sdk.cardgame.ui.wallet.WalletNavigator
 import com.rummytitans.sdk.cardgame.ui.wallet.adapter.WalletBonusAdapter
 import com.rummytitans.sdk.cardgame.utils.*
 import com.rummytitans.sdk.cardgame.utils.alertDialog.AlertdialogModel
@@ -54,7 +56,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener,
-    ActiveGameNavigator {
+    ActiveGameNavigator, WalletNavigator {
 
 
     lateinit var viewModel: MainViewModel
@@ -178,9 +180,9 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
             viewModel.getWalletDetail()
         }
         //fetch profile when comes form rummyTitans
-       /* if(viewModel.userAvtar.get() != prefs.avtarId){
+        if(viewModel.userAvtar.get() != prefs.avtarId){
             viewModel.fetchProfileData()
-        }*/
+        }
     }
 
     private fun initClicks() {
@@ -384,13 +386,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
     private fun initWalletBonusList(walletInfo: WalletInfoModel) {
         binding.bottomSheetMiniWallet.rvBones.apply {
            // val appColor = Color.parseColor(viewModel.prefs.appPrimaryColor)
-            adapter = WalletBonusAdapter(walletInfo.Balance.BonusList,) {
-                startActivity(
-                    Intent(this@RummyMainActivity, CommonFragmentActivity::class.java)
-                        .putExtra(MyConstants.INTENT_PASS_COMMON_TYPE, "CashBonus")
-                        .putExtra(MyConstants.INTENT_PASS_WEB_TITLE,getString(R.string.game_bonus) )
-                )
-            }
+            adapter = WalletBonusAdapter(walletInfo.Balance.BonusList,this@RummyMainActivity)
         }
     }
 
@@ -638,4 +634,17 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
             Intent(this, RummyAddCashActivity::class.java),
             MyConstants.REQUEST_CODE_ADD_CASH)
     }
+    override fun performBonusListClick(model: WalletInfoModel.WalletBonesModel) {
+        if (model.walletType == 2) {
+            val title = viewModel.walletInfo.value?.Balance?.BonusList?.singleOrNull { it.isbouns }?.name
+                ?: getString(R.string.game_bonus)
+
+            startActivity(
+                Intent(this, CommonFragmentActivity::class.java)
+                    .putExtra(MyConstants.INTENT_PASS_COMMON_TYPE, "CashBonus")
+                    .putExtra(MyConstants.INTENT_PASS_WEB_TITLE,title )
+            )
+        }
+    }
+
 }

@@ -118,7 +118,6 @@
                         android:layout_height="24dp"
                         android:elevation="8dp"
                         android:padding="3dp"
-                        android:onClick="@{()->profileViewModel.showSheet(2)}"
                         app:layout_constraintBottom_toBottomOf="@+id/icUser"
                         app:layout_constraintEnd_toEndOf="@+id/icUser"
                         app:tint="@color/white"
@@ -513,15 +512,8 @@
             android:layout_height="match_parent"
             android:background="#5000"
             android:onClick="@{()->profileViewModel.hideAllSheet()}"
-            android:visibility="@{profileViewModel.isBottomSheetVisible||profileViewModel.isAvtarBottomSheetVisible? View.VISIBLE:View.GONE}"
+            android:visibility="@{profileViewModel.isBottomSheetVisible? View.VISIBLE:View.GONE}"
             tools:visibility="gone" />
-
-
-       <!-- <include
-            android:id="@+id/bottomSheetUpdateAvtar"
-            layout="@layout/rummy_bottomsheet_update_avtar_dialog"
-            bind:viewmodel="@{profileViewModel}" />-->
-
 
         <View
             android:layout_width="match_parent"

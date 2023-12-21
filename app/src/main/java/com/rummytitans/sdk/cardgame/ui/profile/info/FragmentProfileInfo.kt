@@ -119,7 +119,7 @@ class FragmentProfileInfo : BaseFragment(),
 
         val cal = Calendar.getInstance()
         val datePickerDialog = DatePickerDialog(
-            requireActivity(), { _, p1, p2, p3 ->
+            requireActivity(),R.style.RummySdkDatePickerDialogTheme, { _, p1, p2, p3 ->
                 val dob = p3.toString() + "/" + (p2 + 1).toString() + "/" + p1.toString()
                 editDOB.setText(dob)
             }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)

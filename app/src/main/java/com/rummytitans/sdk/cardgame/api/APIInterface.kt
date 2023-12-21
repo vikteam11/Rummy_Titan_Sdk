@@ -212,7 +212,8 @@ interface APIInterface {
     fun getProfileIno(
         @Header(USER_ID) UserId: String,
         @Header(EXPIRE_TOKEN) ExpireToken: String,
-        @Header(AUTH_EXPIRE) AuthExpire: String
+        @Header(AUTH_EXPIRE) AuthExpire: String,
+        @Header("InstanceId") instanceId: String
     ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.ProfileInfoModel>>
 
     @GET("myprofile/getlevels")

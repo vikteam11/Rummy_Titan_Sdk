@@ -1,5 +1,6 @@
 package com.rummytitans.sdk.cardgame.ui
 
+import android.text.TextUtils
 import android.util.Log
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
@@ -37,7 +38,7 @@ class MainViewModel @Inject constructor(
     val selectedColor = ObservableField(if (prefs.onSafePlay) safeColor else regularColor)
     val balance = ObservableField("")
     val gameTicket = ObservableInt(0)
-    val userAvtar = ObservableInt(1)
+    val userAvtar = ObservableInt(MyConstants.DefaultAvatarID)
     val loginResponse: LoginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
     var versionResp: VersionModel = gson.fromJson(prefs.splashResponse, VersionModel::class.java)
     val displayHome = ObservableBoolean(false)
@@ -85,7 +86,9 @@ class MainViewModel @Inject constructor(
             apiInterface.getProfileIno(
                 loginResponse.UserId.toString(),
                 loginResponse.ExpireToken,
-                loginResponse.AuthExpire
+                loginResponse.AuthExpire,
+                prefs.instanceId?:""
+
             )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -153,6 +156,22 @@ class MainViewModel @Inject constructor(
                     if (it.Status) {
                         if (it.Response is WalletInfoModel) {
                             val apiData = it.Response as WalletInfoModel
+
+                            apiData.Balance?.BonusList?.iterator()?.let { iterator ->
+                                while (iterator.hasNext()) {
+                                    iterator.next().let { bonus ->
+                                        if(!bonus.value.contains("₹")){
+                                            bonus.value = "₹"+bonus.value
+                                        }
+                                        if(bonus.isDeposit){
+                                            bonus.walletType = 0
+                                        }
+                                        if (bonus.walletType == 3) {
+                                            iterator.remove()
+                                        }
+                                    }
+                                }
+                            }
                          //   apiData.Offer = apiData.Offer.filter { it1 -> it1.IsShow }
                             _walletInfo.value = apiData
                         }
@@ -216,7 +235,10 @@ class MainViewModel @Inject constructor(
         )
         json.addProperty("KYCStatus", prefs.KycStatus)
         json.addProperty("PINCode", prefs.PinCode)
-        val apis = getApiEndPointObject(prefs.gamePlayUrl ?:"")
+        if(TextUtils.isEmpty(prefs.gamePlayUrl)){
+            prefs.gamePlayUrl = MyConstants.GAME_PLAY_URL
+        }
+        val apis = getApiEndPointObject(prefs.gamePlayUrl ?:MyConstants.GAME_PLAY_URL)
 
         compositeDisposable.add(
             apis.checkForActiveMatch(

@@ -130,7 +130,7 @@ class FragmentWallet : BaseFragment(),
         }
         binding.rvBones.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            adapter = WalletBonusAdapter(arrayListOf(),this@FragmentWallet) { onClickBonusItem() }
+            adapter = WalletBonusAdapter(arrayListOf(),this@FragmentWallet)
         }
 
         binding.btnTickets.setOnClickListener {
@@ -706,10 +706,10 @@ class FragmentWallet : BaseFragment(),
 }
 
 interface WalletNavigator {
-    fun fillProfileDataForFirstTimeUser()
-    fun performOnAddCashClick()
-    fun onAddressNotVerified()
-    fun performBonusListClick(model : WalletInfoModel.WalletBonesModel)
+    fun fillProfileDataForFirstTimeUser(){}
+    fun performOnAddCashClick(){}
+    fun onAddressNotVerified(){}
+    fun performBonusListClick(model : WalletInfoModel.WalletBonesModel){}
 }
 
 interface OnOfferBannerClick {

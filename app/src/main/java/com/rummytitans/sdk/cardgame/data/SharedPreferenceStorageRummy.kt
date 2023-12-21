@@ -107,6 +107,7 @@ interface PreferenceStorageRummy {
     var userCurrentLocationRes:String?
     var disableAppUpdateScreen: Boolean
     var disableAppUpdateVersion: String?
+    var instanceId: String?
 }
 
 
@@ -299,6 +300,7 @@ class SharedPreferenceStorageRummy @Inject constructor(@ApplicationContext conte
 
     override var disableAppUpdateVersion by StringPreference(prefs,PREF_NEW_APP_CODE,"")
 
+    override var instanceId by StringPreference(prefs, PREF_INSTANCE_ID, "")
     var notificationReadIdsList: String
         get(){
             val loginUser = Gson().fromJson(loginResponse, LoginResponse::class.java)
@@ -423,6 +425,7 @@ class SharedPreferenceStorageRummy @Inject constructor(@ApplicationContext conte
         const val PREF_LOCATION_PENDING_MINUTES = "prefs_location_pending_minutes"
         const val PREF_DISABLE_UPDATE_SCREEN = "prefs_disable_App_update_screen"
         const val PREF_NEW_APP_CODE = "prefs_new_app_update_code"
+        const val PREF_INSTANCE_ID = "PREF_INSTANCE_ID"
     }
 
     fun registerOnPreferenceChangeListener(listener: OnSharedPreferenceChangeListener) {

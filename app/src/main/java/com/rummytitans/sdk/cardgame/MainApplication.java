@@ -32,7 +32,6 @@ import java.util.Map;
 
 import dagger.hilt.android.HiltAndroidApp;
 
-//@HiltAndroidApp
 public class MainApplication extends Application implements LifecycleEventObserver {
 
     public static WeakReference<Activity> forgroundActivityRef = null;

@@ -55,7 +55,6 @@ class ProfileViewModel @Inject constructor(
 
 
     val sportResponse = gson.fromJson(prefs.sportResponse, Array<SportTabs>::class.java)
-    val isAvtarBottomSheetVisible = ObservableBoolean(false)
 
 
     init {
@@ -63,9 +62,6 @@ class ProfileViewModel @Inject constructor(
     }
 
     val isBottomSheetVisible = ObservableBoolean(false)
-
-    var isRankListAvailable = false
-
     val _bottomSheetStateEvent = MutableLiveData<Int>(BottomSheetBehavior.STATE_HIDDEN)
     val bottomSheetStateEvent: LiveData<Int>
         get() = _bottomSheetStateEvent
@@ -115,24 +111,8 @@ class ProfileViewModel @Inject constructor(
                 BottomSheetBehavior.STATE_EXPANDED
             }
     }
-
-    fun toggelBottomSheet() {
-        isBottomSheetVisible.set(!isBottomSheetVisible.get())
-    }
-
-    fun showSheet(type: Int) {
-        if (type == 0) {
-            if (isRankListAvailable)
-                isBottomSheetVisible.set(!isBottomSheetVisible.get())
-            else
-                navigator.showError("Rank Not Available")
-        } else if (type == 2)
-            isAvtarBottomSheetVisible.set(!isAvtarBottomSheetVisible.get())
-    }
-
     fun hideAllSheet() {
         isBottomSheetVisible.set(false)
-        isAvtarBottomSheetVisible.set(false)
     }
 
     fun logoutUser() {
@@ -181,7 +161,6 @@ class ProfileViewModel @Inject constructor(
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(({
-                    isAvtarBottomSheetVisible.set(false)
                     if (it.Status) {
                         prefs.avtarId=avtaarId
                         navigator.showMessage(it.Message)
@@ -189,7 +168,6 @@ class ProfileViewModel @Inject constructor(
                         navigator.showError(it.Message)
                     }
                 }), ({
-                    isAvtarBottomSheetVisible.set(false)
                     navigator.handleError(it)
                 }))
         )

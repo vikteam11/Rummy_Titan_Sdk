@@ -73,7 +73,6 @@ class ProfileActivity : BaseActivity(), ProfileSelectListener, DBUpdateNavigorto
         binding.verificationViewModel = verificationViewModel
         binding.profileInfoViewModel = profileInfoViewModel
 
-        setAvatarAdapter()
         initClick()
         observerVerificationItem()
         observeProfileData()
@@ -114,6 +113,9 @@ class ProfileActivity : BaseActivity(), ProfileSelectListener, DBUpdateNavigorto
         bottomSheetListener()
         binding.icUser.setOnClickListenerDebounce {
             showAvatarBottomSheet()
+        }
+        binding.imageView28.setOnClickListenerDebounce {
+            binding.icUser.performClick()
         }
         binding.btnLogout.setOnClickListenerDebounce {
             BottomSheetAlertDialog(
@@ -206,12 +208,6 @@ class ProfileActivity : BaseActivity(), ProfileSelectListener, DBUpdateNavigorto
         avatarListAdapter?.setSelected(avtarId)
     }
 
-    private fun setAvatarAdapter() {
-        val list = getAvtarList()
-        profileViewModel.avatars = list
-        val spaceDecoration = SpacesItemDecoration(5)
-    }
-
     private fun getAvtarList(): ArrayList<ProfileAvtarModel> {
         val avatars = ArrayList<ProfileAvtarItem>()
         val newAvatars = ArrayList<ProfileAvtarItem>()
@@ -230,7 +226,7 @@ class ProfileActivity : BaseActivity(), ProfileSelectListener, DBUpdateNavigorto
         }
         val avatarsList = ArrayList<ProfileAvtarModel>()
         avatarsList.add(ProfileAvtarModel(title="", avtarList = avatars))
-        avatarsList.add(ProfileAvtarModel(title="New Avatar", avtarList = newAvatars))
+        avatarsList.add(ProfileAvtarModel(title="New Avatars", avtarList = newAvatars))
         return  avatarsList
     }
 
@@ -318,7 +314,6 @@ class ProfileActivity : BaseActivity(), ProfileSelectListener, DBUpdateNavigorto
     fun showAvatarBottomSheet(){
         avatarDialog?.show()
     }
-
     private fun bottomSheetListener(){
         avatarDialog =  BottomSheetDialogBinding<RummyBottomsheetUpdateAvtarDialogBinding>(
             this,
@@ -340,23 +335,7 @@ class ProfileActivity : BaseActivity(), ProfileSelectListener, DBUpdateNavigorto
                 avatarListAdapter = ProfileAvatarListAdapter(list,this@ProfileActivity)
             }
             binding.recyclerAvatars.adapter = avatarListAdapter
-
         }
-
-
-        avatarDialog?.setOnKeyListener(OnKeyListener { dialog, keyCode, event ->
-            true
-        })
-
-        avatarDialog?.behavior?.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-
-            }
-
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                // Do something when the bottom sheet is sliding.
-            }
-        })
     }
     private fun changeAvatar() {
         binding.icUser.setImageResource(getAvtar(profileViewModel.selectedAvatar.get()))

@@ -66,7 +66,7 @@ class AvatarAdapter(private var listResponse: MutableList<AvatarModel>?) : Recyc
         }
 
         override fun onItemClick() {
-            val currentPosition = adapterPosition
+            val currentPosition = layoutPosition
             if (currentPosition == selectedPosition) return
             if (selectedPosition != -1) {
                 try {

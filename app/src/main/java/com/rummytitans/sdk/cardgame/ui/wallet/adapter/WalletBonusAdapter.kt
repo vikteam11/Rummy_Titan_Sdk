@@ -13,8 +13,7 @@ import com.rummytitans.sdk.cardgame.ui.wallet.WalletNavigator
 
 class WalletBonusAdapter(
     var listResponse: MutableList<WalletInfoModel.WalletBonesModel>?,
-    val listner: WalletNavigator? = null,
-    val onClickItem: () -> Unit
+    val listner: WalletNavigator? = null
 ) :
     RecyclerView.Adapter<BaseViewHolder>() {
     val colorArray = arrayOf(

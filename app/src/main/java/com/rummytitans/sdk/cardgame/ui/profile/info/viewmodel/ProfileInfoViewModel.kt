@@ -119,6 +119,7 @@ class ProfileInfoViewModel
         json.addProperty(APIInterface.TEAMNAME,newTeamName)
         json.addProperty(APIInterface.DEVICE_ID_2,prefs.androidId.toString())
 
+        isLoading.set(true)
         compositeDisposable.add(
             apiInterface.updateProfileData(
                 loginResponse.UserId.toString(),
@@ -189,7 +190,8 @@ class ProfileInfoViewModel
             apiInterface.getProfileIno(
                 loginResponse.UserId.toString(),
                 loginResponse.ExpireToken,
-                loginResponse.AuthExpire
+                loginResponse.AuthExpire,
+                prefs.instanceId?:""
             )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

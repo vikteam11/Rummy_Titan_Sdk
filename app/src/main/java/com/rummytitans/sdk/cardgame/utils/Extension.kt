@@ -208,16 +208,33 @@ fun validTeamNameTestCase(text: String) =
 fun getAvtar(avtarId: Int): Int {
     var avtar = R.drawable.avatar_1
     when (avtarId) {
+        MyConstants.DefaultAvatarID -> avtar = R.drawable.dummy_avtar
         1 -> avtar = R.drawable.avatar_1
         2 -> avtar = R.drawable.avatar_2
         3 -> avtar = R.drawable.avatar_3
         4 -> avtar = R.drawable.avatar_4
         5 -> avtar = R.drawable.avatar_5
-        6 -> avtar = R.drawable.avatar_6
-        7 -> avtar = R.drawable.avatar_7
-        8 -> avtar = R.drawable.avatar_8
-        9 -> avtar = R.drawable.avatar_9
-        10 -> avtar = R.drawable.avatar_10
+        6 -> avtar = R.drawable.avatar_7
+        7 -> avtar = R.drawable.avatar_8
+        8 -> avtar = R.drawable.avatar_9
+        9 -> avtar = R.drawable.avatar_10
+        10 -> avtar = R.drawable.avatar_11
+        11 -> avtar = R.drawable.avatar_12
+        12 -> avtar = R.drawable.avatar_13
+        13 -> avtar = R.drawable.avatar_14
+        14 -> avtar = R.drawable.avatar_15
+        15 -> avtar = R.drawable.avatar_16
+        16 -> avtar = R.drawable.avatar_17
+        17 -> avtar = R.drawable.avatar_18
+        18 -> avtar = R.drawable.avatar_19
+        19 -> avtar = R.drawable.avatar_20
+        20 -> avtar = R.drawable.avatar_21
+        21 -> avtar = R.drawable.avatar_22
+        22 -> avtar = R.drawable.avatar_23
+        23 -> avtar = R.drawable.avatar_24
+        24 -> avtar = R.drawable.avatar_25
+        25 -> avtar = R.drawable.avatar_26
+        26 -> avtar = R.drawable.avatar_26
     }
     return avtar
 }
