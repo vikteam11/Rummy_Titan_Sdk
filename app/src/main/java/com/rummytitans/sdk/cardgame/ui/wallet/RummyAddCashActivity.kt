@@ -433,8 +433,11 @@ class RummyAddCashActivity :
     }
 
     fun startAddCash(amount: Double) {
+        val amountToAdd = (if(viewModel.enableGstCalculation.get())
+            viewModel.gstModel.value?.finalAmount else amount)?:10.0
+
         viewModel.offerIds = mOfferAdapter?.listResponse?.filter { it.isSelected }?.joinToString{ it.Id}?:""
-        viewModel.getPaymentMethods(amount)
+        viewModel.getPaymentMethods(amountToAdd)
     }
 
     override fun goForPayment(response: NewPaymentGateWayModel, amount: Double) {
