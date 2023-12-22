@@ -321,6 +321,7 @@ class FragmentProfileInfo : BaseFragment(),
 
     }
 
+
 }
 
 interface DBUpdateNavigortor {

@@ -208,6 +208,10 @@ class ProfileActivity : BaseActivity(), ProfileSelectListener, DBUpdateNavigorto
         avatarListAdapter?.setSelected(avtarId)
     }
 
+    override fun onSuccesTeamUpdate(msg: String) {
+      binding.txtTeamName.text = msg
+    }
+
     private fun getAvtarList(): ArrayList<ProfileAvtarModel> {
         val avatars = ArrayList<ProfileAvtarItem>()
         val newAvatars = ArrayList<ProfileAvtarItem>()

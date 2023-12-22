@@ -130,7 +130,8 @@ class ProfileInfoViewModel
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     if (it.Status) {
-                        navigatorAct.onSuccesTeamUpdate(it.Message)
+                        navigator.showMessage(it.Message)
+                        navigatorAct.onSuccesTeamUpdate(newTeamName)
                     }
                     isLoading.set(false)
                     if (it.TokenExpire) {

@@ -55,7 +55,7 @@ class SDKSplashActivity : AppCompatActivity(),
         setContentView(binding.root)
         //FirebaseMessaging.getInstance().subscribeToTopic("global")
         // For normally run SDK
-       // viewModel.prefs.gamePlayUrl= MyConstants.GAME_PLAY_URL
+        //viewModel.prefs.gamePlayUrl= MyConstants.GAME_PLAY_URL
         fetchAdvertisingId()
         viewModel.navigator = this
         viewModel.myDialog= MyDialog(this)

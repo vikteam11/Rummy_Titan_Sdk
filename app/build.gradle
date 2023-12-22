@@ -16,7 +16,7 @@ android {
         targetSdkVersion 33
         versionCode 48
         versionName '1.4.8'
-       // applicationId "com.rummytitans.sdk.cardgame"
+        //applicationId "com.rummytitans.sdk.cardgame"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
