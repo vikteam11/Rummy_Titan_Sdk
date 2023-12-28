@@ -57,6 +57,7 @@ object RummyTitanSDK {
         val splashDecodeString =
             String(Base64.decode(splashResponse, Base64.CRLF), StandardCharsets.UTF_8)
         println("Decoded String: $decodedString")
+        println("Deeplink String: $deeplink")
         SharedPreferenceStorageRummy(context).let { pref ->
             try {
                 pref.loginCompleted = true
@@ -84,7 +85,7 @@ object RummyTitanSDK {
                 Intent(context, RummyMainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             if (!TextUtils.isEmpty(deeplink)) {
-                intent.putExtra("deeplink", deeplink)
+                intent.putExtra("deepLink", deeplink)
             }
             context.startActivity(intent)
 

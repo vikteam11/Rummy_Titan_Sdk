@@ -503,7 +503,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
 
         viewModel.analyticsHelper.addTrigger(AnalyticsKey.Keys.Screen,tabName)
         viewModel.analyticsHelper.fireEvent(
-            AnalyticsKey.Names.ButtonClick, bundleOf(
+            AnalyticsKey.Names.MainTabClicked, bundleOf(
                 AnalyticsKey.Keys.TabName to tabName,
                 AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.HOME
             )
@@ -558,7 +558,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
         if(RummyTitanSDK.getOption().currentAppType  == MyConstants.APP_RUMMY){
             if (doubleBackToExitPressedOnce) {
                 RummyTitanSDK.rummyCallback?.sdkFinish()
-                finish()
+                finishAffinity()
                 return
             }
             this.doubleBackToExitPressedOnce = true
@@ -574,7 +574,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
                     "Play",
                     onNegativeClick = {
                         RummyTitanSDK.rummyCallback?.sdkFinish()
-                        finish()
+                        finishAffinity()
                     },
                 ),
                 viewModel.selectedColor.get()?:""
