@@ -172,6 +172,7 @@ class RakeBackFragment :  BaseFragment(),RakeBackNavigator{
             binding.model = statusDataModel
 
             binding.layoutBottomSheet.btnSubmitDone.setOnClickListener {
+                viewModel.fetchRakeBackDetail(true)
                 dialog.dismiss()
                 // we have to use intent_filter here.
                /* viewModel.fetchRakeBackDetail(true)

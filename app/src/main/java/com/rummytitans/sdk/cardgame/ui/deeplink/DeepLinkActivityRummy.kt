@@ -223,28 +223,7 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
                         )
                         finish()
                     }
-                   /*
-                    "notification" -> {
-                        startActivity(Intent(this, NotificationActivity::class.java))
-                        finish()
-                    }
 
-                    "scratch" -> {
-                        startActivity(Intent(this, ScrachCardActivity::class.java))
-                        finish()
-                    }
-                    "offers" -> {
-                        startActivity(Intent(this, OffersActivity::class.java))
-                        finish()
-                    }
-                    "coupon" -> {
-                        startActivity(Intent(this, CouponsListActivity::class.java))
-                        finish()
-                    }
-                    "chat" -> {
-                        startActivity(Intent(this, WebChatActivity::class.java))
-                        finish()
-                    }*/
                     "wallet" -> {
                         goToHome(tabName = "wallet")
                     }
@@ -260,6 +239,9 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
                 }
                 return@forEach
             }
+            else  {
+            goToHome()
+          }
         }
     }
 
