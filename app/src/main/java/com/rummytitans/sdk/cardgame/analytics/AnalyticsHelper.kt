@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.util.Log
 import com.appsflyer.AppsFlyerLib
 
-import com.google.firebase.analytics.FirebaseAnalytics
 //import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
 import com.rummytitans.sdk.cardgame.RummyTitanSDK
@@ -20,8 +19,6 @@ import kotlin.collections.HashMap
 
 class AnalyticsHelper @Inject constructor(var context: Context, var gson: Gson) {
 
-    val mFirebaseAnalytics = FirebaseAnalytics.getInstance(context)
-    //var firestore = FirebaseFirestore.getInstance()
     fun setUserProperty(property: String, value: String) {
         RummyTitanSDK.analytiCallback?.setUserPropertySDK(property,value)
     }
@@ -31,7 +28,7 @@ class AnalyticsHelper @Inject constructor(var context: Context, var gson: Gson) 
     }
 
     fun setUserID(userID: String?) {
-        mFirebaseAnalytics.setUserId(userID)
+        //mFirebaseAnalytics.setUserId(userID)
         //OneSignal.setExternalUserId(userID?:"")
         //fireLoginEvent(userID)
     }

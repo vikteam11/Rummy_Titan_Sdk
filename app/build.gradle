@@ -3,8 +3,6 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-//apply plugin: 'com.google.firebase.firebase-perf'
-//apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'dagger.hilt.android.plugin'
@@ -108,11 +106,6 @@ dependencies {
     kapt "androidx.lifecycle:lifecycle-compiler:$rootProject.lifecycleVersion"
 
 
-//firebase
-    implementation platform('com.google.firebase:firebase-bom:31.0.2')
-    //implementation 'com.google.firebase:firebase-crashlytics-ktx'
-    implementation 'com.google.firebase:firebase-iid:21.1.0'
-    implementation 'com.google.firebase:firebase-analytics'
 
     configurations.all {
         resolutionStrategy {
@@ -204,9 +197,7 @@ dependencies {
     //juspay
     implementation 'in.juspay:hypersdk:2.1.20'
 
-    // clevertap
-    implementation 'com.clevertap.android:clevertap-android-sdk:5.2.1'
-    implementation 'com.android.installreferrer:installreferrer:2.2'
+
 
 
 }

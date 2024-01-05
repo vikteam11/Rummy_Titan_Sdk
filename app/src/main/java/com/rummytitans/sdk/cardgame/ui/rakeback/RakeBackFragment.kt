@@ -175,8 +175,8 @@ class RakeBackFragment :  BaseFragment(),RakeBackNavigator{
                 viewModel.fetchRakeBackDetail(true)
                 dialog.dismiss()
                 // we have to use intent_filter here.
-               /* viewModel.fetchRakeBackDetail(true)
-                startActivity(Intent(requireActivity(),GamesTicketActivity::class.java))*/
+                viewModel.fetchRakeBackDetail(true)
+               // startActivity(Intent(requireActivity(),GamesTicketActivity::class.java))
             }
             binding.layoutBottomSheet.imgCross.setOnClickListener {
                 viewModel.fetchRakeBackDetail(true)
