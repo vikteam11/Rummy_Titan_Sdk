@@ -28,7 +28,9 @@ class FeedbackViewModel @Inject constructor(
 ) : BaseViewModel<BaseNavigator>() {
     val loginResponse: LoginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
     var myDialog: MyDialog? = null
-    var feedbacks = arrayListOf("Bonus",
+    var feedbacks = arrayListOf(
+        "Please select feedback category",
+        "Bonus",
         "Gameplay",
         "Scoring",
         "Referral",

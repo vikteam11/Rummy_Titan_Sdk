@@ -10,11 +10,14 @@ import com.rummytitans.sdk.cardgame.utils.validMobile
 import com.rummytitans.sdk.cardgame.utils.validOTP
 import android.os.CountDownTimer
 import android.text.TextUtils
+import androidx.core.os.bundleOf
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
+import com.rummytitans.sdk.cardgame.analytics.AnalyticsHelper
+import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -23,7 +26,8 @@ class UpdatePhoneViewModel @Inject constructor(
     val prefs: SharedPreferenceStorageRummy,
     val gson: Gson,
     val apiInterface: APIInterface,
-    val connectionDetector: ConnectionDetector
+    val connectionDetector: ConnectionDetector,
+    val analyticsHelper: AnalyticsHelper
 ) : BaseViewModel<UpdatePhoneNavigator>() {
     companion object{
         const val UPDATE_REQUEST_OTP=1
@@ -78,12 +82,16 @@ class UpdatePhoneViewModel @Inject constructor(
             verifyOTP()
     }
 
-    fun requestOTP() {
+    fun requestOTP(resendOtp : Boolean = false) {
         apiCall(apiInterface.requestOtpForUpdate(
             loginResponse.UserId, mobileNumber.get().toString(),
             prefs.androidId.toString(), loginResponse.ExpireToken, loginResponse.AuthExpire
         ), {
             updateStep.set(VERIFY_OTP)
+            if(resendOtp){
+                timeIsOver.set(false)
+                navigator.showMessage(it.Message)
+            }
             startTimer()
             navigatorAct.onRequestFocusOtp()
         },expireTokan = {
@@ -105,6 +113,12 @@ class UpdatePhoneViewModel @Inject constructor(
             loginResponse.Mobile=mobileNumber.get()
             prefs.loginResponse=gson.toJson(loginResponse)
             navigator.showMessage(it.Message)
+            analyticsHelper.fireEvent(
+                AnalyticsKey.Names.MobileNoUpdateDone, bundleOf(
+                    AnalyticsKey.Keys.NewMobileNumber to mobileNumber.get().toString(),
+                    AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.UpdatePhone,
+                )
+            )
             navigatorAct.onSuccessUpdate()
         },expireTokan = {
                 logoutStatus(apiInterface, loginResponse.UserId, prefs.androidId ?: "", "0")

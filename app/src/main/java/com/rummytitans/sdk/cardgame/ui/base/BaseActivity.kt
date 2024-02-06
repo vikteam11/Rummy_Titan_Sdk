@@ -169,10 +169,8 @@ open class BaseActivity : AppCompatActivity(),
     @CallSuper
     override fun logoutUser() {
         //HaptikSDK.logout(this)
-        //finishAffinity()
-      
+        finishAffinity()
         RummyTitanSDK.rummyCallback?.logoutUser()
-
     }
 
     override fun getStringResource(resourseId: Int) =

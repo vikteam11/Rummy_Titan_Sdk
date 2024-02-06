@@ -278,7 +278,7 @@ class FragmentHome : BaseFragmentLocation(),
     override fun onOfferClick(headerModel: HeaderItemModel) {
         viewModel.analyticsHelper.fireEvent(
             AnalyticsKey.Names.BannerClicked, bundleOf(
-                AnalyticsKey.Keys.BannerId to "",
+                AnalyticsKey.Keys.BannerId to headerModel.type,
                 AnalyticsKey.Keys.BannerType to headerModel.type,
                 AnalyticsKey.Keys.BannerLink to headerModel.deeplink,
                 AnalyticsKey.Keys.Screen to AnalyticsKey.Values.Home

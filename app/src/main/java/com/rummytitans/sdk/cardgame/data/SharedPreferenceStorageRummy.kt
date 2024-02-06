@@ -338,6 +338,7 @@ class SharedPreferenceStorageRummy @Inject constructor(@ApplicationContext conte
         const val PREF_IS_GAME_DISABLED = "pref_is_Games_disabled"
         const val PREF_ONINTRODUCTION = "pref_introduction"
         const val PREF_LOGIN = "pref_login"
+        const val PREF_UPDATE = "pref_update"
         const val PREF_LOGIN_RESPONSE = "pref_login_response"
         const val PREF_SPLASH_RESPONSE = "pref_splash_response"
         const val PREF_NOTIFICATIONS_SHOWN = "pref_notifications_shown"

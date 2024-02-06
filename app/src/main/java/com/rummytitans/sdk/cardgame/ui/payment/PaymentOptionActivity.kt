@@ -305,10 +305,12 @@ class PaymentOptionActivity : BaseActivity(), PaymentOptionNavigator, BottomShee
                 if (viewModel.validForPinview.get()) {
                     viewModel.authenticateWallet()
                 }else {
+                    binding.bottomSheetLinkWallet.otpView.setText("")
                     viewModel.wrongOtpErrorMsg.set(getString(R.string.err_invalid_otp))
                 }
             }else {
                 //send otp
+                binding.bottomSheetLinkWallet.otpView.setText("")
                 viewModel.sendOtpForLinkWallet()
             }
         }
@@ -446,7 +448,7 @@ class PaymentOptionActivity : BaseActivity(), PaymentOptionNavigator, BottomShee
         viewModel.analyticsHelper.fireEvent(
             AnalyticsKey.Names.ButtonClick, bundleOf(
                 AnalyticsKey.Keys.ButtonName to AnalyticsKey.Values.AddUPI,
-                AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.AddCash,
+                AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.Payment,
             )
         )
         viewModel._bottomSheetAddUpi.value = BottomSheetBehavior.STATE_EXPANDED
@@ -607,7 +609,7 @@ class PaymentOptionActivity : BaseActivity(), PaymentOptionNavigator, BottomShee
         viewModel.analyticsHelper.fireEvent(
             AnalyticsKey.Names.ButtonClick, bundleOf(
                 AnalyticsKey.Keys.ButtonName to btnName,
-                AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.AddCash,
+                AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.Payment,
             )
         )
         viewModel.isSearchAllow.set(type == 2)

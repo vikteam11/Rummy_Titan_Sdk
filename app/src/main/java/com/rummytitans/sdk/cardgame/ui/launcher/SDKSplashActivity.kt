@@ -54,7 +54,7 @@ class SDKSplashActivity : AppCompatActivity(),
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.activity_splash_sdk,null,false)
         setContentView(binding.root)
         //FirebaseMessaging.getInstance().subscribeToTopic("global")
-        // For normally run SDK
+         //For normally run SDK
         //viewModel.prefs.gamePlayUrl= MyConstants.GAME_PLAY_URL
         fetchAdvertisingId()
         viewModel.navigator = this

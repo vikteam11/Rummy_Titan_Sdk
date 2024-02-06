@@ -178,10 +178,11 @@
 
             <TextView
                 android:id="@+id/txtInfoInvite2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:gravity="center"
+                android:paddingHorizontal="5dp"
                 android:text='@{"Don`t have a "+viewModel.linkedWallet.Title +" account, we will create one for you."}'
                 android:textColor="@color/text_color2"
                 android:textSize="12sp"

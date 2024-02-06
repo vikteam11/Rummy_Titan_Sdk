@@ -100,12 +100,25 @@ class RummyAddCashActivity :
         icBack.setOnClickListener { onBackPressed() }
 
         ivSupport.setOnClickListener {
+            viewModel.analyticsHelper.fireEvent(
+                AnalyticsKey.Names.ButtonClick, bundleOf(
+                    AnalyticsKey.Keys.ButtonName to AnalyticsKey.Values.NeedHelp,
+                    AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.AddCash
+                )
+            )
             startActivity(
                 Intent(this, CommonFragmentActivity::class.java)
                     .putExtra(MyConstants.INTENT_PASS_COMMON_TYPE, "support")
                     .putExtra("FROM", "Wallet")
             )
 
+        }
+        binding.ivTdsInfo.setOnClickListenerDebounce {
+            showBottomSheetWebView(
+                url = viewModel.gstModel.value?.tncURL?:"",
+                color = viewModel.selectedColor.get() ?: "",
+                getString(R.string.gst_calculation)
+            )
         }
 
         if (intent.hasExtra("currentBalance")) {

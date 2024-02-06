@@ -21,6 +21,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
+import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.WebChatActivity
 import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
@@ -121,7 +122,26 @@ class FragmentMore : BaseFragment(), MainNavigationFragment, MoreNavigator,
 
 
     override fun onWebClick(url: String, titleId: Int) {
-        chkype(titleId)
+        val list = listOf(
+            R.string.about_us, R.string.how_to_play, R.string.tutorial_videos,
+            R.string.faq_s, R.string.fantasy_point_system
+        )
+        if (!list.contains(titleId)) return
+
+        val eventName = when (titleId) {
+            R.string.about_us -> AnalyticsKey.Values.AboutUs
+            R.string.how_to_play -> AnalyticsKey.Values.HowToPlay
+            R.string.tutorial_videos -> AnalyticsKey.Values.TutorialVideos
+            R.string.faq_s -> AnalyticsKey.Values.FAQ
+            R.string.fantasy_point_system -> AnalyticsKey.Values.FantasyPointSystem
+            else -> ""
+        }
+        viewModel.analyticsHelper.fireEvent(
+            AnalyticsKey.Names.ButtonClick, bundleOf(
+                AnalyticsKey.Keys.ButtonName to eventName,
+                AnalyticsKey.Keys.Screen to AnalyticsKey.Values.More
+            )
+        )
         sendToCloseAbleInternalBrowser(requireActivity(), url,activity?.getString(titleId)?:"")
     }
 
@@ -165,6 +185,7 @@ class FragmentMore : BaseFragment(), MainNavigationFragment, MoreNavigator,
             5 -> {
                 buttonName = AnalyticsKey.Values.UpdateApp
                 (activity as? RummyMainActivity)?.onAppUpdate()
+                RummyTitanSDK.rummyCallback?.checkForUpdate()
             }
         }
 
@@ -178,29 +199,6 @@ class FragmentMore : BaseFragment(), MainNavigationFragment, MoreNavigator,
     }
 
 
-    fun chkype(int: Int) {
-        val list = listOf(
-            R.string.about_us, R.string.how_to_play, R.string.tutorial_videos,
-            R.string.faq_s, R.string.fantasy_point_system
-        )
-        if (!list.contains(int)) return
-
-        val eventName = when (int) {
-            R.string.about_us -> AnalyticsKey.Values.AboutUs
-            R.string.how_to_play -> AnalyticsKey.Values.HowToPlay
-            R.string.tutorial_videos -> AnalyticsKey.Values.TutorialVideos
-            R.string.faq_s -> AnalyticsKey.Values.FAQ
-            R.string.fantasy_point_system -> AnalyticsKey.Values.FantasyPointSystem
-            else -> ""
-        }
-        viewModel.analyticsHelper.fireEvent(
-            AnalyticsKey.Names.ButtonClick, bundleOf(
-                AnalyticsKey.Keys.ButtonName to eventName,
-                AnalyticsKey.Keys.Screen to AnalyticsKey.Values.More
-            )
-        )
-
-    }
 
     override fun notificationApiCalled() {
         (activity as? RummyMainActivity)?.isNotificationApiCalled=true

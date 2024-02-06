@@ -11,6 +11,7 @@ import com.rummytitans.sdk.cardgame.sdk_callbacks.AnalticsCallback
 import com.rummytitans.sdk.cardgame.sdk_callbacks.RummySdkOptions
 import com.rummytitans.sdk.cardgame.sdk_callbacks.RummyTitansCallback
 import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
+import com.rummytitans.sdk.cardgame.ui.SdkScreen
 import com.rummytitans.sdk.cardgame.ui.launcher.SDKSplashActivity
 import java.nio.charset.StandardCharsets
 
@@ -33,6 +34,12 @@ object RummyTitanSDK {
 
     fun setOptions(options: RummySdkOptions) {
         rummySdkOptions = options
+    }
+
+    fun setUpdateInfo(context:Context,update: Boolean) {
+        SharedPreferenceStorageRummy(context).let { pref ->
+         pref.isInAppAvailable = update
+        }
     }
 
     fun getOption() = rummySdkOptions

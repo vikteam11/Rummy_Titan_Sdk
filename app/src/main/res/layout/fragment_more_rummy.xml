@@ -7,7 +7,7 @@
     <data>
 
         <import type="android.view.View" />
-
+        <import type="com.rummytitans.sdk.cardgame.RummyTitanSDK"/>
         <import type="com.rummytitans.sdk.cardgame.R" />
 
         <import type="android.graphics.Color" />
@@ -420,7 +420,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="16dp"
-                    android:visibility="gone"
+                    android:visibility="@{RummyTitanSDK.INSTANCE.option.isRummyApp ? View.VISIBLE :View.GONE}"
                     android:paddingVertical="12dp">
 
                     <ImageView
@@ -469,8 +469,8 @@
                         android:backgroundTint="@color/rummy_maingreen"
                         android:fontFamily="@font/rubik_medium"
                         android:gravity="center"
-                        android:onClick="@{()->viewmodel.versionResponse.enableAppUpdateBtn?viewmodel.navigatorAct.onItemClick(5):null}"
-                        android:visibility="@{viewmodel.versionResponse.enableAppUpdateBtn? View.VISIBLE :View.GONE,default=gone}"
+                        android:onClick="@{()->viewmodel.prefs.isInAppAvailable?viewmodel.navigatorAct.onItemClick(5):null}"
+                        android:visibility="@{viewmodel.prefs.isInAppAvailable? View.VISIBLE :View.GONE,default=gone}"
                         android:paddingHorizontal="15dp"
                         android:paddingVertical="6dp"
                         android:text="@string/update"

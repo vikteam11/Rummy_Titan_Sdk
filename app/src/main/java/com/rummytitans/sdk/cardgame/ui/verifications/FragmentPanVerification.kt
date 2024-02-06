@@ -29,8 +29,13 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import com.google.firebase.ml.vision.text.FirebaseVisionText
 import com.rummytitans.sdk.cardgame.databinding.FragmentPanVerificationRummyBinding
 import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
+import com.rummytitans.sdk.cardgame.widget.cropImage.CropImage
+import com.rummytitans.sdk.cardgame.widget.cropImage.CropImageView
 import kotlinx.android.synthetic.main.dialog_choose_pic_rummy.*
+import kotlinx.android.synthetic.main.fragment_bank_verification_rummy.*
 import kotlinx.android.synthetic.main.fragment_pan_verification_rummy.*
+import kotlinx.android.synthetic.main.fragment_pan_verification_rummy.imgDeleteImage
+import kotlinx.android.synthetic.main.fragment_pan_verification_rummy.imgPanCard
 import kotlinx.coroutines.launch
 import java.io.File
 import java.util.*
@@ -174,13 +179,17 @@ class FragmentPanVerification : BaseFragment(), RequestVarificationInterface,
                     if (type.contains("jpg", ignoreCase = true)
                         or type.contains("jpeg", ignoreCase = true)
                         or type.contains("png", ignoreCase = true)){
+                        CropImage.activity(uri)
+                            .setGuidelines(CropImageView.Guidelines.OFF)
+                            .setBorderCornerOffset(8f)
+                            .start(requireContext(), this)
                         lifecycleScope.launch {
-                            ImageCompressor.getCompressedImage(requireActivity(),uri){
+                           /* ImageCompressor.getCompressedImage(requireActivity(),uri){
                                 val bmOptions = BitmapFactory.Options()
                                 val bitmap1 = BitmapFactory.decodeFile(it, bmOptions)
                                 imgPanCard.setImageBitmap(bitmap1)
                                 viewModel.imageUrl.value = it
-                            }
+                            }*/
                         }
                     }else{
                         showError(R.string.only_jpg_png_pdf_supported)
@@ -195,7 +204,12 @@ class FragmentPanVerification : BaseFragment(), RequestVarificationInterface,
                         }*/
                     }
                 } else if (requestCode == MyConstants.REQUEST_CODE_CAMERA) {
-                    lifecycleScope.launch {
+                    val oldFile = File(currentPhotoPath)
+                    CropImage.activity(Uri.fromFile(oldFile))
+                        .setGuidelines(CropImageView.Guidelines.OFF)
+                        .setBorderCornerOffset(8f)
+                        .start(requireContext(), this)
+                  /*  lifecycleScope.launch {
                         val oldFile = File(currentPhotoPath)
                         ImageCompressor.getCompressedImage(requireActivity(),Uri.fromFile(oldFile)){
                             val bmOptions = BitmapFactory.Options()
@@ -203,6 +217,26 @@ class FragmentPanVerification : BaseFragment(), RequestVarificationInterface,
                             imgPanCard.setImageBitmap(bitmap1)
                             viewModel.imageUrl.value = it
                             runTextRecognition(bitmap1)
+                        }
+                    }*/
+                }else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+                    lifecycleScope.launch {
+                        CropImage.getActivityResult(data)?.also { result ->
+                            val resultUri = result.uri
+                            ImageCompressor.getCompressedImage(requireContext(), resultUri) {
+                                val bmOptions = BitmapFactory.Options()
+                                val bitmap1 = BitmapFactory.decodeFile(it, bmOptions)
+                                val selFile = File(it)
+                                val fileSize = (selFile.length() / 1024) / 1024
+                                if (fileSize <= 5) {
+                                    imgPanCard.setImageBitmap(bitmap1)
+                                    viewModel.imageUrl.value = it
+                                    runTextRecognition(bitmap1)
+                                } else {
+                                    showErrorMessageView("File size is too large")
+                                }
+
+                            }
                         }
                     }
                 }

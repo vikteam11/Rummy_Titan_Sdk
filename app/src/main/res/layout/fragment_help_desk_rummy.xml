@@ -41,7 +41,7 @@
                     android:paddingBottom="7dp"
                     android:textColor="@color/text_color8"
                     android:textSize="14sp"
-                    app:bind_htmlText="@{`Hello &lt;b>`+ viewmodel.loginResponse.Name +`&lt;/b>, Need Help?`}"
+                    app:bind_htmlText="@{`Hello &lt;b>`+ viewmodel.userName() +`&lt;/b>, Need Help?`}"
                     tools:text="Hello Naresh, Need Help?" />
 
                 <com.google.android.material.textview.MaterialTextView

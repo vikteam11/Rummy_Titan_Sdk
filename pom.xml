@@ -1,0 +1,13 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.rummytitans.sdk.cardgame</groupId>
+    <artifactId>titanSdk</artifactId>
+    <version>1.0.0</version>
+    <packaging>aar</packaging>
+
+    <dependencies>
+        <!-- Add any dependencies your SDK might have -->
+    </dependencies>
+
+    <!-- Other configuration settings go here -->
+</project>

@@ -160,7 +160,7 @@ class FragmentVerificationOption : BaseFragment(), AddressVerificationNavigator,
 
     override fun onVerificationFailed() {
         viewModel.analyticsHelper.fireEvent(AnalyticsKey.Names.ButtonClick ,
-            bundleOf(AnalyticsKey.Keys.ButtonName to AnalyticsKey.Values.TryAgain,
+            bundleOf(AnalyticsKey.Keys.ButtonName to AnalyticsKey.Values.Close,
                 AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.AddressVerification)
         )
         binding.edtAadhaar.setText("")

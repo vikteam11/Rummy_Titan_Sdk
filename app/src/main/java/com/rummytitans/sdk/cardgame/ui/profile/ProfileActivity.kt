@@ -125,6 +125,7 @@ class ProfileActivity : BaseActivity(), ProfileSelectListener, DBUpdateNavigorto
                     getString(R.string.no),
                     getString(R.string.yes),
                     onPositiveClick = {
+
                         profileViewModel.logoutUser()
                     }
                 )
@@ -183,11 +184,11 @@ class ProfileActivity : BaseActivity(), ProfileSelectListener, DBUpdateNavigorto
     }
 
     override fun onEditMobileClick() {
-        profileViewModel.analyticsHelper.fireEvent(
-            AnalyticsKey.Names.MobileNoUpdated, bundleOf(
-                AnalyticsKey.Keys.MobileNo to profileInfoViewModel.profileInfo.value?.Mobile,
-                AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.Profile
-            )
+        verificationViewModel.analyticsHelper.fireEvent(
+            AnalyticsKey.Names.ButtonClick, bundleOf(
+                AnalyticsKey.Keys.ButtonName to AnalyticsKey.Names.MobileNoUpdated,
+                AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.Profile,
+                )
         )
         startActivityForResult(
             Intent(this, UpdatePhoneActivity::class.java), UPDATE_PROFILE

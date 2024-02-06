@@ -134,6 +134,12 @@ class FragmentSupport : BaseFragment(), MainNavigationFragment, SupportClick,
     }
 
     override fun onCallClick() {
+        viewModel.analyticsHelper.fireEvent(
+            AnalyticsKey.Names.ButtonClick, bundleOf(
+                AnalyticsKey.Keys.ButtonName to AnalyticsKey.Values.CallUs,
+                AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.HelpDesk
+            )
+        )
         if (!ClickEvent.check(ClickEvent.BUTTON_CLICK)) return
         val supportPhone = viewModel.supportResponse.value?.Mobile ?:"911414579900"
         val intent = Intent(Intent.ACTION_DIAL)

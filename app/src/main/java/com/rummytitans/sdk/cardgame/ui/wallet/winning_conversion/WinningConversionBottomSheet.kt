@@ -159,7 +159,7 @@ class WinningConversionBottomSheet(val callback: WinningConversionCallback):
         mBinding.btnClose.setOnClickListenerDebounce {
             viewModel.analyticsHelper.fireEvent(
                 AnalyticsKey.Names.ButtonClick, bundleOf(
-                    AnalyticsKey.Keys.ButtonName to AnalyticsKey.Values.CloseButton,
+                    AnalyticsKey.Keys.ButtonName to AnalyticsKey.Values.Close,
                     AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.WinningConversion
                 )
             )

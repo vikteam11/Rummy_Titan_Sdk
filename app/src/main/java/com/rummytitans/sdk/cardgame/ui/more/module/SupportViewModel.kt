@@ -41,4 +41,10 @@ class SupportViewModel @Inject constructor(
             supportResponse.value = it.Response
         })
     }
+
+    fun userName() = if(TextUtils.isEmpty(loginResponse.Name)){
+        "RummyTitans"
+    }else{
+        loginResponse.Name
+    }
 }

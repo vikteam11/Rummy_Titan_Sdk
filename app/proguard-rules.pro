@@ -4,7 +4,8 @@
 -keep class retrofit.** { *; }
 -keepattributes Signature
 -keepattributes Exceptions
-
+-keep class com.rummytitans.sdk.cardgame.ui.RummyMainActivity { *; }
+-keep class androidx.lifecycle.ViewModel.** {*;}
 #okhttp3
 -keepattributes *Annotation*
 -keep class okhttp3.** { *; }
@@ -12,7 +13,7 @@
 -dontwarn okhttp3.**
 
 -keep class androidx.viewbinding.** { *; }
--keep class androidx.viewbinding.adapters.** { !* }
+-keep class androidx.viewbinding.adapters.** { *; }
 
 -optimizationpasses 1
 # Okio

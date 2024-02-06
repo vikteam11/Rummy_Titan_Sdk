@@ -52,6 +52,8 @@
             android:text='@{TextUtils.isEmpty(data.value)?"-":data.value}'
             android:textColor="@color/text_color8"
             android:textSize="16sp"
+            android:singleLine="true"
+            android:ellipsize="marquee"
             android:layout_marginRight="4dp"
             app:layout_constraintEnd_toStartOf="@+id/cl1"
             app:layout_constraintStart_toStartOf="parent"

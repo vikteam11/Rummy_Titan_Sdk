@@ -140,7 +140,7 @@ class FragmentWallet : BaseFragment(),
                 addTrigger(AnalyticsKey.Screens.Wallet,AnalyticsKey.Screens.RummyTickets)
                 fireEvent(
                     AnalyticsKey.Names.ButtonClick, bundleOf(
-                        AnalyticsKey.Keys.ButtonName to AnalyticsKey.Values.GameTickets,
+                        AnalyticsKey.Keys.ButtonName to AnalyticsKey.Values.RummyTickets,
                         AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.Wallet
                     )
                 )

@@ -23,6 +23,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
+import com.rummytitans.sdk.cardgame.widget.cropImage.CropImage
+import com.rummytitans.sdk.cardgame.widget.cropImage.CropImageView
 import kotlinx.android.synthetic.main.dialog_choose_pic_rummy.*
 import kotlinx.android.synthetic.main.fragment_bank_verification_rummy.*
 import kotlinx.android.synthetic.main.fragment_bank_verification_rummy.imgDeleteImage
@@ -144,14 +146,18 @@ class FragmentBankVerification : BaseFragment(), RequestVarificationInterface,
                     if (type.contains("jpg", ignoreCase = true)
                         or type.contains("jpeg", ignoreCase = true)
                         or type.contains("png", ignoreCase = true)){
-                        lifecycleScope.launch {
+                        CropImage.activity(uri)
+                            .setGuidelines(CropImageView.Guidelines.OFF)
+                            .setBorderCornerOffset(8f)
+                            .start(requireContext(), this)
+                       /* lifecycleScope.launch {
                             ImageCompressor.getCompressedImage(requireActivity(),uri){
                                 val bmOptions = BitmapFactory.Options()
                                 val bitmap1 = BitmapFactory.decodeFile(it, bmOptions)
                                 imgPanCard.setImageBitmap(bitmap1)
                                 viewModel.imageUrl.value = it
                             }
-                        }
+                        }*/
                     }else{
                         showError(R.string.only_jpg_png_pdf_supported)
                         /*val path = requireContext().getFilePath(uri)?:""
@@ -166,12 +172,35 @@ class FragmentBankVerification : BaseFragment(), RequestVarificationInterface,
                     }
                 } else if (requestCode == MyConstants.REQUEST_CODE_CAMERA) {
                     val oldFile = File(currentPhotoPath)
-                    lifecycleScope.launch {
+                    CropImage.activity(Uri.fromFile(oldFile))
+                        .setGuidelines(CropImageView.Guidelines.OFF)
+                        .setBorderCornerOffset(8f)
+                        .start(requireContext(), this)
+                   /* lifecycleScope.launch {
                         ImageCompressor.getCompressedImage(requireActivity(),Uri.fromFile(oldFile)){
                             val bmOptions = BitmapFactory.Options()
                             val bitmap1 = BitmapFactory.decodeFile(it, bmOptions)
                             imgPanCard.setImageBitmap(bitmap1)
                             viewModel.imageUrl.value = it
+                        }
+                    }*/
+                } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+                    lifecycleScope.launch {
+                        CropImage.getActivityResult(data)?.also { result ->
+                            val resultUri = result.uri
+                            ImageCompressor.getCompressedImage(requireContext(), resultUri) {
+                                val bmOptions = BitmapFactory.Options()
+                                val bitmap1 = BitmapFactory.decodeFile(it, bmOptions)
+                                val selFile = File(it)
+                                val fileSize = (selFile.length() / 1024) / 1024
+                                if (fileSize <= 5) {
+                                    imgPanCard.setImageBitmap(bitmap1)
+                                    viewModel.imageUrl.value = it
+                                } else {
+                                    showErrorMessageView("File size is too large")
+                                }
+
+                            }
                         }
                     }
                 }

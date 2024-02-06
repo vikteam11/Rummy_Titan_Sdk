@@ -160,8 +160,6 @@ class RummyNewLoginActivity : BaseActivity(), NewLoginNavigator {
                 AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.LOGIN
             )
         )
-
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

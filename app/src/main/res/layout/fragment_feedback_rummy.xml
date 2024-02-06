@@ -323,7 +323,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:background="@color/colorPrimary" />
+            />
 
         <ProgressBar
             android:id="@+id/loading"

@@ -3,16 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.rummytitans.sdk.cardgame">
 
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <!--     <uses-permission android:name="android.permission.SEND_SMS" /> -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" /> <!-- <uses-permission android:name="android.permission.SEND_SMS" /> -->
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
@@ -43,12 +42,12 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:allowBackup, android:fullBackupContent">
         <activity
+            android:name=".ui.SdkScreen"
+            android:exported="false" />
+        <activity
             android:name=".ui.LaunchActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
-            >
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ui.newlogin.RummyNewLoginActivity"
             android:exported="false"
@@ -62,8 +61,7 @@
             android:name=".ui.deeplink.DeepLinkActivityRummy"
             android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ui.launcher.SDKSplashActivity"
             android:exported="true"
@@ -71,18 +69,17 @@
             android:screenOrientation="portrait"
             android:theme="@style/RummySdk_SplashAppTheme">
 
-          <!--  <intent-filter>
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
-          <!--  <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+            -->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
 
-            <!--<intent-filter
+            <!--
+            <intent-filter
                 android:autoVerify="true"
                 tools:targetApi="m">
                 <action android:name="android.intent.action.VIEW" />
@@ -116,7 +113,8 @@
                 <data
                     android:host="rummytitans.page.link"
                     android:scheme="https" />
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </activity>
         <activity
             android:name=".ui.RummyMainActivity"
@@ -145,12 +143,10 @@
             android:name="com.rummytitans.sdk.cardgame.utils.locationservices.uiModules.RequestPermissionActivity"
             android:exported="false"
             android:theme="@style/Theme.DialogActivity" />
-
         <activity
             android:name=".utils.permissions.PermissionActivity"
             android:exported="false"
             android:theme="@style/Theme.DialogActivity" />
-
         <activity
             android:name=".games.rummy.RummyWebViewActivity"
             android:configChanges="orientation|screenSize"
@@ -159,105 +155,97 @@
         <activity
             android:name=".ui.WebViewActivity"
             android:exported="false"
-            android:theme="@style/RummyAppTheme"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:exported="false"
-            android:name="com.rummytitans.sdk.cardgame.ui.refer.RummySDKReferActivity"
-            android:screenOrientation="portrait" />
-
-        <activity android:name=".ui.refer.ReferEarnActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/RummyAppTheme"/>
-        <activity
-            android:exported="false"
-            android:name="com.rummytitans.sdk.cardgame.ui.refer.ShareActivity"
             android:screenOrientation="portrait"
             android:theme="@style/RummyAppTheme" />
-
         <activity
+            android:name=".ui.refer.RummySDKReferActivity"
             android:exported="false"
-            android:name="com.rummytitans.sdk.cardgame.ui.contectList.ContactListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.refer.ReferEarnActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/RummyAppTheme" />
+        <activity
+            android:name=".ui.refer.ShareActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/RummyAppTheme" />
+        <activity
+            android:name=".ui.contectList.ContactListActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-
         <activity
-            android:exported="false"
-            android:name="com.rummytitans.sdk.cardgame.ui.wallet.RummyAddCashActivity"
+            android:name=".ui.wallet.RummyAddCashActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
-            android:theme="@style/RummyAppTheme" />
-
-        <activity
-            android:exported="true"
-            android:name="com.rummytitans.sdk.cardgame.ui.games.tickets.GamesTicketActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/RummyAppTheme" />
-
-        <activity
             android:exported="false"
-            android:name="com.rummytitans.sdk.cardgame.ui.common.CommonFragmentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/RummyAppTheme" />
+        <activity
+            android:name=".ui.games.tickets.GamesTicketActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/RummyAppTheme" />
+        <activity
+            android:name=".ui.common.CommonFragmentActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/RummyAppTheme"
             android:windowSoftInputMode="adjustResize|stateVisible" />
-
         <activity
+            android:name=".ui.WebPaymentActivity"
             android:exported="false"
-            android:name="com.rummytitans.sdk.cardgame.ui.WebPaymentActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/RummyAppTheme"  />
-
-        <activity
-            android:exported="false"
-            android:name="com.rummytitans.sdk.cardgame.ui.payment.AddCardActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/RummyAppTheme"  />
-
-        <activity android:name="com.rummytitans.sdk.cardgame.widget.cropImage.CropImageActivity"
-            android:theme="@style/CropImage.Theme.Transprent"/>
-
-        <activity
-            android:exported="false"
-            android:name="com.rummytitans.sdk.cardgame.ui.verifications.VerificationActivity"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/RummyAppTheme"  />
-
-        <activity
-            android:exported="false"
-            android:name=".ui.verifications.WebAutoAddressVerifyActivity"
             android:screenOrientation="portrait"
             android:theme="@style/RummyAppTheme" />
-
         <activity
+            android:name=".ui.payment.AddCardActivity"
             android:exported="false"
-            android:name="com.rummytitans.sdk.cardgame.ui.payment.PaymentOptionActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/RummyAppTheme"  />
-
-        <activity android:name=".ui.verifications.RummySDKAddressVerificationActivity"
-            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:theme="@style/RummyAppTheme" />
+        <activity
+            android:name="com.rummytitans.sdk.cardgame.widget.cropImage.CropImageActivity"
+            android:theme="@style/CropImage.Theme.Transprent" />
+        <activity
+            android:name=".ui.verifications.VerificationActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/RummyAppTheme"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.verifications.WebAutoAddressVerifyActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/RummyAppTheme" />
+        <activity
+            android:name=".ui.payment.PaymentOptionActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/RummyAppTheme" />
+        <activity
+            android:name=".ui.verifications.RummySDKAddressVerificationActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/RummyAppTheme"  />
-
-        <activity android:name=".ui.profile.ProfileActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            />
+            android:theme="@style/RummyAppTheme"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
+            android:name=".ui.profile.ProfileActivity"
             android:exported="false"
-            android:name="com.rummytitans.sdk.cardgame.ui.profile.updatePhone.UpdatePhoneActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.profile.updatePhone.UpdatePhoneActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateVisible" />
-
         <activity
-            android:exported="false" android:name=".ui.wallet.withdrawal.WithdrawalDoneActivity"
-            android:screenOrientation="portrait"/>
-
+            android:name=".ui.wallet.withdrawal.WithdrawalDoneActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.wallet.withdrawal.WithdrawDetailActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

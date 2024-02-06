@@ -21,6 +21,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import com.rummytitans.sdk.cardgame.databinding.BottomsheetDialogEmailVerifyRummyBinding
@@ -220,7 +221,7 @@ class FragmentVerify : BaseFragment(), BaseNavigator, VerificationNavigator,
         } else {
             uploadingDialog?.updateData(statusDataModel)
         }
-        uploadingDialog?.binding?.btnSubmitDone?.backgroundTintList = ColorStateList.valueOf(Color.parseColor(viewModel.selectedColor.get()));
+        uploadingDialog?.binding?.btnSubmitDone?.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(),statusDataModel.btnColorRes))
         uploadingDialog?.show()
     }
     var dialog: BottomSheetDialogBinding<BottomsheetDialogEmailVerifyRummyBinding>?= null

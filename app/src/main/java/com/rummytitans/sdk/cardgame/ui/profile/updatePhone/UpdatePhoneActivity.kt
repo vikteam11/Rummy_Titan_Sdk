@@ -8,10 +8,13 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.view.WindowManager
+import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
 import com.rummytitans.sdk.cardgame.databinding.ActivityUpdatePhoneRummyBinding
+import com.rummytitans.sdk.cardgame.utils.setOnClickListenerDebounce
 import javax.inject.Inject
 
 class UpdatePhoneActivity : BaseActivity(),UpdatePhoneNavigator {
@@ -31,6 +34,9 @@ class UpdatePhoneActivity : BaseActivity(),UpdatePhoneNavigator {
         mViewModel.navigatorAct=this
         mViewModel.navigator=this
         setEditTextWatchers()
+        mBinding.includeVerificationCode.ivEdit.setOnClickListenerDebounce {
+            onBackPressed()
+        }
     }
 
     private fun setEditTextWatchers(){
@@ -60,6 +66,7 @@ class UpdatePhoneActivity : BaseActivity(),UpdatePhoneNavigator {
     }
 
     override fun onSuccessUpdate() {
+
         Handler().postDelayed({
             setResult(Activity.RESULT_OK)
             finish()

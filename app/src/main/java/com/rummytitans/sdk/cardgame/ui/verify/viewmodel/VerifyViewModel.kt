@@ -309,7 +309,7 @@ class VerifyViewModel @Inject constructor(
                                     title = "Email Verification Successful!"
                                     description = it.Message
                                     positiveButtonName= "Ok,Got it"
-                                    btnColorRes = R.color.turtle_Green
+                                    btnColorRes = R.color.rummy_maingreen
                                     isSuccess = false
                                     allowCross = true
                                     animationFileId = R.raw.withdrawal_done_anim

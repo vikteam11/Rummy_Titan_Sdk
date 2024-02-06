@@ -119,11 +119,12 @@ class ProfileViewModel @Inject constructor(
         analyticsHelper.fireEvent(AnalyticsKey.Names.LogOut)
         prefs.referCode = ""
         logout()
-        navigator.logoutUser()
         prefs.userName = ""
         prefs.userTeamName = ""
         prefs.avtarId = -1
         prefs.sportSelected = 1
+
+        navigator.logoutUser()
     }
 
     fun logoutUserFromAllDevice(){

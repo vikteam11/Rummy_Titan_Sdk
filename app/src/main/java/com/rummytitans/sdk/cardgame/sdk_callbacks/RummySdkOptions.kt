@@ -9,6 +9,7 @@ data class RummySdkOptions(
     val gamePlayUrl :String = MyConstants.GAME_PLAY_URL,
     val gameSplashUrl :String = MyConstants.SPLASH_URL,
     val displayProfileIcon :Boolean = true,
+    val isRummyApp : Boolean = false,
     val showKycOptions :Boolean = true,
     val locationDelay :Long = 0L,
     val fbInstanceId :String = "",

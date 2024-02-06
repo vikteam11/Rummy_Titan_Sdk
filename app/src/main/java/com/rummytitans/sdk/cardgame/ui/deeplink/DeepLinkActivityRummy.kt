@@ -18,6 +18,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.appsflyer.AppsFlyerLib
 import com.rummytitans.sdk.cardgame.RummyTitanSDK
+import com.rummytitans.sdk.cardgame.ui.common.CommonFragmentActivity
 import com.rummytitans.sdk.cardgame.ui.games.tickets.GamesTicketActivity
 import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
 import com.rummytitans.sdk.cardgame.ui.wallet.RummyAddCashActivity
@@ -232,6 +233,27 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
                     }
                     "rakeback"->{
                         goToHome(tabName = "rakeback")
+                    }
+                    "depositBonusHistory" -> {
+                        startActivity(Intent(this, CommonFragmentActivity::class.java)
+                            .putExtra(MyConstants.INTENT_PASS_COMMON_TYPE, "CashBonus")
+                            .putExtra(MyConstants.INTENT_PASS_WEB_TITLE, "Deposit Bonus")
+                        )
+                        finish()
+                    }
+                    "gameBonusHistory" -> {
+                        startActivity(Intent(this, CommonFragmentActivity::class.java)
+                            .putExtra(MyConstants.INTENT_PASS_COMMON_TYPE, "CashBonus")
+                            .putExtra(MyConstants.INTENT_PASS_WEB_TITLE, getString(R.string.game_bonus))
+                        )
+                        finish()
+                    }
+                    "conversionBonusHistory" -> {
+                        startActivity(Intent(this, CommonFragmentActivity::class.java)
+                            .putExtra(MyConstants.INTENT_PASS_COMMON_TYPE, "CashBonus")
+                            .putExtra(MyConstants.INTENT_PASS_WEB_TITLE, "Conversion Bonus")
+                        )
+                        finish()
                     }
                     else -> {
                        goToHome()

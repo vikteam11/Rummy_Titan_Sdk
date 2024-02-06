@@ -28,6 +28,7 @@ class LottieBottomSheetDialog(
 
     private fun renderView() {
         binding.imgCross.setOnClickListenerDebounce {
+
             dismiss()
             if(statusDataModel.isSuccess){
                 listener?.onVerificationSuccess()

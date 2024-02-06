@@ -139,15 +139,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/rubik_medium"
-                android:onClick="@{()->viewModel.requestOTP()}"
+                android:onClick="@{()->viewModel.requestOTP(true)}"
                 android:text="@string/resend"
                 android:textColor="@color/text_color3"
                 android:textSize="12sp"
                 android:visibility="@{viewModel.timeIsOver?View.VISIBLE:View.GONE}"
-                app:layout_constraintEnd_toEndOf="@+id/otpView"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/textView62"
-                app:setUnderline="@{true}"
-                tools:visibility="gone" />
+                app:setUnderline="@{true}" />
 
 
             <TextView

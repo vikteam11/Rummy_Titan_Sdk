@@ -180,6 +180,12 @@ class FragmentShare : BaseFragment(), MainNavigationFragment,
         }
 
         binding.imgCopy.setOnClickListenerDebounce {
+            viewModel.analyticsHelper.fireEvent(
+                AnalyticsKey.Names.ButtonClick, bundleOf(
+                    AnalyticsKey.Keys.ButtonName to AnalyticsKey.Values.ReferralCodeCopy,
+                    AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.ReferAndEarn
+                )
+            )
             requireActivity().copyCode(viewModel.referCode.get())
             showMessage(getString(R.string.code_copied))
         }

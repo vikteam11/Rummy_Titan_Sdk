@@ -1,5 +1,6 @@
 package com.rummytitans.sdk.cardgame.sdk_callbacks
 
+import android.app.Activity
 import android.content.Intent
 
 interface RummyTitansCallback {
@@ -8,5 +9,10 @@ interface RummyTitansCallback {
     fun sdkFinish()
     fun logoutUser()
     fun redirectToHome()
+    fun checkForUpdate()
+    fun onResumeUpdate()
+    fun onStopUpdate(){}
+    fun onUpdateActivityResult(requestCode: Int, resultCode: Int, data: Intent?){}
+    fun checkIsAppUpdateAvailable(activity: Activity){}
 
 }

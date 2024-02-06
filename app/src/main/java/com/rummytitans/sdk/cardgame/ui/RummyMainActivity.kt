@@ -54,20 +54,13 @@ import com.rummytitans.sdk.cardgame.utils.bottomsheets.BottomSheetAlertDialog
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-@AndroidEntryPoint
+
 class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener,
     ActiveGameNavigator, WalletNavigator {
 
-
-    lateinit var viewModel: MainViewModel
-
-    lateinit var mCurrentFragment: BaseFragment
-
-    @Inject
-    lateinit var prefs: SharedPreferenceStorageRummy
-
-
     lateinit var binding: ActivityHomeRummyBinding
+    lateinit var viewModel: MainViewModel
+    lateinit var mCurrentFragment: BaseFragment
     var isNotificationApiCalled = false
     var pokerData = ""
     var gameID = ""
@@ -98,7 +91,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
                 }
             }
         }
-
+        Toast.makeText(applicationContext,"hello",Toast.LENGTH_SHORT).show()
         initUI()
         observeWalletData()
         initFragments()
@@ -115,6 +108,8 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
         initClicks()
         disableTooltipFromNavigation()
         viewModel.checkForActiveMatch()
+
+        RummyTitanSDK.rummyCallback?.checkIsAppUpdateAvailable(this)
 
     }
 
@@ -180,11 +175,16 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
             viewModel.getWalletDetail()
         }
         //fetch profile when comes form rummyTitans
-        if(viewModel.userAvtar.get() != prefs.avtarId){
+        if(viewModel.userAvtar.get() != viewModel.prefs.avtarId){
             viewModel.fetchProfileData()
         }
+        RummyTitanSDK.rummyCallback?.onResumeUpdate()
     }
 
+    override fun onStop() {
+        super.onStop()
+        RummyTitanSDK.rummyCallback?.onStopUpdate()
+    }
     private fun initClicks() {
         binding.imgBack.setOnClickListener {
             onBackPressed()
@@ -235,6 +235,12 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
         }
 
         binding.ivSupport.setOnClickListenerDebounce {
+            viewModel.analyticsHelper.fireEvent(
+                AnalyticsKey.Names.ButtonClick, bundleOf(
+                    AnalyticsKey.Keys.ButtonName to AnalyticsKey.Values.NeedHelp,
+                    AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.Home
+                )
+            )
             startActivity(
                 Intent(this, CommonFragmentActivity::class.java)
                     .putExtra(MyConstants.INTENT_PASS_COMMON_TYPE, "support")
@@ -531,6 +537,9 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
         if ( requestCode==MyConstants.REQUEST_CODE_ADD_CASH)
             viewModel.fetchWalletData()
 
+        RummyTitanSDK.rummyCallback?.onUpdateActivityResult(
+            requestCode,resultCode,data
+        )
     }
 
     //inCase of share fragment open in main activity

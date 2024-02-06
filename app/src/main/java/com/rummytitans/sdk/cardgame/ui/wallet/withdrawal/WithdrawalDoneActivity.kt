@@ -21,9 +21,10 @@ import androidx.databinding.ObservableInt
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
 import com.rummytitans.sdk.cardgame.ui.common.CommonFragmentActivity
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class WithdrawalDoneActivity : BaseActivity(){
 
     lateinit var binding: ActivityRummyWithdrawDoneBinding
@@ -114,7 +115,7 @@ class WithdrawalDoneActivity : BaseActivity(){
         }
         binding.tvBackToWallet.setOnClickListener {
             analyticsHelper.fireEvent(
-                AnalyticsKey.Names.ScreenLoadDone, bundleOf(
+                AnalyticsKey.Names.ButtonClick, bundleOf(
                     AnalyticsKey.Keys.ButtonName to AnalyticsKey.Values.BackToWallet,
                     AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.Withdraw,
                 )
