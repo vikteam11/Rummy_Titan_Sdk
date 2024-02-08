@@ -12,8 +12,11 @@ import com.rummytitans.sdk.cardgame.widget.MyDialog
 import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 @HiltViewModel
 class DeepLinkRummyViewModel @Inject constructor(
@@ -102,4 +105,37 @@ class DeepLinkRummyViewModel @Inject constructor(
         prefs.sportSelected = type
         navigatorAct.finishAllAndCallMainActivity()
     }
+
+    fun getDeeplinkUrl(action:String) {
+        if (!connectionDetector.isConnected) {
+            myDialog?.noInternetDialog {
+                getDeeplinkUrl(action)
+            }
+            return
+        }
+        val json = JsonObject()
+        json.addProperty("actionVal", action)
+        isParentLoading.set(true)
+        val apiInterface = getApiEndPointObject(prefs.appUrl2?:"")
+        compositeDisposable.add(
+            apiInterface.getDeeplinkUrl(
+                loginResponse.UserId,
+                loginResponse.ExpireToken,
+                loginResponse.AuthExpire,
+                json
+            ).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    isParentLoading.set(false)
+                    if (it.Status) {
+                        navigatorAct.openWebView(it.Response.Title,it.Response.DeeplinksUrl)
+                    }
+                }, {
+                    isParentLoading.set(false)
+                    navigator.handleError(it)
+                })
+        )
+    }
+
+
 }

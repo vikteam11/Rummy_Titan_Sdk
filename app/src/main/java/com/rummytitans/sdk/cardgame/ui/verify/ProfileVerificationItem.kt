@@ -15,5 +15,11 @@ data class ProfileVerificationItem(
     @DrawableRes val icon:Int = 0,
     @ColorRes val textColor:Int = 0,
     @ColorRes val verifyColor: Int=0,
-    @IdRes val buttonId:Int=0
-    )
+    @IdRes val buttonId:Int=0,
+    var count:Int=0,
+    var message:String="",
+){
+    fun isDisabled() = count <= 3
+    fun isPanding() = value?.isNotEmpty()?:false
+}
+

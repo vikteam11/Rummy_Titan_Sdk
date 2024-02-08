@@ -11,8 +11,6 @@ import retrofit2.http.*
 
 interface APIInterface {
 
-
-
     @GET("notification/notification-key")
     fun getNotificationKey(
         @Header(USERID) userId: Int,
@@ -923,12 +921,21 @@ interface APIInterface {
         @Header(AUTH_EXPIRE) AuthExpire: String
     ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.HelpDeskModel>>
 
-    @POST("myprofile/userprofile")
+    @GET("profile/v1/userprofile")
     fun getVerificationInfo(
         @Header(USER_ID) UserId: String,
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String
     ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.ProfileVerificationModel>>
+
+
+    @POST("match/v1/Segmentdetail")
+    fun getDeeplinkUrl(
+        @Header(USER_ID) UserId: Int,
+        @Header(EXPIRE_TOKEN) AuthExpire: String,
+        @Header(AUTH_EXPIRE) ExpireToken: String,
+        @Body json:JsonObject
+    ): Single<BaseModel<DeeplinkResponseModel>>
 
     @GET("payment/v1/card/validator")
     fun checkCardInformation(

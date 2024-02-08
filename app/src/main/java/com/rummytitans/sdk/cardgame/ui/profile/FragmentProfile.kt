@@ -125,9 +125,9 @@ class FragmentProfile : BaseFragment(),
 
             verificationViewModel.verificationInfo.value?.let {
                 val step = when {
-                    !it.EmailVerify -> AnalyticsKey.Values.VerificationStepEmail
-                    !it.PanVerify -> AnalyticsKey.Values.VerificationStepPan
-                    !it.BankVerify -> AnalyticsKey.Values.VerificationStepBank
+                    !it.EmailItem.Verify -> AnalyticsKey.Values.VerificationStepEmail
+                    !it.PancardItem.Verify -> AnalyticsKey.Values.VerificationStepPan
+                    !it.BankItem.Verify -> AnalyticsKey.Values.VerificationStepBank
                     else -> "AllDone"
                 }
                 verificationViewModel.analyticsHelper.fireEvent(

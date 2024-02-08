@@ -18,6 +18,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.appsflyer.AppsFlyerLib
 import com.rummytitans.sdk.cardgame.RummyTitanSDK
+import com.rummytitans.sdk.cardgame.ui.WebViewActivity
 import com.rummytitans.sdk.cardgame.ui.common.CommonFragmentActivity
 import com.rummytitans.sdk.cardgame.ui.games.tickets.GamesTicketActivity
 import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
@@ -164,7 +165,11 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
 
     fun redirection(map: Map<String, String>) {
         map.forEach {
-            if (it.key=="withdrawDetail"){
+            if (it.key == "action") {
+                val action = map[it.key] ?: ""
+                viewModel.getDeeplinkUrl(action)
+            }
+           else if (it.key=="withdrawDetail"){
                 startActivity(
                     Intent(this, WithdrawDetailActivity::class.java)
                         .putExtra(MyConstants.INTENT_PASS_TRANSACTION_ID, it.value)
@@ -295,6 +300,15 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
         startActivity(intent)
         finish()
     }
+
+    override fun openWebView(title: String, url: String) {
+        startActivity(
+            Intent(this, WebViewActivity::class.java)
+                .putExtra(MyConstants.INTENT_PASS_WEB_URL, url)
+                .putExtra(MyConstants.INTENT_PASS_WEB_TITLE, title)
+        )
+        finish()
+    }
 }
 
 interface DeepLinkNavigator {
@@ -302,6 +316,7 @@ interface DeepLinkNavigator {
     fun finishAllAndCallMainActivity(){}
     fun finishActivity(){}
     fun deepLinkOnNewIntent(bundle: Bundle?){}
+    fun openWebView(title: String, url: String){}
 }
 
 

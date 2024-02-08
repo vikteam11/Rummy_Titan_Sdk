@@ -22,14 +22,18 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
+import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
 import com.rummytitans.sdk.cardgame.databinding.BottomsheetDialogEmailVerifyRummyBinding
+import com.rummytitans.sdk.cardgame.databinding.DialogAlertPopupRummyBinding
 import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
 import com.rummytitans.sdk.cardgame.ui.common.CommonFragmentActivity
 import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
 import com.rummytitans.sdk.cardgame.ui.profile.verify.ProfileVerificationItem
 import com.rummytitans.sdk.cardgame.ui.verify.adapter.ProfileVerifyItemAdapter
+import com.rummytitans.sdk.cardgame.utils.alertDialog.AlertdialogModel
 import com.rummytitans.sdk.cardgame.utils.bottomsheets.BottomSheetDialogBinding
 import com.rummytitans.sdk.cardgame.utils.bottomsheets.LottieBottomSheetDialog
 import com.rummytitans.sdk.cardgame.utils.bottomsheets.listeners.BottomSheetStatusListener
@@ -153,9 +157,9 @@ class FragmentVerify : BaseFragment(), BaseNavigator, VerificationNavigator,
         viewModel.verificationInfo.observe(viewLifecycleOwner){
             if(setEmail){
                 setEmail = false
-                binding.txtEmail.setText(it.Email?:"")
+                binding.txtEmail.setText(it.EmailItem?.Value?:"")
             }
-            if (!it.EmailVerify) {
+            if (!it.isEmailVerify) {
                 binding.txtEmail.isFocusableInTouchMode=true
                 binding.txtEmail.requestFocus()
             }
@@ -176,9 +180,13 @@ class FragmentVerify : BaseFragment(), BaseNavigator, VerificationNavigator,
     }
 
     override fun onVerificationItemClick(item: ProfileVerificationItem) {
+        if(item.isDisabled()){
+            showAlertPopup()
+            return
+        }
         when(item.type){
             MyConstants.VERIFY_ITEM_PAN->{
-                if (viewModel.data.value?.EmailVerify == true) {
+                if (viewModel.data.value?.isEmailVerify == true) {
                     startActivityForResult(
                         Intent(activity, VerificationActivity::class.java).putExtra("for", "pan"),
                         101
@@ -187,8 +195,8 @@ class FragmentVerify : BaseFragment(), BaseNavigator, VerificationNavigator,
             }
 
             MyConstants.VERIFY_ITEM_BANK->{
-                if (viewModel.data.value?.EmailVerify == true) {
-                    if (viewModel.data.value?.PanVerify == true) {
+                if (viewModel.data.value?.isEmailVerify == true) {
+                    if (viewModel.data.value?.PancardItem?.Verify == true) {
                         startActivityForResult(
                             Intent(activity, VerificationActivity::class.java)
                                 .putExtra("for", "bank"), 101
@@ -204,6 +212,34 @@ class FragmentVerify : BaseFragment(), BaseNavigator, VerificationNavigator,
             }
         }
     }
+
+    private fun showAlertPopup(){
+        val alertdialogModel= AlertdialogModel(
+            title= "Exceeded Verification Attempts",
+            description = "Uh-oh! There was some trouble verify your documents. Contact our support team for assistance.",
+            imgRes = R.drawable.ic_hand,
+            positiveText = getString(R.string.contact_us),
+            onCloseClick = {
+                viewModel.analyticsHelper.fireEvent(
+                    AnalyticsKey.Names.ButtonClick, bundleOf(
+                        AnalyticsKey.Keys.ButtonName to AnalyticsKey.Values.Close,
+                        AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.Verification
+                    )
+                )
+            },
+            onPositiveClick = {
+                startActivity(
+                    Intent(requireActivity(), CommonFragmentActivity::class.java)
+                        .putExtra(MyConstants.INTENT_PASS_COMMON_TYPE, "support")
+                        .putExtra("FROM", "Verify")
+                )
+            }
+        )
+        viewModel.myDialog?.
+        getAlertPopup<DialogAlertPopupRummyBinding>(alertdialogModel,R.layout.dialog_alert_popup_rummy)?.
+        show()
+    }
+
 
     override fun goBack() {
         activity?.onBackPressed()

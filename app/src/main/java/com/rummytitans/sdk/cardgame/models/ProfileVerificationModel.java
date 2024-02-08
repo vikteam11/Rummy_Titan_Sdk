@@ -3,37 +3,38 @@ package com.rummytitans.sdk.cardgame.models;
 import com.google.gson.annotations.SerializedName;
 
 public class ProfileVerificationModel {
-    @SerializedName("BankVerify")
-    public boolean BankVerify;
-    @SerializedName("AccNo")
-    public String AccNo;
-    @SerializedName("PanVerify")
-    public boolean PanVerify;
-    @SerializedName("PanCardNumber")
-    public String PanCardNumber;
-    @SerializedName("MobileVerify")
-    public boolean MobileVerify;
-    @SerializedName("MobileNumber")
-    public String MobileNumber;
-    @SerializedName("EmailVerify")
-    public boolean EmailVerify;
-    @SerializedName("Email")
-    public String Email;
     @SerializedName("Url")
     public String Url;
-
-    @SerializedName("AddressVerified")
-    public boolean AddressVerified;
-    @SerializedName("AddressNo")
-    public String AddressNo;
     @SerializedName("AddressType")
     public int AddressType;
-
+    @SerializedName("Email")
+    public ProfileVerificationItemModel EmailItem;
+    @SerializedName("Mobile")
+    public ProfileVerificationItemModel MobileItem;
+    @SerializedName("Pancard")
+    public ProfileVerificationItemModel PancardItem;
+    @SerializedName("Bank")
+    public ProfileVerificationItemModel BankItem;
+    @SerializedName("Address")
+    public ProfileVerificationItemModel AddressItem;
+    public boolean isEmailVerify(){
+        return EmailItem.Verify;
+    }
     public boolean profileVerified(){
-        return (MobileVerify || !MobileNumber.equals(""))
-                && (EmailVerify || !Email.equals(""))
-                && (PanVerify || !PanCardNumber.equals(""))
-                && (BankVerify || !AccNo.equals(""))
-                && (AddressVerified || !AddressNo.equals(""));
+        return (MobileItem.Verify || !MobileItem.Value.equals(""))
+                && (EmailItem.Verify || !EmailItem.Value.equals(""))
+                && (PancardItem.Verify || !PancardItem.Value.equals(""))
+                && (BankItem.Verify || !BankItem.Value.equals(""))
+                && (AddressItem.Verify || !AddressItem.Value.equals(""));
+    }
+    public static class ProfileVerificationItemModel{
+        @SerializedName("Verify")
+        public boolean Verify;
+        @SerializedName("Message")
+        public String Message;
+        @SerializedName("Value")
+        public String Value;
+        @SerializedName("Count")
+        public int Count;
     }
 }
