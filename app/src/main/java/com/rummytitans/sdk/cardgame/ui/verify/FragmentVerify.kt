@@ -158,7 +158,12 @@ class FragmentVerify : BaseFragment(), BaseNavigator, VerificationNavigator,
             if(setEmail){
                 setEmail = false
                 binding.txtEmail.setText(it.EmailItem?.Value?:"")
+            }else{
+                //if user enter spaces then after verify we remove all spaces.
+                binding.txtEmail.setText(binding.txtEmail.text.toString().trim())
             }
+            binding.txtEmailAds.text = binding.txtEmail.text.toString().trim()
+
             if (!it.isEmailVerify) {
                 binding.txtEmail.isFocusableInTouchMode=true
                 binding.txtEmail.requestFocus()
@@ -180,7 +185,7 @@ class FragmentVerify : BaseFragment(), BaseNavigator, VerificationNavigator,
     }
 
     override fun onVerificationItemClick(item: ProfileVerificationItem) {
-        if(item.isDisabled()){
+        if(item.isBlocked){
             showAlertPopup()
             return
         }

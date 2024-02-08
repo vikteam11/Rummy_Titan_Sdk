@@ -1009,7 +1009,7 @@ fun setVerificationDesc(view: TextView, model: ProfileVerificationModel?) {
         }
     } ?: run {
         view.text = if(model?.profileVerified() == true) view.context.getString(R.string.profile_verified)  else
-            view.context.getString(R.string.profile_unverified)
+            ""
     }
 }
 

@@ -34,7 +34,16 @@ public class ProfileVerificationModel {
         public String Message;
         @SerializedName("Value")
         public String Value;
-        @SerializedName("Count")
-        public int Count;
+        @SerializedName("IsUpload")
+        public boolean IsUpload;
+
+        /*
+         * IsUpload = true means user can can upload documents.
+         * IsUpload = false user can't upload documents. verify button should be disabled
+         * */
+        public boolean isBlocked(){
+
+            return  !IsUpload;
+        }
     }
 }

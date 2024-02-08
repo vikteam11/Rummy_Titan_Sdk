@@ -16,10 +16,13 @@ data class ProfileVerificationItem(
     @ColorRes val textColor:Int = 0,
     @ColorRes val verifyColor: Int=0,
     @IdRes val buttonId:Int=0,
-    var count:Int=0,
+    var isBlocked:Boolean=false,
     var message:String="",
 ){
-    fun isDisabled() = count <= 3
-    fun isPanding() = value?.isNotEmpty()?:false
+    /*
+     * if we get verify = false and getting value Like PanNo. aadhr No. or accountNo
+     * then documents is in under process*/
+
+    fun isPending() = value?.isNotEmpty()?:false
 }
 

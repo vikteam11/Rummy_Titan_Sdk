@@ -413,7 +413,7 @@ class VerifyViewModel @Inject constructor(
                     verifyColor = R.color.light_yellow,
                     textColor = R.color.yellow,
                     buttonId = R.id.verifyMobile,
-                    count = it.MobileItem.Count?:0,
+                    isBlocked = it.MobileItem.isBlocked,
                     message = it.MobileItem.Message?:""
                 ),
                 ProfileVerificationItem(
@@ -426,7 +426,7 @@ class VerifyViewModel @Inject constructor(
                     verifyColor = R.color.light_blue,
                     textColor = R.color.verification_blue,
                     buttonId = R.id.verifyPan,
-                    count = it.PancardItem.Count?:0,
+                    isBlocked = it.PancardItem.isBlocked,
                     message = it.PancardItem.Message?:""
                 ),
                 ProfileVerificationItem(
@@ -439,7 +439,7 @@ class VerifyViewModel @Inject constructor(
                     verifyColor = R.color.light_purple,
                     textColor = R.color.verification_purple,
                     buttonId = R.id.verifyBank,
-                    count = it.BankItem.Count?:0,
+                    isBlocked = it.BankItem.isBlocked,
                     message = it.BankItem.Message?:""
                 ),
                 ProfileVerificationItem(
@@ -457,7 +457,7 @@ class VerifyViewModel @Inject constructor(
                     verifyColor = R.color.light_theme1,
                     textColor = R.color.theme1_regular,
                     buttonId = R.id.verifyAddress,
-                    count = it.AddressItem.Count?:0,
+                    isBlocked = it.AddressItem.isBlocked,
                     message = it.AddressItem.Message?:""
                 ),
             )
@@ -475,7 +475,7 @@ class VerifyViewModel @Inject constructor(
                     verifyColor = R.color.light_red,
                     textColor = R.color.red,
                     buttonId = R.id.verifyEmail,
-                    count = verificationInfo.value?.EmailItem?.Count?:0,
+                    isBlocked = verificationInfo.value?.EmailItem?.isBlocked?:false,
                     message = verificationInfo.value?.EmailItem?.Message?:""
                 )
             )
