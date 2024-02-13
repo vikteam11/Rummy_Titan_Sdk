@@ -40,71 +40,15 @@ class DeepLinkRummyViewModel @Inject constructor(
             if (it.Status) {
                 prefs.splashResponse = gson.toJson(it.Response)
                 isForceUpdate.value = it.Response
+            }else{
+                navigatorAct.showErrorAndFinish(it.Message?: "")
             }
+        }, unSuccess = {
+            navigatorAct.showErrorAndFinish(it.message?: "")
         })
     }
 
-    fun getMatchDetails(matchId: String) {
-        if (!connectionDetector.isConnected) {
-            myDialog?.noInternetDialog { getMatchDetails(matchId) }
-            return
-        }
-        val filteredMatchId = when {
-            TextUtils.isEmpty(matchId) -> 0
-            TextUtils.isDigitsOnly(matchId) -> matchId.toInt()
-            else -> 0
-        }
-        apiCall(apis.getSingleMatchDetails(
-            loginResponse.UserId,
-            loginResponse.ExpireToken,
-            loginResponse.AuthExpire,
-            filteredMatchId
-        ), {
-            if (it.TokenExpire) {
-                logoutStatus(apis, loginResponse.UserId, prefs.androidId ?: "", "0")
-                prefs.loginResponse = gson.toJson(LoginResponse())
-                prefs.loginCompleted = false
-                navigator.logoutUser()
-            }
-            if (it.Status) {
-                navigator.showMessage(it.Message)
-                matchModel = it.Response.getUpdatedMatchModel(filteredMatchId)
-                 navigatorAct.sendToContestActivity(matchModel)
-            } else navigator.showError(it.Message)
-        })
-    }
 
-    fun getInviteCodeDetails(contestCode: String) {
-
-        if (!connectionDetector.isConnected) {
-            myDialog?.noInternetDialog { getInviteCodeDetails(contestCode) }
-            return
-        }
-
-        apiCall(apis.getPrivateContestDetails(
-            loginResponse.UserId, loginResponse.ExpireToken,
-            loginResponse.AuthExpire, contestCode
-        ), {
-            if (it.Status) {
-                navigator.showMessage(it.Message)
-                leagueFees = it.Response.Fees
-                leagueId = it.Response.LeagueID
-                leagueMembers = it.Response.NoofMembers
-                getMatchDetails(it.Response.MatchID.toString())
-            } else {
-                navigator.showError(it.Message)
-              //  navigatorAct.finishActivity()
-            }
-        },unSuccess = {
-            navigator.showError(it.Message)
-           // navigatorAct.finishActivity()
-        })
-    }
-
-    fun changeSportsType(type: Int) {
-        prefs.sportSelected = type
-        navigatorAct.finishAllAndCallMainActivity()
-    }
 
     fun getDeeplinkUrl(action:String) {
         if (!connectionDetector.isConnected) {
@@ -129,10 +73,13 @@ class DeepLinkRummyViewModel @Inject constructor(
                     isParentLoading.set(false)
                     if (it.Status) {
                         navigatorAct.openWebView(it.Response.Title,it.Response.DeeplinksUrl)
+                    }else{
+                        navigatorAct.showErrorAndFinish(it.Message?: "")
                     }
                 }, {
                     isParentLoading.set(false)
-                    navigator.handleError(it)
+                    //navigator.handleError(it)
+                    navigatorAct.showErrorAndFinish(it.message?: "")
                 })
         )
     }

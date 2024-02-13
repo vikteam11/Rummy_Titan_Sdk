@@ -95,7 +95,7 @@
         <TextView
             android:tag="button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginEnd="10dp"
             android:background="@drawable/bg_primary_box_rummy"
             android:backgroundTint="@{data.blocked ? @color/gray2 : @color/rummy_maingreen}"
@@ -107,7 +107,7 @@
             android:textAllCaps="true"
             android:text="@string/frag_verify_verify"
             android:textColor="@color/white"
-            android:textSize="10dp"
+            android:textSize="12sp"
             android:visibility='@{!data.verified &amp;&amp; TextUtils.isEmpty(data.value)? View.VISIBLE:View.GONE}'
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

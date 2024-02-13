@@ -59,9 +59,8 @@ class ProfileVerifyItemAdapter(
             val view = mBinding.root.findViewWithTag<View>("button")
             view.id = listResponse[position].buttonId
             view?.setOnClickListenerDebounce {
-                if(!listResponse[position].isDisabled()) {
-                    listener?.onVerificationItemClick(listResponse[position])
-                }
+                listener?.onVerificationItemClick(listResponse[position])
+
             }
 
             mBinding.btnDelete.setOnClickListenerDebounce{
@@ -73,7 +72,7 @@ class ProfileVerifyItemAdapter(
                 }
             }
             mBinding.root.setOnClickListenerDebounce {
-                if(listResponse[position].isDisabled()){
+                if(listResponse[position].isBlocked){
                     listener?.onVerificationItemClick(listResponse[position])
                 }
             }

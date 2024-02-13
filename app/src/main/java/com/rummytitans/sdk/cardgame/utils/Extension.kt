@@ -102,6 +102,7 @@ fun View.setOnClickListenerDebounce(debounceTime: Long = 600L, action: (v: View)
 }
 
 fun sendToCloseAbleInternalBrowser(activity: Context, webUrl: String,title:String="") {
+    Log.e("url>>>>>>>>>>>>> ",webUrl)
     if (TextUtils.isEmpty(webUrl) || !URLUtil.isValidUrl(webUrl)) return
     activity.startActivity(
         Intent(activity, WebViewActivity::class.java)

@@ -921,7 +921,7 @@ interface APIInterface {
         @Header(AUTH_EXPIRE) AuthExpire: String
     ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.HelpDeskModel>>
 
-    @GET("profile/v1/userprofile")
+    @GET("kyc/v1/details")
     fun getVerificationInfo(
         @Header(USER_ID) UserId: String,
         @Header(EXPIRE_TOKEN) ExpireToken: String,

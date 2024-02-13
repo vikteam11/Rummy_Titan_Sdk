@@ -186,7 +186,7 @@ class FragmentVerify : BaseFragment(), BaseNavigator, VerificationNavigator,
 
     override fun onVerificationItemClick(item: ProfileVerificationItem) {
         if(item.isBlocked){
-            showAlertPopup()
+            showAlertPopup("Block${item.title}")
             return
         }
         when(item.type){
@@ -218,7 +218,8 @@ class FragmentVerify : BaseFragment(), BaseNavigator, VerificationNavigator,
         }
     }
 
-    private fun showAlertPopup(){
+    private fun showAlertPopup(title : String = ""){
+
         val alertdialogModel= AlertdialogModel(
             title= "Exceeded Verification Attempts",
             description = "Uh-oh! There was some trouble verify your documents. Contact our support team for assistance.",
@@ -228,11 +229,17 @@ class FragmentVerify : BaseFragment(), BaseNavigator, VerificationNavigator,
                 viewModel.analyticsHelper.fireEvent(
                     AnalyticsKey.Names.ButtonClick, bundleOf(
                         AnalyticsKey.Keys.ButtonName to AnalyticsKey.Values.Close,
-                        AnalyticsKey.Keys.Screen to AnalyticsKey.Screens.Verification
+                        AnalyticsKey.Keys.Screen to title
                     )
                 )
             },
             onPositiveClick = {
+                viewModel.analyticsHelper.fireEvent(
+                    AnalyticsKey.Names.ButtonClick, bundleOf(
+                        AnalyticsKey.Keys.ButtonName to AnalyticsKey.Values.contactUs,
+                        AnalyticsKey.Keys.Screen to title
+                    )
+                )
                 startActivity(
                     Intent(requireActivity(), CommonFragmentActivity::class.java)
                         .putExtra(MyConstants.INTENT_PASS_COMMON_TYPE, "support")

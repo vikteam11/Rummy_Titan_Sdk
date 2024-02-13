@@ -309,6 +309,11 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
         )
         finish()
     }
+
+    override fun showErrorAndFinish(error: String) {
+        showErrorMessageView(error)
+        Handler(mainLooper).postDelayed({ finishActivity() }, 1500)
+    }
 }
 
 interface DeepLinkNavigator {
@@ -317,6 +322,8 @@ interface DeepLinkNavigator {
     fun finishActivity(){}
     fun deepLinkOnNewIntent(bundle: Bundle?){}
     fun openWebView(title: String, url: String){}
+
+    fun showErrorAndFinish(error: String){}
 }
 
 

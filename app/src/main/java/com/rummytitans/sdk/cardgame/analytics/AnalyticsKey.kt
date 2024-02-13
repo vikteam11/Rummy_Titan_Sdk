@@ -187,6 +187,7 @@ object AnalyticsKey {
         const val ChatWithUs = "ChatWithUs"
         const val EmailUs = "EmailUs"
         const val FAQ = "FAQ"
+        const val TermsCondition = "Terms & Condition"
         const val VerifyEmail="VerifyEmail"
         const val Facebook = "Facebook"
         const val Twitter = "Twitter"
@@ -250,6 +251,9 @@ object AnalyticsKey {
         const val MyTeam11DepositeBonus = "RummyTitansPromoBonus"
         const val MyTeam11ConversionBonus = "RummyTitansWinningConversionBonus"
         const val ViaLink="vialink"
+        const val contactUs="ContactUs"
+
+
     }
 
 }

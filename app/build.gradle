@@ -14,15 +14,15 @@ android {
     defaultConfig {
         minSdkVersion 22
         targetSdkVersion 33
-        versionCode 58
-        versionName '1.5.8'
+        versionCode 62
+        versionName '1.6.2'
         //applicationId "com.rummytitans.sdk.cardgame"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
         buildConfigField "int", "isPlayStoreApk", "0"
-        buildConfigField "int", "VERSION_CODE", "58"
-        buildConfigField "String", "VERSION_NAME", "\"1.5.8\""
+        buildConfigField "int", "VERSION_CODE", "62"
+        buildConfigField "String", "VERSION_NAME", "\"1.6.2\""
     }
     buildFeatures {
         dataBinding true
