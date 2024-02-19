@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-//apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.gms.google-services'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'maven-publish'
@@ -14,15 +14,15 @@ android {
     defaultConfig {
         minSdkVersion 22
         targetSdkVersion 33
-        versionCode 62
-        versionName '1.6.2'
+        versionCode 64
+        versionName '1.6.4'
         //applicationId "com.rummytitans.sdk.cardgame"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
         buildConfigField "int", "isPlayStoreApk", "0"
-        buildConfigField "int", "VERSION_CODE", "62"
-        buildConfigField "String", "VERSION_NAME", "\"1.6.2\""
+        buildConfigField "int", "VERSION_CODE", "64"
+        buildConfigField "String", "VERSION_NAME", "\"1.6.4\""
     }
     buildFeatures {
         dataBinding true
@@ -90,7 +90,7 @@ dependencies {
 
 
 //kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+  //  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
 
 //Android
     implementation 'androidx.appcompat:appcompat:1.4.1'

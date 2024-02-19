@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.rummytitans.sdk.cardgame.databinding.ItemGstCalculationBinding
+import com.rummytitans.sdk.cardgame.databinding.ItemGstCalculationRummyBinding
 import com.rummytitans.sdk.cardgame.models.GstCalculationModel
 import com.rummytitans.sdk.cardgame.ui.base.BaseViewHolder
 
@@ -15,7 +15,7 @@ class GstCalculationAdapter(
     lateinit var context: Context
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         context = parent.context
-        val binding = ItemGstCalculationBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemGstCalculationRummyBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return WithdrawalTdsViewHolder(binding)
     }
 
@@ -27,7 +27,7 @@ class GstCalculationAdapter(
         holder.onBind(position)
     }
 
-    inner class WithdrawalTdsViewHolder constructor(private val binding: ItemGstCalculationBinding) :
+    inner class WithdrawalTdsViewHolder constructor(private val binding: ItemGstCalculationRummyBinding) :
         BaseViewHolder(binding.root) {
 
         override fun onBind(position: Int) {
