@@ -71,7 +71,7 @@ class MainViewModel @Inject constructor(
                 .subscribe(({
                     if (it.Status)
                         prefs.KycStatus =
-                            if (it.Response.MobileVerify && it.Response.PanVerify && it.Response.BankVerify)
+                            if (it.Response.MobileItem.Verify && it.Response.PancardItem.Verify && it.Response.BankItem.Verify)
                                 1 else 0
                 }), ({
                 }))

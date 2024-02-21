@@ -979,28 +979,28 @@ fun setDOBText(view: TextView, dob: String?) {
 fun setVerificationDesc(view: TextView, model: ProfileVerificationModel?) {
     model?.apply {
         view.text =   when{
-            !EmailVerify && !TextUtils.isEmpty(Email)->{
+            !EmailItem.Verify && !TextUtils.isEmpty(EmailItem.Value)->{
                 view.context.getString(R.string.please_verify_email)
             }
-            !EmailVerify->{
+            !EmailItem.Verify->{
                 view.context.getString(R.string.please_verify_email)
             }
-            !PanVerify  && !TextUtils.isEmpty(PanCardNumber)->{
+            !PancardItem.Verify  && !TextUtils.isEmpty(PancardItem.Value)->{
                 view.context.getString(R.string.your_pan_detail_under_process)
             }
-            !PanVerify ->{
+            !PancardItem.Verify ->{
                 view.context.getString(R.string.please_verify_pan)
             }
-            !BankVerify  && !TextUtils.isEmpty(AccNo)->{
+            !BankItem.Verify  && !TextUtils.isEmpty(BankItem.Value)->{
                 view.context.getString(R.string.your_bankdetail_under_process)
             }
-            !BankVerify ->{
+            !BankItem.Verify ->{
                 view.context.getString(R.string.please_verify_bank_detail)
             }
-            !AddressVerified  && !TextUtils.isEmpty(AddressNo)->{
+            !AddressItem.Verify  && !TextUtils.isEmpty(AddressItem.Value)->{
                 view.context.getString(R.string.address_verification_under_process)
             }
-            !AddressVerified ->{
+            !AddressItem.Verify ->{
                 view.context.getString(R.string.your_address_verification_under_process)
             }
             else ->{
@@ -1009,7 +1009,7 @@ fun setVerificationDesc(view: TextView, model: ProfileVerificationModel?) {
         }
     } ?: run {
         view.text = if(model?.profileVerified() == true) view.context.getString(R.string.profile_verified)  else
-            view.context.getString(R.string.profile_unverified)
+            ""
     }
 }
 

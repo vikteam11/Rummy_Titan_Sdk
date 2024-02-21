@@ -80,7 +80,7 @@
                         android:textAllCaps="true"
                         android:textColor="@color/white"
                         android:textSize="12sp"
-                        android:visibility='@{viewmodel.verificationInfo.EmailVerify?View.GONE:View.VISIBLE}'
+                        android:visibility='@{viewmodel.verificationInfo.emailVerify?View.GONE:View.VISIBLE}'
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_chainStyle="spread_inside"
                         app:layout_constraintTop_toTopOf="@+id/textView11" />
@@ -90,23 +90,48 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
-                        android:backgroundTint="@{viewmodel.verificationInfo.EmailVerify ? @color/text_color5 : @color/text_color2}"
-                        android:enabled="@{viewmodel.verificationInfo.EmailVerify?false:true}"
-                        android:focusable='@{viewmodel.verificationInfo.EmailVerify?false:true}'
+                        android:layout_marginTop="10dp"
+                        android:backgroundTint="@{viewmodel.verificationInfo.emailVerify ? @color/text_color5 : @color/text_color2}"
+                        android:enabled="@{viewmodel.verificationInfo.emailVerify?false:true}"
+                        android:focusable='@{viewmodel.verificationInfo.emailVerify?false:true}'
                         android:fontFamily="@font/rubik_medium"
                         android:hint="@string/txt_enter_your_email"
                         android:singleLine="true"
                         android:textColor="@color/text_color8"
                         android:textColorHint="@color/text_color2"
                         android:textSize="14sp"
+                        android:visibility="@{viewmodel.verificationInfo.emailVerify ? View.INVISIBLE : View.VISIBLE}"
                         app:layout_constraintVertical_chainStyle="packed"
-                        app:bottomPadding="@{viewmodel.verificationInfo.EmailVerify ? 0 : 20}"
+                        app:bottomPadding="@{viewmodel.verificationInfo.emailVerify ? 0 : 20}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/imgEmailVerify"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView11"
                         app:removeDefaultPadding="@{true}"
-                        app:topPadding="@{viewmodel.verificationInfo.EmailVerify ? 0 : 20}" />
+                        app:topPadding="@{viewmodel.verificationInfo.emailVerify ? 0 : 20}" />
+
+                    <!--
+                        if email is verified then this view show in other cases it will be hide.
+                    -->
+                    <TextView
+                        android:id="@+id/txtEmailAds"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/rubik_medium"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:textColor="@color/text_color8"
+                        android:textSize="14sp"
+                        app:layout_constraintVertical_chainStyle="packed"
+                        android:visibility="@{viewmodel.verificationInfo.emailVerify ? View.VISIBLE : View.GONE}"
+                        app:bottomPadding="@{viewmodel.verificationInfo.emailVerify ? 0 : 20}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/imgEmailVerify"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView11"
+                        app:topPadding="@{viewmodel.verificationInfo.emailVerify ? 0 : 20}" />
 
 
                     <ImageView
@@ -114,7 +139,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/ic_done_new"
-                        android:visibility='@{viewmodel.verificationInfo.EmailVerify?View.VISIBLE:View.GONE}'
+                        android:visibility='@{viewmodel.verificationInfo.emailVerify?View.VISIBLE:View.GONE}'
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -138,7 +163,7 @@
                             android:layout_marginEnd="2dp"
                             android:layout_weight="1"
                             tools:visibility="visible"
-                            android:visibility='@{viewmodel.verificationInfo.EmailVerify?View.GONE:View.VISIBLE}'>
+                            android:visibility='@{viewmodel.verificationInfo.emailVerify?View.GONE:View.VISIBLE}'>
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -163,7 +188,7 @@
                                 android:layout_height="0dp"
                                 android:background="@color/alpha_white"
                                 android:elevation="3dp"
-                                android:visibility="@{TextUtils.isEmpty(viewmodel.verificationInfo.Email)?View.VISIBLE:View.GONE}"
+                                android:visibility="@{TextUtils.isEmpty(viewmodel.verificationInfo.EmailItem.Value)?View.VISIBLE:View.GONE}"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -189,7 +214,7 @@
                             android:textColor="@color/white"
                             android:textSize="12sp"
                             android:textStyle="bold"
-                            android:visibility='@{viewmodel.verificationInfo.EmailVerify?View.GONE:View.VISIBLE}' />
+                            android:visibility='@{viewmodel.verificationInfo.emailVerify?View.GONE:View.VISIBLE}' />
 
                     </LinearLayout>
 

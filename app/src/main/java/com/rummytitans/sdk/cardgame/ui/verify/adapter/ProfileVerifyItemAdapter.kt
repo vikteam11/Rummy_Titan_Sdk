@@ -60,6 +60,7 @@ class ProfileVerifyItemAdapter(
             view.id = listResponse[position].buttonId
             view?.setOnClickListenerDebounce {
                 listener?.onVerificationItemClick(listResponse[position])
+
             }
 
             mBinding.btnDelete.setOnClickListenerDebounce{
@@ -68,6 +69,11 @@ class ProfileVerifyItemAdapter(
             mBinding.imgVerify.setOnClickListenerDebounce{
                 if(!listResponse[position].isVerified){
                     listener?.onClickWarning(it,listResponse[position])
+                }
+            }
+            mBinding.root.setOnClickListenerDebounce {
+                if(listResponse[position].isBlocked){
+                    listener?.onVerificationItemClick(listResponse[position])
                 }
             }
             mBinding.executePendingBindings()

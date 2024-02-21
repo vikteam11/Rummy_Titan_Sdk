@@ -12,8 +12,11 @@ import com.rummytitans.sdk.cardgame.widget.MyDialog
 import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 @HiltViewModel
 class DeepLinkRummyViewModel @Inject constructor(
@@ -37,69 +40,49 @@ class DeepLinkRummyViewModel @Inject constructor(
             if (it.Status) {
                 prefs.splashResponse = gson.toJson(it.Response)
                 isForceUpdate.value = it.Response
+            }else{
+                navigatorAct.showErrorAndFinish(it.Message?: "")
             }
+        }, unSuccess = {
+            navigatorAct.showErrorAndFinish(it.message?: "")
         })
     }
 
-    fun getMatchDetails(matchId: String) {
+
+
+    fun getDeeplinkUrl(action:String) {
         if (!connectionDetector.isConnected) {
-            myDialog?.noInternetDialog { getMatchDetails(matchId) }
+            myDialog?.noInternetDialog {
+                getDeeplinkUrl(action)
+            }
             return
         }
-        val filteredMatchId = when {
-            TextUtils.isEmpty(matchId) -> 0
-            TextUtils.isDigitsOnly(matchId) -> matchId.toInt()
-            else -> 0
-        }
-        apiCall(apis.getSingleMatchDetails(
-            loginResponse.UserId,
-            loginResponse.ExpireToken,
-            loginResponse.AuthExpire,
-            filteredMatchId
-        ), {
-            if (it.TokenExpire) {
-                logoutStatus(apis, loginResponse.UserId, prefs.androidId ?: "", "0")
-                prefs.loginResponse = gson.toJson(LoginResponse())
-                prefs.loginCompleted = false
-                navigator.logoutUser()
-            }
-            if (it.Status) {
-                navigator.showMessage(it.Message)
-                matchModel = it.Response.getUpdatedMatchModel(filteredMatchId)
-                 navigatorAct.sendToContestActivity(matchModel)
-            } else navigator.showError(it.Message)
-        })
+        val json = JsonObject()
+        json.addProperty("actionVal", action)
+        isParentLoading.set(true)
+        val apiInterface = getApiEndPointObject(prefs.appUrl2?:"")
+        compositeDisposable.add(
+            apiInterface.getDeeplinkUrl(
+                loginResponse.UserId,
+                loginResponse.ExpireToken,
+                loginResponse.AuthExpire,
+                json
+            ).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    isParentLoading.set(false)
+                    if (it.Status) {
+                        navigatorAct.openWebView(it.Response.Title,it.Response.DeeplinksUrl)
+                    }else{
+                        navigatorAct.showErrorAndFinish(it.Message?: "")
+                    }
+                }, {
+                    isParentLoading.set(false)
+                    //navigator.handleError(it)
+                    navigatorAct.showErrorAndFinish(it.message?: "")
+                })
+        )
     }
 
-    fun getInviteCodeDetails(contestCode: String) {
 
-        if (!connectionDetector.isConnected) {
-            myDialog?.noInternetDialog { getInviteCodeDetails(contestCode) }
-            return
-        }
-
-        apiCall(apis.getPrivateContestDetails(
-            loginResponse.UserId, loginResponse.ExpireToken,
-            loginResponse.AuthExpire, contestCode
-        ), {
-            if (it.Status) {
-                navigator.showMessage(it.Message)
-                leagueFees = it.Response.Fees
-                leagueId = it.Response.LeagueID
-                leagueMembers = it.Response.NoofMembers
-                getMatchDetails(it.Response.MatchID.toString())
-            } else {
-                navigator.showError(it.Message)
-              //  navigatorAct.finishActivity()
-            }
-        },unSuccess = {
-            navigator.showError(it.Message)
-           // navigatorAct.finishActivity()
-        })
-    }
-
-    fun changeSportsType(type: Int) {
-        prefs.sportSelected = type
-        navigatorAct.finishAllAndCallMainActivity()
-    }
 }

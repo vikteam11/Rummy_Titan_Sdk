@@ -117,6 +117,7 @@ class FragmentVerificationOption : BaseFragment(), AddressVerificationNavigator,
         }
 
         binding.btExpand.setOnClickListenerDebounce {
+            hideKeyboard()
             expandView()
         }
 

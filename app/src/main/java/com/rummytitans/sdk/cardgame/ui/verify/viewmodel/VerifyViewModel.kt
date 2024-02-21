@@ -82,9 +82,10 @@ class VerifyViewModel @Inject constructor(
             return
         }
 
+        val api = getApiEndPointObject(prefs.appUrl2?:"")
 
         compositeDisposable.add(
-            apiInterface.getVerificationInfo(
+            api.getVerificationInfo(
                 loginResponse.UserId.toString(),
                 loginResponse.ExpireToken,
                 loginResponse.AuthExpire
@@ -106,10 +107,10 @@ class VerifyViewModel @Inject constructor(
                         isVrified.set(it.Response.profileVerified())
                         it.Response.apply {
                             val status = when {
-                                BankVerify -> "Bank"
-                                PanVerify -> "PAN"
-                                EmailVerify -> "Email"
-                                MobileVerify -> "Phone"
+                                BankItem.Verify -> "Bank"
+                                PancardItem.Verify -> "PAN"
+                                EmailItem.Verify -> "Email"
+                                MobileItem.Verify -> "Phone"
                                 else -> ""
                             }
                             analyticsHelper.setJsonUserProperty(
@@ -236,8 +237,8 @@ class VerifyViewModel @Inject constructor(
                         )
                         stopVerificationTimer()
                         navigatorAct.dismissVerifyEmailOtpDialog()
-                        data.value?.EmailVerify = true
-                        data.value?.Email = email.get()
+                        data.value?.EmailItem?.Verify = true
+                        data.value?.EmailItem?.Value = email.get()
                         data.value = data.value
                         navigatorAct.showUploadingSheet(
                             BottomSheetStatusDataModel().apply {
@@ -265,7 +266,7 @@ class VerifyViewModel @Inject constructor(
     }
 
     fun checkEmailVerificationStatus() {
-        if(data.value?.EmailVerify==true){
+        if(data.value?.isEmailVerify==true){
             stopVerificationTimer()
             return
         }
@@ -300,8 +301,8 @@ class VerifyViewModel @Inject constructor(
                                 )
                             )
                             stopVerificationTimer()
-                            data.value?.EmailVerify = true
-                            data.value?.Email = email.get()
+                            data.value?.EmailItem?.Verify = true
+                            data.value?.EmailItem?.Value = email.get()
                             data.value = data.value
                             navigatorAct.dismissVerifyEmailOtpDialog()
                             navigatorAct.showUploadingSheet(
@@ -399,45 +400,48 @@ class VerifyViewModel @Inject constructor(
         )
     }
 
-    fun getVerificationItems(addEmail:Boolean = false): ArrayList<ProfileVerificationItem> {
-        val list =  verificationInfo.value?.let {
+    fun getVerificationItems(addEmail:Boolean = false):ArrayList<ProfileVerificationItem>{
+        val list = verificationInfo.value?.let {
             arrayListOf(
                 ProfileVerificationItem(
                     MyConstants.VERIFY_ITEM_MOBILE,
                     navigator.getStringResource(R.string.frag_verify_mobile),
-                    it.MobileNumber?:"",
-                    isVerified = it.MobileVerify,
+                    it.MobileItem.Value?:"",
+                    isVerified = it.MobileItem.Verify,
                     selectedColor = selectedColor.get(),
                     icon = R.drawable.ic_mobile_verification,
                     verifyColor = R.color.light_yellow,
                     textColor = R.color.yellow,
-                    buttonId = R.id.verifyMobile
+                    buttonId = R.id.verifyMobile,
+                    isBlocked = it.MobileItem.isBlocked,
+                    message = it.MobileItem.Message?:""
                 ),
-
                 ProfileVerificationItem(
                     MyConstants.VERIFY_ITEM_PAN,
                     navigator.getStringResource(if(addEmail)R.string.pan else R.string.frag_verify_pan_card),
-                    it.PanCardNumber,
-                    isVerified=it.PanVerify,
+                    it.PancardItem.Value,
+                    isVerified=it.PancardItem.Verify,
                     selectedColor = selectedColor.get(),
                     icon = R.drawable.ic_pan_verification,
                     verifyColor = R.color.light_blue,
                     textColor = R.color.verification_blue,
-                    buttonId = R.id.verifyPan
+                    buttonId = R.id.verifyPan,
+                    isBlocked = it.PancardItem.isBlocked,
+                    message = it.PancardItem.Message?:""
                 ),
-
                 ProfileVerificationItem(
                     MyConstants.VERIFY_ITEM_BANK,
                     navigator.getStringResource(if(addEmail)R.string.bank else R.string.bank_account),
-                    it.AccNo,isVerified=it.BankVerify,
+                    it.BankItem.Value,isVerified=it.BankItem.Verify,
                     selectedColor = selectedColor.get(),
                     isDeleteAble = true,
                     icon = R.drawable.ic_bank_verification,
                     verifyColor = R.color.light_purple,
                     textColor = R.color.verification_purple,
-                    buttonId = R.id.verifyBank
+                    buttonId = R.id.verifyBank,
+                    isBlocked = it.BankItem.isBlocked,
+                    message = it.BankItem.Message?:""
                 ),
-
                 ProfileVerificationItem(
                     MyConstants.VERIFY_ITEM_ADDRESS,
                     when{
@@ -446,13 +450,15 @@ class VerifyViewModel @Inject constructor(
                         it.AddressType==2 ->{navigator.getStringResource(R.string.driving_license)}
                         else -> navigator.getStringResource(R.string.address)
                     },
-                    it.AddressNo,
-                    isVerified = it.AddressVerified,
+                    it.AddressItem.Value,
+                    isVerified = it.AddressItem.Verify,
                     selectedColor = selectedColor.get(),
                     icon = R.drawable.ic_address_verificqation,
                     verifyColor = R.color.light_theme1,
                     textColor = R.color.theme1_regular,
-                    buttonId = R.id.verifyAddress
+                    buttonId = R.id.verifyAddress,
+                    isBlocked = it.AddressItem.isBlocked,
+                    message = it.AddressItem.Message?:""
                 ),
             )
         }?: kotlin.run {
@@ -462,20 +468,20 @@ class VerifyViewModel @Inject constructor(
             list.add(1,
                 ProfileVerificationItem(
                     MyConstants.VERIFY_ITEM_EMAIL,
-                    navigator.getStringResource(R.string.email),verificationInfo.value?.Email,
-                    isVerified = verificationInfo.value?.EmailVerify?:false,
+                    navigator.getStringResource(R.string.email),verificationInfo.value?.EmailItem?.Value,
+                    isVerified = verificationInfo.value?.EmailItem?.Verify?:false,
                     selectedColor = selectedColor.get(),
                     icon = R.drawable.ic_email_verification,
                     verifyColor = R.color.light_red,
                     textColor = R.color.red,
-                    buttonId = R.id.verifyEmail
+                    buttonId = R.id.verifyEmail,
+                    isBlocked = verificationInfo.value?.EmailItem?.isBlocked?:false,
+                    message = verificationInfo.value?.EmailItem?.Message?:""
                 )
-
             )
         }
-
         list.sortBy { !it.isVerified}
-        list.sortBy { TextUtils.isEmpty(it.value)  }
+        list.sortBy { TextUtils.isEmpty(it.value) }
         return list
     }
 

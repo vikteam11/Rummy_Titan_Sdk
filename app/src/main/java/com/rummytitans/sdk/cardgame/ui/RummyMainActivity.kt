@@ -91,7 +91,6 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
                 }
             }
         }
-        Toast.makeText(applicationContext,"hello",Toast.LENGTH_SHORT).show()
         initUI()
         observeWalletData()
         initFragments()
@@ -583,7 +582,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
                     "Play",
                     onNegativeClick = {
                         RummyTitanSDK.rummyCallback?.sdkFinish()
-                        finishAffinity()
+                        finish()
                     },
                 ),
                 viewModel.selectedColor.get()?:""

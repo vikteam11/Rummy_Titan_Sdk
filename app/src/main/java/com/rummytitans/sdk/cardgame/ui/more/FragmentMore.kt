@@ -16,6 +16,7 @@ import com.rummytitans.sdk.cardgame.utils.sendToCloseAbleInternalBrowser
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -122,17 +123,14 @@ class FragmentMore : BaseFragment(), MainNavigationFragment, MoreNavigator,
 
 
     override fun onWebClick(url: String, titleId: Int) {
-        val list = listOf(
-            R.string.about_us, R.string.how_to_play, R.string.tutorial_videos,
-            R.string.faq_s, R.string.fantasy_point_system
-        )
-        if (!list.contains(titleId)) return
+        Log.e("click >>>>"," webClick $url")
 
         val eventName = when (titleId) {
             R.string.about_us -> AnalyticsKey.Values.AboutUs
             R.string.how_to_play -> AnalyticsKey.Values.HowToPlay
             R.string.tutorial_videos -> AnalyticsKey.Values.TutorialVideos
             R.string.faq_s -> AnalyticsKey.Values.FAQ
+            R.string.term_condition -> AnalyticsKey.Values.TermsCondition
             R.string.fantasy_point_system -> AnalyticsKey.Values.FantasyPointSystem
             else -> ""
         }

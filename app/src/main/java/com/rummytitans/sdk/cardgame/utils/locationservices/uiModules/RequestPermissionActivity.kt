@@ -2,11 +2,7 @@ package com.rummytitans.sdk.cardgame.utils.locationservices.uiModules
 
 import com.rummytitans.sdk.cardgame.R
 import com.rummytitans.sdk.cardgame.utils.bottomsheets.AlertBottomSheetDialog
-import com.rummytitans.sdk.cardgame.utils.locationservices.constants.LocationConstants.REQUEST_OPEN_APP_SETTINGS
-import com.rummytitans.sdk.cardgame.utils.locationservices.constants.LocationConstants.RESPONSE_LOCATION_OK
-import com.rummytitans.sdk.cardgame.utils.locationservices.constants.LocationConstants.RESPONSE__LOCATION_FAILED
-import com.rummytitans.sdk.cardgame.utils.locationservices.constants.LocationProviderPluginConstants
-import com.rummytitans.sdk.cardgame.utils.locationservices.models.ModelPermission
+
 import com.rummytitans.sdk.cardgame.utils.locationservices.utils.*
 import android.app.Activity
 import android.content.Intent
@@ -14,6 +10,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import com.rummytitans.sdk.cardgame.utils.locationservices.constants.LocationConstants.REQUEST_OPEN_APP_SETTINGS
+import com.rummytitans.sdk.cardgame.utils.locationservices.constants.LocationConstants.RESPONSE_LOCATION_OK
+import com.rummytitans.sdk.cardgame.utils.locationservices.constants.LocationConstants.RESPONSE__LOCATION_FAILED
+import com.rummytitans.sdk.cardgame.utils.locationservices.constants.LocationProviderPluginConstants
+import com.rummytitans.sdk.cardgame.utils.locationservices.models.ModelPermission
 
 class RequestPermissionActivity : Activity() {
 
