@@ -5,6 +5,7 @@ import android.content.Intent
 import android.text.TextUtils
 import android.util.Base64
 import androidx.annotation.Keep
+import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.sdk.cardgame.sdk_callbacks.AnalticsCallback
@@ -42,10 +43,9 @@ object RummyTitanSDK {
         }
     }
 
-    fun getOption() = rummySdkOptions
-
-    fun initialize1(context: Context) {
-        appContext = context
+    fun getOption():RummySdkOptions{
+        val pref=SharedPreferenceStorageRummy(appContext)
+        return Gson().fromJson(pref.sdkOptions,RummySdkOptions::class.java)
     }
 
     fun startLibraryActivity() {
@@ -83,8 +83,7 @@ object RummyTitanSDK {
                 e.printStackTrace()
                 println("Error while parsing JSON: ${e.message}")
             }
-
-
+            pref.sdkOptions= Gson().toJson(rummySdkOptions)
             val intent = if (splashResponse?.isEmpty() == true) Intent(
                 context,
                 SDKSplashActivity::class.java

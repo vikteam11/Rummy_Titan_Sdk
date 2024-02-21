@@ -10,17 +10,17 @@ import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
 
 const val TAG="LOCATION_PROVIDER"
-class LocationProvider(
+class LocationProviderRummy(
     mContext: Context, private val mainLooper: Looper,
     private val onSuccess: (result: Location?) -> Unit, private val onFailed: () -> Unit
 ) {
-    private val LocationClient:FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(mContext)
+    private val locationClient:FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(mContext)
 
     @SuppressLint("MissingPermission")
     fun requestLocationAsync() {
         Log.e(TAG, "getLastLocation requestLocationAsync ")
         kotlin.runCatching {
-            LocationClient.lastLocation.addOnCompleteListener {
+            locationClient.lastLocation.addOnCompleteListener {
                 val result: Task<Location>? = it
                 if (it.isSuccessful && result?.result!=null)
                     onSuccess(it.result)
@@ -51,13 +51,13 @@ class LocationProvider(
         val callback = { onFailed() }
         handler.postDelayed(callback,8*1000)
 
-        LocationClient.requestLocationUpdates(locationRequest, object : LocationCallback() {
+        locationClient.requestLocationUpdates(locationRequest, object : LocationCallback() {
 
             override fun onLocationResult(p0: LocationResult) {
                 for (location in p0.locations) {
                     handler.removeCallbacks(callback)
                     if (location != null) {
-                        LocationClient.removeLocationUpdates(this)
+                        locationClient.removeLocationUpdates(this)
                         onSuccess(location)
                     } else {
                         onFailed()

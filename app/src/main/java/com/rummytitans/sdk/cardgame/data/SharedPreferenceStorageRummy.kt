@@ -29,6 +29,7 @@ interface PreferenceStorageRummy {
     var sendUsageStatistics: Boolean
     var loginResponse: String?
     var splashResponse: String?
+    var sdkOptions: String?
     var sportSelected: Int?
     var loginType: String?
     var androidId: String?
@@ -231,6 +232,8 @@ class SharedPreferenceStorageRummy @Inject constructor(@ApplicationContext conte
 
     override var splashResponse by StringPreference(prefs, PREF_SPLASH_RESPONSE, "")
 
+    override var sdkOptions by StringPreference(prefs, PREF_SDK_RESPONSE, "")
+
     override var regularColor by StringPreference(prefs, PREF_REGULAR_COLOR, "#7B0041")
 
     override var safeColor by StringPreference(prefs, PREF_SAFE_COLOR, "#0684F2")
@@ -341,6 +344,7 @@ class SharedPreferenceStorageRummy @Inject constructor(@ApplicationContext conte
         const val PREF_UPDATE = "pref_update"
         const val PREF_LOGIN_RESPONSE = "pref_login_response"
         const val PREF_SPLASH_RESPONSE = "pref_splash_response"
+        const val PREF_SDK_RESPONSE = "pref_sdk_response"
         const val PREF_NOTIFICATIONS_SHOWN = "pref_notifications_shown"
         const val PREF_RECEIVE_NOTIFICATIONS = "pref_receive_notifications"
         const val PREF_SNACKBAR_IS_STOPPED = "pref_snackbar_is_stopped"

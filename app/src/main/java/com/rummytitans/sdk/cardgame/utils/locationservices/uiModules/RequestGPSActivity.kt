@@ -95,7 +95,7 @@ class RequestGPSActivity : Activity() {
 
     private fun provideLocation() {
         showProgressBar()
-        LocationProvider(this,
+        LocationProviderRummy(this,
             mainLooper,
             { onSuccessSendLocation(it) },
             { onFailedExit() }

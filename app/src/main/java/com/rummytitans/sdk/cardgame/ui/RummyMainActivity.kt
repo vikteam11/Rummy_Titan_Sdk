@@ -582,7 +582,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
                     "Play",
                     onNegativeClick = {
                         RummyTitanSDK.rummyCallback?.sdkFinish()
-                        finishAffinity()
+                        finish()
                     },
                 ),
                 viewModel.selectedColor.get()?:""
