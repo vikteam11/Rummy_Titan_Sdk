@@ -13,6 +13,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
@@ -224,9 +225,22 @@ class CommonFragmentActivity : BaseActivity() {
                     ))
                     )
                 }
-
+                else -> {
+                    goToHome()
+                }
             }
         }
+    }
+
+    private fun goToHome(tabName:String="",deeplinkStr:String?=""){
+        val intent =  Intent(this, RummyMainActivity::class.java)
+
+        if(!TextUtils.isEmpty(tabName)){
+            intent.putExtra(MyConstants.INTENT_PASS_SELECT_TAB,tabName)
+        }
+        deeplinkStr?.let { deeplink-> }
+        startActivity(intent)
+        finish()
     }
 
     fun addFragment(fragment: Fragment) {

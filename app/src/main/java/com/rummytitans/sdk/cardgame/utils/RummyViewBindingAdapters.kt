@@ -32,6 +32,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.Guideline
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.ColorUtils
@@ -68,6 +69,11 @@ fun setCompactDrawableWithTrophyRight(view: TextView, drawable: Int) {
         VectorDrawableCompat.create(view.resources, R.drawable.ic_trophy, view.context.theme),
         null, VectorDrawableCompat.create(view.resources, drawable, view.context.theme), null
     )
+}
+
+@BindingAdapter("setGuideLinePercent")
+fun setGuideLinePercent(guideline: Guideline, percent: Float){
+    guideline.setGuidelinePercent(percent)
 }
 
 @BindingAdapter(value = ["bind_htmlText"], requireAll = true)

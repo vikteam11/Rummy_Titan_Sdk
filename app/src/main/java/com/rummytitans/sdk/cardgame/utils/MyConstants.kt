@@ -29,7 +29,7 @@ object MyConstants {
     const val UPDATE_EVENT_URL = "https://logs.mt11games.com/"
     const val REQUEST_UPDATE_VERIFY_DETAILS=999
     const val DefaultAvatarID = 111
-
+    var checkForBackPayment = false
     const val APP_TYPE = 8
     const val TEST_ACCOUNT_EMAIL="vinubagda@gmail.com"
     const val TEST_ACCOUNT_MOBILE="5828666143"

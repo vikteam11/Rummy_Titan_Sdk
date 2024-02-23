@@ -22,6 +22,7 @@ import com.rummytitans.sdk.cardgame.ui.WebViewActivity
 import com.rummytitans.sdk.cardgame.ui.common.CommonFragmentActivity
 import com.rummytitans.sdk.cardgame.ui.games.tickets.GamesTicketActivity
 import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
+import com.rummytitans.sdk.cardgame.ui.profile.ProfileActivity
 import com.rummytitans.sdk.cardgame.ui.wallet.RummyAddCashActivity
 import com.rummytitans.sdk.cardgame.ui.wallet.withdrawal.WithdrawDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -217,10 +218,8 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
                         finish()
                     }
                     "profile" -> {
-                       // startActivity(Intent(this, ProfileActivity::class.java))
-                        RummyTitanSDK.rummyCallback?.openProfile()
-                        RummyTitanSDK.rummyCallback?.sdkFinish()
-                        finish()
+                        startActivity(Intent(this, ProfileActivity::class.java))
+
                     }
                     "addcash" -> {
                         startActivity(Intent(this, RummyAddCashActivity::class.java)
@@ -261,7 +260,12 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
                         finish()
                     }
                     else -> {
-                       goToHome()
+                        startActivity(
+                            Intent(this, CommonFragmentActivity::class.java)
+                                .putExtra(MyConstants.INTENT_PASS_COMMON_TYPE, it.value)
+                                .putExtra("fromDeeplink", true)
+                        )
+                        finish()
                     }
                 }
                 return@forEach

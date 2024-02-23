@@ -680,7 +680,7 @@
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="16dp"
+                                android:padding="12dp"
                                 android:layout_marginTop="8dp"
                                 android:background="@drawable/box_grey_border_rummy"
                                 app:layout_constraintTop_toBottomOf="@+id/tvDescription">
@@ -690,7 +690,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical"
-                                    app:layout_constraintGuide_percent="0.35" />
+                                    app:layout_constraintGuide_percent="0.20"
+                                    app:setGuideLinePercent="@{viewmodel.ticketsAvailable ? .20f: .37f}"
+                                    />
 
                                 <TextView
                                     android:id="@+id/tvAmountHeader"

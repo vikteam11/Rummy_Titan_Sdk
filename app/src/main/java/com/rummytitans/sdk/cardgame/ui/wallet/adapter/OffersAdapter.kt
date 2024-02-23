@@ -12,7 +12,8 @@ import com.rummytitans.sdk.cardgame.ui.wallet.OnOfferClick
 
 class OffersAdapter(var listResponse: MutableList<AddCashOfferModel.AddCash>,
                     var listener: OnOfferClick,
-                    var selectedColor: String?) :
+                    var selectedColor: String?,
+                    val ticketAvailable:Boolean=false) :
 
     RecyclerView.Adapter<BaseViewHolder>() {
     private var context: Context? = null
@@ -42,6 +43,7 @@ class OffersAdapter(var listResponse: MutableList<AddCashOfferModel.AddCash>,
         override fun onBind(position: Int) {
             listResponse?.elementAtOrNull(position)?.let {
                 mBinding.model = it
+                mBinding.ticketAvailable =ticketAvailable
             }
             mBinding.root.setOnClickListener {
                 listResponse[layoutPosition].isSelected =  !listResponse[layoutPosition].isSelected

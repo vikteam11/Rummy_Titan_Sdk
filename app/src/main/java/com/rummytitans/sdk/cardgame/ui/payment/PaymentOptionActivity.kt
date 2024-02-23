@@ -511,9 +511,17 @@ class PaymentOptionActivity : BaseActivity(), PaymentOptionNavigator, BottomShee
     }
 
     override fun onPaymentStatusReceived(paymentStatus: Boolean,reason: String?) {
-        if (paymentStatus)
-            onPaymentSuccess()
-        else
+        if (paymentStatus){
+            if(TextUtils.isEmpty(viewModel.returnUrl)) {
+                onPaymentSuccess()
+            }else{
+                startActivityForResult(
+                    Intent(this, WebPaymentActivity::class.java)
+                        .putExtra(MyConstants.INTENT_PASS_WEB_URL, viewModel.returnUrl)
+                        .putExtra(MyConstants.INTENT_PASS_SHOW_TOOLBAR, false)
+                        .putExtra(MyConstants.INTENT_PASS_WEB_TITLE, "Payment"), 101)
+            }
+        } else
             onPaymentFailure(reason?:"")
     }
 
@@ -553,16 +561,21 @@ class PaymentOptionActivity : BaseActivity(), PaymentOptionNavigator, BottomShee
             it.positiveButtonName=btnName
             it.allowCross=false
         }
-        val dialog= LottieBottomSheetDialog(this,dataModel,this)
-        dialog.show()
-        dialog.setOnDismissListener {
-            if (dataModel.isSuccess) {
-                fireOnPaymentDoneEvent(true)
-                setResult(Activity.RESULT_OK)
-                finish()
-            }else{
-                hideLoader()
-                fireOnPaymentDoneEvent(false)
+
+        if(dataModel.isSuccess && !TextUtils.isEmpty(viewModel.returnUrl)) {
+            startActivityForResult(
+                Intent(this, WebPaymentActivity::class.java)
+                    .putExtra(MyConstants.INTENT_PASS_WEB_URL, viewModel.returnUrl)
+                    .putExtra(MyConstants.INTENT_PASS_SHOW_TOOLBAR, false)
+                    .putExtra(MyConstants.INTENT_PASS_WEB_TITLE, "Payment"), 101)
+        }else{
+            val dialog = LottieBottomSheetDialog(this, dataModel, this)
+            dialog.show()
+            dialog.setOnDismissListener {
+                if (dataModel.isSuccess)
+                    onPaymentSuccess()
+                else
+                    onPaymentFailure("")
             }
         }
     }

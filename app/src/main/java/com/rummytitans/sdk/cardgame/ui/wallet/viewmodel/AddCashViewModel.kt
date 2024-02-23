@@ -45,7 +45,7 @@ class AddCashViewModel @Inject constructor(
     var isRedeemCoupon = ObservableBoolean(false)
     var isCouponsListEmpty = ObservableBoolean(true)
     var isOfferListEmpty = ObservableBoolean(true)
-
+    var ticketsAvailable=ObservableBoolean(false)
     var offers = MutableLiveData(AddCashOfferModel())
     var couponApplied = MutableLiveData<Boolean>()
 
@@ -122,54 +122,6 @@ class AddCashViewModel @Inject constructor(
             navigatorAct.addAmount(amount)
         }
     }
-
-    fun checkUserIsBanned(amount: Double) {
-        if(isLoading.get()){
-            return
-        }
-        if (!connectionDetector.isConnected) {
-            myDialog?.noInternetDialog {
-                isLoading.set(true)
-                checkUserIsBanned(amount)
-            }
-            isLoading.set(false)
-            return
-        }
-
-        val json = JsonObject()
-        json.addProperty("Amount",amount)
-        json.addProperty("OfferIds",offerIds)
-        json.addProperty("PassId",0)
-        json.addProperty("CoupanId",couponId)
-        if (TextUtils.isEmpty(userCurrentState))
-            json.addProperty(LOCATION_COORDINATE,userCurrentStateLatLog)
-        else
-            json.addProperty(LOCATION_STATE,userCurrentState)
-        isLoading.set(true)
-        compositeDisposable.add(
-            apis.getPaymentGateWay(
-                loginResponse.UserId,
-                loginResponse.ExpireToken,
-                loginResponse.AuthExpire,
-                json
-            )
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe({
-                    isLoading.set(false)
-                    if (it.IsUserFromBannedState){
-                        navigatorAct.showDialog(MyConstants.RESTRICT_LOC_MESSAGE)
-                        return@subscribe
-                    }else
-                        navigatorAct.onValidLocationFound()
-                }, {
-                    isLoading.set(false)
-                    navigator.showError(R.string.something_went_wrong)
-                    it.printStackTrace()
-                })
-        )
-    }
-
     fun getCurentBalance() {
         if (!connectionDetector.isConnected) {
             myDialog?.noInternetDialog {
@@ -330,8 +282,10 @@ class AddCashViewModel @Inject constructor(
         json.addProperty("CoupanId",couponId)
         json.addProperty(LOCATION_COORDINATE,userCurrentStateLatLog)
         isLoading.set(true)
+        val apiInterface = getApiEndPointObject(prefs.appUrl2?:"")
+
         compositeDisposable.add(
-            apis.getPaymentGateWay(
+            apiInterface.getPaymentGateWay(
                 loginResponse.UserId,
                 loginResponse.ExpireToken,
                 loginResponse.AuthExpire,
@@ -384,8 +338,9 @@ class AddCashViewModel @Inject constructor(
             return
         }
         isLoading.set(true)
+        val apiInterface = getApiEndPointObject(prefs.appUrl2?:"")
         compositeDisposable.add(
-            apis.getAddCashOfferList(
+            apiInterface.getAddCashOfferList(
                 loginResponse.UserId,
                 loginResponse.ExpireToken,
                 loginResponse.AuthExpire,
@@ -401,8 +356,13 @@ class AddCashViewModel @Inject constructor(
                         navigator.logoutUser()
                     }
                     if (it.Status) {
+                        ticketsAvailable.set(
+                            it.Response?.Offers?.any {offerModel->
+                                offerModel.Tickets.isNotEmpty()
+                            }?:false
+                        )
                         enableGstCalculation.set(it.Response.IsGST)
-                        offerTitle.set(it.Offer)
+                        offerTitle.set(it.Title)
                         offerDescription.set(it.Description)
                         _mAddCashOffer.value = it.Response?.Offers
                         _mAvailableCoupons.value = it.Response?.Coupans

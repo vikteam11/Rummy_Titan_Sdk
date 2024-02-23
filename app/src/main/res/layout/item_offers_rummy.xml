@@ -14,6 +14,10 @@
         <import type="com.rummytitans.sdk.cardgame.R" />
 
         <variable
+            name="ticketAvailable"
+            type="Boolean" />
+
+        <variable
             name="model"
             type="com.rummytitans.sdk.cardgame.models.AddCashOfferModel.AddCash" />
     </data>
@@ -28,7 +32,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent=".35" />
+            app:layout_constraintGuide_percent=".20"
+            setGuideLinePercent="@{ticketAvailable ? 0.20f : .37f,default=0.20f}"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".37"
+            setGuideLinePercent="@{ticketAvailable ? 0.37f : 0.9f}"
+            />
 
         <View
             android:id="@+id/viewBg"
@@ -38,67 +53,98 @@
             android:alpha="@{model.isSelected ?0.10f:1.0f}"
             android:background="@drawable/bg_squre_shape"
             android:backgroundTint="@{model.isSelected ? @color/rummy_maingreen : @color/text_color6}"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/ivSelect"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="11dp"
             android:scaleType="fitStart"
-            app:layout_constraintStart_toStartOf="@id/viewBg"
             android:src="@drawable/img_recomd_tag"
             android:visibility="@{model.Popular ? View.VISIBLE :View.GONE,default=gone}"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintStart_toStartOf="@id/viewBg"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvAmount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/rubik_medium"
-            app:setAmountFormat="@{model.Add}"
-            app:placeHolder='@{@string/rupees}'
-            app:placeHolderAtStart="@{true}"
-            android:textColor="@{model.isSelected ? @color/rummy_maingreen : @color/text_color8}"
-            android:textSize="12sp"
             android:paddingHorizontal="10dp"
-            app:layout_constraintEnd_toStartOf="@id/guideline14"
             android:paddingVertical="12dp"
+            android:textColor="@{model.isSelected ? @color/rummy_maingreen : @color/text_color8}"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@id/viewBg"
+            app:layout_constraintEnd_toStartOf="@id/guideline14"
             app:layout_constraintStart_toStartOf="@id/viewBg"
             app:layout_constraintTop_toTopOf="@id/viewBg"
-            app:layout_constraintBottom_toBottomOf="@id/viewBg"/>
+            app:placeHolder='@{@string/rupees}'
+            app:placeHolderAtStart="@{true}"
+            app:setAmountFormat="@{model.Add}" />
 
         <TextView
             android:id="@+id/tvCashBonus"
             android:layout_width="0dp"
-            app:layout_constraintEnd_toEndOf="@id/viewBg"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="4dp"
             android:fontFamily="@font/rubik_medium"
             android:textColor="@{model.isSelected ? @color/rummy_maingreen : @color/text_color8}"
-            android:textSize="12sp"
-            android:layout_marginEnd="4dp"
+            android:textSize="11sp"
             app:layout_constraintBottom_toBottomOf="@id/viewBg"
+            app:layout_constraintEnd_toEndOf="@id/viewBg"
+            app:layout_constraintEnd_toStartOf="@+id/guideline15"
             app:layout_constraintStart_toEndOf="@id/guideline14"
             app:layout_constraintTop_toTopOf="@id/viewBg"
             app:placeHolder='@{@string/rupees}'
             app:placeHolderAtStart="@{true}"
             app:setAmountFormat="@{model.Get}" />
 
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{TextUtils.isEmpty(model.Tickets) ? View.GONE : View.VISIBLE}"
+            app:constraint_referenced_ids="txtPlus,txtTicket,ivTicket" />
+
         <TextView
-            android:id="@+id/tvPercent"
+            android:id="@+id/txtPlus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_medium"
+            android:paddingHorizontal="8dp"
+            android:text="+"
+            android:textColor="@color/text_color2"
+            android:textSize="9sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@id/viewBg"
+            app:layout_constraintStart_toEndOf="@id/guideline15"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivTicket"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            app:layout_constraintBottom_toBottomOf="@id/viewBg"
+            app:layout_constraintStart_toEndOf="@id/txtPlus"
+            app:layout_constraintTop_toTopOf="parent"
+            app:setSrcCompact="@{@drawable/img_rummy_ticket}" />
+
+        <TextView
+            android:id="@+id/txtTicket"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:fontFamily="@font/rubik_medium"
-            android:text="@{model.percent}"
+            android:text="@{model.Tickets}"
             android:textColor="@{model.isSelected ? @color/rummy_maingreen : @color/text_color8}"
-            android:textSize="12sp"
-            android:visibility="gone"
+            android:textSize="11sp"
+            app:layout_constraintStart_toEndOf="@+id/ivTicket"
+            app:layout_constraintBottom_toBottomOf="@id/viewBg"
             app:layout_constraintEnd_toEndOf="@+id/viewBg"
-            app:layout_constraintTop_toTopOf="@id/viewBg"
-            app:layout_constraintBottom_toBottomOf="@id/viewBg"/>
+            app:layout_constraintTop_toTopOf="@id/viewBg" />
 
         <ImageView
             android:id="@+id/ivSelect"
@@ -106,9 +152,9 @@
             android:layout_height="24dp"
             android:layout_marginEnd="8dp"
             android:src="@{model.isSelected ? @drawable/ic_green_checked: @drawable/ic_green_uncheck,default=@drawable/ic_green_uncheck}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
