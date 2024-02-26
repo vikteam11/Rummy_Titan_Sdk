@@ -27,6 +27,8 @@ public class NewPaymentGateWayModel implements Serializable {
     @SerializedName("JusPayToken")
     public String JusPayToken;
 
+    @SerializedName("ReturnUrl")
+    public String ReturnUrl;
     @Expose
     @SerializedName("updateMessage")
     public String updateMessage;

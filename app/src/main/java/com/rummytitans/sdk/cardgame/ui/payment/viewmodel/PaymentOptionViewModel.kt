@@ -57,7 +57,7 @@ class PaymentOptionViewModel @Inject constructor(
 
     var _mGateWayResponse = MutableLiveData<NewPaymentGateWayModel>()
     var mGateWayResponse :LiveData<NewPaymentGateWayModel> = _mGateWayResponse
-
+    var returnUrl = ""
 
     var isUpiApiAllow = true
 
@@ -183,9 +183,9 @@ class PaymentOptionViewModel @Inject constructor(
         json.addProperty("OfferIds",offerIds)
         json.addProperty("PassId",goldenTicketId)
         json.addProperty("CoupanId",addCashCouponID)
-
+        val apiInterface = getApiEndPointObject(prefs.appUrl2?:"")
         compositeDisposable.add(
-            apis.getPaymentGateWay(
+            apiInterface.getPaymentGateWay(
                 loginResponse.UserId,
                 loginResponse.ExpireToken,
                 loginResponse.AuthExpire,
@@ -195,6 +195,7 @@ class PaymentOptionViewModel @Inject constructor(
                 .subscribe({
                     isLoading.set(false)
                     if (it.Status) {
+                        returnUrl = it.ReturnUrl
                         it.GatewayList.map {model->
                             if (model.Type!=4 || it.IsVPAAllow)
                                 setAddMoreGatewayItem(model)

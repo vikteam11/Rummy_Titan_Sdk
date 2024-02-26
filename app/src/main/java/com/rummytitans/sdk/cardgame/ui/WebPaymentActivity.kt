@@ -65,6 +65,12 @@ class WebPaymentActivity : AppCompatActivity() {
                     } else if (url.matches(failedRegex)) {
                         setResult(Activity.RESULT_CANCELED)
                         finish()
+                    }else if(url.equals("success", ignoreCase = true)){
+                        setResult(Activity.RESULT_OK)
+                        finish()
+                    }else if(url.equals("failed", ignoreCase = true) ){
+                        setResult(Activity.RESULT_CANCELED)
+                        finish()
                     }
                     return false
                 }
@@ -86,7 +92,7 @@ class WebPaymentActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         if (intent.getBooleanExtra(MyConstants.INTENT_PASS_FROM_PAYMENTS,true))return
-
+        MyConstants.checkForBackPayment = true
         if (binding.webview.canGoBack()) binding.webview.goBack()
         else {
             setResult(Activity.RESULT_CANCELED)

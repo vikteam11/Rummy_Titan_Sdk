@@ -119,8 +119,12 @@ class PaymentOptionActivity : BaseActivity(), PaymentOptionNavigator, BottomShee
         } else {
             viewModel.isLoading.set(false)
             viewModel.cardListCount.set(intent.getIntExtra("cardListCount", 0))
-            viewModel._mGateWayResponse.value =
-                intent.getSerializableExtra("paymentModel") as NewPaymentGateWayModel
+            if(intent.hasExtra("paymentModel")){
+                viewModel._mGateWayResponse.value =
+                    intent.getSerializableExtra("paymentModel") as NewPaymentGateWayModel
+            }else{
+                viewModel.getPaymentGateWay()
+            }
         }
 
         val upiApps = packageManager.queryIntentActivities(
@@ -232,6 +236,7 @@ class PaymentOptionActivity : BaseActivity(), PaymentOptionNavigator, BottomShee
 
     private fun observeData() {
         viewModel.mGateWayResponse.observe(this){
+            viewModel.returnUrl = it.ReturnUrl
             paymentHelper.initJuspay(it.jusPayData.CustomerId, it.jusPayData.OrderId, it.jusPayData.Token)
 
             it.GatewayList.filter { !it.Disable }.map {gatWayList ->
@@ -511,9 +516,17 @@ class PaymentOptionActivity : BaseActivity(), PaymentOptionNavigator, BottomShee
     }
 
     override fun onPaymentStatusReceived(paymentStatus: Boolean,reason: String?) {
-        if (paymentStatus)
-            onPaymentSuccess()
-        else
+        if (paymentStatus){
+            if(TextUtils.isEmpty(viewModel.returnUrl)) {
+                onPaymentSuccess()
+            }else{
+                startActivityForResult(
+                    Intent(this, WebPaymentActivity::class.java)
+                        .putExtra(MyConstants.INTENT_PASS_WEB_URL, viewModel.returnUrl)
+                        .putExtra(MyConstants.INTENT_PASS_SHOW_TOOLBAR, false)
+                        .putExtra(MyConstants.INTENT_PASS_WEB_TITLE, "Payment"), 101)
+            }
+        } else
             onPaymentFailure(reason?:"")
     }
 
@@ -553,16 +566,21 @@ class PaymentOptionActivity : BaseActivity(), PaymentOptionNavigator, BottomShee
             it.positiveButtonName=btnName
             it.allowCross=false
         }
-        val dialog= LottieBottomSheetDialog(this,dataModel,this)
-        dialog.show()
-        dialog.setOnDismissListener {
-            if (dataModel.isSuccess) {
-                fireOnPaymentDoneEvent(true)
-                setResult(Activity.RESULT_OK)
-                finish()
-            }else{
-                hideLoader()
-                fireOnPaymentDoneEvent(false)
+
+        if(dataModel.isSuccess && !TextUtils.isEmpty(viewModel.returnUrl)) {
+            startActivityForResult(
+                Intent(this, WebPaymentActivity::class.java)
+                    .putExtra(MyConstants.INTENT_PASS_WEB_URL, viewModel.returnUrl)
+                    .putExtra(MyConstants.INTENT_PASS_SHOW_TOOLBAR, false)
+                    .putExtra(MyConstants.INTENT_PASS_WEB_TITLE, "Payment"), 101)
+        }else{
+            val dialog = LottieBottomSheetDialog(this, dataModel, this)
+            dialog.show()
+            dialog.setOnDismissListener {
+                if (dataModel.isSuccess)
+                    onPaymentSuccess()
+                else
+                    onPaymentFailure("")
             }
         }
     }

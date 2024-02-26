@@ -94,9 +94,13 @@ class RummyAddCashActivity :
         viewModel.navigator = this
         viewModel.navigatorAct = this
         viewModel.myDialog = MyDialog(this)
-
         fromGame=intent.getBooleanExtra(MyConstants.INTENT_COME_FROM_GAME,false)
+       intializeData()
 
+    }
+
+
+    private fun intializeData(){
         icBack.setOnClickListener { onBackPressed() }
 
         ivSupport.setOnClickListener {
@@ -232,6 +236,11 @@ class RummyAddCashActivity :
         if(headerAdapter != null){
             startViewPagerScrolling()
         }
+        if(MyConstants.checkForBackPayment) {
+            intializeData()
+            unselectAllOffer()
+            MyConstants.checkForBackPayment =false
+        }
     }
 
     override fun onPause() {
@@ -255,7 +264,8 @@ class RummyAddCashActivity :
         })
 
         viewModel.mAddCashOffer.observe(this, Observer {
-            mOfferAdapter = OffersAdapter(it,this,viewModel.selectedColor.get())
+            mOfferAdapter = OffersAdapter(it,this,viewModel.selectedColor.get(),
+            viewModel.ticketsAvailable.get()?:false)
             binding.rvOffers.adapter = mOfferAdapter
         })
 
@@ -266,7 +276,6 @@ class RummyAddCashActivity :
             binding.rvAvailableCoupon.adapter = couponsAdapter
         })
     }
-
     override fun showDialog(descriptionMsg: String) {
         onRestrictLocationFound(descriptionMsg)
     }

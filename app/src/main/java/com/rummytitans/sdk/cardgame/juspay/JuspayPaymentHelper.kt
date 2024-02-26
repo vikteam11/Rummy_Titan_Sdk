@@ -104,30 +104,27 @@ class JuspayPaymentHelper(
                             val errorMessage = data.optString("errorMessage")
                             val status = data.optJSONObject("payload")?.optString("status")
                             listener.hideLoader()
-                            if (paymentResultShowBottomSheet== PAYMENT_TYPE_UPI || paymentResultShowBottomSheet== PAYMENT_TYPE_NATIVE_APP) {
-                                var paymentErrorMessage=""
-                                val paymentType = if (error){
-                                    /**not fully managed
-                                     * PENDING
-                                     * CANCELED
-                                     * FAILED*/
-                                    paymentErrorMessage=when (status) {
-                                        "AUTHORIZATION_FAILED","AUTHENTICATION_FAILED" -> context.getString(R.string.payment_failed_msg)
-                                        "PENDING_VBV" ->  context.getString(R.string.payment_pending_msg)
-                                        else-> context.getString(R.string.payment_pending_msg)
-                                    }
-                                    PAYMENT_STATUS_FAILED
-                                }else if(!error && status == "CHARGED")
-                                    PAYMENT_STATUS_SUCCESS
-                                else
-                                    PAYMENT_STATUS_FAILED
+                            var paymentErrorMessage=""
+                            val paymentType = if (error){
+                                /**not fully managed
+                                 * PENDING
+                                 * CANCELED
+                                 * FAILED*/
+                                paymentErrorMessage=when (status) {
+                                    "AUTHORIZATION_FAILED","AUTHENTICATION_FAILED" -> context.getString(R.string.payment_failed_msg)
+                                    "PENDING_VBV" ->  context.getString(R.string.payment_pending_msg)
+                                    else-> context.getString(R.string.payment_pending_msg)
+                                }
+                                PAYMENT_STATUS_FAILED
+                            }else if(!error && status == "CHARGED")
+                                PAYMENT_STATUS_SUCCESS
+                            else
+                                PAYMENT_STATUS_FAILED
 
-                                listener.onUpiPaymentResponseReceive(
-                                    paymentType,
-                                    paymentErrorMessage
-                                )
-                            }else
-                                listener.onPaymentStatusReceived(!error && status == "CHARGED",errorMessage)
+                            listener.onUpiPaymentResponseReceive(
+                                paymentType,
+                                paymentErrorMessage
+                            )
                             paymentResultShowBottomSheet=""
                             /* if (!error && status == "CHARGED") listner.onPaymentSuccess()
                              else listner.onPaymentFailure(errorMessage)*/

@@ -37,6 +37,9 @@ public class AddCashOfferModel {
         @SerializedName("Popular")
         public boolean Popular;
 
+        @SerializedName("Tickets")
+        public String Tickets;
+
         public boolean isSelected;
 
         public String FillInTax;
