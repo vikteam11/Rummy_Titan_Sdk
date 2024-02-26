@@ -14,15 +14,15 @@ android {
     defaultConfig {
         minSdkVersion 22
         targetSdkVersion 33
-        versionCode 64
-        versionName '1.6.4'
+        versionCode 66
+        versionName '1.6.6'
         //applicationId "com.rummytitans.sdk.cardgame"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
-        buildConfigField "int", "isPlayStoreApk", "0"
-        buildConfigField "int", "VERSION_CODE", "64"
-        buildConfigField "String", "VERSION_NAME", "\"1.6.4\""
+        buildConfigField "int", "isPlayStoreApk", "1"
+        buildConfigField "int", "VERSION_CODE", "66"
+        buildConfigField "String", "VERSION_NAME", "\"1.6.6\""
     }
     buildFeatures {
         dataBinding true
@@ -208,7 +208,7 @@ project.afterEvaluate {
                 setGroupId "com.rummytitans.sdk.cardgame"
 //setArtifactId artifactId
                 setArtifactId "titanSdk"
-                version "1.0.0"
+                version "1.0.1"
                 artifact bundlePlayStoreAppReleaseAar
                 //artifact("$buildDir/outputs/aar/app-playStoreApp-debug.aar")
                 pom.withXml {

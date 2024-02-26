@@ -219,7 +219,7 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
                     }
                     "profile" -> {
                         startActivity(Intent(this, ProfileActivity::class.java))
-
+                        finish()
                     }
                     "addcash" -> {
                         startActivity(Intent(this, RummyAddCashActivity::class.java)
