@@ -119,8 +119,12 @@ class PaymentOptionActivity : BaseActivity(), PaymentOptionNavigator, BottomShee
         } else {
             viewModel.isLoading.set(false)
             viewModel.cardListCount.set(intent.getIntExtra("cardListCount", 0))
-            viewModel._mGateWayResponse.value =
-                intent.getSerializableExtra("paymentModel") as NewPaymentGateWayModel
+            if(intent.hasExtra("paymentModel")){
+                viewModel._mGateWayResponse.value =
+                    intent.getSerializableExtra("paymentModel") as NewPaymentGateWayModel
+            }else{
+                viewModel.getPaymentGateWay()
+            }
         }
 
         val upiApps = packageManager.queryIntentActivities(
@@ -232,6 +236,7 @@ class PaymentOptionActivity : BaseActivity(), PaymentOptionNavigator, BottomShee
 
     private fun observeData() {
         viewModel.mGateWayResponse.observe(this){
+            viewModel.returnUrl = it.ReturnUrl
             paymentHelper.initJuspay(it.jusPayData.CustomerId, it.jusPayData.OrderId, it.jusPayData.Token)
 
             it.GatewayList.filter { !it.Disable }.map {gatWayList ->
