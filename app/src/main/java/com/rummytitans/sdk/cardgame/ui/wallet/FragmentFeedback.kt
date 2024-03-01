@@ -118,10 +118,6 @@ class FragmentFeedback : BaseFragment(), MainNavigationFragment,
                 binding.inputLayout1.error = getString(R.string.enter_title)
             } else if (TextUtils.isEmpty(binding.editMessage.text)) {
                 binding.inputLayout2.error = getString(R.string.enter_your_message)
-            } else if (!binding.editMessage.text.toString().contains(" ")) {
-                binding.inputLayout2.error = getString(R.string.enter_a_explained_message)
-            } else if (binding.editMessage.text.toString().split(" ").size < 20) {
-                binding.inputLayout2.error = getString(R.string.oops_minimum_char_req)
             } else {
                 viewModel.submit(
                     editTitle.text.toString(), editMessage.text.toString(),
@@ -143,7 +139,7 @@ class FragmentFeedback : BaseFragment(), MainNavigationFragment,
 
     override fun showMessage(message: String?) {
         if (TextUtils.isEmpty(message)) return
-        showMessageView(message ?: "", true)
+        showMessageView(message ?: "", false)
     }
 
     override fun showError(message: String?) {
