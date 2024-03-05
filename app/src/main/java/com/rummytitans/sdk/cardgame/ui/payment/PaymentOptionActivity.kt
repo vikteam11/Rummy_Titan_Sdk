@@ -325,7 +325,8 @@ class PaymentOptionActivity : BaseActivity(), PaymentOptionNavigator, BottomShee
             Intent(this, AddCardActivity::class.java)
                 .putExtra(COMING_FOR, comingFor)
                 .putExtra(MyConstants.INTENT_PASS_AMOUNT, viewModel.amount.get())
-                .putExtra(MyConstants.INTENT_PASS_JUSPAY, viewModel.mGateWayResponse.value?.jusPayData),
+                .putExtra(MyConstants.INTENT_PASS_JUSPAY, viewModel.mGateWayResponse.value?.jusPayData)
+                .putExtra(MyConstants.INTENT_PASS_WEB_URL, viewModel.returnUrl),
             102
         )
     }

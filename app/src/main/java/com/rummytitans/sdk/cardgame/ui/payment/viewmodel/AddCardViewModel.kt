@@ -58,6 +58,8 @@ class AddCardViewModel @Inject constructor(
     val safeColor = prefs.safeColor
     val selectedColor = ObservableField(if (prefs.onSafePlay) safeColor else regularColor)
     var isNewCardSaved = false
+    var returnUrl = ""
+
     fun goBack() {
         navigator.goBack()
     }

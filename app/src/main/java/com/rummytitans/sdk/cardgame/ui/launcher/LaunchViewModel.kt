@@ -33,7 +33,6 @@ class LaunchViewModel @Inject constructor(
     var isFailed: ObservableInt = ObservableInt(0)
     var failedReason: MutableLiveData<Throwable> = MutableLiveData()
     var versionResp = MutableLiveData<VersionModel>()
-    val showGameAnimationLiveData = MutableLiveData<Boolean>()
     var name: String = ""
     var myDialog: MyDialog? = null
 

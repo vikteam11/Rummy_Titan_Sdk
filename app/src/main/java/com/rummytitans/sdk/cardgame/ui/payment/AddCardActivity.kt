@@ -29,6 +29,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.rummytitans.sdk.cardgame.juspay.PaymentListener
+import com.rummytitans.sdk.cardgame.ui.WebPaymentActivity
+import com.rummytitans.sdk.cardgame.utils.bottomsheets.LottieBottomSheetDialog
+import com.rummytitans.sdk.cardgame.utils.bottomsheets.models.BottomSheetStatusDataModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_rummy_add_card.*
@@ -172,6 +175,10 @@ class AddCardActivity : BaseActivity(), AddCardNavigator, PaymentListener {
     }
 
     private fun getPaymentInfo() {
+        intent?.getStringExtra(MyConstants.INTENT_PASS_WEB_URL)?.let {
+            viewModel.returnUrl = it
+        }
+
         (intent?.getSerializableExtra(MyConstants.INTENT_PASS_JUSPAY) as? NewPaymentGateWayModel.JusPayData)?.let {
             paymentHelper.initJuspay(it.CustomerId, it.OrderId, it.Token)
         }
@@ -182,6 +189,9 @@ class AddCardActivity : BaseActivity(), AddCardNavigator, PaymentListener {
             hyperInstance.onActivityResult(requestCode, resultCode, data!!)
         }
         super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 101 && resultCode == Activity.RESULT_OK) {
+            onPaymentSuccess()
+        }
     }
 
     private fun setupExpArray() {
@@ -312,6 +322,61 @@ class AddCardActivity : BaseActivity(), AddCardNavigator, PaymentListener {
      //   Toast.makeText(this, "Payment Success", Toast.LENGTH_LONG).show()
         setResult(Activity.RESULT_OK)
         finish()
+    }
+
+    override fun onUpiPaymentResponseReceive(paymentStatus: Int, reason: String?) {
+        val dataModel= BottomSheetStatusDataModel().also {
+            val (title,des,btnName)= when(paymentStatus){
+                JuspayPaymentHelper.PAYMENT_STATUS_FAILED-> {
+                    it.btnColorRes=R.color.black
+                    it.animationFileId = R.raw.withdrawal_failed_anim
+                    listOf(
+                        getStringResource(R.string.payment_failed),
+                        reason?:getStringResource(R.string.payment_failed_msg),
+                        getStringResource(R.string.try_again)
+                    )
+                }
+                JuspayPaymentHelper.PAYMENT_STATUS_PENDING-> {
+                    it.btnColorRes=R.color.yellow
+                    it.animationFileId = R.raw.transaction_pending_anim
+                    listOf(
+                        getStringResource(R.string.payment_pending),
+                        reason?:getStringResource(R.string.payment_pending_msg),
+                        getStringResource(R.string.try_again)
+                    )
+                }else-> {
+                    it.btnColorRes=R.color.alertGreen
+                    it.isSuccess=true
+                    it.animationFileId =R.raw.withdrawal_done_anim
+                    listOf(
+                        getStringResource(R.string.payment_success),
+                        getStringResource(R.string.payment_succcess_msg),
+                        getStringResource(R.string.done)
+                    )
+                }
+            }
+            it.title=title
+            it.description=des
+            it.positiveButtonName=btnName
+            it.allowCross=false
+        }
+
+        if(dataModel.isSuccess && !TextUtils.isEmpty(viewModel.returnUrl)) {
+            startActivityForResult(
+                Intent(this, WebPaymentActivity::class.java)
+                    .putExtra(MyConstants.INTENT_PASS_WEB_URL, viewModel.returnUrl)
+                    .putExtra(MyConstants.INTENT_PASS_SHOW_TOOLBAR, false)
+                    .putExtra(MyConstants.INTENT_PASS_WEB_TITLE, "Payment"), 101)
+        }else{
+            val dialog = LottieBottomSheetDialog(this, dataModel)
+            dialog.show()
+            dialog.setOnDismissListener {
+                if (dataModel.isSuccess)
+                    onPaymentSuccess()
+                else
+                    onPaymentFailure("")
+            }
+        }
     }
 
     override fun onPaymentFailure(reason: String) {

@@ -48,14 +48,9 @@ class SDKSplashActivity : AppCompatActivity(),
         window.transparentStatusBar()
         super.onCreate(savedInstanceState)
         AppsFlyerLib.getInstance().sendPushNotificationData(this)
-        viewModel = ViewModelProvider(
-            this
-        ).get(LaunchViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(LaunchViewModel::class.java)
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.activity_splash_sdk,null,false)
         setContentView(binding.root)
-        //FirebaseMessaging.getInstance().subscribeToTopic("global")
-         //For normally run SDK
-        //viewModel.prefs.gamePlayUrl= MyConstants.GAME_PLAY_URL
         fetchAdvertisingId()
         viewModel.navigator = this
         viewModel.myDialog= MyDialog(this)
@@ -64,19 +59,12 @@ class SDKSplashActivity : AppCompatActivity(),
             viewModel.prefs.firstOpen = false
         }
 
-        viewModel.showGameAnimationLiveData.observe(this) {
-            (application as? MainApplication)?.showGameAnimation = true
-        }
-
         viewModel.versionResp.observe(this) {
-            showLanguage(it)
+            redirectUser()
             viewModel.prefs.let { pref ->
                 pref.splashImageUrl = it.SplashImage
             }
         }
-
-
-       // FirebaseMessaging.getInstance().subscribeToTopic(getString(R.string.global))
 
         if (TextUtils.isEmpty(viewModel.prefs.androidId)) {
             Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)?.let {
@@ -102,24 +90,8 @@ class SDKSplashActivity : AppCompatActivity(),
 
     override fun onResume() {
         super.onResume()
-        Log.e("pkgname == ",packageName)
-       // if (packageName == "in.myteam11.store")
-            apiCall()
-        //else Toast.makeText(this, "Please use original ${getString(R.string.app_name)} App.", Toast.LENGTH_LONG).show()
+        apiCall()
     }
-
-    override fun onStart() {
-        super.onStart()
-       /* Firebase.dynamicLinks.getDynamicLink(intent)
-            .addOnSuccessListener(this) { pendingDynamicLinkData ->
-                pendingDynamicLinkData?.let {
-                    val deepLink = pendingDynamicLinkData.link
-                    val referCode = deepLink?.getQueryParameter("referCode")
-                    viewModel.prefs.referCode = referCode
-                }
-            }.addOnFailureListener(this) { e -> println("getDynamicLink:onFailure$e") }*/
-    }
-
     private fun fetchAdvertisingId() {
 
            val d= Observable.fromCallable {
@@ -136,101 +108,25 @@ class SDKSplashActivity : AppCompatActivity(),
                })
 
     }
-
-    //check received DeepLinks
-
-
     private fun apiCall() {
         viewModel.fetchVersion()
     }
-
-    private fun checkConditions(model: VersionModel) {
-//        model.IsAppUpdate=true
-//        model.ForceUpdate=false
-     //   model.showUpdateOnSplash = true
-     //   model.playStoreApkUpdateFrom = model.UPDATE_FROM_IN_APP_UPDATE
-//        model.UpdateType = APP_UPDATE_FULL_SCREEN
-       // model.DownLoadURl="https://a3.files.diawi.com/app-file/WkBqSj9nU9ldYvc2RMZ0.apk"
-        when {
-            model.IsAppUpdate -> {
-                if (!model.ForceUpdate){  // redirect only if force update not available
-                    if (!model.showUpdateOnSplash){ //redirect only if update on splash not allowed
-                        redirectUser()
-                        return
-                    }
-                }
-                if (redirectUserToHome(model)){
-                    redirectUser()
-                    return
-                }
-
-            }
-
-            else -> {
-                binding.root.postDelayed({
-                    redirectUser()
-                },3000)
-
-            }
-        }
-    }
-
-    /**redirect user for play store apk,
-     * 1.no data from playStore updates
-     * 2.not force update*/
-    private fun isAppUpdateAvailable(model: VersionModel):Boolean{
-        return model.IsAppUpdate && viewModel.prefs.isInAppAvailable
-    }
-
-    /**redirect user for play store apk,
-     * 1.no data from playStore updates
-     * 2.not force update*/
-    private fun redirectUserToHome(model: VersionModel):Boolean{
-        return if (BuildConfig.isPlayStoreApk==1){
-            !viewModel.prefs.isInAppAvailable
-        }else false
-    }
-
     private fun redirectUser(){
-        if (viewModel.prefs.loginCompleted) {
-            val loginModel: LoginResponse? = viewModel.gson.fromJson(
-                viewModel.prefs.loginResponse,
-                LoginResponse::class.java
-            )
-            viewModel.analyticsHelper.setUserID(loginModel?.UserId.toString())
-           /* val fireBaseIntent=checkFireBaseDeepLinks()
-            fireBaseIntent?.let {
-                startActivity(it)
-                viewModel.prefs.isOldUser = true
-                finish()
-                return
-            }*/
+        val loginModel: LoginResponse? = viewModel.gson.fromJson(
+            viewModel.prefs.loginResponse,
+            LoginResponse::class.java
+        )
+        viewModel.analyticsHelper.setUserID(loginModel?.UserId.toString())
 
-            val i = Intent(this, RummyMainActivity::class.java)
-            if (!TextUtils.isEmpty(viewModel.prefs.appsFlyerDeepLink)) {
-                i.putExtra("comingForGame", true)
-                viewModel.prefs.appsFlyerDeepLink = ""
-            }
-            startActivity(i)
-            viewModel.prefs.isOldUser = true
-            finish()
-        } else {
-            startActivity(Intent(this, RummyNewLoginActivity::class.java))
-            finish()
-            overridePendingTransition(0, 0)
-
+        val i = Intent(this, RummyMainActivity::class.java)
+        if (!TextUtils.isEmpty(viewModel.prefs.appsFlyerDeepLink)) {
+            i.putExtra("comingForGame", true)
+            i.putExtra("deepLink", intent.getStringExtra("deepLink"))
+            viewModel.prefs.appsFlyerDeepLink = ""
         }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == fromAppUpdateBottomSheet) {
-            redirectUser()
-        }
-    }
-
-    private fun showLanguage(model: VersionModel) {
-        checkConditions(model)
+        startActivity(i)
+        viewModel.prefs.isOldUser = true
+        finish()
     }
 
     override fun goBack() {
@@ -255,7 +151,7 @@ class SDKSplashActivity : AppCompatActivity(),
 
     override fun onBackPressed() {
         viewModel.versionResp.value?.let {
-            checkConditions(it)
+            redirectUser()
         }
         super.onBackPressed()
     }
