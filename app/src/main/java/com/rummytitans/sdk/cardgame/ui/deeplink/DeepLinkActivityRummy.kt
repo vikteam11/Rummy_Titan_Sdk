@@ -35,7 +35,7 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
 
     lateinit var viewModel: DeepLinkRummyViewModel
     lateinit var binding: ActivityDeepLinkRummyBinding
-
+    private var deepLinkUrlReceived: String = ""
     var comingFor = 0
     val MATCH = 1
     val CONTEST = 2
@@ -62,7 +62,7 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
                 if (model.playStoreApkUpdateFrom==model.UPDATE_FROM_APP_STORE)
                     sendToPlayStore(this,packageName)
                 else{
-                    // todo updateApp
+                    RummyTitanSDK.rummyCallback?.checkForUpdate()
                 }
                 finish()
             } else {
@@ -71,8 +71,8 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
         })
 
         if (intent.hasExtra("data")) {
-            val data = intent.getStringExtra("data")
-            redirection(getKeyValueOfQuery(data))
+            val data = intent.getStringExtra("data")?:""
+            checkForDeepLink(data)
         }
 
         binding.executePendingBindings()
@@ -80,11 +80,26 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-
         // On Android 12, Raise notification clicked event when Activity is already running in activity backstack
         if(intent?.getBooleanExtra("isFromClever",false) == true) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 deepLinkOnNewIntent(intent.extras)
+            }
+        }
+    }
+
+    private fun checkForDeepLink(link: String) {
+        if (link.isMyTeamDeeplink()) {
+            RummyTitanSDK.rummyCallback?.openDeeplink(link)
+            RummyTitanSDK.rummyCallback?.sdkFinish()
+            finish()
+
+        } else {
+              if (link.contains("?")) {
+                  val params = link.split("?")[1].substringBefore("&__sta_linkid")
+                redirection(getKeyValueOfQuery(params))
+            } else {
+                redirection(getKeyValueOfQuery(link))
             }
         }
     }
@@ -121,15 +136,15 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
             return
         }
         if (Intent.ACTION_VIEW == deepIntent?.action && null != deepIntent.data) {
-            val data = deepIntent.data?.query ?: deepIntent.data?.lastPathSegment ?: ""
-            redirection(getKeyValueOfQuery(data))
+            deepLinkUrlReceived = deepIntent.data.toString()
+            checkForDeepLink(deepLinkUrlReceived)
         }
 
         if (intent.hasExtra("deepLink")) {
             val deeplinkUrl = intent.getStringExtra("deepLink") ?: ""
+            deepLinkUrlReceived = deeplinkUrl
             if (deeplinkUrl.contains("?")) {
-                val params = deeplinkUrl.split("?")[1]
-                redirection(getKeyValueOfQuery(params))
+                checkForDeepLink(deeplinkUrl)
             }
         }
         if (intent.hasExtra("fireBaseDeeplink")) {
@@ -150,6 +165,7 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
         val pairs = query?.split("&")
         pairs?.forEach { pair ->
             if (pair.contains("=")) {
+
                 val split = pair.split("=")
                 if (split.size == 2) map[split[0]] = split[1]
                 else if (split.size == 1) map[split[0]] = ""
@@ -209,6 +225,12 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
                     "main" -> {
                         goToHome()
                     }
+
+                    "fantasy" -> {
+                       RummyTitanSDK.rummyCallback?.sdkFinish()
+                        finish()
+                    }
+
 
                     "games" -> {
                         goToHome()

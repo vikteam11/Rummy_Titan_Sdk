@@ -12,7 +12,6 @@ import com.rummytitans.sdk.cardgame.sdk_callbacks.AnalticsCallback
 import com.rummytitans.sdk.cardgame.sdk_callbacks.RummySdkOptions
 import com.rummytitans.sdk.cardgame.sdk_callbacks.RummyTitansCallback
 import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
-import com.rummytitans.sdk.cardgame.ui.SdkScreen
 import com.rummytitans.sdk.cardgame.ui.launcher.SDKSplashActivity
 import java.nio.charset.StandardCharsets
 
@@ -26,9 +25,10 @@ object RummyTitanSDK {
 
     fun initialize(context: Context) {
         appContext = context.applicationContext
+        MainApplication.appContext = context
     }
 
-    fun setCallback(callback: RummyTitansCallback,analticsCallback: AnalticsCallback) {
+    fun setCallback(callback: RummyTitansCallback, analticsCallback: AnalticsCallback) {
         rummyCallback = callback
         analytiCallback = analticsCallback
     }
@@ -37,15 +37,19 @@ object RummyTitanSDK {
         rummySdkOptions = options
     }
 
-    fun setUpdateInfo(context:Context,update: Boolean) {
+    fun setUpdateInfo(context: Context, update: Boolean) {
         SharedPreferenceStorageRummy(context).let { pref ->
-         pref.isInAppAvailable = update
+            pref.isInAppAvailable = update
         }
     }
 
     fun getOption():RummySdkOptions{
+        if (!(::appContext.isInitialized)){
+            appContext = MainApplication.appContext
+        }
         val pref=SharedPreferenceStorageRummy(appContext)
-        return Gson().fromJson(pref.sdkOptions,RummySdkOptions::class.java)
+        return Gson().fromJson(pref.sdkOptions, RummySdkOptions::class.java
+        )
     }
 
     fun startLibraryActivity() {
@@ -83,7 +87,7 @@ object RummyTitanSDK {
                 e.printStackTrace()
                 println("Error while parsing JSON: ${e.message}")
             }
-            pref.sdkOptions= Gson().toJson(rummySdkOptions)
+            pref.sdkOptions = Gson().toJson(rummySdkOptions)
             val intent = if (splashResponse?.isEmpty() == true) Intent(
                 context,
                 SDKSplashActivity::class.java

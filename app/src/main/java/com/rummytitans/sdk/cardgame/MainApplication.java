@@ -46,7 +46,7 @@ public class MainApplication extends Application implements LifecycleEventObserv
     public static boolean openGameAppFlyer = false;
     public boolean isAppBackgroud = false;
     public boolean isFromBackground = false;
-
+    public static Context appContext;
    /* @Override
     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
         //return DaggerAppComponent.builder().create(this);

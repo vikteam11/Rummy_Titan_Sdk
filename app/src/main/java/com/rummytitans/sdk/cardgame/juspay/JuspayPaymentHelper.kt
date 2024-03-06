@@ -103,6 +103,10 @@ class JuspayPaymentHelper(
                             val error = data.getBoolean("error")
                             val errorMessage = data.optString("errorMessage")
                             val status = data.optJSONObject("payload")?.optString("status")
+                            val lastVisitedUrl = data.optJSONObject("payload")
+                                ?.optJSONObject("otherInfo")
+                                ?.optJSONObject("realtime")
+                                ?.optString("lastVisitedUrl")?:""
                             listener.hideLoader()
                             var paymentErrorMessage=""
                             val paymentType = if (error){
@@ -121,10 +125,19 @@ class JuspayPaymentHelper(
                             else
                                 PAYMENT_STATUS_FAILED
 
-                            listener.onUpiPaymentResponseReceive(
-                                paymentType,
-                                paymentErrorMessage
-                            )
+                            if(lastVisitedUrl.contains("https://app.myteam11.com/payment-status")){
+                                if (!error && status == "CHARGED"){
+                                    listener.onPaymentSuccess()
+                                } else{
+                                    listener.onPaymentFailure(errorMessage)
+                                }
+                            }else{
+                                listener.onUpiPaymentResponseReceive(
+                                    paymentType,
+                                    paymentErrorMessage
+                                )
+                            }
+
                             paymentResultShowBottomSheet=""
                             /* if (!error && status == "CHARGED") listner.onPaymentSuccess()
                              else listner.onPaymentFailure(errorMessage)*/

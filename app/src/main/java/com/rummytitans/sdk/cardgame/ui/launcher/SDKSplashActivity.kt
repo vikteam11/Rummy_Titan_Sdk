@@ -121,9 +121,9 @@ class SDKSplashActivity : AppCompatActivity(),
         val i = Intent(this, RummyMainActivity::class.java)
         if (!TextUtils.isEmpty(viewModel.prefs.appsFlyerDeepLink)) {
             i.putExtra("comingForGame", true)
-            i.putExtra("deepLink", intent.getStringExtra("deepLink"))
             viewModel.prefs.appsFlyerDeepLink = ""
         }
+        i.putExtra("deepLink", intent.getStringExtra("deepLink"))
         startActivity(i)
         viewModel.prefs.isOldUser = true
         finish()
