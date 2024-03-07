@@ -293,7 +293,12 @@
                     app:addCashListener="@{()-> viewModel.addCashListener()}"
                     app:isDataLoading="@{viewModel.walletLoading}"
                     app:isGraphVisible="@{viewModel.isGraphVisible}"
-                    app:walletInfo="@{viewModel.walletInfo}" />
+                    app:walletInfo="@{viewModel.walletInfo}"
+                    app:depositBonus="@{viewModel.depositBonusVal}"
+                    app:gstBonus="@{viewModel.gstBonusVal}"
+                    app:isGstBonusShow="@{viewModel.isGstBonusShow}"
+                    app:conversionBonus="@{viewModel.conversionBonusVal}"
+                    />
             </LinearLayout>
         </FrameLayout>
 

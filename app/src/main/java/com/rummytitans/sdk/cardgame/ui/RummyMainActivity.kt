@@ -421,7 +421,11 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
     fun replaceFragment(fragment:BaseFragment){
         hideMiniWallet()
         viewModel.displayHome.set(fragment is FragmentHome)
-        showSupportIcon(fragment is FragmentWallet || fragment is RakeBackFragment || fragment is FragmentShare)
+        if(fragment is FragmentWallet || fragment is RakeBackFragment || fragment is FragmentShare)
+            showSupportIcon(true)
+        else
+            showSupportIcon(false)
+       // showSupportIcon(fragment is FragmentWallet || fragment is RakeBackFragment || fragment is FragmentShare)
         showReferIcon(false)
         mCurrentFragment = fragment
         supportFragmentManager.inTransaction {
@@ -653,6 +657,11 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
                     .putExtra(MyConstants.INTENT_PASS_WEB_TITLE,title )
             )
         }
+        if(model.walletType == 1 && viewModel.bonusSubList.size >=2){
+            viewModel.isGstBonusShow.set(!viewModel.isGstBonusShow.get())
+        }
     }
+
+
 
 }

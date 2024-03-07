@@ -5,6 +5,9 @@
     <data>
         <import type="android.view.View" />
         <import type="android.text.TextUtils"/>
+        <import type="com.rummytitans.sdk.cardgame.models.WalletInfoModel.WalletBonesModel"/>
+        <import type="androidx.databinding.ObservableBoolean"/>
+        <import type="androidx.databinding.ObservableField"/>
         <import type="com.rummytitans.sdk.cardgame.BuildConfig"/>
         
         <import type="android.graphics.Color" />
@@ -28,6 +31,20 @@
         <variable
             name="addCashListener"
             type="android.view.View.OnClickListener" />
+
+        <variable
+            name="depositBonus"
+            type="ObservableField&lt;WalletBonesModel&gt;" />
+        <variable
+            name="conversionBonus"
+            type="ObservableField&lt;WalletBonesModel&gt;" />
+        <variable
+            name="gstBonus"
+            type="ObservableField&lt;WalletBonesModel&gt;" />
+
+        <variable
+            name="isGstBonusShow"
+            type="ObservableBoolean" />
 
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -166,6 +183,193 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/piechart"
             tools:visibility="visible" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnGstBonus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="12dp"
+            app:cardElevation="4dp"
+            android:visibility="@{isGstBonusShow?View.VISIBLE:View.GONE}"
+            app:cardBackgroundColor="@color/RummyalertOrange"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvBones">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:backgroundTint="@color/rummy_black_3"
+                android:background="@drawable/bg_squre_8dp"
+                android:layout_marginTop="1dp"
+                android:padding="10dp">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.34"/>
+
+                <!-- Guideline 2: Divide the screen into thirds -->
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.68"/>
+
+                <ImageView
+                    android:id="@+id/imageView63"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/guideline1"
+                    app:layout_constraintStart_toStartOf="@id/guideline1"                                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_gst_plus" />
+
+                <ImageView
+                    android:id="@+id/imageView64"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/guideline2"
+                    app:layout_constraintStart_toStartOf="@id/guideline2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_gst_plus" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView63"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/rubik_regular"
+                        android:gravity="center"
+                        android:text="@{depositBonus.name}"
+                        android:textColor="@color/text_color2"
+                        android:textSize="9sp"
+                        android:maxLines="1"
+                        app:autoSizeTextType="uniform"
+                        app:autoSizePresetSizes="@array/text_sizes_10"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/rubik_medium"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:text="@{depositBonus.value.toString()}"
+                        android:textColor="@color/text_color8"
+                        android:textSize="14sp"
+                        android:maxLines="1"
+                        app:autoSizeTextType="uniform"
+                        app:autoSizePresetSizes="@array/text_sizes_14"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layDepositBonus"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/imageView64"
+                    android:gravity="center"
+                    app:layout_constraintStart_toEndOf="@+id/imageView63"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:fontFamily="@font/rubik_regular"
+                        android:text="@{gstBonus.name}"
+                        android:textColor="@color/text_color2"
+                        android:textSize="9sp"
+                        android:maxLines="1"
+                        app:autoSizeTextType="uniform"
+                        app:autoSizePresetSizes="@array/text_sizes_10"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/rubik_medium"
+                        android:textColor="@color/text_color8"
+                        android:textSize="14sp"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        app:autoSizeTextType="uniform"
+                        app:autoSizePresetSizes="@array/text_sizes_14"
+                        android:text="@{gstBonus.value.toString()}"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layConversionBonus"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_marginStart="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView64"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/rubik_regular"
+                        android:text="@{conversionBonus.name}"
+                        android:textColor="@color/text_color2"
+                        android:textSize="9sp"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        app:autoSizeTextType="uniform"
+                        app:autoSizePresetSizes="@array/text_sizes_10"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/rubik_medium"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:text="@{conversionBonus.value.toString()}"
+                        android:textColor="@color/text_color8"
+                        android:textSize="14sp"
+                        android:maxLines="1"
+                        app:autoSizeTextType="uniform"
+                        app:autoSizePresetSizes="@array/text_sizes_14"/>
+
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

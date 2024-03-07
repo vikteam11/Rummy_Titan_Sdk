@@ -51,6 +51,11 @@ class MainViewModel @Inject constructor(
         get() = _walletInfo
     var isGraphVisible = ObservableBoolean(false)
     var isMiniWalletOpen = ObservableBoolean(false)
+    var isGstBonusShow = ObservableBoolean(false)
+    var bonusSubList= arrayListOf<WalletInfoModel.WalletBonesModel>()
+    var depositBonusVal = ObservableField<WalletInfoModel.WalletBonesModel>()
+    var gstBonusVal = ObservableField<WalletInfoModel.WalletBonesModel>()
+    var conversionBonusVal = ObservableField<WalletInfoModel.WalletBonesModel>()
     init {
         fetchVerificationData()
     }
@@ -157,7 +162,29 @@ class MainViewModel @Inject constructor(
                         if (it.Response is WalletInfoModel) {
                             val apiData = it.Response as WalletInfoModel
 
-                            apiData.Balance?.BonusList?.iterator()?.let { iterator ->
+                            bonusSubList.clear()
+                            it.Response.Balance.BonusList?.iterator()?.let { iterator ->
+                                while (iterator.hasNext()) {
+                                    iterator.next().let { bonus ->
+                                        if(!bonus.value.contains("₹")){
+                                            bonus.value = "₹"+bonus.value
+                                        }
+                                        if(isGstBonusShow.get() && bonus.isDeposit){
+                                            bonus.isArrowUpDown = true
+                                        }
+                                        if (bonus.walletType == 3) {
+                                            bonusSubList.add(bonus)
+                                            iterator.remove()
+                                        }
+                                    }
+                                }
+                            }
+
+                            depositBonusVal.set(getBonusSubItem(0))
+                            gstBonusVal.set(getBonusSubItem(1))
+                            conversionBonusVal.set(getBonusSubItem(2))
+
+                           /* apiData.Balance?.BonusList?.iterator()?.let { iterator ->
                                 while (iterator.hasNext()) {
                                     iterator.next().let { bonus ->
                                         if(!bonus.value.contains("₹")){
@@ -171,7 +198,7 @@ class MainViewModel @Inject constructor(
                                         }
                                     }
                                 }
-                            }
+                            }*/
                          //   apiData.Offer = apiData.Offer.filter { it1 -> it1.IsShow }
                             _walletInfo.value = apiData
                         }
@@ -270,6 +297,12 @@ class MainViewModel @Inject constructor(
                     //navigator.showError(it.message)
                 }))
         )
+    }
+
+    private fun getBonusSubItem(pos:Int): WalletInfoModel.WalletBonesModel?{
+        return if(bonusSubList.size > pos){
+            bonusSubList[pos]
+        }else null
     }
 
 }
