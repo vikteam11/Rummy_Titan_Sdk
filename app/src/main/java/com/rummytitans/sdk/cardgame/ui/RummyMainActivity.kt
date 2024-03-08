@@ -52,6 +52,7 @@ import com.rummytitans.sdk.cardgame.utils.*
 import com.rummytitans.sdk.cardgame.utils.alertDialog.AlertdialogModel
 import com.rummytitans.sdk.cardgame.utils.bottomsheets.BottomSheetAlertDialog
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Locale
 import javax.inject.Inject
 
 
@@ -96,14 +97,13 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
         initFragments()
 
         //findViewById<View>(R.id.navigation_home).performClick()
+        viewModel.displayHome.set(true)
         replaceFragment(FragmentHome())
         handleDeepLink()
         handleTabs()
         viewModel.analyticsHelper.fireEvent(
             AnalyticsKey.Names.GameScreenLaunched
         )
-        viewModel.displayHome.set(true)
-
         initClicks()
         disableTooltipFromNavigation()
         viewModel.checkForActiveMatch()
@@ -124,18 +124,19 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
 
 
     private fun handleTabs(){
+
         intent.getStringExtra(MyConstants.INTENT_PASS_SELECT_TAB)?.let {
-            when(it){
+            when(it.toLowerCase(Locale.getDefault())){
                 "wallet"->{
-                    viewModel.displayHome.set(false)
+                    disPlayHome(false)
                     redirectToTab(R.id.navigation_wallet)
                 }
                 "refer"->{
-                    viewModel.displayHome.set(false)
+                    disPlayHome(false)
                     redirectToTab(R.id.navigation_refer)
                 }
                 "rakeback"->{
-                    viewModel.displayHome.set(false)
+                    disPlayHome(false)
                     redirectToTab(R.id.navigation_rakeback)
                 }
             }
@@ -147,19 +148,23 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
         if (intent.hasExtra("deepLink")){
             intent.getStringExtra("deepLink")?.let { deeplink->
                 if (deeplink.contains("screen=refer", true)) {
-                    viewModel.displayHome.set(false)
+                    disPlayHome(false)
                     redirectToTab(R.id.navigation_refer)
                 } else  if (deeplink.contains("screen=wallet", true)) {
-                    viewModel.displayHome.set(false)
+                    disPlayHome(false)
                     redirectToTab(R.id.navigation_wallet)
                 } else  if (deeplink.contains("screen=rakeback", true)) {
-                    viewModel.displayHome.set(false)
-                   redirectToTab(R.id.navigation_rakeback)
+                    disPlayHome(false)
+                    redirectToTab(R.id.navigation_rakeback)
                 } else {
                     startDeepLinkActivity(deeplink)
                 }
             }
         }
+    }
+
+    fun disPlayHome(flag:Boolean){
+        viewModel.displayHome.set(flag)
     }
 
     private fun disableTooltipFromNavigation() {
