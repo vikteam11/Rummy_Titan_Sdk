@@ -18,14 +18,13 @@ import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.rummytitans.sdk.cardgame.MainApplication
 import com.rummytitans.sdk.cardgame.RummyTitanSDK
-import com.rummytitans.sdk.cardgame.di.anotation.RummySdk
 import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 @HiltViewModel
-class LaunchViewModel @Inject constructor(
+class RummyLaunchViewModel @Inject constructor(
     val prefs: SharedPreferenceStorageRummy,
     val gson: Gson, val connectionDetector: ConnectionDetector, var analyticsHelper: AnalyticsHelper
 ) : BaseViewModel<BaseNavigator>() {

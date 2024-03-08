@@ -40,10 +40,10 @@
 -keep class io.hansel.**{*;}
 -keep class * implements io.hansel.**.* {*;}
 -keep class * extends io.hansel.**.* {*;}
-
-
 -dontwarn org.cocos2dx.**
-
+-keep class androidx.lifecycle.ViewModel { *; }
+-keepclassmembers class androidx.lifecycle.LiveData { *; }
+-keepclassmembers class androidx.lifecycle.MutableLiveData { *; }
 -dontwarn kotlin.time.jdk8.**
 
 

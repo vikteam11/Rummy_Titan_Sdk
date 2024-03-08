@@ -130,7 +130,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:setSrcCompact="@{@drawable/ic_arrow_up}"
-                        app:tint="@color/alertRed" />
+                        app:tint="@color/silver_two" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

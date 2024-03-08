@@ -36,7 +36,7 @@ class SDKSplashActivity : AppCompatActivity(),
     BaseNavigator {
     lateinit var binding: ActivitySplashSdkBinding
 
-    lateinit var viewModel: LaunchViewModel
+    lateinit var viewModel: RummyLaunchViewModel
     private val fromAppUpdateBottomSheet: Int = 1221
 
     override fun onNewIntent(intent: Intent?) {
@@ -48,7 +48,7 @@ class SDKSplashActivity : AppCompatActivity(),
         window.transparentStatusBar()
         super.onCreate(savedInstanceState)
         AppsFlyerLib.getInstance().sendPushNotificationData(this)
-        viewModel = ViewModelProvider(this).get(LaunchViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(RummyLaunchViewModel::class.java)
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.activity_splash_sdk,null,false)
         setContentView(binding.root)
         fetchAdvertisingId()
@@ -60,6 +60,7 @@ class SDKSplashActivity : AppCompatActivity(),
         }
 
         viewModel.versionResp.observe(this) {
+            Log.e("versionResp","inside")
             redirectUser()
             viewModel.prefs.let { pref ->
                 pref.splashImageUrl = it.SplashImage
@@ -109,6 +110,7 @@ class SDKSplashActivity : AppCompatActivity(),
 
     }
     private fun apiCall() {
+        Log.e("apiCall","inside")
         viewModel.fetchVersion()
     }
     private fun redirectUser(){
@@ -117,7 +119,7 @@ class SDKSplashActivity : AppCompatActivity(),
             LoginResponse::class.java
         )
         viewModel.analyticsHelper.setUserID(loginModel?.UserId.toString())
-
+        Log.e("redirectUser","inside")
         val i = Intent(this, RummyMainActivity::class.java)
         if (!TextUtils.isEmpty(viewModel.prefs.appsFlyerDeepLink)) {
             i.putExtra("comingForGame", true)

@@ -107,6 +107,7 @@ object AnalyticsKey {
         const val Language = "Language"
         const val MobileNo = "MobileNo"
         const val OTP = "OTP"
+        const val GameID = "GameID"
         const val ApiFailedMessage = "ApiFailedMessage"
         const val ReferCode = "ReferCode"
         const val UserID = "UserID"
@@ -159,6 +160,7 @@ object AnalyticsKey {
     object Values {
         const val ReferCode = "ReferCode"
         const val SendOTP = "SendOTP"
+        const val GameTicketsRedeemClicked = "GameTicketsRedeemClicked"
         const val ReSendOTP = "ReSendOTP"
         const val VerifyOTP = "VerifyOTP"
         const val ForgetPassword = "ForgetPassword"

@@ -10,9 +10,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.rummytitans.sdk.cardgame.RummyTitanSDK
+import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
 import com.rummytitans.sdk.cardgame.di.anotation.RummySdk
 import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.utils.locationservices.uiModules.CurrentLocationBaseActivity
@@ -81,6 +83,15 @@ class GamesTicketActivity : CurrentLocationBaseActivity(), GameTicketNavigator {
     }
 
     override fun onTicketRedeem(model: GameTicketModel.TicketsItemModel) {
+        mViewModel.analyticsHelper.fireEvent(
+            AnalyticsKey.Names.ButtonClick, bundleOf(
+                AnalyticsKey.Keys.ButtonName to AnalyticsKey.Values.GameTicketsRedeemClicked,
+                AnalyticsKey.Keys.GameID to model.gameId,
+                AnalyticsKey.Keys.GameTicketId to model.iD,
+                AnalyticsKey.Keys.GameName to model.name,
+                AnalyticsKey.Keys.Screen to AnalyticsKey.Values.GameTickets
+            )
+        )
         setResult(MyConstants.GAME_RELOAD)
         finish()
        /* if (model.gameId == 0) {
