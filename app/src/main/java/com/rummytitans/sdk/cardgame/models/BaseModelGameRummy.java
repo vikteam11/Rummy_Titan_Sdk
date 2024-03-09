@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class BaseModelGame<T> implements Serializable {
+public class BaseModelGameRummy<T> implements Serializable {
     public String Message;
     public boolean TokenExpire;
     public boolean Status;
@@ -14,7 +14,7 @@ public class BaseModelGame<T> implements Serializable {
     public boolean IsAutoScrollHeader;
     public long ScrollTime = 0L;
 
-    public BaseModelGame() {
+    public BaseModelGameRummy() {
 
     }
 

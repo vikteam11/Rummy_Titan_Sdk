@@ -3,10 +3,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rummytitans.sdk.cardgame.databinding.ItemRakebackBinding
-import com.rummytitans.sdk.cardgame.models.RakeBackDetailModel
+import com.rummytitans.sdk.cardgame.models.RakeBackDetailModelRummy
 
 
-class RakeBackHistoryAdapter(private var data: MutableList<RakeBackDetailModel.RakeBackHistoryModel>) : RecyclerView.Adapter<RakeBackHistoryAdapter.ViewHolder>() {
+class RakeBackHistoryAdapter(private var data: MutableList<RakeBackDetailModelRummy.RakeBackHistoryModel>) : RecyclerView.Adapter<RakeBackHistoryAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemRakebackBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -21,7 +21,7 @@ class RakeBackHistoryAdapter(private var data: MutableList<RakeBackDetailModel.R
         return data.size
     }
 
-    fun updateData(list: MutableList<RakeBackDetailModel.RakeBackHistoryModel>){
+    fun updateData(list: MutableList<RakeBackDetailModelRummy.RakeBackHistoryModel>){
         data= list
         notifyItemRangeChanged(0,data.size)
     }

@@ -11,7 +11,7 @@ import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
 import com.rummytitans.sdk.cardgame.api.APIInterface
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
-import com.rummytitans.sdk.cardgame.models.RakeBackDetailModel
+import com.rummytitans.sdk.cardgame.models.RakeBackDetailModelRummy
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
 import com.rummytitans.sdk.cardgame.utils.ConnectionDetector
 import com.rummytitans.sdk.cardgame.widget.MyDialog
@@ -33,8 +33,8 @@ class RakeBackViewModel @Inject constructor(
     val historyAvailable = ObservableBoolean(false)
     var myDialog: MyDialog? = null
 
-    private val _rakeBackDetail = MutableLiveData<RakeBackDetailModel>()
-    val rakeBackDetail: LiveData<RakeBackDetailModel> = _rakeBackDetail
+    private val _rakeBackDetail = MutableLiveData<RakeBackDetailModelRummy>()
+    val rakeBackDetail: LiveData<RakeBackDetailModelRummy> = _rakeBackDetail
 
     fun fetchRakeBackDetail(dataRefresh:Boolean=false) {
         if (!connectionDetector.isConnected) {

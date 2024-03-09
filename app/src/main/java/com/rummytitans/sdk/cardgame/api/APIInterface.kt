@@ -748,7 +748,7 @@ interface APIInterface {
         @Header(USER_ID) userId: String,
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
-    ): Single<com.rummytitans.sdk.cardgame.models.BaseModelGame<com.rummytitans.sdk.cardgame.models.RakeBackDetailModel>>
+    ): Single<BaseModelGameRummy<RakeBackDetailModelRummy>>
 
     @POST("v2/rakeback/reedem")
     fun redeemRakeBack(
@@ -756,7 +756,7 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Body json :JsonObject
-    ): Single<com.rummytitans.sdk.cardgame.models.BaseModelGame<Any>>
+    ): Single<BaseModelGameRummy<Any>>
 
     @FormUrlEncoded
     @POST("/users/save-friends")
@@ -766,7 +766,7 @@ interface APIInterface {
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Field(FRIENDS_DATA) list: String,
         @Header("DeviceID") devideId: String
-    ): Single<com.rummytitans.sdk.cardgame.models.SavedContactModel>
+    ): Single<SavedContactModel>
 
     @GET("v2/games/refer-list")
     fun getReferList(
@@ -788,7 +788,7 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Header("DeviceID") devideId: String
-    ): Single<com.rummytitans.sdk.cardgame.models.MyContactsResponseModel>
+    ): Single<MyContactsResponseModel>
 
     @GET("games/v1/wallet/details")
     fun getWalletDetails(
@@ -803,7 +803,7 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Body map:JsonObject
-    ): Single<com.rummytitans.sdk.cardgame.models.NewPaymentGateWayModel>
+    ): Single<NewPaymentGateWayModel>
 
     @GET("transaction/v2/account-balance")
     fun getWalletIno(
@@ -829,7 +829,7 @@ interface APIInterface {
     ): Single<BaseModelRummy<AddCashOfferModel>>
 
     @GET("v1/myteam11/banners")
-    fun getHeaders(): Single<com.rummytitans.sdk.cardgame.models.HeaderBaseResponse>
+    fun getHeaders(): Single<HeaderBaseResponse>
     @GET
     fun getCashBonusList(
         @Url url: String,

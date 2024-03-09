@@ -6,7 +6,7 @@
     <data>
         <import type="android.view.View" />
         <variable name="model"
-            type="com.rummytitans.sdk.cardgame.models.RakeBackDetailModel.RakeBackHistoryModel"
+            type="com.rummytitans.sdk.cardgame.models.RakeBackDetailModelRummy.RakeBackHistoryModel"
             />
     </data>
 
