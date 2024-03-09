@@ -15,7 +15,7 @@ import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
 import com.rummytitans.sdk.cardgame.api.APIInterface
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.sdk.cardgame.models.AddressKycContentModel
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.models.VerificationOptionModel
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
 import com.rummytitans.sdk.cardgame.ui.verifications.AddressVerificationNavigator
@@ -41,7 +41,7 @@ class AddressVerificationViewModel @Inject constructor(
     val apiInterface: APIInterface,
     val connectionDetector: ConnectionDetector, var analyticsHelper: AnalyticsHelper
 ) : BaseViewModel<AddressVerificationNavigator>() {
-    val loginResponse: LoginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+    val loginResponse: LoginResponseRummy = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
     var myDialog: MyDialog? = null
     var isProgressLoading = ObservableBoolean(false)
     var url = ""

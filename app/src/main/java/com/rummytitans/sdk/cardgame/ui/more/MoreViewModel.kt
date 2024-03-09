@@ -3,8 +3,8 @@ package com.rummytitans.sdk.cardgame.ui.more
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.sdk.cardgame.api.APIInterface
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
-import com.rummytitans.sdk.cardgame.models.LoginResponse
-import com.rummytitans.sdk.cardgame.models.VersionModel
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
+import com.rummytitans.sdk.cardgame.models.VersionModelRummy
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
 import com.rummytitans.sdk.cardgame.utils.ConnectionDetector
 import com.rummytitans.sdk.cardgame.utils.WebViewUrls
@@ -21,9 +21,9 @@ class MoreViewModel @Inject constructor(
     val connectionDetector: ConnectionDetector, val analyticsHelper: AnalyticsHelper
 ) : BaseViewModel<MoreNavigator>() {
 
-    val loginResponse: LoginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
-    var versionResponse: VersionModel =
-        gson.fromJson(prefs.splashResponse, VersionModel::class.java)
+    val loginResponse: LoginResponseRummy = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
+    var versionResponse: VersionModelRummy =
+        gson.fromJson(prefs.splashResponse, VersionModelRummy::class.java)
 
     var regularColor = prefs.regularColor
     var safeColor = prefs.safeColor
@@ -32,7 +32,7 @@ class MoreViewModel @Inject constructor(
 
     fun logout() {
         logoutStatus(apiInterface, loginResponse.UserId, prefs.androidId ?: "", "0")
-        prefs.loginResponse = gson.toJson(LoginResponse())
+        prefs.loginResponse = gson.toJson(LoginResponseRummy())
         prefs.loginCompleted = false
         navigator.logoutUser()
 

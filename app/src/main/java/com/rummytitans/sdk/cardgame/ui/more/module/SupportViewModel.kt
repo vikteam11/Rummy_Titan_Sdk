@@ -5,7 +5,7 @@ import com.rummytitans.sdk.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.sdk.cardgame.api.APIInterface
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.sdk.cardgame.models.HelpDeskModel
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
 import com.rummytitans.sdk.cardgame.ui.more.SupportClick
 import com.rummytitans.sdk.cardgame.utils.ConnectionDetector
@@ -24,7 +24,7 @@ class SupportViewModel @Inject constructor(
     val loginResponse = prefs.loginResponse.let {
         try {
             if (TextUtils.isEmpty(it)) getNotLoginUser()
-            else gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+            else gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
         } catch (e: Exception) {
             getNotLoginUser()
         }

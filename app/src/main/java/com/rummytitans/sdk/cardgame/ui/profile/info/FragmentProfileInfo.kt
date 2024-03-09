@@ -2,11 +2,10 @@ package com.rummytitans.sdk.cardgame.ui.profile.info
 
 import com.rummytitans.sdk.cardgame.R
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.base.BaseFragment
 import com.rummytitans.sdk.cardgame.ui.home.MainNavigationFragment
-import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
 import com.rummytitans.sdk.cardgame.ui.profile.info.viewmodel.ProfileInfoViewModel
 import com.rummytitans.sdk.cardgame.ui.profile.updatePhone.UpdatePhoneActivity
 import com.rummytitans.sdk.cardgame.utils.inTransaction
@@ -38,7 +37,6 @@ import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
 import kotlinx.android.synthetic.main.fragment_profile_info_rummy.*
 import kotlinx.android.synthetic.main.fragment_profile_info_rummy.editDOB
 import java.util.*
-import javax.inject.Inject
 
 class FragmentProfileInfo : BaseFragment(),
     BaseNavigator, DBUpdateNavigortor {
@@ -326,7 +324,7 @@ class FragmentProfileInfo : BaseFragment(),
 
 interface DBUpdateNavigortor {
     fun updateProfileDataSuccess(successMessage: String){}
-    fun saveToDB(loginResponse: LoginResponse?) {}
+    fun saveToDB(loginResponse: LoginResponseRummy?) {}
     fun onEditMobileClick() {}
     fun onSuccesTeamUpdate(msg: String) {}
 }

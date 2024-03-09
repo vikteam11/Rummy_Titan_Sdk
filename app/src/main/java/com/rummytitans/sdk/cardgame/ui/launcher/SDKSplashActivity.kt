@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.provider.Settings
 import android.text.TextUtils
 import android.util.Log
+import androidx.annotation.Keep
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
@@ -20,8 +21,7 @@ import com.rummytitans.sdk.cardgame.*
 //import com.google.firebase.ktx.Firebase
 //import com.google.firebase.messaging.FirebaseMessaging
 import com.rummytitans.sdk.cardgame.databinding.ActivitySplashSdkBinding
-import com.rummytitans.sdk.cardgame.models.LoginResponse
-import com.rummytitans.sdk.cardgame.models.VersionModel
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
 import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
 import com.rummytitans.sdk.cardgame.utils.*
@@ -31,6 +31,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.dialog_internet_rummy.*
 
+@Keep
 @AndroidEntryPoint
 class SDKSplashActivity : AppCompatActivity(),
     BaseNavigator {
@@ -59,8 +60,7 @@ class SDKSplashActivity : AppCompatActivity(),
             viewModel.prefs.firstOpen = false
         }
 
-        viewModel.versionResp.observe(this) {
-            Log.e("versionResp","inside")
+        viewModel.versionResponse.observe(this) {
             redirectUser()
             viewModel.prefs.let { pref ->
                 pref.splashImageUrl = it.SplashImage
@@ -110,16 +110,14 @@ class SDKSplashActivity : AppCompatActivity(),
 
     }
     private fun apiCall() {
-        Log.e("apiCall","inside")
         viewModel.fetchVersion()
     }
     private fun redirectUser(){
-        val loginModel: LoginResponse? = viewModel.gson.fromJson(
+        val loginModel: LoginResponseRummy? = viewModel.gson.fromJson(
             viewModel.prefs.loginResponse,
-            LoginResponse::class.java
+            LoginResponseRummy::class.java
         )
         viewModel.analyticsHelper.setUserID(loginModel?.UserId.toString())
-        Log.e("redirectUser","inside")
         val i = Intent(this, RummyMainActivity::class.java)
         if (!TextUtils.isEmpty(viewModel.prefs.appsFlyerDeepLink)) {
             i.putExtra("comingForGame", true)
@@ -152,7 +150,7 @@ class SDKSplashActivity : AppCompatActivity(),
     }
 
     override fun onBackPressed() {
-        viewModel.versionResp.value?.let {
+        viewModel.versionResponse.value?.let {
             redirectUser()
         }
         super.onBackPressed()

@@ -8,7 +8,7 @@ import androidx.annotation.WorkerThread
 import androidx.core.content.edit
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.utils.MyConstants
 import com.rummytitans.sdk.cardgame.utils.MyConstants.FULL_TIME_TYPE
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -306,31 +306,31 @@ class SharedPreferenceStorageRummy @Inject constructor(@ApplicationContext conte
     override var instanceId by StringPreference(prefs, PREF_INSTANCE_ID, "")
     var notificationReadIdsList: String
         get(){
-            val loginUser = Gson().fromJson(loginResponse, LoginResponse::class.java)
+            val loginUser = Gson().fromJson(loginResponse, LoginResponseRummy::class.java)
             return prefs.getString("READ_IDS_${loginUser.UserId}","")?:""
         }
         set(value) {
-            val loginUser = Gson().fromJson(loginResponse, LoginResponse::class.java)
+            val loginUser = Gson().fromJson(loginResponse, LoginResponseRummy::class.java)
             prefs.edit().putString("READ_IDS_${loginUser.UserId}", value).apply()
         }
 
     var notificationKey: String
         get(){
-            val loginUser = Gson().fromJson(loginResponse, LoginResponse::class.java)
+            val loginUser = Gson().fromJson(loginResponse, LoginResponseRummy::class.java)
             return prefs.getString("NOT_KEY_${loginUser.UserId}","0")?:"0"
         }
         set(value) {
-            val loginUser = Gson().fromJson(loginResponse, LoginResponse::class.java)
+            val loginUser = Gson().fromJson(loginResponse, LoginResponseRummy::class.java)
             prefs.edit().putString("NOT_KEY_${loginUser.UserId}", value).apply()
         }
 
     var latestNotificationAvailable: Boolean
         get(){
-            val loginUser = Gson().fromJson(loginResponse, LoginResponse::class.java)
+            val loginUser = Gson().fromJson(loginResponse, LoginResponseRummy::class.java)
             return prefs.getBoolean("UnRead_NOT${loginUser.UserId}",false)?:false
         }
         set(value) {
-            val loginUser = Gson().fromJson(loginResponse, LoginResponse::class.java)
+            val loginUser = Gson().fromJson(loginResponse, LoginResponseRummy::class.java)
             prefs.edit().putBoolean("UnRead_NOT${loginUser.UserId}", value).apply()
         }
 

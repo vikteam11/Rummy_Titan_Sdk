@@ -4,7 +4,7 @@ import com.rummytitans.sdk.cardgame.BuildConfig
 import com.rummytitans.sdk.cardgame.R
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.sdk.cardgame.databinding.ActivityRummyWebchatBinding
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.utils.*
 import android.content.Intent
 import android.net.Uri
@@ -29,7 +29,7 @@ class WebChatActivity : AppCompatActivity() {
         binding.icBack.setOnClickListener { onBackPressed() }
 
         val loginResponse = SharedPreferenceStorageRummy(this).let {
-            Gson().fromJson(it.loginResponse, LoginResponse::class.java)
+            Gson().fromJson(it.loginResponse, LoginResponseRummy::class.java)
         }
 
         val params = try {

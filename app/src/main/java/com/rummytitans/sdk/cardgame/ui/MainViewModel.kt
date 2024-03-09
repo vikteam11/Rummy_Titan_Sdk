@@ -39,8 +39,8 @@ class MainViewModel @Inject constructor(
     val balance = ObservableField("")
     val gameTicket = ObservableInt(0)
     val userAvtar = ObservableInt(MyConstants.DefaultAvatarID)
-    val loginResponse: LoginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
-    var versionResp: VersionModel = gson.fromJson(prefs.splashResponse, VersionModel::class.java)
+    val loginResponse: LoginResponseRummy = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
+    var versionResp: VersionModelRummy = gson.fromJson(prefs.splashResponse, VersionModelRummy::class.java)
     val displayHome = ObservableBoolean(false)
     var isAddressVerified = true
     var walletLoading = ObservableBoolean(false)
@@ -280,7 +280,7 @@ class MainViewModel @Inject constructor(
                     isLoading.set(false)
                     if (it.TokenExpire) {
                         logoutStatus(apis, loginResponse.UserId, prefs.androidId ?: "", "0")
-                        prefs.loginResponse = gson.toJson(LoginResponse())
+                        prefs.loginResponse = gson.toJson(LoginResponseRummy())
                         prefs.loginCompleted = false
                         navigator.logoutUser()
                     }

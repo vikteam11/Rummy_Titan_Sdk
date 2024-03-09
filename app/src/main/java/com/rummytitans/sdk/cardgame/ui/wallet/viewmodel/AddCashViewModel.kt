@@ -3,7 +3,6 @@ package com.rummytitans.sdk.cardgame.ui.wallet.viewmodel
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.sdk.cardgame.api.APIInterface
 import com.rummytitans.sdk.cardgame.api.APIInterface.Companion.LOCATION_COORDINATE
-import com.rummytitans.sdk.cardgame.api.APIInterface.Companion.LOCATION_STATE
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.sdk.cardgame.models.*
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
@@ -19,7 +18,6 @@ import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.rummytitans.sdk.cardgame.R
-import com.rummytitans.sdk.cardgame.models.*
 import com.rummytitans.sdk.cardgame.utils.setAddMoreGatewayItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -39,7 +37,7 @@ class AddCashViewModel @Inject constructor(
     BaseViewModel<AddCashNavigator>() {
     val currentBalance = ObservableField(0.0)
     val addCashAmmount = ObservableField<Double>(MyConstants.DEFAULT_ADD_CASH_AMOUNT)
-    var loginResponse: LoginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+    var loginResponse: LoginResponseRummy = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
     var isLoading = ObservableBoolean(false)
     var myDialog: MyDialog? = null
     var isRedeemCoupon = ObservableBoolean(false)
@@ -144,7 +142,7 @@ class AddCashViewModel @Inject constructor(
                     isLoading.set(false)
                     if (it.TokenExpire) {
                         logoutStatus(apis, loginResponse.UserId, prefs.androidId ?: "", "0")
-                        prefs.loginResponse = gson.toJson(LoginResponse())
+                        prefs.loginResponse = gson.toJson(LoginResponseRummy())
                         prefs.loginCompleted = false
                         navigator.logoutUser()
                     }
@@ -193,7 +191,7 @@ class AddCashViewModel @Inject constructor(
                 .subscribe({
                     if (it.TokenExpire) {
                         logoutStatus(apis, loginResponse.UserId, prefs.androidId ?: "", "0")
-                        prefs.loginResponse = gson.toJson(LoginResponse())
+                        prefs.loginResponse = gson.toJson(LoginResponseRummy())
                         prefs.loginCompleted = false
                         navigator.logoutUser()
                     }
@@ -248,7 +246,7 @@ class AddCashViewModel @Inject constructor(
                     isLoading.set(false)
                     if (it.TokenExpire) {
                         logoutStatus(apis, loginResponse.UserId, prefs.androidId ?: "", "0")
-                        prefs.loginResponse = gson.toJson(LoginResponse())
+                        prefs.loginResponse = gson.toJson(LoginResponseRummy())
                         prefs.loginCompleted = false
                         navigator.logoutUser()
                     }
@@ -302,7 +300,7 @@ class AddCashViewModel @Inject constructor(
                     }
                     if (it.TokenExpire) {
                         logoutStatus(apis, loginResponse.UserId, prefs.androidId ?: "", "0")
-                        prefs.loginResponse = gson.toJson(LoginResponse())
+                        prefs.loginResponse = gson.toJson(LoginResponseRummy())
                         prefs.loginCompleted = false
                         navigator.logoutUser()
                     }
@@ -351,7 +349,7 @@ class AddCashViewModel @Inject constructor(
                     isLoading.set(false)
                     if (it.TokenExpire) {
                         logoutStatus(apis, loginResponse.UserId, prefs.androidId ?: "", "0")
-                        prefs.loginResponse = gson.toJson(LoginResponse())
+                        prefs.loginResponse = gson.toJson(LoginResponseRummy())
                         prefs.loginCompleted = false
                         navigator.logoutUser()
                     }

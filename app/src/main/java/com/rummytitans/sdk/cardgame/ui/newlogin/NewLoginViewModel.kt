@@ -14,8 +14,8 @@ import com.rummytitans.sdk.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
 import com.rummytitans.sdk.cardgame.api.APIInterface
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
-import com.rummytitans.sdk.cardgame.models.BaseModel
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.BaseModelRummy
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
 import com.rummytitans.sdk.cardgame.utils.AnalyticsConstants
 import com.rummytitans.sdk.cardgame.utils.AnalyticsEventsKeys
@@ -55,7 +55,7 @@ class NewLoginViewModel @Inject constructor(
     var emailTextArray = ArrayList<String>()
     var phoneTextArray = ArrayList<String>()
     var colorArray = ArrayList<Int>()
-    var loginModel: LoginResponse? = null
+    var loginModel: LoginResponseRummy? = null
     val confirmByUser = ObservableBoolean(false)
 
     var regularColor = prefs.regularColor
@@ -140,7 +140,7 @@ class NewLoginViewModel @Inject constructor(
             ), {
                 prefs.referCode=""
                 prefs.loginType = "MOBILE"
-                loginModel = gson.fromJson(gson.toJson(it.Response), LoginResponse::class.java)
+                loginModel = gson.fromJson(gson.toJson(it.Response), LoginResponseRummy::class.java)
                 fireEvent(loginModel, it.IsRegister)
                 verificationCheckup(it)
             })
@@ -160,7 +160,7 @@ class NewLoginViewModel @Inject constructor(
                 prefs.advertisingId?:"", appsFlyerId
             ), {
                 prefs.loginType = "EMAIL"
-                loginModel = gson.fromJson(gson.toJson(it.Response), LoginResponse::class.java)
+                loginModel = gson.fromJson(gson.toJson(it.Response), LoginResponseRummy::class.java)
                 loginModel?.apply {
                     if (isTwo) {
                         mobileNumber.set(Mobile)
@@ -180,7 +180,7 @@ class NewLoginViewModel @Inject constructor(
             })
     }
 
-    fun fireEvent(loginModel: LoginResponse?, isRegister: Boolean) {
+    fun fireEvent(loginModel: LoginResponseRummy?, isRegister: Boolean) {
 
         AppsFlyerLib.getInstance().setCustomerUserId(loginModel?.UserId.toString())
 
@@ -249,9 +249,9 @@ class NewLoginViewModel @Inject constructor(
 
     }
 
-    private fun verificationCheckup(response: BaseModel<Any>) {
+    private fun verificationCheckup(response: BaseModelRummy<Any>) {
         navigator.showMessage(response.Message)
-        loginModel = gson.fromJson(gson.toJson(response.Response), LoginResponse::class.java)
+        loginModel = gson.fromJson(gson.toJson(response.Response), LoginResponseRummy::class.java)
         analyticsHelper.updateEndPointValue(loginModel)
         if (loginModel?.IsFairPlay == true)
             navigatorAct.showFairplayVoilationDialog(loginModel?.FairPlayMessage ?: "")

@@ -1,7 +1,6 @@
 package com.rummytitans.sdk.cardgame.sdk_callbacks
 
 import android.os.Bundle
-import com.rummytitans.sdk.cardgame.models.LoginResponse
 import org.json.JSONObject
 
 interface AnalticsCallback {

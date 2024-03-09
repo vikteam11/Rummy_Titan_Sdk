@@ -4,8 +4,8 @@ import com.rummytitans.sdk.cardgame.BuildConfig
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
-import com.rummytitans.sdk.cardgame.models.LoginResponse
-import com.rummytitans.sdk.cardgame.models.VersionModel
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
+import com.rummytitans.sdk.cardgame.models.VersionModelRummy
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
 import com.rummytitans.sdk.cardgame.utils.ConnectionDetector
 import com.rummytitans.sdk.cardgame.utils.MyConstants
@@ -23,6 +23,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
+@Keep
 @HiltViewModel
 class RummyLaunchViewModel @Inject constructor(
     val prefs: SharedPreferenceStorageRummy,
@@ -31,7 +32,7 @@ class RummyLaunchViewModel @Inject constructor(
 
     var isFailed: ObservableInt = ObservableInt(0)
     var failedReason: MutableLiveData<Throwable> = MutableLiveData()
-    var versionResp = MutableLiveData<VersionModel>()
+    var versionResponse = MutableLiveData<VersionModelRummy>()
     var name: String = ""
     var myDialog: MyDialog? = null
 
@@ -47,7 +48,7 @@ class RummyLaunchViewModel @Inject constructor(
         val loginResponse = prefs.loginResponse.let {
             try {
                 if (TextUtils.isEmpty(it)) getNotLoginUser()
-                else gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+                else gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
             } catch (e: Exception) {
                 getNotLoginUser()
             }
@@ -70,7 +71,7 @@ class RummyLaunchViewModel @Inject constructor(
                         prefs.appUrl =it.Response.BaseUrl
                         prefs.appUrl2 = it.Response.BaseUrl2
                         prefs.loginAuthTokan = it.Response.LoginAuthTokan ?: ""
-                        versionResp.value = it.Response
+                        versionResponse.value = it.Response
                         prefs.splashResponse = gson.toJson(it.Response)
                         MyConstants.LOGS_ENABLE = it.Response.isLogsEnable
                     } else {

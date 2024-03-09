@@ -6,7 +6,7 @@ import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
 import com.rummytitans.sdk.cardgame.api.APIInterface
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.sdk.cardgame.models.AvatarModel
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.models.WalletInfoModel
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
 import com.rummytitans.sdk.cardgame.utils.ConnectionDetector
@@ -35,7 +35,7 @@ class ProfileViewModel @Inject constructor(
     val apiInterface: APIInterface,
     val connectionDetector: ConnectionDetector, val analyticsHelper: AnalyticsHelper
 ) : BaseViewModel<BaseNavigator>() {
-    val loginResponse: LoginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+    val loginResponse: LoginResponseRummy = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
 
     var avatars = ArrayList<ProfileAvtarModel>()
     var avatarList = ObservableField<ArrayList<AvatarModel>>(arrayListOf())
@@ -177,7 +177,7 @@ class ProfileViewModel @Inject constructor(
     fun logout() {
         prefs.introductionCompleted=false
         prefs.loginCompleted = false
-        prefs.loginResponse = gson.toJson(LoginResponse())
+        prefs.loginResponse = gson.toJson(LoginResponseRummy())
         logoutStatus(apiInterface, loginResponse.UserId, prefs.androidId ?: "", "0")
     }
 

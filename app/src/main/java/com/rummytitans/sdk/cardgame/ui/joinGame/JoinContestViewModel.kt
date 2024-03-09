@@ -4,11 +4,10 @@ package com.rummytitans.sdk.cardgame.ui.joinGame
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.sdk.cardgame.api.APIInterface
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.models.JoinGameConfirmationModel
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
 import com.rummytitans.sdk.cardgame.utils.ConnectionDetector
-import com.rummytitans.sdk.cardgame.utils.MyConstants
 import com.rummytitans.sdk.cardgame.widget.MyDialog
 import androidx.core.os.bundleOf
 import androidx.databinding.ObservableBoolean
@@ -36,7 +35,7 @@ class JoinContestViewModel @Inject constructor(
     val analyticsHelper: AnalyticsHelper
 ) : BaseViewModel<JoinGameSheetNavigator>() {
     var myDialog: MyDialog? = null
-    val loginResponse: LoginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+    val loginResponse: LoginResponseRummy = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
     var isLoading = ObservableBoolean(false)
     val ispurchaseCoupon = ObservableBoolean(false)
     val mModiPassCount = ObservableInt()
@@ -71,7 +70,7 @@ class JoinContestViewModel @Inject constructor(
                     isLoading.set(false)
                     if (it.TokenExpire) {
                         logoutStatus(apis, loginResponse.UserId, prefs.androidId ?: "", "0")
-                        prefs.loginResponse = gson.toJson(LoginResponse())
+                        prefs.loginResponse = gson.toJson(LoginResponseRummy())
                         prefs.loginCompleted = false
                         navigator.logoutUser()
                     }
@@ -127,7 +126,7 @@ class JoinContestViewModel @Inject constructor(
                     isLoading.set(false)
                     if (it.TokenExpire) {
                         logoutStatus(apis, loginResponse.UserId, prefs.androidId ?: "", "0")
-                        prefs.loginResponse = gson.toJson(LoginResponse())
+                        prefs.loginResponse = gson.toJson(LoginResponseRummy())
                         prefs.loginCompleted = false
                         navigator.logoutUser()
                     }

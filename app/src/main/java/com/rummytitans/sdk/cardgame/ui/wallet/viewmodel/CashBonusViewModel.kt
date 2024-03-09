@@ -3,7 +3,7 @@ package com.rummytitans.sdk.cardgame.ui.wallet.viewmodel
 import com.rummytitans.sdk.cardgame.api.APIInterface
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.sdk.cardgame.models.CashBonusModel
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
 import com.rummytitans.sdk.cardgame.utils.ConnectionDetector
 import com.rummytitans.sdk.cardgame.widget.MyDialog
@@ -16,7 +16,6 @@ import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import retrofit2.http.Url
 import javax.inject.Inject
 @HiltViewModel
 class CashBonusViewModel @Inject constructor(
@@ -26,7 +25,7 @@ class CashBonusViewModel @Inject constructor(
     val connectionDetector: ConnectionDetector
 ) : BaseViewModel<BaseNavigator>() {
 
-    val loginResponse: LoginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+    val loginResponse: LoginResponseRummy = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
 
     private val data = MutableLiveData<ArrayList<CashBonusModel>>()
     val listmodel: LiveData<ArrayList<CashBonusModel>>

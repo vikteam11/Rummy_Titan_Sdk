@@ -1,15 +1,13 @@
 package com.rummytitans.sdk.cardgame.ui.refer.viewmodel
 
-import com.rummytitans.sdk.cardgame.R
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.sdk.cardgame.api.APIInterface
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.models.ReferModel
 import com.rummytitans.sdk.cardgame.models.TempContactModel
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
 import com.rummytitans.sdk.cardgame.utils.ConnectionDetector
-import com.rummytitans.sdk.cardgame.utils.copyCode
 import com.rummytitans.sdk.cardgame.widget.MyDialog
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
@@ -39,7 +37,7 @@ class ReferViewModel @Inject constructor(
     //show status bar if coming from home
     val showToolBar=ObservableBoolean(false)
     val data = MutableLiveData<ReferModel>()
-    val loginResponse: LoginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+    val loginResponse: LoginResponseRummy = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
 
     val listModel: LiveData<ReferModel>
         get() = data
@@ -93,7 +91,7 @@ class ReferViewModel @Inject constructor(
                     contactLoading.set(false)
                     if (it.TokenExpire) {
                         logoutStatus(apiInterface, loginResponse.UserId, prefs.androidId ?: "", "0")
-                        prefs.loginResponse = gson.toJson(LoginResponse())
+                        prefs.loginResponse = gson.toJson(LoginResponseRummy())
                         prefs.loginCompleted = false
                         navigator.logoutUser()
                     }
@@ -134,7 +132,7 @@ class ReferViewModel @Inject constructor(
                     isLoading.set(false)
                     if (it.TokenExpire) {
                         logoutStatus(apiInterface, loginResponse.UserId, prefs.androidId ?: "", "0")
-                        prefs.loginResponse = gson.toJson(LoginResponse())
+                        prefs.loginResponse = gson.toJson(LoginResponseRummy())
                         prefs.loginCompleted = false
                         navigator.logoutUser()
                     }
@@ -185,7 +183,7 @@ class ReferViewModel @Inject constructor(
                     isLoading.set(false)
                     if (it.TokenExpire) {
                         logoutStatus(apiInterface, loginResponse.UserId, prefs.androidId ?: "", "0")
-                        prefs.loginResponse = gson.toJson(LoginResponse())
+                        prefs.loginResponse = gson.toJson(LoginResponseRummy())
                         prefs.loginCompleted = false
                         navigator.logoutUser()
                     }

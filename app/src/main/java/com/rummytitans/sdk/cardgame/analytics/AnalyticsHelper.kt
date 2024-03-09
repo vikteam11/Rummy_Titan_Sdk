@@ -1,21 +1,15 @@
 package com.rummytitans.sdk.cardgame.analytics
 
-import com.rummytitans.sdk.cardgame.BuildConfig
-import com.rummytitans.sdk.cardgame.models.LoginResponse
-import com.rummytitans.sdk.cardgame.utils.AnalyticsConstants
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import com.appsflyer.AppsFlyerLib
 
 //import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
 import com.rummytitans.sdk.cardgame.RummyTitanSDK
 //import com.onesignal.OneSignal
 import org.json.JSONObject
-import java.util.*
 import javax.inject.Inject
-import kotlin.collections.HashMap
 
 class AnalyticsHelper @Inject constructor(var context: Context, var gson: Gson) {
 
@@ -33,11 +27,11 @@ class AnalyticsHelper @Inject constructor(var context: Context, var gson: Gson) 
         //fireLoginEvent(userID)
     }
 
-    fun setUserDataToTools(loginResponse: com.rummytitans.sdk.cardgame.models.LoginResponse?){
+    fun setUserDataToTools(loginResponse: LoginResponseRummy?){
         RummyTitanSDK.analytiCallback?.setUserDataToToolsSDK()
     }
 
-    fun updateEndPointValue(loginResponse: com.rummytitans.sdk.cardgame.models.LoginResponse?) {
+    fun updateEndPointValue(loginResponse: LoginResponseRummy?) {
     }
 
     fun fireLoginEvent(userId: String?) {

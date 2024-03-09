@@ -2,7 +2,7 @@ package com.rummytitans.sdk.cardgame.ui.completeprofile
 
 import com.rummytitans.sdk.cardgame.R
 import com.rummytitans.sdk.cardgame.models.AvatarModel
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.ui.base.BaseActivity
 import com.rummytitans.sdk.cardgame.utils.MyConstants
 import com.rummytitans.sdk.cardgame.widget.MyDialog
@@ -106,10 +106,10 @@ class CompleteProfileActivity : BaseActivity(), CompleteProfileNavigator, OnSugg
     private fun setBindingModule() {
         viewModel.getState()
         val loginResponse =
-            LoginResponse()
+            LoginResponseRummy()
         viewModel.loginResponse = loginResponse
         if (null != intent.getSerializableExtra(MyConstants.INTENT_LOGIN_RESPONSE))
-            viewModel.loginResponse = intent.getSerializableExtra(MyConstants.INTENT_LOGIN_RESPONSE) as LoginResponse
+            viewModel.loginResponse = intent.getSerializableExtra(MyConstants.INTENT_LOGIN_RESPONSE) as LoginResponseRummy
 
         RxTextView.afterTextChangeEvents(binding.editTeamName).skipInitialValue()
             .debounce(500, TimeUnit.MILLISECONDS)

@@ -1,8 +1,10 @@
 package com.rummytitans.sdk.cardgame.models;
 
-import java.io.Serializable;
+import androidx.annotation.Keep;
 
-public class BaseModel<T> implements Serializable {
+import java.io.Serializable;
+@Keep
+public class BaseModelRummy<T> implements Serializable {
     public String Message;
     public String message;
     public boolean TokenExpire;
@@ -53,7 +55,7 @@ public class BaseModel<T> implements Serializable {
     public boolean AllowRummyGame;
     public int DelayMinutes;
 
-    public BaseModel() {
+    public BaseModelRummy() {
 
     }
 

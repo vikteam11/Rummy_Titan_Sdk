@@ -1,7 +1,7 @@
 package com.rummytitans.sdk.cardgame.games.locationBottomSheet
 
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
 import com.rummytitans.sdk.cardgame.widget.MyDialog
 import androidx.databinding.ObservableField
@@ -18,7 +18,7 @@ class LocationViewModel @Inject constructor(
     val gson: Gson
 ) : BaseViewModel<LocationNavigator>() {
     var myDialog: MyDialog? = null
-    var loginResponse: LoginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+    var loginResponse: LoginResponseRummy = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
 
     val _bottomSheetStateEvent = MutableLiveData<Int>()
     val bottomSheetStateEvent: LiveData<Int>

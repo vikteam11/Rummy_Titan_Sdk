@@ -34,7 +34,7 @@ class HomeViewModel @Inject constructor(
 ) : BaseViewModel<RummyCategoryNavigator>(){
 
     var locationModel: UserCurrentLocationModel?=null
-    var loginResponse: LoginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+    var loginResponse: LoginResponseRummy = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
     var isLoading = ObservableBoolean(false)
     var lobbyLoading = ObservableBoolean(false)
     val selectedCategory = ObservableField(RummyCategoryModel())
@@ -98,7 +98,7 @@ class HomeViewModel @Inject constructor(
                     isLoading.set(false)
                     if (it.TokenExpire) {
                         logoutStatus(apiInterface, loginResponse.UserId, prefs.androidId ?: "", "0")
-                        prefs.loginResponse = gson.toJson(LoginResponse())
+                        prefs.loginResponse = gson.toJson(LoginResponseRummy())
                         prefs.loginCompleted = false
                         navigator.logoutUser()
                     }
@@ -136,7 +136,7 @@ class HomeViewModel @Inject constructor(
                     isLoading.set(false)
                     if (it.TokenExpire) {
                         logoutStatus(apiInterface, loginResponse.UserId, prefs.androidId ?: "", "0")
-                        prefs.loginResponse = gson.toJson(LoginResponse())
+                        prefs.loginResponse = gson.toJson(LoginResponseRummy())
                         prefs.loginCompleted = false
                         navigator.logoutUser()
                     }
@@ -190,7 +190,7 @@ class HomeViewModel @Inject constructor(
                     lobbyLoading.set(false)
                     if (it.TokenExpire) {
                         logoutStatus(apiInterface, loginResponse.UserId, prefs.androidId ?: "", "0")
-                        prefs.loginResponse = gson.toJson(LoginResponse())
+                        prefs.loginResponse = gson.toJson(LoginResponseRummy())
                         prefs.loginCompleted = false
                         navigator.logoutUser()
                     }

@@ -43,7 +43,7 @@ import com.rummytitans.sdk.cardgame.BuildConfig
 import com.rummytitans.sdk.cardgame.R
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.sdk.cardgame.databinding.BottomSheetDialogAlertWarningsBinding
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.models.NewPaymentGateWayModel
 import com.rummytitans.sdk.cardgame.ui.WebViewActivity
 import com.rummytitans.sdk.cardgame.ui.base.BaseFragment
@@ -351,7 +351,7 @@ fun setTimeByType(time: String, timeType: Int): String {
     return returnText
 }
 
-fun getNotLoginUser() = LoginResponse()
+fun getNotLoginUser() = LoginResponseRummy()
     .apply {
     UserId = 0
     AuthExpire = "0"
@@ -513,9 +513,9 @@ fun JSONObject.toBundle(): Bundle {
     return bundle
 }
 
-fun SharedPreferenceStorageRummy.toUserDetail(gson: Gson): LoginResponse? {
+fun SharedPreferenceStorageRummy.toUserDetail(gson: Gson): LoginResponseRummy? {
     if (loginResponse.isNullOrEmpty() || !loginCompleted) return null
-    return gson.fromJson(loginResponse, LoginResponse::class.java)
+    return gson.fromJson(loginResponse, LoginResponseRummy::class.java)
 }
 
 fun Context.shareUrl(url:String?,message: String?){

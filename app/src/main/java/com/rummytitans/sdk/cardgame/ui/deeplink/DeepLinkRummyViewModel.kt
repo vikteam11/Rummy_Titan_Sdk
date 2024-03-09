@@ -3,13 +3,12 @@ package com.rummytitans.sdk.cardgame.ui.deeplink
 import com.rummytitans.sdk.cardgame.BuildConfig
 import com.rummytitans.sdk.cardgame.api.APIInterface
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.models.MatchModel
-import com.rummytitans.sdk.cardgame.models.VersionModel
+import com.rummytitans.sdk.cardgame.models.VersionModelRummy
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
 import com.rummytitans.sdk.cardgame.utils.ConnectionDetector
 import com.rummytitans.sdk.cardgame.widget.MyDialog
-import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.JsonObject
@@ -29,8 +28,8 @@ class DeepLinkRummyViewModel @Inject constructor(
     var leagueId = 0
     var leagueFees = 0
     var leagueMembers = 0
-    val loginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
-    val isForceUpdate = MutableLiveData<VersionModel>()
+    val loginResponse = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
+    val isForceUpdate = MutableLiveData<VersionModelRummy>()
 
     fun checkForceUpdate() {
         val apis = getApiEndPointObject(RummyTitanSDK.getOption().gameSplashUrl)

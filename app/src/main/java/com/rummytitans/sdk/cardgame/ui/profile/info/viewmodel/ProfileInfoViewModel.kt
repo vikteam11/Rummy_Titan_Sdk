@@ -6,7 +6,7 @@ import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
 import com.rummytitans.sdk.cardgame.api.APIInterface
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.sdk.cardgame.models.LevelModel
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.models.ProfileInfoModel
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
 import com.rummytitans.sdk.cardgame.ui.profile.info.DBUpdateNavigortor
@@ -40,7 +40,7 @@ class ProfileInfoViewModel
 
     var updateData = ObservableBoolean(false)
     var isEditable = MutableLiveData(true)
-    val loginResponse: LoginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+    val loginResponse: LoginResponseRummy = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
 
     val data = MutableLiveData<ProfileInfoModel>()
     val profileInfo: LiveData<ProfileInfoModel> get() = data
@@ -136,7 +136,7 @@ class ProfileInfoViewModel
                     isLoading.set(false)
                     if (it.TokenExpire) {
                         logoutStatus(apiInterface, loginResponse.UserId, prefs.androidId ?: "", "0")
-                        prefs.loginResponse = gson.toJson(LoginResponse())
+                        prefs.loginResponse = gson.toJson(LoginResponseRummy())
                         prefs.loginCompleted = false
                         navigator.logoutUser()
                     }
@@ -341,15 +341,15 @@ class ProfileInfoViewModel
 
                     if (it.TokenExpire) {
                         logoutStatus(apiInterface, loginResponse.UserId, prefs.androidId ?: "", "0")
-                        prefs.loginResponse = gson.toJson(LoginResponse())
+                        prefs.loginResponse = gson.toJson(LoginResponseRummy())
                         prefs.loginCompleted = false
                         navigator.logoutUser()
                     }
 
                     if (it.Status) {
                         navigator.showMessage(it.Message)
-                        val loginResponse: LoginResponse =
-                            gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+                        val loginResponse: LoginResponseRummy =
+                            gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
                         loginResponse.Name = name
                         prefs.loginResponse = gson.toJson(loginResponse)
 

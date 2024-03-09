@@ -5,7 +5,7 @@ import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
 import com.rummytitans.sdk.cardgame.api.APIInterface
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.sdk.cardgame.models.GameTicketModel
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
 import com.rummytitans.sdk.cardgame.utils.ConnectionDetector
 import com.rummytitans.sdk.cardgame.utils.MyConstants
@@ -30,7 +30,7 @@ class GamesTicketViewModel @Inject constructor(
     val connectionDetector: ConnectionDetector, val analyticsHelper: AnalyticsHelper
 ) : BaseViewModel<GameTicketNavigator>(conn = connectionDetector) {
     var myDialog: MyDialog? = null
-    var loginModel: LoginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+    var loginModel: LoginResponseRummy = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
     var regularColor = prefs.regularColor
     var safeColor = prefs.safeColor
     val selectedColor = ObservableField(if (prefs.onSafePlay) safeColor else regularColor)

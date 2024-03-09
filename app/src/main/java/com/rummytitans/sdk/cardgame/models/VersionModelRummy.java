@@ -1,11 +1,14 @@
 package com.rummytitans.sdk.cardgame.models;
 
+import androidx.annotation.Keep;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class VersionModel implements Serializable {
+@Keep
+public class VersionModelRummy implements Serializable {
 
     @SerializedName("ClearData")
     public boolean ClearData;

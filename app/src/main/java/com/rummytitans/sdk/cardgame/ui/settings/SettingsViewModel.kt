@@ -3,9 +3,9 @@ package com.rummytitans.sdk.cardgame.ui.settings
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.sdk.cardgame.api.APIInterface
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.models.SubscriptionItemModel
-import com.rummytitans.sdk.cardgame.models.VersionModel
+import com.rummytitans.sdk.cardgame.models.VersionModelRummy
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
 import com.rummytitans.sdk.cardgame.utils.ConnectionDetector
 import com.rummytitans.sdk.cardgame.widget.MyDialog
@@ -62,8 +62,8 @@ class SettingsViewModel @Inject constructor(
     val subscriptionListModel = MutableLiveData<ArrayList<SubscriptionItemModel>>()
 
 
-    var loginModel: LoginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
-    var splashModel: VersionModel = gson.fromJson(prefs.splashResponse, VersionModel::class.java)
+    var loginModel: LoginResponseRummy = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
+    var splashModel: VersionModelRummy = gson.fromJson(prefs.splashResponse, VersionModelRummy::class.java)
 
 
     fun toggleQuiz() {

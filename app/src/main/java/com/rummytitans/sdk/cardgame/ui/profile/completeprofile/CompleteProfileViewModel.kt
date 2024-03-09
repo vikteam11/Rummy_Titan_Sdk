@@ -5,7 +5,7 @@ import com.rummytitans.sdk.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.sdk.cardgame.api.APIInterface
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.sdk.cardgame.models.AvatarModel
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
 import com.rummytitans.sdk.cardgame.utils.ConnectionDetector
 import com.rummytitans.sdk.cardgame.widget.MyDialog
@@ -31,7 +31,7 @@ class CompleteProfileViewModel @Inject constructor(
     var myDialog: MyDialog? = null
     var createTeamFromLogin = false
 
-    lateinit var loginResponse: LoginResponse
+    lateinit var loginResponse: LoginResponseRummy
     var checkTeamObservable: Disposable? = null
     var txtTeamName = ObservableField<String>("")
     var txtTeamNameColor = ObservableInt(R.color.rummy_colorPrimary)

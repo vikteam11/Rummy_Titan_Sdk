@@ -22,7 +22,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import com.rummytitans.sdk.cardgame.models.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -44,7 +43,7 @@ class WithdrawViewModel @Inject constructor(
 
     var winnings = 0.0
 
-    val loginResponse: LoginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+    val loginResponse: LoginResponseRummy = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
 
     var myDialog: MyDialog? = null
     val isLoading = ObservableBoolean(false)
@@ -125,7 +124,7 @@ class WithdrawViewModel @Inject constructor(
         isBankDetailOpen.set(!isBankDetailOpen.get())
     }
 
-    fun onWithdrawalResponseReceive(apiResponse: BaseModel<String>?, extraMsg:String=""){
+    fun onWithdrawalResponseReceive(apiResponse: BaseModelRummy<String>?, extraMsg:String=""){
         withdrawalMethod.get()?.let { withdrawalMethod ->
             WithdrawalSuccessCustomModel()
                 .let {

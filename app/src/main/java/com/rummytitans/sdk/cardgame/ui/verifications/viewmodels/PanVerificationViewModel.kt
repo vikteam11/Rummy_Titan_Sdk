@@ -4,7 +4,7 @@ import com.rummytitans.sdk.cardgame.R
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.sdk.cardgame.api.APIInterface
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
 import com.rummytitans.sdk.cardgame.ui.verifications.RequestVarificationInterface
 import com.rummytitans.sdk.cardgame.utils.ConnectionDetector
@@ -33,7 +33,7 @@ class PanVerificationViewModel @Inject constructor(
     val apiInterface: APIInterface,
     val connectionDetector: ConnectionDetector, var analyticsHelper: AnalyticsHelper
 ) : BaseViewModel<BaseNavigator>() {
-    val loginResponse: LoginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+    val loginResponse: LoginResponseRummy = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
     var myDialog: MyDialog? = null
     var isProgressLoading = ObservableBoolean(false)
     var state = ArrayList<String>()

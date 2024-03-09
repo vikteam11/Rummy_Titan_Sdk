@@ -1,10 +1,12 @@
 package com.rummytitans.sdk.cardgame.models;
 
+import androidx.annotation.Keep;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-
-public class LoginResponse implements Serializable {
+@Keep
+public class LoginResponseRummy implements Serializable {
     @SerializedName("FairPlayMessage")
     public String FairPlayMessage;
     @SerializedName("IsFairPlay")

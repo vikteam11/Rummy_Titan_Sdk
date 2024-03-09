@@ -5,7 +5,7 @@ import com.rummytitans.sdk.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
 import com.rummytitans.sdk.cardgame.api.APIInterface
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.models.WalletInfoModel
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
 import com.rummytitans.sdk.cardgame.ui.wallet.WalletNavigator
@@ -38,7 +38,7 @@ class WalletViewModel @Inject constructor(
     val data = MutableLiveData<WalletInfoModel>()
     val walletInfo: LiveData<WalletInfoModel>
         get() = data
-    var loginResponse: LoginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+    var loginResponse: LoginResponseRummy = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
 
     val isOnSafe = ObservableBoolean(false)
     var availableCode = ObservableField<String>()
@@ -101,7 +101,7 @@ class WalletViewModel @Inject constructor(
     }
     //update in case of update user details
     fun updateLoginModel(){
-        loginResponse = Gson().fromJson(prefs.loginResponse, LoginResponse::class.java)
+        loginResponse = Gson().fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
     }
     fun fetchWalletData() {
         setDefaultTheme()
@@ -129,7 +129,7 @@ class WalletViewModel @Inject constructor(
                     isSwipeLoading.set(false)
                     if (it.TokenExpire) {
                         logoutStatus(apiInterface, loginResponse.UserId, prefs.androidId ?: "", "0")
-                        prefs.loginResponse = gson.toJson(LoginResponse())
+                        prefs.loginResponse = gson.toJson(LoginResponseRummy())
                         prefs.loginCompleted = false
                         navigator.logoutUser()
                     }
@@ -246,7 +246,7 @@ class WalletViewModel @Inject constructor(
                     isSwipeLoading.set(false)
                     if (it.TokenExpire) {
                         logoutStatus(apiInterface, loginResponse.UserId, prefs.androidId ?: "", "0")
-                        prefs.loginResponse = gson.toJson(LoginResponse())
+                        prefs.loginResponse = gson.toJson(LoginResponseRummy())
                         prefs.loginCompleted = false
                         navigator.logoutUser()
                     }
@@ -287,7 +287,7 @@ class WalletViewModel @Inject constructor(
                     isSwipeLoading.set(false)
                     if (it.TokenExpire) {
                         logoutStatus(apiInterface, loginResponse.UserId, prefs.androidId ?: "", "0")
-                        prefs.loginResponse = gson.toJson(LoginResponse())
+                        prefs.loginResponse = gson.toJson(LoginResponseRummy())
                         prefs.loginCompleted = false
                         navigator.logoutUser()
                     }
@@ -387,7 +387,7 @@ class WalletViewModel @Inject constructor(
                     isLoading.set(false)
                     if (it.TokenExpire) {
                         logoutStatus(apiInterface, loginResponse.UserId, prefs.androidId ?: "", "0")
-                        prefs.loginResponse = gson.toJson(LoginResponse())
+                        prefs.loginResponse = gson.toJson(LoginResponseRummy())
                         prefs.loginCompleted = false
                         navigator.logoutUser()
                     }

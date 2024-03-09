@@ -6,14 +6,13 @@ import com.rummytitans.sdk.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
 import com.rummytitans.sdk.cardgame.api.APIInterface
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.models.ProfileVerificationModel
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
 import com.rummytitans.sdk.cardgame.ui.profile.verify.ProfileVerificationItem
 import com.rummytitans.sdk.cardgame.ui.verify.VerificationNavigator
 import com.rummytitans.sdk.cardgame.utils.ConnectionDetector
 import com.rummytitans.sdk.cardgame.utils.MyConstants
-import com.rummytitans.sdk.cardgame.utils.WebViewUrls
 import com.rummytitans.sdk.cardgame.utils.locationservices.utils.emptyJson
 import com.rummytitans.sdk.cardgame.widget.MyDialog
 import android.text.TextUtils
@@ -42,7 +41,7 @@ class VerifyViewModel @Inject constructor(
 ) : BaseViewModel<VerificationNavigator>() {
     val loginStep = MyConstants.OTP
     val data = MutableLiveData<ProfileVerificationModel>()
-    val loginResponse: LoginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+    val loginResponse: LoginResponseRummy = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
     var isLoading = ObservableBoolean(false)
     var isValidEmailVerify = ObservableBoolean(false)
     var isShowPinViewError = ObservableBoolean(false)
@@ -97,7 +96,7 @@ class VerifyViewModel @Inject constructor(
                     isLoading.set(false)
                     if (it.TokenExpire) {
                         logoutStatus(apiInterface, loginResponse.UserId, prefs.androidId ?: "", "0")
-                        prefs.loginResponse = gson.toJson(LoginResponse())
+                        prefs.loginResponse = gson.toJson(LoginResponseRummy())
                         prefs.loginCompleted = false
                         navigator.logoutUser()
                     }

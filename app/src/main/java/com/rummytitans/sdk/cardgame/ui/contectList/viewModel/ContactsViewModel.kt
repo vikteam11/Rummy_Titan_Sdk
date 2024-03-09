@@ -3,7 +3,7 @@ package com.rummytitans.sdk.cardgame.ui.contectList.viewModel
 import com.rummytitans.sdk.cardgame.api.APIInterface
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.sdk.cardgame.models.ContactModel
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.models.MyContactsResponseModel
 import com.rummytitans.sdk.cardgame.models.TempContactModel
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
@@ -29,7 +29,7 @@ class ContactsViewModel @Inject constructor(
 ) : BaseViewModel<BaseNavigator>() {
 
     var isAlertContactOpen = false
-    val loginResponse: LoginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+    val loginResponse: LoginResponseRummy = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
     var isLoading = ObservableBoolean(false)
     var myDialog: MyDialog? = null
     val regularColor = prefs.regularColor
@@ -121,7 +121,7 @@ class ContactsViewModel @Inject constructor(
                     isLoading.set(false)
                     if (it.TokenExpire) {
                         logoutStatus(apiInterface, loginResponse.UserId, prefs.androidId ?: "", "0")
-                        prefs.loginResponse = gson.toJson(LoginResponse())
+                        prefs.loginResponse = gson.toJson(LoginResponseRummy())
                         prefs.loginCompleted = false
                         navigator.logoutUser()
                     }

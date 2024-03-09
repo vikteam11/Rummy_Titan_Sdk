@@ -5,7 +5,7 @@ import com.rummytitans.sdk.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.sdk.cardgame.api.APIInterface
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.sdk.cardgame.models.GamesResponseModel
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
 import com.rummytitans.sdk.cardgame.utils.ConnectionDetector
 import com.rummytitans.sdk.cardgame.utils.MyConstants
@@ -30,7 +30,7 @@ class RummyViewModel @Inject constructor(
 ) : BaseViewModel<RummyNavigator>(conn = null) {
     var myDialog: MyDialog? = null
     val isSwipeRefresh = ObservableBoolean(false)
-    var loginModel = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+    var loginModel = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
     var isLoading = ObservableBoolean(false)
     var regularColor = prefs.regularColor
     var safeColor = prefs.safeColor
@@ -39,7 +39,7 @@ class RummyViewModel @Inject constructor(
     private var mGameModel: GamesResponseModel.GamesModel? = null
     var isEmptyData = ObservableBoolean(false)
     var comeFromAllGames = ObservableBoolean(false)
-    var loginResponse: LoginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+    var loginResponse: LoginResponseRummy = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
 
     init {
         // fetchProfileData()
@@ -148,7 +148,7 @@ class RummyViewModel @Inject constructor(
                     isLoading.set(false)
                     if (it.TokenExpire) {
                         logoutStatus(apiInterface, loginModel.UserId, prefs.androidId ?: "", "0")
-                        prefs.loginResponse = gson.toJson(LoginResponse())
+                        prefs.loginResponse = gson.toJson(LoginResponseRummy())
                         prefs.loginCompleted = false
                         navigator.logoutUser()
                     }
@@ -177,7 +177,7 @@ class RummyViewModel @Inject constructor(
 
     fun logoutUser() {
         prefs.loginCompleted = false
-        prefs.loginResponse = gson.toJson(LoginResponse())
+        prefs.loginResponse = gson.toJson(LoginResponseRummy())
         logoutStatus(apiInterface, loginModel.UserId, prefs.androidId ?: "", "0")
     }
 }

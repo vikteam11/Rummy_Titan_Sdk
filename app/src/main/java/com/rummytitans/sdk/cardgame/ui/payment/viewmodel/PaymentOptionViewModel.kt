@@ -4,7 +4,7 @@ import com.rummytitans.sdk.cardgame.R
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.sdk.cardgame.api.APIInterface
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.models.NewPaymentGateWayModel
 import com.rummytitans.sdk.cardgame.models.WalletInfoModel
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
@@ -34,8 +34,8 @@ class PaymentOptionViewModel @Inject constructor(
     val connectionDetector: ConnectionDetector
 ) :
     BaseViewModel<PaymentOptionNavigator>() {
-    var loginResponse: LoginResponse =
-        gson.fromJson(prefs.loginResponse ?: "", LoginResponse::class.java)
+    var loginResponse: LoginResponseRummy =
+        gson.fromJson(prefs.loginResponse ?: "", LoginResponseRummy::class.java)
 
     var amount = ObservableField(0.0)
     var balanceModel: WalletInfoModel.Balance? = null
@@ -175,7 +175,7 @@ class PaymentOptionViewModel @Inject constructor(
 
     fun getPaymentGateWay() {
         isLoading.set(true)
-        loginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+        loginResponse = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
 
 
         val json = JsonObject()
@@ -222,7 +222,7 @@ class PaymentOptionViewModel @Inject constructor(
 
     fun deleteCard(cardToken: String) {
         isLoading.set(true)
-        loginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+        loginResponse = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
         compositeDisposable.add(
             apis.deleteSaveCard(
                 loginResponse.UserId,
@@ -245,7 +245,7 @@ class PaymentOptionViewModel @Inject constructor(
     }
 
     fun verifyUPI(upiAddress:String){
-        loginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+        loginResponse = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
         isLoading.set(true)
         compositeDisposable.add(
             apis.verifyUPI(
@@ -273,7 +273,7 @@ class PaymentOptionViewModel @Inject constructor(
         val json = JsonObject()
 
         json.addProperty("Wallet",linkedWallet.get()?.Code)
-        loginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+        loginResponse = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
         isLoading.set(true)
         compositeDisposable.add(
             apis.sendOtpForLinkWallet(
@@ -305,7 +305,7 @@ class PaymentOptionViewModel @Inject constructor(
         json.addProperty("Otp",linkedOtp)
         json.addProperty("Amount",amount.get())
 
-        loginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+        loginResponse = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
         isLoading.set(true)
 
         compositeDisposable.add(
@@ -347,7 +347,7 @@ class PaymentOptionViewModel @Inject constructor(
         json.addProperty("WalletToken",token)
         json.addProperty("PaymentMethod",paymentMethod)
 
-        loginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+        loginResponse = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
         isLoading.set(true)
 
         compositeDisposable.add(

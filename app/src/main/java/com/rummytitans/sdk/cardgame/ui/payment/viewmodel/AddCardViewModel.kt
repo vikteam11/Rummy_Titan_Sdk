@@ -3,7 +3,7 @@ package com.rummytitans.sdk.cardgame.ui.payment.viewmodel
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsHelper
 import com.rummytitans.sdk.cardgame.api.APIInterface
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
 import com.rummytitans.sdk.cardgame.ui.payment.AddCardNavigator
 import com.rummytitans.sdk.cardgame.utils.ConnectionDetector
@@ -21,10 +21,6 @@ import com.rummytitans.sdk.cardgame.utils.MyConstants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 @HiltViewModel
 class AddCardViewModel @Inject constructor(
@@ -45,7 +41,7 @@ class AddCardViewModel @Inject constructor(
     var selectedYear: Int = 0
     var selectedMonth: Int = 0
 
-    var loginResponse: LoginResponse = gson.fromJson(prefs.loginResponse ?: "", LoginResponse::class.java)
+    var loginResponse: LoginResponseRummy = gson.fromJson(prefs.loginResponse ?: "", LoginResponseRummy::class.java)
     var amount = ObservableField(0.0)
     var myDialog: MyDialog? = null
 
@@ -130,7 +126,7 @@ class AddCardViewModel @Inject constructor(
         json.addProperty("Year",selectedYear)
         json.addProperty("NickName","")
         json.addProperty("Month",selectedMonth)
-        loginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+        loginResponse = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
         compositeDisposable.add(
             apis.saveDebitCard(
                 loginResponse.UserId,

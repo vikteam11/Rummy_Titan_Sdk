@@ -2,7 +2,7 @@ package com.rummytitans.sdk.cardgame.ui.wallet.viewmodel
 
 import com.rummytitans.sdk.cardgame.api.APIInterface
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
 import com.rummytitans.sdk.cardgame.utils.ConnectionDetector
 import com.rummytitans.sdk.cardgame.widget.MyDialog
@@ -28,7 +28,7 @@ class UnutilizedViewModel
     val withdrawtext = MutableLiveData<String>("")
     var winnings = 0.0
 
-    val loginResponse: LoginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+    val loginResponse: LoginResponseRummy = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
 
     var myDialog: MyDialog? = null
     val isLoading = ObservableBoolean(false)

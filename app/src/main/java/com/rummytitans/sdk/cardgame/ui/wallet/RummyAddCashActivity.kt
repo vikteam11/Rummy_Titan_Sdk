@@ -8,7 +8,6 @@ import com.rummytitans.sdk.cardgame.databinding.ActivityRummyAddCashBinding
 import com.rummytitans.sdk.cardgame.databinding.DialogWalletRedeemCodeRummyBinding
 import com.rummytitans.sdk.cardgame.models.*
 import com.rummytitans.sdk.cardgame.ui.common.CommonFragmentActivity
-import com.rummytitans.sdk.cardgame.ui.deeplink.DeepLinkActivityRummy
 import com.rummytitans.sdk.cardgame.ui.payment.PaymentOptionActivity
 import com.rummytitans.sdk.cardgame.ui.wallet.adapter.AvailableCouponsAdapter
 import com.rummytitans.sdk.cardgame.ui.wallet.model.WalletRedeemCodeModel
@@ -38,7 +37,6 @@ import androidx.viewpager.widget.ViewPager
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
-import com.rummytitans.sdk.cardgame.ui.home.adapter.WalletOffersAdapter
 import com.rummytitans.sdk.cardgame.ui.wallet.adapter.AddCashBannerAdapter
 import com.rummytitans.sdk.cardgame.ui.wallet.adapter.GstCalculationAdapter
 import com.rummytitans.sdk.cardgame.ui.wallet.adapter.OffersAdapter
@@ -50,7 +48,6 @@ import kotlinx.android.synthetic.main.activity_rummy_add_cash.*
 import java.text.DecimalFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class RummyAddCashActivity :
@@ -441,7 +438,7 @@ class RummyAddCashActivity :
                     addressVerificationRejectMsg=""
                     loginResponse = gson.fromJson(
                         prefs.loginResponse,
-                        LoginResponse::class.java
+                        LoginResponseRummy::class.java
                     )
                 }
             }

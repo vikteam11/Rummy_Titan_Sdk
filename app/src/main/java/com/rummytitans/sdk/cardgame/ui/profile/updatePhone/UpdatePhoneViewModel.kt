@@ -3,7 +3,7 @@ package com.rummytitans.sdk.cardgame.ui.profile.updatePhone
 import com.rummytitans.sdk.cardgame.R
 import com.rummytitans.sdk.cardgame.api.APIInterface
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.ui.BaseViewModel
 import com.rummytitans.sdk.cardgame.utils.ConnectionDetector
 import com.rummytitans.sdk.cardgame.utils.validMobile
@@ -34,7 +34,7 @@ class UpdatePhoneViewModel @Inject constructor(
         const val VERIFY_OTP=2
     }
 
-    val loginResponse: LoginResponse = gson.fromJson(prefs.loginResponse, LoginResponse::class.java)
+    val loginResponse: LoginResponseRummy = gson.fromJson(prefs.loginResponse, LoginResponseRummy::class.java)
     val isLoading = ObservableBoolean(false)
     val safeSelected = MutableLiveData(false)
 
@@ -96,7 +96,7 @@ class UpdatePhoneViewModel @Inject constructor(
             navigatorAct.onRequestFocusOtp()
         },expireTokan = {
                 logoutStatus(apiInterface, loginResponse.UserId, prefs.androidId ?: "", "0")
-                prefs.loginResponse = gson.toJson(LoginResponse())
+                prefs.loginResponse = gson.toJson(LoginResponseRummy())
                 prefs.loginCompleted = false
                 navigator.logoutUser()
         })
@@ -122,7 +122,7 @@ class UpdatePhoneViewModel @Inject constructor(
             navigatorAct.onSuccessUpdate()
         },expireTokan = {
                 logoutStatus(apiInterface, loginResponse.UserId, prefs.androidId ?: "", "0")
-                prefs.loginResponse = gson.toJson(LoginResponse())
+                prefs.loginResponse = gson.toJson(LoginResponseRummy())
                 prefs.loginCompleted = false
                 navigator.logoutUser()
         })

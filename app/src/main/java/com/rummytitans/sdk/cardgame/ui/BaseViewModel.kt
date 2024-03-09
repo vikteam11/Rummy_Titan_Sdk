@@ -2,7 +2,7 @@ package com.rummytitans.sdk.cardgame.ui
 
 import android.os.Build
 import com.rummytitans.sdk.cardgame.api.APIInterface
-import com.rummytitans.sdk.cardgame.models.BaseModel
+import com.rummytitans.sdk.cardgame.models.BaseModelRummy
 import com.rummytitans.sdk.cardgame.utils.ConnectionDetector
 import com.rummytitans.sdk.cardgame.utils.MyConstants
 import com.rummytitans.sdk.cardgame.utils.MyConstants.FULL_TIME_TYPE
@@ -216,12 +216,12 @@ abstract class BaseViewModel<N>(val conn: ConnectionDetector? = null) : ViewMode
 
     @Deprecated("not fully managed.")
     fun <S> apiCall(
-        api: Single<BaseModel<S>>,
-        success: (it: BaseModel<S>) -> Unit = {},
+        api: Single<BaseModelRummy<S>>,
+        success: (it: BaseModelRummy<S>) -> Unit = {},
         failed: (it: Throwable) -> Unit = {},
-        expireTokan: (it: BaseModel<S>) -> Unit = {},
+        expireTokan: (it: BaseModelRummy<S>) -> Unit = {},
         hideMessage: Boolean = false,
-        unSuccess: (it: BaseModel<S>) -> Unit = {}
+        unSuccess: (it: BaseModelRummy<S>) -> Unit = {}
     ) {
         if (conn?.isConnected == false) {
             myParentDialog?.noInternetDialog {

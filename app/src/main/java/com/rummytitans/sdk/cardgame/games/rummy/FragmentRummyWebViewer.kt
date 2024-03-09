@@ -5,7 +5,7 @@ import com.rummytitans.sdk.cardgame.R
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
 import com.rummytitans.sdk.cardgame.databinding.ActivityGamesWebViewerRummyBinding
 import com.rummytitans.sdk.cardgame.models.GamesResponseModel
-import com.rummytitans.sdk.cardgame.models.LoginResponse
+import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
 import com.rummytitans.sdk.cardgame.ui.base.BaseFragment
 import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
 import com.rummytitans.sdk.cardgame.utils.*
@@ -323,7 +323,7 @@ class FragmentRummyWebViewer() : BaseFragment(),
                                 sportSelected = 1
                                 introductionCompleted=false
                                 loginCompleted = false
-                                loginResponse = gson.toJson(LoginResponse())
+                                loginResponse = gson.toJson(LoginResponseRummy())
                             }
                         }
                         startActivity(Intent(requireActivity(),RummyNewLoginActivity::class.java))

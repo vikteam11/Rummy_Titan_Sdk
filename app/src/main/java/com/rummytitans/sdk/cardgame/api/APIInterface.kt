@@ -3,6 +3,7 @@ package com.rummytitans.sdk.cardgame.api
 import com.rummytitans.sdk.cardgame.models.*
 import com.rummytitans.sdk.cardgame.utils.MyConstants
 import com.google.gson.JsonObject
+import com.rummytitans.sdk.cardgame.ui.payment.viewmodel.WalletInitializeModel
 import io.reactivex.Observable
 import io.reactivex.Single
 import okhttp3.MultipartBody
@@ -16,21 +17,21 @@ interface APIInterface {
         @Header(USERID) userId: Int,
         @Header(EXPIRETOKEN) expireToken: String,
         @Header(AUTHEXPIRE) authExpire: String,
-    ): Single<com.rummytitans.sdk.cardgame.models.BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
     @GET("games/v1/splash")
     fun getVersion(
         @Header(USERID) userId: Int,
         @Header("Version") code: Int,
         @Header("AdvertisingId") AdvertisingId: String
-    ): Single<BaseModel<VersionModel>>
+    ): Single<BaseModelRummy<VersionModelRummy>>
 
     @POST("users/get")
     fun loginUser(
         @Header(EMAIL_ADDRESS) email: String,
         @Header(AUTH_EXPIRE) password: String,
         @Header(CAMPAIGN_ID) campaignId: String
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
     @POST("users/loginwithotp")
     fun requestOtp(
@@ -38,7 +39,7 @@ interface APIInterface {
         @Header(LOGIN_AUTH_EXPIRE) auth: String,
         @Header(REFER_CODE) referCode: String,
         @Header(CAMPAIGN_ID1) campaignId: String
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
     @POST("v1/user/change-mobile")
     fun requestOtpForUpdate(
@@ -47,7 +48,7 @@ interface APIInterface {
         @Header("DeviceID") referCode: String,
         @Header("ExpireToken") campaignId: String,
         @Header("AuthExpire") authExpire: String
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
     @PUT("v1/games/login")
     fun verifyLoginOtp(
@@ -61,7 +62,7 @@ interface APIInterface {
         @Header("AdvertisingId") AdvertisingId: String,
         @Header("AppsFlyerId") AppsFlyerId: String,
         @Header("Type") type: Int=1
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
     @POST("account/v2/login/truecaller")
     fun loginTrueCaller(
@@ -73,7 +74,7 @@ interface APIInterface {
         @Header(TOKEN_FIREBASE_1) FirebaseToken: String,
         @Header("AdvertisingId") AdvertisingId: String,
         @Header("AppsFlyerId") AppsFlyerId: String
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
 
 
@@ -87,10 +88,10 @@ interface APIInterface {
         @Header(DEVICE_ID_2) deviceID: String,
         @Header("AdvertisingId") AdvertisingId: String,
         @Header("AppsFlyerId") AppsFlyerId: String
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
     @GET("users/usercheck")
-    fun checkUser(@Header(EMAIL) email: String, @Header(SID) sId: String): Single<BaseModel<Any>>
+    fun checkUser(@Header(EMAIL) email: String, @Header(SID) sId: String): Single<BaseModelRummy<Any>>
 
     @POST("users/gmaillogin")
     fun loginUserG(
@@ -101,7 +102,7 @@ interface APIInterface {
         @Header(GMAIL_ID) GmailID: String,
         @Header(GMAIL_ACCESS_TOKEN) gmailAccessToken: String,
         @Header(CAMPAIGN_ID) campaignId: String
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
 
 
@@ -114,7 +115,7 @@ interface APIInterface {
         @Header(TOKEN) token: String,
         @Header(TOKEN_FIREBASE) tokenFireBase: String,
         @Header(CAMPAIGN_ID) campaignId: String
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
     @POST("users/sentotpnew")
     fun sendOTP(
@@ -122,12 +123,12 @@ interface APIInterface {
         @Header(USERID) UserId: Int,
         @Header(EXPIRETOKEN) ExpireToken: String,
         @Header(AUTHEXPIRE) AuthExpire: String
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
     @POST("users/forgotpasswordnew")
     fun forgotPasswordSendOTP(
         @Header(MOBILE_NUMBER) Mobile_Number: String,
         @Header(TOKEN) token: String
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
     @PUT("users/verifyOtpnew")
     fun verifyOTP(
@@ -136,7 +137,7 @@ interface APIInterface {
         @Header(USERID) userId: Int,
         @Header(EXPIRETOKEN) expireToken: String,
         @Header(AUTHEXPIRE) authExpire: String
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
     @PUT("users/verifyOtpnew")
     fun verifyOtpForUpdateMobile(
@@ -145,14 +146,14 @@ interface APIInterface {
         @Header(USERID) userId: Int,
         @Header(EXPIRETOKEN) expireToken: String,
         @Header(AUTHEXPIRE) authExpire: String
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
     @POST("users/resetotpverifynew")
     fun forgotPasswordVerifyOTP(
         @Header(MOBILE_NUMBER) mobileNumber: String,
         @Header(OTP) otp: String,
         @Header(TOKEN) token: String
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
     @POST("users/resetpasswordnew")
     fun resetPassword(
@@ -160,7 +161,7 @@ interface APIInterface {
         @Header(OTP1) otp: String,
         @Header(TOKEN_1) token: String,
         @Header(PASSWORD_1) password: String
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
     @POST("users/updateuserpincode")
     fun updatePincode(
@@ -169,7 +170,7 @@ interface APIInterface {
         @Header(USERID) token: String,
         @Header(PINCODE) password: String,
         @Header(DOB) dob: String
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
     @GET("users/teamcheck")
     fun checkTeamnameAvailability(
@@ -177,14 +178,14 @@ interface APIInterface {
         @Header(EXPIRETOKEN) expireToken: String,
         @Header(AUTHEXPIRE) authExpire: String,
         @Header(TEAMNAME) teamName: String
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
     @GET("v3/team/getteamsuggestions")
     fun checkTeamnameSuggestions(
         @Header(USERID) userId: Int,
         @Header(EXPIRETOKEN) expireToken: String,
         @Header(AUTHEXPIRE) authExpire: String
-    ): Observable<BaseModel<String>>
+    ): Observable<BaseModelRummy<String>>
 
 
 
@@ -197,14 +198,14 @@ interface APIInterface {
         @Header(TEAMNAME1) teamName: String,
         @Header(STATE_NAME) stateName: String,
         @Header(AVATAR_ID) avatarId: Int
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
     @GET("users/getuserprofile")
     fun getProfile(
         @Header(USERID) userId: Int,
         @Header(EXPIRETOKEN) expireToken: String,
         @Header(AUTHEXPIRE) authExpire: String
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
     @GET("users/getuserprofile")
     fun getProfileIno(
@@ -212,14 +213,14 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Header("InstanceId") instanceId: String
-    ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.ProfileInfoModel>>
+    ): Single<BaseModelRummy<ProfileInfoModel>>
 
     @GET("myprofile/getlevels")
     fun getLevels(
         @Header(USER_ID) UserId: String,
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String
-    ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.LevelModel>>
+    ): Single<BaseModelRummy<LevelModel>>
 
     @POST("player/userteamsave")
     fun saveTeam(
@@ -229,7 +230,7 @@ interface APIInterface {
         @Header(MATCH_ID) matchId: Int,
         @Header(PLAYER_RESP) playerRes: String,
         @Header(CAMPAIGN_ID) campaignId: String
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
     @POST("player/userteamsavev1")
     fun saveTeamNew(
@@ -239,7 +240,7 @@ interface APIInterface {
         @Header(MATCH_ID) matchId: Int,
         @Header(PLAYER_RESP) playerRes: String,
         @Header(CAMPAIGN_ID) campaignId: String
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
     @POST("v1/user/update-team-name")
     fun updateTeamName(
@@ -248,7 +249,7 @@ interface APIInterface {
         @Header(EXPIRETOKEN) expireToken: String,
         @Header(AUTHEXPIRE) authExpire: String,
         @Header(DEVICE_ID_2) deviceID: String
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
     @POST("player/usereditsave")
     fun saveEditTeam(
@@ -259,7 +260,7 @@ interface APIInterface {
         @Header(PLAYER_RESP) playerRes: String,
         @Header(TEAM_ID) teamId: Long,
         @Header(CAMPAIGN_ID) campaignId: String
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
     @POST("player/usereditsavev1")
     fun saveEditTeamNew(
         @Header(USERID) userId: Int,
@@ -269,7 +270,7 @@ interface APIInterface {
         @Header(PLAYER_RESP) playerRes: String,
         @Header(TEAM_ID) teamId: Long,
         @Header(CAMPAIGN_ID) campaignId: String
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
 
     @POST("joinleauge/joinleaguev2")
@@ -282,7 +283,7 @@ interface APIInterface {
         @Header(MATCH_ID) matchId: Int,
         @Header(CAMPAIGN_ID) campaignId: String,
         @Header("PassCount") passCount: Int = 0
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
 
     @POST("goldenticket/purchase")
@@ -291,7 +292,7 @@ interface APIInterface {
         @Header(EXPIRETOKEN) expireToken: String,
         @Header(AUTHEXPIRE) authExpire: String,
         @Header("PassId") passID: String
-    ):Single<BaseModel<String>>
+    ):Single<BaseModelRummy<String>>
 
     @POST("quiz/joinquiz")
     fun joinQuiz(
@@ -303,7 +304,7 @@ interface APIInterface {
         @Header(CAMPAIGN_ID) campaignId: String,
         @Header(LANGUAGE_CODE_1) languageCode: String,
         @Header(TOKEN_FIREBASE_1) FirebaseToken: String = ""
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
 
     @POST("joinleauge/switchteam")
@@ -315,7 +316,7 @@ interface APIInterface {
         @Header(CONTEST_ID) contestId: Int,
         @Header(TEAM_ID) teamId: Long,
         @Header(OLD_TEAM_ID) oldTeamId: Long
-    ): Single<BaseModel<String?>>
+    ): Single<BaseModelRummy<String?>>
 
     @POST("myprofile/redeem-coupan")
     fun redeemCode(
@@ -324,13 +325,13 @@ interface APIInterface {
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Header(COUPON) coupon: String,
         @Header(DEVICE_ID_2) deviceId: String
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
     @POST("bankaccount/bankdelete")
     fun deleteBank(
         @Header(USER_ID) UserId: String,
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
     @POST("/account/v1/sendverificationmail")
     fun sendVerificationEmail(
@@ -338,7 +339,7 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Body map:JsonObject
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
     @POST("/account/v1/verify-email")
     fun verifyEmail(
@@ -346,14 +347,14 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Body map:JsonObject
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
     @GET("/account/v1/email/verificationstatus")
     fun verificationStatus(
         @Header(USER_ID) UserId: String,
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
-    ): Single<BaseModel<EmailVerificationStatusModel>>
+    ): Single<BaseModelRummy<EmailVerificationStatusModel>>
 
     @POST("myprofile/emailchange")
     fun updateEmailAddress(
@@ -361,7 +362,7 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Header("NewEmail") newEmail: String
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
     @Multipart
     @POST("pancard/pancardupload")
@@ -374,7 +375,7 @@ interface APIInterface {
         @Part(PAN_DOB) dob: RequestBody,
         @Part(PAN_STATE) state: RequestBody,
         @Part(PAN_PHOTO + "\"; filename=abc.jpg") file: RequestBody
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
 
 
@@ -383,7 +384,7 @@ interface APIInterface {
         @Header(USER_ID) UserId: String,
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
 
 
@@ -399,7 +400,7 @@ interface APIInterface {
         @Part(BANK_NAME) bname: RequestBody,
         @Part(BANK_BRANCH) branch: RequestBody,
         @Part(BANK_PHOTO + "\"; filename=" + "abc.jpg") file: RequestBody
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
     @POST("quiz/update-wheel-data")
     fun updateWheelData(
@@ -407,7 +408,7 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Header("WheelID") SportsType: String
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
     @POST("users/updateuserprofile")
     fun updateProfile(
@@ -421,7 +422,7 @@ interface APIInterface {
         @Header(PINCODE) pincode: String,
         @Header(STATE) state: String,
         @Header(EMAIL) email: String
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
     @POST("myprofile/updateavtarimage")
     fun changeUserAvtaar(
@@ -429,7 +430,7 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Header(AVTAR_ID) avtarId: String
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
     @POST("users/chnagepassword")
     fun changePassword(
@@ -438,7 +439,7 @@ interface APIInterface {
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Header(OLD_PASSWORD) oldpassword: String,
         @Header(PASSWORD_2) password: String
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
 
 
@@ -450,7 +451,7 @@ interface APIInterface {
         @Body map:JsonObject,
         //@Header(AMMOUNT) ammount: String,
         //@Header(WITHDRAWAL_METHOD) methodId: String
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
     @POST("myprofile/WdRquestCancel")
     fun cancelWithdrawalDetail(
@@ -458,7 +459,7 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Header("TnxId") transactionID: String
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
     @POST("myprofile/withdrawunutilized")
     fun withdrawUnutilizedAmount(
@@ -467,7 +468,7 @@ interface APIInterface {
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Header(AMMOUNT) ammount: String,
         @Header(WITHDRAWAL_METHOD) methodId: String
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
 
     @GET("PaymentsAndroid/DeleteCard")
@@ -488,7 +489,7 @@ interface APIInterface {
         @Header(TITLE) title: String,
         @Header(MESSAGE) mes: String,
         @Header(CATEGORY_NAME) category: String
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
     @POST("users/saveipaddress")
     fun logout(
@@ -496,14 +497,14 @@ interface APIInterface {
         @Query(IP_ADDRESS) ipaddress: String,
         @Query(MAC_ADDRESS) macaddress: String,
         @Query(TYPE) type: String
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
     @POST("v1/user/logout-all-devices")
     fun logoutFromAllDevice(
         @Header("UserId") UserId: String,
         @Header("ExpireToken") expire: String,
         @Header("AuthExpire") auth: String
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
 
 
@@ -515,7 +516,7 @@ interface APIInterface {
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Header(POLL_ID) pollId: String,
         @Header(POLL_OPTION_ID) optionId: String
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
 
     @GET("v3/match/pollsaveshare")
@@ -525,7 +526,7 @@ interface APIInterface {
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Header(POLL_ID) pollId: String,
         @Header(POLL_OPTION_ID) optionId: String
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
     @POST("v3/language/save")
     fun saveLanguage(
@@ -533,7 +534,7 @@ interface APIInterface {
         @Query(DEVICE_ID) deviceId: String,
         @Query(LANGUAGE_CODE) lamguageCode: String,
         @Query(DEVICE_TYPE) type: String
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
 
     @POST("v3/team/saveteam")
@@ -543,7 +544,7 @@ interface APIInterface {
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Header(FAV_TEAM_ID) teamId: Long,
         @Header(TOUR_ID) tourId: Int
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
 
     @POST("myprofile/ScarchCard")
@@ -552,7 +553,7 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Header(ID) cardId: Long
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
     @GET("users/savefirebasetoken")
     fun updateFirebaseToken(
@@ -560,7 +561,7 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Header(TOKEN_FIREBASE_1) FirebaseToken: String
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
 
     @GET("myprofile/getscarchcard")
@@ -568,14 +569,14 @@ interface APIInterface {
         @Header(USER_ID) UserId: String,
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
     @POST("myprofile/updatescarchcard")
     fun updateScratchCard(
         @Header(USER_ID) UserId: String,
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
 
 
@@ -588,7 +589,7 @@ interface APIInterface {
         @Header(MATCH_Id) matchId: Int,
         @Header(QUESTION_ID) questionId: Int,
         @Header(OPTION_ID) optionId: Int
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
 
     @GET("Quiz/CheckQuizCompletTime")
@@ -597,7 +598,7 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Header(MATCH_Id) matchId: Int
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
 
     @POST("coupans/check-availability")
@@ -606,7 +607,7 @@ interface APIInterface {
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Header(USER_ID) UserId: Int,
         @Header(ID) couponId: String
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
 
 
@@ -620,7 +621,7 @@ interface APIInterface {
         @Header("DemographicData") DemographicData: String,
         @Header("LocationData") LocationData: String,
         @Body raw: JsonObject
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
 
 
@@ -631,7 +632,7 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Body map:JsonObject
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
 
     @POST("payment/v1/card/save")
@@ -640,7 +641,7 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) AuthExpire: String,
         @Header(AUTH_EXPIRE) ExpireToken: String,
         @Body map:JsonObject
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
 
     @POST("payment/v1/wallet/direct-debit")
@@ -649,7 +650,7 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) AuthExpire: String,
         @Header(AUTH_EXPIRE) ExpireToken: String,
         @Body map:JsonObject
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
     @POST("payment/v1/vpa/verify")
     fun verifyUPI(
@@ -657,7 +658,7 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) AuthExpire: String,
         @Header(AUTH_EXPIRE) ExpireToken: String,
         @Header("UPI") UPI: String,
-    ): Single<BaseModel<String>>
+    ): Single<BaseModelRummy<String>>
 
 
 
@@ -666,14 +667,14 @@ interface APIInterface {
         @Header(USER_ID) UserId: Int,
         @Header(EXPIRETOKEN) AuthExpire: String,
         @Header(AUTHEXPIRE) ExpireToken: String,
-    ): Single<BaseModel<ArrayList<com.rummytitans.sdk.cardgame.models.HeaderItemModel>>>
+    ): Single<BaseModelRummy<ArrayList<HeaderItemModel>>>
 
     @GET("v2/category/")
     fun getCategories(
         @Header(USER_ID) UserId: Int,
         @Header(EXPIRETOKEN) AuthExpire: String,
         @Header(AUTHEXPIRE) ExpireToken: String,
-    ): Single<BaseModel<ArrayList<com.rummytitans.sdk.cardgame.models.RummyCategoryModel>>>
+    ): Single<BaseModelRummy<ArrayList<RummyCategoryModel>>>
 
     @GET("v2/lobby/list")
     fun getLobbies(
@@ -681,7 +682,7 @@ interface APIInterface {
         @Header(EXPIRETOKEN) AuthExpire: String,
         @Header(AUTHEXPIRE) ExpireToken: String,
         @Query("categoryId")categoryId:String,
-    ): Single<BaseModel<ArrayList<com.rummytitans.sdk.cardgame.models.RummyLobbyModel>>>
+    ): Single<BaseModelRummy<ArrayList<RummyLobbyModel>>>
 
     /*Location*/
     @POST("account/v1/location")
@@ -690,7 +691,7 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Body raw: JsonObject
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
     @POST("v2/game/active-match")
     fun checkForActiveMatch(
@@ -698,7 +699,7 @@ interface APIInterface {
         @Header(EXPIRETOKEN) AuthExpire: String,
         @Header(AUTHEXPIRE) ExpireToken: String,
         @Body json:JsonObject
-    ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.JoinLobbyModel>>
+    ): Single<BaseModelRummy<JoinLobbyModel>>
 
     @GET("match/v1/getmatch")
     fun getSingleMatchDetails(
@@ -708,7 +709,7 @@ interface APIInterface {
         @Header(MATCH_ID) matchId: Int,
         @Header(APP_CODE) appCode: Int=2,
         @Header(MATCH_STATUS) isMatchStatusLive: String=MyConstants.MATCH_NOT_STARTED
-    ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.MatchModel>>
+    ): Single<BaseModelRummy<MatchModel>>
 
     @POST("private/leaugecode")
     fun getPrivateContestDetails(
@@ -716,7 +717,7 @@ interface APIInterface {
         @Header(EXPIRETOKEN) expireToken: String,
         @Header(AUTHEXPIRE) authExpire: String,
         @Header(CONTEST_CODE) leaugeCode: String
-    ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.CreatePrivateContestModel>>
+    ): Single<BaseModelRummy<CreatePrivateContestModel>>
 
     @POST("v3/wallet/buy-in-range")
     fun confirmLobby(
@@ -724,7 +725,7 @@ interface APIInterface {
         @Header(EXPIRETOKEN) AuthExpire: String,
         @Header(AUTHEXPIRE) ExpireToken: String,
         @Body json:JsonObject
-    ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.JoinGameConfirmationModel>>
+    ): Single<BaseModelRummy<JoinGameConfirmationModel>>
 
     @POST("v2/game/play")
     fun joinLobby(
@@ -732,7 +733,7 @@ interface APIInterface {
         @Header(EXPIRETOKEN) AuthExpire: String,
         @Header(AUTHEXPIRE) ExpireToken: String,
         @Body json:JsonObject
-    ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.JoinLobbyModel>>
+    ): Single<BaseModelRummy<JoinLobbyModel>>
 
     @GET("v2/games/get/{gameId}")
     fun getGames(
@@ -740,7 +741,7 @@ interface APIInterface {
         @Header(EXPIRETOKEN) expireToken: String,
         @Header(AUTHEXPIRE) authExpire: String,
         @Path("gameId") gameId: Int
-    ): Single<BaseModel<GamesResponseModel.GamesModel>>
+    ): Single<BaseModelRummy<GamesResponseModel.GamesModel>>
 
     @GET("v2/rakeback/details")
     fun getRakeBackDetail(
@@ -779,7 +780,7 @@ interface APIInterface {
         @Header(USER_ID) userId: String,
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
-    ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.ReferContentModel>>
+    ): Single<BaseModelRummy<ReferContentModel>>
 
     @GET("/users/get-friends")
     fun getContacts(
@@ -794,7 +795,7 @@ interface APIInterface {
         @Header(USER_ID) UserId: String,
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String
-    ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.WalletBalanceModel>>
+    ): Single<BaseModelRummy<WalletBalanceModel>>
 
     @POST("payment/v1/gateway/initialize")
     fun getPaymentGateWay(
@@ -810,7 +811,7 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Header(LANGUAGE_CODE_1) languageCode: String
-    ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.WalletInfoModel>>
+    ): Single<BaseModelRummy<WalletInfoModel>>
 
     @POST("payment/v1/coupan/verify")
     fun verifyAppliedCoupon(
@@ -818,14 +819,14 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Body jsonObject: JsonObject
-    ): Single<BaseModel<CouponAppliedModel>>
+    ): Single<BaseModelRummy<CouponAppliedModel>>
 
     @GET("/payment/v1/offers")
     fun getAddCashOfferList(
         @Header(USER_ID) UserId: Int,
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String
-    ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.AddCashOfferModel>>
+    ): Single<BaseModelRummy<AddCashOfferModel>>
 
     @GET("v1/myteam11/banners")
     fun getHeaders(): Single<com.rummytitans.sdk.cardgame.models.HeaderBaseResponse>
@@ -835,7 +836,7 @@ interface APIInterface {
         @Header(USER_ID) UserId: Int,
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String
-    ): Single<BaseModel<ArrayList<CashBonusModel>>>
+    ): Single<BaseModelRummy<ArrayList<CashBonusModel>>>
 
     @GET("transaction/v2/list/{TypeId}/{PageNo}")
     fun getRecentTransactions(
@@ -844,7 +845,7 @@ interface APIInterface {
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Path("PageNo") PageNo: String,
         @Path("TypeId") TypeId: Int
-    ): Single<BaseModel<ArrayList<com.rummytitans.sdk.cardgame.models.TransactionModel>>>
+    ): Single<BaseModelRummy<ArrayList<TransactionModel>>>
 
     @GET("transaction/v3/detail/{tranId}/{gameId}")
     fun getTransectionDetails(
@@ -854,7 +855,7 @@ interface APIInterface {
         @Header("TranType") typeId: String,
         @Path("tranId") txtId: String,
         @Path("gameId") gameId: String,
-    ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.TransactionModel.TransactionListModel>>
+    ): Single<BaseModelRummy<TransactionModel.TransactionListModel>>
 
     @POST("joinleauge/usableandamountNewv2")
     fun getUsableJoinAmount(
@@ -868,7 +869,7 @@ interface APIInterface {
         @Header("teamCount") teamCount: Int,
         @Header("passcount") passcount: Int,
         @Header("Modipasscount") Modipasscount: Int = 0
-    ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.UsableAmountModel>>
+    ): Single<BaseModelRummy<UsableAmountModel>>
 
 
     @GET("transaction/v1/withdrawal/options")
@@ -877,7 +878,7 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Query(LANGUAGE_CODE_1) languageCode: String
-    ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.WithdrawModel>>
+    ): Single<BaseModelRummy<WithdrawModel>>
 
     @POST("/user/v2/Withdrawal/tds-calculation")
     fun getTdsOnAmount(
@@ -886,7 +887,7 @@ interface APIInterface {
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Header(LANGUAGE_CODE_1) languageCode: String,
         @Body json: JsonObject
-    ): Single<BaseModel<List<com.rummytitans.sdk.cardgame.models.WithdrawalTdsModel>>>
+    ): Single<BaseModelRummy<List<WithdrawalTdsModel>>>
 
     @GET("myprofile/Wddetail")
     fun getWithdrawalDetail(
@@ -894,7 +895,7 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Header("TnxId") transactionID: String
-    ): Single<BaseModel<WithdrawalDetailModel>>
+    ): Single<BaseModelRummy<WithdrawalDetailModel>>
 
     @POST("games/v1/tickets")
     fun getGamesTicket(
@@ -902,7 +903,7 @@ interface APIInterface {
         @Header(AUTH_EXPIRE) ExpireToken: String,
         @Header(EXPIRE_TOKEN) AuthExpire: String,
         @Header("GameId") GameId: Int
-    ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.GameTicketModel>>
+    ): Single<BaseModelRummy<GameTicketModel>>
 
     @GET("platfrom/gamedetails")
     fun getGameDetails(
@@ -912,21 +913,21 @@ interface APIInterface {
         @Header(STATE_NAME2) stateName: String,
         @Header(GAME_ID) gameId: Int,
         @Header(LOCATION_CORDINATE) cordinates: String
-    ): Single<BaseModel<GamesResponseModel.GamesModel>>
+    ): Single<BaseModelRummy<GamesResponseModel.GamesModel>>
 
     @GET("myprofile/gethelpdesk")
     fun getHelpDesk(
         @Header(USER_ID) UserId: String,
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String
-    ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.HelpDeskModel>>
+    ): Single<BaseModelRummy<HelpDeskModel>>
 
     @GET("kyc/v1/details")
     fun getVerificationInfo(
         @Header(USER_ID) UserId: String,
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String
-    ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.ProfileVerificationModel>>
+    ): Single<BaseModelRummy<ProfileVerificationModel>>
 
 
     @POST("match/v1/Segmentdetail")
@@ -935,7 +936,7 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) AuthExpire: String,
         @Header(AUTH_EXPIRE) ExpireToken: String,
         @Body json:JsonObject
-    ): Single<BaseModel<DeeplinkResponseModel>>
+    ): Single<BaseModelRummy<DeeplinkResponseModel>>
 
     @GET("payment/v1/card/validator")
     fun checkCardInformation(
@@ -960,7 +961,7 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Body map:JsonObject
-    ): Single<BaseModel<com.rummytitans.sdk.cardgame.ui.payment.viewmodel.WalletInitializeModel>>
+    ): Single<BaseModelRummy<WalletInitializeModel>>
 
     @GET("myprofile/get-subscription-items")
     fun getSubscriptionList(
@@ -968,7 +969,7 @@ interface APIInterface {
         @Header(EXPIRETOKEN) expireToken: String,
         @Header(AUTHEXPIRE) authExpire: String,
         @Header("Initial") initial: Boolean
-    ): Single<BaseModel<ArrayList<SubscriptionItemModel>>>
+    ): Single<BaseModelRummy<ArrayList<SubscriptionItemModel>>>
 
     @POST("myprofile/save-subscription-items")
     fun saveSubscriptionList(
@@ -984,7 +985,7 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Header(LANGUAGE_CODE_1)language:String
-    ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.AddressKycContentModel>>
+    ): Single<BaseModelRummy<AddressKycContentModel>>
 
     @Multipart
     @POST("profile/v2/upload/address-proof")
@@ -995,7 +996,7 @@ interface APIInterface {
         @Part("DocType") DocType:RequestBody,
         @Part(PAN_STATE) state: RequestBody,
         @Part images: ArrayList<MultipartBody.Part>
-    ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.AddressResponseModel<Boolean>>>
+    ): Single<BaseModelRummy<AddressResponseModel<Boolean>>>
 
     @POST("kyc/v1/dl/verification")
     fun uploadAddressProofFromDL(
@@ -1003,7 +1004,7 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Body jsonBody:JsonObject
-    ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.AddressResponseModel<Int>>>
+    ): Single<BaseModelRummy<AddressResponseModel<Int>>>
 
     @POST("/kyc/v1/aadhar/basic-verification")
     fun verifyWithAadhaar(
@@ -1011,15 +1012,15 @@ interface APIInterface {
         @Header(EXPIRE_TOKEN) ExpireToken: String,
         @Header(AUTH_EXPIRE) AuthExpire: String,
         @Body json: JsonObject
-    ): Single<BaseModel<com.rummytitans.sdk.cardgame.models.AddressResponseModel<Int>>>
+    ): Single<BaseModelRummy<AddressResponseModel<Int>>>
 
     @GET("account/v1/states")
-    fun getStateList(): Single<BaseModel<ArrayList<com.rummytitans.sdk.cardgame.models.StateModel>>>
+    fun getStateList(): Single<BaseModelRummy<ArrayList<StateModel>>>
 
     @POST("print-log")
     fun printRummyLog(
         @Body json:JsonObject
-    ): Single<BaseModel<JsonObject>>
+    ): Single<BaseModelRummy<JsonObject>>
 
     @POST("payment/v1/calculate/gst")
     fun getGstCalcualtion(
@@ -1027,7 +1028,7 @@ interface APIInterface {
         @Header(EXPIRETOKEN) AuthExpire: String,
         @Header(AUTHEXPIRE) ExpireToken: String,
         @Body json:JsonObject
-    ): Single<BaseModel<GstCalculationModel>>
+    ): Single<BaseModelRummy<GstCalculationModel>>
 
     @POST("profile/v1/update")
     fun updateProfileData(
@@ -1035,14 +1036,14 @@ interface APIInterface {
         @Header(EXPIRETOKEN) expireToken: String,
         @Header(AUTHEXPIRE) authExpire: String,
         @Body json:JsonObject
-    ): Single<BaseModel<Any>>
+    ): Single<BaseModelRummy<Any>>
 
     @GET("transaction/v1/calculate/winning-to-deposit")
     fun getWinningConversionRange(
         @Header(USERID) userId: String,
         @Header(EXPIRETOKEN) expireToken: String,
         @Header(AUTHEXPIRE) authExpire: String,
-    ): Single<BaseModel<WinningConversionContentModel>>
+    ): Single<BaseModelRummy<WinningConversionContentModel>>
 
     @POST("transaction/v1/convert/winning-to-deposit")
     fun convertToDeposit(
@@ -1050,7 +1051,7 @@ interface APIInterface {
         @Header(EXPIRETOKEN) expireToken: String,
         @Header(AUTHEXPIRE) authExpire: String,
         @Body json: JsonObject
-    ): Single<BaseModel<List<WinningConversionContentModel.WinningConversionBenefitModel>>>
+    ): Single<BaseModelRummy<List<WinningConversionContentModel.WinningConversionBenefitModel>>>
 
     companion object {
         const val TRANSACTION_ID = "TxnId"
