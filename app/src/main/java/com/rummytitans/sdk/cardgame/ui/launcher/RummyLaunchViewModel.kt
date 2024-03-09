@@ -12,6 +12,7 @@ import com.rummytitans.sdk.cardgame.utils.MyConstants
 import com.rummytitans.sdk.cardgame.utils.getNotLoginUser
 import com.rummytitans.sdk.cardgame.widget.MyDialog
 import android.text.TextUtils
+import androidx.annotation.Keep
 import androidx.core.os.bundleOf
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.MutableLiveData
