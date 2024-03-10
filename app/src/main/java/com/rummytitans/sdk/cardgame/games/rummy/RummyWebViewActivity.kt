@@ -89,7 +89,7 @@ class RummyWebViewActivity() : BaseActivity(), RummyNavigator {
                 domStorageEnabled = true
                 databaseEnabled = true
             }
-            addJavascriptInterface(JsObject(), "Android")
+            addJavascriptInterface(JsObjectRummy(), "Android")
         }
 
         mBinding.webViewGame.webViewClient = object : WebViewClient() {
@@ -204,7 +204,7 @@ class RummyWebViewActivity() : BaseActivity(), RummyNavigator {
 
     var lastOrientation = "PORTRAIT"
 
-    inner class JsObject {
+    inner class JsObjectRummy {
         @JavascriptInterface
         fun receiveMessage(data: String) {
             Log.d("RummyTitan","data "+data)
@@ -213,6 +213,9 @@ class RummyWebViewActivity() : BaseActivity(), RummyNavigator {
 
             kotlin.runCatching {
                 val eventModel = Gson().fromJson(data, GameEventModel::class.java)
+                Log.d("RummyTitan","data "+eventModel)
+                Log.d("RummyTitan","data "+this)
+
                 when(eventModel.redirectionType.lowercase()){
                     "landscape"->{
                         changeOrientation(PORTRAIT)
@@ -221,6 +224,8 @@ class RummyWebViewActivity() : BaseActivity(), RummyNavigator {
                         changeOrientation(LANDSCAPE)
                     }
                     "exit"->{
+                        Log.d("RummyTitan","addModel ")
+
                         when(eventModel.redirectionParams.redirectionUrl?.lowercase()){
                             "addmoney" ->{
                                 addCash(eventModel.redirectionParams.extraParams?.amount?:
@@ -243,6 +248,8 @@ class RummyWebViewActivity() : BaseActivity(), RummyNavigator {
                         destroyAndRelaunchWebView()
                     }
                 }
+            }.onFailure {
+                Log.d("RummyTitan","onFailure "+it.message)
             }
         }
     }
