@@ -69,6 +69,10 @@ object RummyTitanSDK {
             String(Base64.decode(splashResponse, Base64.CRLF), StandardCharsets.UTF_8)
         println("Decoded String: $decodedString")
         println("Deeplink String: $deeplink")
+        var newDeeplink = deeplink
+        if(deeplink.startsWith("https://m11.io")){
+            newDeeplink = deeplink.substringAfter("open/?")
+        }
         SharedPreferenceStorageRummy(context).let { pref ->
             try {
                 pref.loginCompleted = true
@@ -95,7 +99,7 @@ object RummyTitanSDK {
                 Intent(context, RummyMainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             if (!TextUtils.isEmpty(deeplink)) {
-                intent.putExtra("deepLink", deeplink)
+                intent.putExtra("deepLink", newDeeplink)
             }
             context.startActivity(intent)
 
