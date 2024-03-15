@@ -65,8 +65,9 @@ class MainViewModel @Inject constructor(
         if (!connectionDetector.isConnected) {
             return
         }
+        val api = getApiEndPointObject(prefs.appUrl2?:"")
         compositeDisposable.add(
-            apiInterface.getVerificationInfo(
+            api.getVerificationInfo(
                 loginResponse.UserId.toString(),
                 loginResponse.ExpireToken,
                 loginResponse.AuthExpire
