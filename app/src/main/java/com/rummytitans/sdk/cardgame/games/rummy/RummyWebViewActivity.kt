@@ -300,6 +300,7 @@ class RummyWebViewActivity() : BaseActivity() {
                     mViewModel.analyticsHelper.fireEvent(AnalyticsKey.Names.LogOut)
                     mViewModel.logoutUser()
                     exitFromGame()
+                    finishAffinity()
                     RummyTitanSDK.rummyCallback?.logoutUser()
                 }else{
                     exitFromGame()

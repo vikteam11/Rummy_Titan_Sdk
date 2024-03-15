@@ -19,6 +19,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.rummytitans.sdk.cardgame.MainApplication
 import com.rummytitans.sdk.cardgame.RummyTitanSDK
+import com.rummytitans.sdk.cardgame.di.anotation.RummySdk
 import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -55,6 +56,7 @@ class RummyLaunchViewModel @Inject constructor(
             }
         }
 
+        val bseUrl = RummyTitanSDK.getOption()?.baseUrl
         val apis = getApiEndPointObject(prefs.appUrl2?:"")
 
         compositeDisposable.add(

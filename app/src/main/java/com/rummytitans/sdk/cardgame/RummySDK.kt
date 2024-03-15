@@ -48,12 +48,19 @@ object RummyTitanSDK {
         }
     }
 
-    fun getOption():RummySdkOptions{
+    fun getOption():RummySdkOptions?{
         if (!(::appContext.isInitialized)){
-            appContext = MainApplication.appContext
+            MainApplication.appContext?.let {ctx->
+                appContext = ctx
+                val pref=SharedPreferenceStorageRummy(appContext)
+                return Gson().fromJson(pref.sdkOptions, RummySdkOptions::class.java)
+            }?:run {
+                return RummySdkOptions()
+            }
+        }else{
+            val pref=SharedPreferenceStorageRummy(appContext)
+            return Gson().fromJson(pref.sdkOptions, RummySdkOptions::class.java)
         }
-        val pref=SharedPreferenceStorageRummy(appContext)
-        return Gson().fromJson(pref.sdkOptions, RummySdkOptions::class.java)
     }
 
     fun startLibraryActivity() {

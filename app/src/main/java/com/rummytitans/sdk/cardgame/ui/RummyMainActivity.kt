@@ -583,8 +583,11 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
                     getString(R.string.go_back),
                     "Play",
                     onNegativeClick = {
-                        RummyTitanSDK.rummyCallback?.sdkFinish()
-                        finish()
+                        binding.root.postDelayed({
+                            finishAffinity()
+                            finish()
+                            RummyTitanSDK.rummyCallback?.sdkFinish()
+                        },100)
                     },
                 ),
                 viewModel.selectedColor.get()?:""
