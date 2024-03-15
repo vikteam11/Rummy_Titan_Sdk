@@ -584,9 +584,8 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
                     "Play",
                     onNegativeClick = {
                         binding.root.postDelayed({
-                            finishAffinity()
-                            finish()
                             RummyTitanSDK.rummyCallback?.sdkFinish()
+                            finish()
                         },100)
                     },
                 ),
