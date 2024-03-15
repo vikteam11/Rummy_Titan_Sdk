@@ -28,6 +28,11 @@ object RummyTitanSDK {
         MainApplication.appContext = context
     }
 
+    fun setAppContext(context: Context) {
+        appContext = context.applicationContext
+        MainApplication.appContext = context
+    }
+
     fun setCallback(callback: RummyTitansCallback, analticsCallback: AnalticsCallback) {
         rummyCallback = callback
         analytiCallback = analticsCallback
@@ -48,8 +53,7 @@ object RummyTitanSDK {
             appContext = MainApplication.appContext
         }
         val pref=SharedPreferenceStorageRummy(appContext)
-        return Gson().fromJson(pref.sdkOptions, RummySdkOptions::class.java
-        )
+        return Gson().fromJson(pref.sdkOptions, RummySdkOptions::class.java)
     }
 
     fun startLibraryActivity() {
@@ -92,6 +96,7 @@ object RummyTitanSDK {
                 println("Error while parsing JSON: ${e.message}")
             }
             pref.sdkOptions = Gson().toJson(rummySdkOptions)
+
             val intent = if (splashResponse?.isEmpty() == true) Intent(
                 context,
                 SDKSplashActivity::class.java

@@ -158,7 +158,9 @@ class AddCardActivity : BaseActivity(), AddCardNavigator, PaymentListener {
         setupExpMonthArray()
 
         hyperInstance = HyperServices(this)
-        paymentHelper = JuspayPaymentHelper(this, hyperInstance, this,viewModel.connectionDetector)
+        paymentHelper = JuspayPaymentHelper(this, hyperInstance, this,
+            viewModel.connectionDetector,
+            viewModel.prefs)
 
         getPaymentInfo()
         binding.executePendingBindings()

@@ -510,7 +510,7 @@
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="16dp"
                             android:layout_marginEnd="12dp"
-                            android:visibility="@{RummyTitanSDK.INSTANCE.option.showKycOptions ? View.VISIBLE :View.GONE}"
+                            android:visibility="@{viewmodel.prefs.rummySdkOption.showKycOptions ? View.VISIBLE :View.GONE}"
                             app:setViewBackground="@{@color/rummy_black_3}"
                             app:strokeColor="@{@color/grayBorder}"
                             app:viewRadius="@{4}"

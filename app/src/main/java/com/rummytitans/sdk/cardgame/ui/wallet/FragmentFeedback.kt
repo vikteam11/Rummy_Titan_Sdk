@@ -17,8 +17,9 @@ import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
+import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
-import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
+
 import kotlinx.android.synthetic.main.fragment_feedback_rummy.*
 import kotlinx.android.synthetic.main.fragment_feedback_rummy.icBack
 import javax.inject.Inject
@@ -156,7 +157,7 @@ class FragmentFeedback : BaseFragment(), MainNavigationFragment,
     override fun logoutUser() {
         showError(R.string.err_session_expired)
         activity?.finishAffinity()
-        startActivity(Intent(activity, RummyNewLoginActivity::class.java))
+        RummyTitanSDK.rummyCallback?.logoutUser()
     }
 
     override fun getStringResource(resourseId: Int) = getString(resourseId)

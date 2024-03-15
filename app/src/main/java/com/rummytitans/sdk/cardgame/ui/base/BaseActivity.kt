@@ -29,7 +29,7 @@ import com.rummytitans.sdk.cardgame.RummyTitanSDK
 //import com.onesignal.OSInAppMessageAction
 //import com.onesignal.OneSignal
 import com.rummytitans.sdk.cardgame.models.MatchModel
-import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
+
 import com.tapadoo.alerter.Alerter
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
@@ -74,6 +74,7 @@ open class BaseActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setTheme(R.style.RummyAppTheme)
         supportActionBar?.hide()
+        RummyTitanSDK.setAppContext(this)
         registerReceiver(
             clearActivityStack,
             IntentFilter.create("clearStackActivity", "text/plain")

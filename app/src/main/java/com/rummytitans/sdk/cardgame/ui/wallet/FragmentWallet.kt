@@ -16,7 +16,7 @@ import com.rummytitans.sdk.cardgame.ui.base.BaseFragment
 import com.rummytitans.sdk.cardgame.ui.common.CommonFragmentActivity
 import com.rummytitans.sdk.cardgame.ui.games.tickets.GamesTicketActivity
 import com.rummytitans.sdk.cardgame.ui.home.MainNavigationFragment
-import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
+
 import com.rummytitans.sdk.cardgame.ui.wallet.adapter.WalletBonusAdapter
 import com.rummytitans.sdk.cardgame.ui.wallet.model.WalletRedeemCodeModel
 import com.rummytitans.sdk.cardgame.ui.wallet.viewmodel.WalletViewModel
@@ -48,6 +48,7 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
+import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
 import com.rummytitans.sdk.cardgame.ui.wallet.winning_conversion.WinningConversionBottomSheet
@@ -571,7 +572,7 @@ class FragmentWallet : BaseFragment(),
     override fun logoutUser() {
         showError(R.string.err_session_expired)
         activity?.finishAffinity()
-        startActivity(Intent(activity, RummyNewLoginActivity::class.java))
+        RummyTitanSDK.rummyCallback?.logoutUser()
     }
 
     override fun getStringResource(resourseId: Int) = getString(resourseId)

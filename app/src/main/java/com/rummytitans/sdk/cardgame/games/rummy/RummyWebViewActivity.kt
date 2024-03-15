@@ -25,14 +25,15 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.google.gson.Gson
+import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
-import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
+
 import com.rummytitans.sdk.cardgame.ui.wallet.RummyAddCashActivity
 import kotlinx.android.synthetic.main.activity_games_web_viewer_rummy.*
 
 
-class RummyWebViewActivity() : BaseActivity(), RummyNavigator {
+class RummyWebViewActivity() : BaseActivity() {
 
     var isStatusBarHidden = false
     lateinit var mBinding: ActivityGamesWebViewerRummyBinding
@@ -55,26 +56,16 @@ class RummyWebViewActivity() : BaseActivity(), RummyNavigator {
                     navigator = this@RummyWebViewActivity
                     navigatorAct = this@RummyWebViewActivity
                     myDialog = MyDialog(this@RummyWebViewActivity)
-                    intent?.getBooleanExtra(MyConstants.INTENT_PASS_FROM_ALL_GAMES, false)?.let {
-                        comeFromAllGames.set(it)
-                        if (it) isHeadersAvailable.set(false)
-                    }
                 }
         mBinding = DataBindingUtil.setContentView(this,R.layout.activity_games_web_viewer_rummy)
         hideStatusBar()
+
+        launchRummy()
     }
 
     private var savedInstanceState:Bundle?= null
 
-    override fun launchRummy(mGameModel: GamesResponseModel.GamesModel) {
-        mViewModel.apply {
-            if (!connectionDetector.isConnected) {
-                myDialog?.noInternetDialogExit(
-                    retryListener = { launchRummy(mGameModel) },
-                    cancelListener = { exitFromGame()})
-                return
-            }
-        }
+    private fun launchRummy() {
         val finalUrl = intent.getStringExtra(MyConstants.INTENT_PASS_WEB_URL)?:""
         mBinding.webViewGame.apply {
             loadUrl(finalUrl)
@@ -273,7 +264,7 @@ class RummyWebViewActivity() : BaseActivity(), RummyNavigator {
         sendDataToWebView("back")
     }
 
-    override fun showDialog(msg: String, isExit: Boolean) {
+    private fun showDialog(msg: String, isExit: Boolean) {
         val alertModel= AlertdialogModel(
             getString(R.string.app_name_rummy),
             msg,
@@ -305,12 +296,14 @@ class RummyWebViewActivity() : BaseActivity(), RummyNavigator {
             positiveText = exitMSg,
             onPositiveClick = {
                 mDialogTimesUp?.dismiss()
-                mViewModel.analyticsHelper.fireEvent(AnalyticsKey.Names.LogOut)
-                mViewModel.logoutUser()
-                val intent = Intent(this@RummyWebViewActivity, RummyNewLoginActivity::class.java)
-                intent.flags= Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                startActivity(intent)
-                exitFromGame()
+                if(mViewModel.prefs.getRummySdkOption().isRummyApp){
+                    mViewModel.analyticsHelper.fireEvent(AnalyticsKey.Names.LogOut)
+                    mViewModel.logoutUser()
+                    exitFromGame()
+                    RummyTitanSDK.rummyCallback?.logoutUser()
+                }else{
+                    exitFromGame()
+                }
             },
         )
         mDialogTimesUp = MyDialog(this).getAlertDialog(alertModel)

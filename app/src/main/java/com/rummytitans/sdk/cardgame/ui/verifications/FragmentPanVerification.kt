@@ -3,7 +3,7 @@ package com.rummytitans.sdk.cardgame.ui.verifications
 import com.rummytitans.sdk.cardgame.R
 import com.rummytitans.sdk.cardgame.ui.base.BaseFragment
 import com.rummytitans.sdk.cardgame.ui.home.MainNavigationFragment
-import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
+
 import com.rummytitans.sdk.cardgame.ui.verifications.viewmodels.PanVerificationViewModel
 import com.rummytitans.sdk.cardgame.utils.*
 import com.rummytitans.sdk.cardgame.utils.permissions.PermissionActivity
@@ -27,6 +27,7 @@ import androidx.lifecycle.lifecycleScope
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import com.google.firebase.ml.vision.text.FirebaseVisionText
+import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import com.rummytitans.sdk.cardgame.databinding.FragmentPanVerificationRummyBinding
 import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
 import com.rummytitans.sdk.cardgame.widget.cropImage.CropImage
@@ -325,7 +326,7 @@ class FragmentPanVerification : BaseFragment(), RequestVarificationInterface,
     override fun logoutUser() {
         showError(R.string.err_session_expired)
         activity?.finishAffinity()
-        startActivity(Intent(activity, RummyNewLoginActivity::class.java))
+        RummyTitanSDK.rummyCallback?.logoutUser()
     }
 
     override fun getStringResource(resourseId: Int) = getString(resourseId)

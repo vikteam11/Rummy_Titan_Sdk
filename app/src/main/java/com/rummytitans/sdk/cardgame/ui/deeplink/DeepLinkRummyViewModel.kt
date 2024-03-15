@@ -12,7 +12,6 @@ import com.rummytitans.sdk.cardgame.widget.MyDialog
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -32,7 +31,7 @@ class DeepLinkRummyViewModel @Inject constructor(
     val isForceUpdate = MutableLiveData<VersionModelRummy>()
 
     fun checkForceUpdate() {
-        val apis = getApiEndPointObject(RummyTitanSDK.getOption().gameSplashUrl)
+        val apis = getApiEndPointObject(prefs.getRummySdkOption().gameSplashUrl)
         apiCall(apis.getVersion(
             loginResponse?.UserId ?: 0, BuildConfig.VERSION_CODE, ""
         ), {

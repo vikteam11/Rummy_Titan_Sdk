@@ -25,9 +25,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.florent37.viewtooltip.ViewTooltip
 import com.jakewharton.rxbinding2.widget.RxTextView
+import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
 import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
-import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
+
 import com.rummytitans.sdk.cardgame.ui.wallet.WithdrawalTdsAdapter
 import com.rummytitans.sdk.cardgame.ui.wallet.WithdrawalMethodsAdapter
 import com.rummytitans.sdk.cardgame.utils.*
@@ -417,7 +418,7 @@ class FragmentWithdraw : BaseFragment(), MainNavigationFragment,
     override fun logoutUser() {
         showError(R.string.err_session_expired)
         activity?.finishAffinity()
-        startActivity(Intent(activity, RummyNewLoginActivity::class.java))
+        RummyTitanSDK.rummyCallback?.logoutUser()
     }
 
     override fun getStringResource(resourseId: Int) = getString(resourseId)

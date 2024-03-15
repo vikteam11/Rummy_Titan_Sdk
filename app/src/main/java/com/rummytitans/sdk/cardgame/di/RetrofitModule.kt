@@ -4,7 +4,6 @@ import android.os.Build
 import android.text.TextUtils
 import com.google.gson.Gson
 import com.rummytitans.sdk.cardgame.BuildConfig
-import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import com.rummytitans.sdk.cardgame.api.APIInterface
 import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.sdk.cardgame.di.anotation.RummySdk
@@ -37,8 +36,8 @@ class RetrofitModule {
     @Singleton
     @Provides
     @RummySdk
-    fun getRetrofit(@RummySdk okHttpClient: OkHttpClient):Retrofit {
-        val baseurl = RummyTitanSDK.getOption().baseUrl
+    fun getRetrofit(@RummySdk okHttpClient: OkHttpClient, pref:SharedPreferenceStorageRummy):Retrofit {
+        val baseurl = pref.getRummySdkOption().baseUrl
         val baseApiUrl= if (TextUtils.isEmpty(baseurl))
           MyConstants.APP_CURRENT_URL
         else
@@ -69,7 +68,7 @@ class RetrofitModule {
             val url = httpUrl.newBuilder().build()
             val builder = request.newBuilder().url(url)
             builder.addHeader("AppVersion", BuildConfig.VERSION_CODE.toString())
-            builder.addHeader("AppType", "${RummyTitanSDK.getOption().currentAppType}") //uses in BaseViewModel and Analytic helper fireevent()
+            builder.addHeader("AppType", "${pref.getRummySdkOption().currentAppType}") //uses in BaseViewModel and Analytic helper fireevent()
             builder.addHeader("GameType", "1")
             builder.addHeader("DeviceName", Build.MODEL)
             builder.addHeader("DeviceOS", "Android")

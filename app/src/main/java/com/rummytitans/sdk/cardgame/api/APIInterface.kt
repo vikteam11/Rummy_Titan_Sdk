@@ -735,14 +735,6 @@ interface APIInterface {
         @Body json:JsonObject
     ): Single<BaseModelRummy<JoinLobbyModel>>
 
-    @GET("v2/games/get/{gameId}")
-    fun getGames(
-        @Header(USERID) userId: Int,
-        @Header(EXPIRETOKEN) expireToken: String,
-        @Header(AUTHEXPIRE) authExpire: String,
-        @Path("gameId") gameId: Int
-    ): Single<BaseModelRummy<GamesResponseModel.GamesModel>>
-
     @GET("v2/rakeback/details")
     fun getRakeBackDetail(
         @Header(USER_ID) userId: String,

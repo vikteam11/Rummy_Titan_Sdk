@@ -15,7 +15,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
+import com.rummytitans.sdk.cardgame.RummyTitanSDK
+
 import com.rummytitans.sdk.cardgame.ui.wallet.adapter.CashBonusAdapter
 
 class FragmentCashBonus : BaseFragment(), MainNavigationFragment,
@@ -125,7 +126,7 @@ class FragmentCashBonus : BaseFragment(), MainNavigationFragment,
     override fun logoutUser() {
         showError(R.string.err_session_expired)
         activity?.finishAffinity()
-        startActivity(Intent(activity, RummyNewLoginActivity::class.java))
+        RummyTitanSDK.rummyCallback?.logoutUser()
     }
 
     override fun getStringResource(resourseId: Int) = getString(resourseId)

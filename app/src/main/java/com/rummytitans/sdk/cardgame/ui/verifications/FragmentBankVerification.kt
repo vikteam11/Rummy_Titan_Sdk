@@ -5,7 +5,7 @@ import com.rummytitans.sdk.cardgame.databinding.FragmentBankVerificationRummyBin
 import com.rummytitans.sdk.cardgame.models.IFSCCodeModel
 import com.rummytitans.sdk.cardgame.ui.base.BaseFragment
 import com.rummytitans.sdk.cardgame.ui.home.MainNavigationFragment
-import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
+
 import com.rummytitans.sdk.cardgame.ui.verifications.viewmodels.BankVerificationViewModel
 import com.rummytitans.sdk.cardgame.utils.*
 import com.rummytitans.sdk.cardgame.utils.permissions.PermissionActivity
@@ -22,6 +22,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
 import com.rummytitans.sdk.cardgame.widget.cropImage.CropImage
 import com.rummytitans.sdk.cardgame.widget.cropImage.CropImageView
@@ -261,7 +262,7 @@ class FragmentBankVerification : BaseFragment(), RequestVarificationInterface,
     override fun logoutUser() {
         showError(R.string.err_session_expired)
         activity?.finishAffinity()
-        startActivity(Intent(activity, RummyNewLoginActivity::class.java))
+        RummyTitanSDK.rummyCallback?.logoutUser()
     }
     private fun onPermissionReject(){
         showErrorMessageView("Please allow permission to upload document.")

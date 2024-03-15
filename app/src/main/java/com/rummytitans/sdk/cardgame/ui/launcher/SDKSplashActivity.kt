@@ -5,16 +5,20 @@ import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
 
 import com.rummytitans.sdk.cardgame.widget.MyDialog
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.text.TextUtils
 import android.util.Log
+import android.webkit.URLUtil
 import androidx.annotation.Keep
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.appsflyer.AppsFlyerLib
 import com.rummytitans.sdk.cardgame.*
 //import com.google.firebase.dynamiclinks.ktx.dynamicLinks
@@ -22,8 +26,10 @@ import com.rummytitans.sdk.cardgame.*
 //import com.google.firebase.messaging.FirebaseMessaging
 import com.rummytitans.sdk.cardgame.databinding.ActivitySplashSdkBinding
 import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
+import com.rummytitans.sdk.cardgame.models.VersionModelRummy
+import com.rummytitans.sdk.cardgame.ui.WebViewActivity
 import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
-import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
+
 import com.rummytitans.sdk.cardgame.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.Observable
@@ -49,10 +55,11 @@ class SDKSplashActivity : AppCompatActivity(),
         window.transparentStatusBar()
         super.onCreate(savedInstanceState)
         AppsFlyerLib.getInstance().sendPushNotificationData(this)
-        viewModel = ViewModelProvider(this).get(RummyLaunchViewModel::class.java)
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.activity_splash_sdk,null,false)
         setContentView(binding.root)
+        RummyTitanSDK.setAppContext(this)
         fetchAdvertisingId()
+        viewModel = ViewModelProvider(this).get(RummyLaunchViewModel::class.java)
         viewModel.navigator = this
         viewModel.myDialog= MyDialog(this)
 
@@ -61,7 +68,7 @@ class SDKSplashActivity : AppCompatActivity(),
         }
 
         viewModel.versionResponse.observe(this) {
-            redirectUser()
+            checkConditions(it)
             viewModel.prefs.let { pref ->
                 pref.splashImageUrl = it.SplashImage
             }
@@ -112,6 +119,40 @@ class SDKSplashActivity : AppCompatActivity(),
     private fun apiCall() {
         viewModel.fetchVersion()
     }
+
+    private fun checkConditions(model: VersionModelRummy) {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+            kotlin.runCatching {
+                (this as LifecycleOwner).lifecycleScope.launchWhenResumed {
+                    moveToNextScreen(model)
+                }
+            }.onFailure {
+                moveToNextScreen(model)
+            }
+        }else{
+            moveToNextScreen(model)
+        }
+    }
+
+    private fun moveToNextScreen(model: VersionModelRummy) {
+        when {
+            model.RunOnWeb -> {
+                if (TextUtils.isEmpty(model.WebURl) || !URLUtil.isValidUrl(model.WebURl)) return
+                startActivity(
+                    Intent(this, WebViewActivity::class.java)
+                        .putExtra(MyConstants.INTENT_PASS_WEB_URL, model.WebURl)
+                        .putExtra(
+                            MyConstants.INTENT_PASS_WEB_TITLE, getStringResource(R.string.app_name)
+                        )
+                )
+                finish()
+            }
+            else -> {
+                redirectUser()
+            }
+        }
+    }
+
     private fun redirectUser(){
         val loginModel: LoginResponseRummy? = viewModel.gson.fromJson(
             viewModel.prefs.loginResponse,
@@ -146,12 +187,12 @@ class SDKSplashActivity : AppCompatActivity(),
     override fun logoutUser() {
         showError(R.string.err_session_expired)
         finishAffinity()
-        startActivity(Intent(this, RummyNewLoginActivity::class.java))
+        RummyTitanSDK.rummyCallback?.logoutUser()
     }
 
     override fun onBackPressed() {
         viewModel.versionResponse.value?.let {
-            redirectUser()
+            checkConditions(it)
         }
         super.onBackPressed()
     }

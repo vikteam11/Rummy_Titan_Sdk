@@ -28,7 +28,7 @@ import com.rummytitans.sdk.cardgame.ui.base.BaseFragmentLocation
 import com.rummytitans.sdk.cardgame.ui.deeplink.DeepLinkActivityRummy
 import com.rummytitans.sdk.cardgame.ui.home.adapter.*
 import com.rummytitans.sdk.cardgame.ui.joinGame.JoinGameBottomSheet
-import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
+
 import com.rummytitans.sdk.cardgame.ui.wallet.OnOfferBannerClick
 import com.rummytitans.sdk.cardgame.utils.isMyTeamDeeplink
 import com.rummytitans.sdk.cardgame.utils.setOnClickListenerDebounce
@@ -333,7 +333,7 @@ class FragmentHome : BaseFragmentLocation(),
     override fun logoutUser() {
         showError(R.string.err_session_expired)
         activity?.finishAffinity()
-        startActivity(Intent(activity, RummyNewLoginActivity::class.java))
+        RummyTitanSDK.rummyCallback?.logoutUser()
     }
 
     override fun goBack() {

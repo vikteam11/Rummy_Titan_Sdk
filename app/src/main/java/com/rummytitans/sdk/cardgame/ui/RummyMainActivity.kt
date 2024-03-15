@@ -23,11 +23,9 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.gson.Gson
 import com.rummytitans.sdk.cardgame.R
 import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
-import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.sdk.cardgame.databinding.ActivityHomeRummyBinding
 import com.rummytitans.sdk.cardgame.databinding.NotificationBadgeRummyBinding
 import com.rummytitans.sdk.cardgame.games.rummy.RummyWebViewActivity
@@ -43,7 +41,6 @@ import com.rummytitans.sdk.cardgame.ui.profile.ProfileActivity
 import com.rummytitans.sdk.cardgame.ui.rakeback.RakeBackFragment
 import com.rummytitans.sdk.cardgame.ui.refer.FragmentShare
 import com.rummytitans.sdk.cardgame.ui.refer.ReferEarnActivity
-import com.rummytitans.sdk.cardgame.ui.wallet.FragmentCashBonus
 import com.rummytitans.sdk.cardgame.ui.wallet.FragmentWallet
 import com.rummytitans.sdk.cardgame.ui.wallet.RummyAddCashActivity
 import com.rummytitans.sdk.cardgame.ui.wallet.WalletNavigator
@@ -51,9 +48,7 @@ import com.rummytitans.sdk.cardgame.ui.wallet.adapter.WalletBonusAdapter
 import com.rummytitans.sdk.cardgame.utils.*
 import com.rummytitans.sdk.cardgame.utils.alertDialog.AlertdialogModel
 import com.rummytitans.sdk.cardgame.utils.bottomsheets.BottomSheetAlertDialog
-import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
-import javax.inject.Inject
 
 
 class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener,
@@ -74,14 +69,16 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        pokerData = intent?.getStringExtra(MyConstants.INTENT_POKER_DATA) ?: ""
-        gameID = intent?.getStringExtra(MyConstants.INTENT_GAME_DATA) ?: ""
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_home_rummy)
+        binding.lifecycleOwner = this
+
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.navigatorAct = this
         viewModel.navigator = this
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_home_rummy)
-        binding.lifecycleOwner = this
         binding.viewModel = viewModel
+
+        pokerData = intent?.getStringExtra(MyConstants.INTENT_POKER_DATA) ?: ""
+        gameID = intent?.getStringExtra(MyConstants.INTENT_GAME_DATA) ?: ""
 
         binding.navigation.setOnNavigationItemSelectedListener(this)
 
@@ -96,9 +93,6 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
         observeWalletData()
         initFragments()
 
-        //findViewById<View>(R.id.navigation_home).performClick()
-        viewModel.displayHome.set(true)
-        replaceFragment(FragmentHome())
         handleDeepLink()
         handleTabs()
         viewModel.analyticsHelper.fireEvent(
@@ -113,7 +107,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
     }
 
     private fun initUI() {
-        if(!RummyTitanSDK.getOption().displayProfileIcon){
+        if(!viewModel.prefs.getRummySdkOption().displayProfileIcon){
             binding.imgUser.visibility = View.GONE
             binding.imgBack.visibility = View.VISIBLE
         }else{
@@ -405,6 +399,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
     }
 
     private fun initFragments() {
+        viewModel.displayHome.set(true)
         replaceFragment(FragmentHome())
     }
 
@@ -444,9 +439,6 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
         if(fragment !is FragmentWallet && viewModel.walletBalance.value?.showWalletBadge()==true ){
             binding.inBadgeWallet.root.visibility = View.VISIBLE
         }
-        if(viewModel.displayHome.get()){
-            viewModel.getWalletDetail()
-        }
     }
 
     private fun observeWalletData(){
@@ -484,6 +476,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
                         return false
                 }
                 tabName = AnalyticsKey.Values.Home
+                viewModel.getWalletDetail()
                 replaceFragment(FragmentHome())
             }
             R.id.navigation_wallet -> {
@@ -572,7 +565,7 @@ class RummyMainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
     }
 
     private fun performBack() {
-        if(RummyTitanSDK.getOption().currentAppType  == MyConstants.APP_RUMMY){
+        if(viewModel.prefs.getRummySdkOption().currentAppType  == MyConstants.APP_RUMMY){
             if (doubleBackToExitPressedOnce) {
                 RummyTitanSDK.rummyCallback?.sdkFinish()
                 finishAffinity()

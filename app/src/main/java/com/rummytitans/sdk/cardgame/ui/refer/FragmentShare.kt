@@ -27,10 +27,11 @@ import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
 import com.rummytitans.sdk.cardgame.ui.contectList.ContactListActivity
-import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
+
 import com.rummytitans.sdk.cardgame.ui.refer.adapter.ReferContentAdapter
 import com.rummytitans.sdk.cardgame.utils.utilClasses.createReferLink
 import com.rummytitans.sdk.cardgame.utils.utilClasses.shareReferMessage
@@ -355,7 +356,7 @@ class FragmentShare : BaseFragment(), MainNavigationFragment,
     override fun logoutUser() {
         showError(R.string.err_session_expired)
         activity?.finishAffinity()
-        startActivity(Intent(activity, RummyNewLoginActivity::class.java))
+        RummyTitanSDK.rummyCallback?.logoutUser()
     }
 
     override fun getStringResource(resourseId: Int) = getString(resourseId)

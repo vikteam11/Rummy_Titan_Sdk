@@ -1079,12 +1079,6 @@ fun setUnderline(view: TextView, b: Boolean) {
     if (b) view.paintFlags = view.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 }
 
-@BindingAdapter("togglePassword")
-fun togglePasswordVisibillity(view: View, b: ObservableBoolean) {
-    view.rootView?.findViewById<EditText>(R.id.editPassword)?.transformationMethod =
-        if (b.get()) PasswordTransformationMethod.getInstance() else null
-}
-
 @BindingAdapter("TextInputTintColor")
 fun setUpperHintColor(textInputLayout: TextInputLayout, color: Int) {
     runCatching {
@@ -1096,16 +1090,6 @@ fun setUpperHintColor(textInputLayout: TextInputLayout, color: Int) {
     }.onFailure { print(it.message) }
 }
 
-
-@BindingAdapter("setTeamName")
-fun setTeamName(view: TextView, matchModel: MatchModel?) {
-    matchModel?.let {
-        val teamName = matchModel.teamName1 + " vs " + matchModel.teamName2
-        view.text = if (matchModel.Is3TC == true) teamName + " vs " + matchModel.teamName3
-        else teamName
-    }
-}
-
 @BindingAdapter(value = ["setDummyMobile", "isTwoWayVerification"], requireAll = true)
 fun setDummyMobileNumber(view: TextView, mobileNumber: String, isTwoWayVerification: Boolean) {
     runCatching {
@@ -1113,19 +1097,6 @@ fun setDummyMobileNumber(view: TextView, mobileNumber: String, isTwoWayVerificat
             if (isTwoWayVerification) mobileNumber.replaceRange(2, 8, "******") else mobileNumber
     }.onFailure { view.text = mobileNumber }
 }
-
-
-
-@BindingAdapter("setDecimalAmount","placeHolder","placeHolderAtStart", requireAll = false)
-fun setPlayerPoint(view: TextView?,point: Double?,placeHolder:String?="",setPlaceHolderAtStart:Boolean=false){
-   val pointStr =  DecimalFormat("##.##").format(point?:0.0)
-    view?.text =if (setPlaceHolderAtStart)
-         (if(!TextUtils.isEmpty(placeHolder))" $placeHolder" else "") + pointStr
-    else
-        pointStr + if(!TextUtils.isEmpty(placeHolder))" $placeHolder" else ""
-}
-
-
 @BindingAdapter("setAmountFormat","placeHolder","placeHolderAtStart", requireAll = false)
 fun setAmountFormat(view: TextView?,point: Double?,placeHolder:String?="",setPlaceHolderAtStart:Boolean=false){
     val amountStr =  DecimalFormat("##.##").format(point?:0.0)

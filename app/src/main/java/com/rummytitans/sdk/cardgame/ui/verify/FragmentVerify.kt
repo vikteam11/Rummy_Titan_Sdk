@@ -25,12 +25,13 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
+import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
 import com.rummytitans.sdk.cardgame.databinding.BottomsheetDialogEmailVerifyRummyBinding
 import com.rummytitans.sdk.cardgame.databinding.DialogAlertPopupRummyBinding
 import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
 import com.rummytitans.sdk.cardgame.ui.common.CommonFragmentActivity
-import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
+
 import com.rummytitans.sdk.cardgame.ui.profile.verify.ProfileVerificationItem
 import com.rummytitans.sdk.cardgame.ui.verify.adapter.ProfileVerifyItemAdapter
 import com.rummytitans.sdk.cardgame.utils.alertDialog.AlertdialogModel
@@ -370,7 +371,7 @@ class FragmentVerify : BaseFragment(), BaseNavigator, VerificationNavigator,
     override fun logoutUser() {
         showError(R.string.err_session_expired)
         activity?.finishAffinity()
-        startActivity(Intent(activity, RummyNewLoginActivity::class.java))
+        RummyTitanSDK.rummyCallback?.logoutUser()
     }
 
 

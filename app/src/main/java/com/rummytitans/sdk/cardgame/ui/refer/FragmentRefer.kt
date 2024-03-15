@@ -10,7 +10,7 @@ import com.rummytitans.sdk.cardgame.ui.base.BaseFragment
 import com.rummytitans.sdk.cardgame.ui.contectList.ContactListActivity
 import com.rummytitans.sdk.cardgame.ui.home.MainNavigationFragment
 import com.rummytitans.sdk.cardgame.ui.refer.adapter.ReferAdapter
-import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
+
 import com.rummytitans.sdk.cardgame.ui.refer.viewmodel.ItemReferModel
 import com.rummytitans.sdk.cardgame.ui.refer.viewmodel.ReferViewModel
 import com.rummytitans.sdk.cardgame.utils.*
@@ -33,6 +33,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
 import com.rummytitans.sdk.cardgame.utils.utilClasses.createReferLink
 import io.reactivex.Observable
@@ -245,7 +246,7 @@ class FragmentRefer : BaseFragment(), MainNavigationFragment,
         binding.swipeRefresh.isRefreshing = false
         showError(R.string.err_session_expired)
         activity?.finishAffinity()
-        startActivity(Intent(activity, RummyNewLoginActivity::class.java))
+        RummyTitanSDK.rummyCallback?.logoutUser()
     }
 
     override fun getStringResource(resourseId: Int) = getString(resourseId)

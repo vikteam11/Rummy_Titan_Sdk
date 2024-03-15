@@ -55,7 +55,7 @@ class RummyLaunchViewModel @Inject constructor(
             }
         }
 
-        val apis = getApiEndPointObject(RummyTitanSDK.getOption().gameSplashUrl)
+        val apis = getApiEndPointObject(prefs.appUrl2?:"")
 
         compositeDisposable.add(
             apis.getVersion(

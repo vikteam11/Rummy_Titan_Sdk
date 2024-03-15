@@ -29,8 +29,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
-import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
+
 import com.rummytitans.sdk.cardgame.ui.transactions.RecentTranscationAdapter
 import com.rummytitans.sdk.cardgame.utils.LocaleHelper
 import com.rummytitans.sdk.cardgame.utils.extensions.openPdfFile
@@ -213,7 +214,7 @@ class FragmentRecentTransactions : BaseFragment(), MainNavigationFragment,
         swipeRefresh?.isRefreshing = false
         showError(R.string.err_session_expired)
         activity?.finishAffinity()
-        startActivity(Intent(activity, RummyNewLoginActivity::class.java))
+        RummyTitanSDK.rummyCallback?.logoutUser()
     }
 
     override fun getStringResource(resourseId: Int) = getString(resourseId)

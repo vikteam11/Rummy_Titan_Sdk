@@ -19,7 +19,8 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
+import com.rummytitans.sdk.cardgame.RummyTitanSDK
+
 import kotlinx.android.synthetic.main.dialog_success_withdrawal_rummy.*
 import kotlinx.android.synthetic.main.fragment_unutilized_rummy.*
 import java.text.DecimalFormat
@@ -178,7 +179,7 @@ class FragmentUnutilized : BaseFragment(), MainNavigationFragment,
     override fun logoutUser() {
         showError(R.string.err_session_expired)
         activity?.finishAffinity()
-        startActivity(Intent(activity, RummyNewLoginActivity::class.java))
+        RummyTitanSDK.rummyCallback?.logoutUser()
     }
 
     override fun getStringResource(resourseId: Int) = getString(resourseId)

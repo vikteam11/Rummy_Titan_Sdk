@@ -231,12 +231,10 @@ class MainViewModel @Inject constructor(
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    //isAddressVerified = it.IsAddressVerified
                     if (it.Status) {
                         _walletBalance.value = it.Response
                         balance.set(it.Response.Balance)
                         gameTicket.set(it.Response.Tickets)
-
                     } else
                         balance.set("")
                 }, {

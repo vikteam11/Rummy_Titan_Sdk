@@ -25,7 +25,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import com.rummytitans.sdk.cardgame.ui.RummyMainActivity
 import com.rummytitans.sdk.cardgame.ui.WebChatActivity
-import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
+
 import javax.inject.Inject
 
 
@@ -101,7 +101,8 @@ class FragmentMore : BaseFragment(), MainNavigationFragment, MoreNavigator,
     override fun logoutUser() {
         showError(R.string.err_session_expired)
         activity?.finishAffinity()
-        startActivity(Intent(activity, RummyNewLoginActivity::class.java))
+        RummyTitanSDK.rummyCallback?.logoutUser()
+        RummyTitanSDK.rummyCallback?.sdkFinish()
     }
 
     override fun goBack() {

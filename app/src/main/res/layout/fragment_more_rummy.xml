@@ -420,7 +420,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="16dp"
-                    android:visibility="@{RummyTitanSDK.INSTANCE.option.isRummyApp ? View.VISIBLE :View.GONE}"
+                    android:visibility="@{viewmodel.prefs.rummySdkOption.isRummyApp ? View.VISIBLE :View.GONE}"
                     android:paddingVertical="12dp">
 
                     <ImageView

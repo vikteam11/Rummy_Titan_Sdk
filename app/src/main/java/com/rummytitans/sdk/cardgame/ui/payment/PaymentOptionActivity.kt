@@ -107,7 +107,9 @@ class PaymentOptionActivity : BaseActivity(), PaymentOptionNavigator, BottomShee
         rvPaymentOptions.adapter = mPaymentAdapter
 
         hyperInstance = HyperServices(this)
-        paymentHelper = JuspayPaymentHelper(this, hyperInstance, this,viewModel.connectionDetector)
+        paymentHelper = JuspayPaymentHelper(this, hyperInstance, this,
+            viewModel.connectionDetector,
+            viewModel.prefs)
 
         observeData()
 

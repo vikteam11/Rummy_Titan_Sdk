@@ -10,7 +10,7 @@ import com.rummytitans.sdk.cardgame.ui.base.BaseFragment
 import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
 import com.rummytitans.sdk.cardgame.ui.home.MainNavigationFragment
 import com.rummytitans.sdk.cardgame.ui.more.module.SupportViewModel
-import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
+
 import com.rummytitans.sdk.cardgame.utils.*
 import com.rummytitans.sdk.cardgame.widget.MyDialog
 import android.content.Intent
@@ -22,6 +22,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
+import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import javax.inject.Inject
 
 class FragmentSupport : BaseFragment(), MainNavigationFragment, SupportClick,
@@ -207,7 +208,7 @@ class FragmentSupport : BaseFragment(), MainNavigationFragment, SupportClick,
     override fun logoutUser() {
         showError(R.string.err_session_expired)
         activity?.finishAffinity()
-        startActivity(Intent(activity, RummyNewLoginActivity::class.java))
+        RummyTitanSDK.rummyCallback?.logoutUser()
     }
 
     fun fireEvent(s: String) {

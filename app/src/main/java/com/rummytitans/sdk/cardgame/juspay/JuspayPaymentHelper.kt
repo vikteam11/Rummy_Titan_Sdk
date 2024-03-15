@@ -1,28 +1,28 @@
 package com.rummytitans.sdk.cardgame.juspay
 
-import `in`.juspay.hypersdk.core.PaymentConstants
-import `in`.juspay.hypersdk.data.JuspayResponseHandler
-import `in`.juspay.hypersdk.ui.HyperPaymentsCallbackAdapter
-import `in`.juspay.services.HyperServices
-import com.rummytitans.sdk.cardgame.BuildConfig
-import com.rummytitans.sdk.cardgame.utils.ConnectionDetector
-import com.rummytitans.sdk.cardgame.widget.MyDialog
 import android.app.Activity
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import com.rummytitans.sdk.cardgame.R
-import com.rummytitans.sdk.cardgame.RummyTitanSDK
+import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
+import com.rummytitans.sdk.cardgame.utils.ConnectionDetector
 import com.rummytitans.sdk.cardgame.utils.MyConstants
+import com.rummytitans.sdk.cardgame.widget.MyDialog
+import `in`.juspay.hypersdk.core.PaymentConstants
+import `in`.juspay.hypersdk.data.JuspayResponseHandler
+import `in`.juspay.hypersdk.ui.HyperPaymentsCallbackAdapter
+import `in`.juspay.services.HyperServices
 import org.json.JSONArray
 import org.json.JSONObject
-import java.util.*
+import java.util.UUID
 
 class JuspayPaymentHelper(
     private val context: Context,
     private val hyperInstance: HyperServices,
     private val listener: PaymentListener,
-    private val connectionDetector: ConnectionDetector?
+    private val connectionDetector: ConnectionDetector?,
+    private val pref: SharedPreferenceStorageRummy,
 ) {
     private var requestId = ""
     private val JusPayService = "in.juspay.hyperapi"
@@ -72,8 +72,8 @@ class JuspayPaymentHelper(
         initiationPayload.put("requestId", requestId)
         initiationPayload.put(PaymentConstants.SERVICE, JusPayService)
 
-        val env = if(RummyTitanSDK.getOption().baseUrl == MyConstants.PRODUCTION_URL ||
-            RummyTitanSDK.getOption().baseUrl == MyConstants.N2_URL)
+        val env = if(pref.getRummySdkOption().baseUrl == MyConstants.PRODUCTION_URL ||
+            pref.getRummySdkOption().baseUrl == MyConstants.N2_URL)
             "prod"
         else
             "sandbox"

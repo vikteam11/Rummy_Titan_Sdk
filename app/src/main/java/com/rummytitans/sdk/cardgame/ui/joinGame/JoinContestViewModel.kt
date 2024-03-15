@@ -18,7 +18,6 @@ import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.rummytitans.sdk.cardgame.BuildConfig
-import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import com.rummytitans.sdk.cardgame.analytics.AnalyticsKey
 import com.rummytitans.sdk.cardgame.models.RummyLobbyModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -103,7 +102,7 @@ class JoinContestViewModel @Inject constructor(
         val json = JsonObject()
         json.addProperty("StakeId",lobby?.StakeId?:"")
         json.addProperty("app_version", BuildConfig.VERSION_CODE)
-        json.addProperty("app_type", RummyTitanSDK.getOption().currentAppType)
+        json.addProperty("app_type", prefs.getRummySdkOption().currentAppType)
         json.addProperty("State",prefs.userStateName)
         json.addProperty("DeviceType","Android")
         json.addProperty("DeviceID",prefs.androidId)

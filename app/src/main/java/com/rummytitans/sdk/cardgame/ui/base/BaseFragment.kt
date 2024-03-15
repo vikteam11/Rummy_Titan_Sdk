@@ -1,15 +1,12 @@
 package com.rummytitans.sdk.cardgame.ui.base
 
-import com.rummytitans.sdk.cardgame.R
-import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
-import com.rummytitans.sdk.cardgame.games.rummy.FragmentRummyWebViewer
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
-import androidx.appcompat.view.ContextThemeWrapper
 import androidx.fragment.app.Fragment
+import com.rummytitans.sdk.cardgame.R
 import com.rummytitans.sdk.cardgame.utils.LocaleHelper
 import com.tapadoo.alerter.Alerter
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,10 +21,10 @@ open class BaseFragment : Fragment() {
      fun changeActivityOrientation(target: Int) {
         requireActivity().apply {
             val orientation = resources.configuration.orientation
-            if (target == FragmentRummyWebViewer.PORTRAIT && orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            if (target == Configuration.ORIENTATION_PORTRAIT && orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 Log.i("jswrapper", "changeOrientation to PORTRAIT ")
                 requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-            } else if (target == FragmentRummyWebViewer.LANDSCAPE && orientation == Configuration.ORIENTATION_PORTRAIT) {
+            } else if (target == Configuration.ORIENTATION_LANDSCAPE && orientation == Configuration.ORIENTATION_PORTRAIT) {
                 Log.i("jswrapper", "changeOrientation to LANDSCAPE")
                 requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
             }

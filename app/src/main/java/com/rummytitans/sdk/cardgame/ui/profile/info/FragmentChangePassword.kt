@@ -18,7 +18,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import com.rummytitans.sdk.cardgame.databinding.FragmentChangePasswordRummyBinding
-import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
+
 import kotlinx.android.synthetic.main.fragment_change_password_rummy.*
 import javax.inject.Inject
 

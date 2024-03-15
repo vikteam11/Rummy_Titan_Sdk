@@ -21,7 +21,7 @@ import com.rummytitans.sdk.cardgame.RummyTitanSDK
 import com.rummytitans.sdk.cardgame.ui.WebViewActivity
 import com.rummytitans.sdk.cardgame.ui.common.CommonFragmentActivity
 import com.rummytitans.sdk.cardgame.ui.games.tickets.GamesTicketActivity
-import com.rummytitans.sdk.cardgame.ui.newlogin.RummyNewLoginActivity
+
 import com.rummytitans.sdk.cardgame.ui.profile.ProfileActivity
 import com.rummytitans.sdk.cardgame.ui.wallet.RummyAddCashActivity
 import com.rummytitans.sdk.cardgame.ui.wallet.withdrawal.WithdrawDetailActivity
@@ -131,7 +131,7 @@ class DeepLinkActivityRummy : BaseActivity(), DeepLinkNavigator {
     fun handleIntent(deepIntent: Intent?) {
         if (!viewModel.prefs.loginCompleted) {
             showError(R.string.err_login_account_to_continue)
-            startActivity(Intent(this, RummyNewLoginActivity::class.java))
+            RummyTitanSDK.rummyCallback?.logoutUser()
             finishAffinity()
             return
         }

@@ -64,8 +64,9 @@ android {
     productFlavors {
         playStoreApp {
             buildConfigField "int", "isPlayStoreApk", "1"
+            versionCode 70
+            versionName '1.7.0'
         }
-
     }
     sourceSets {
         main {
@@ -208,7 +209,7 @@ project.afterEvaluate {
                 setGroupId "com.rummytitans.sdk.cardgame"
 //setArtifactId artifactId
                 setArtifactId "titanSdk"
-                version "1.0.1"
+                version "1.0.2"
                 artifact bundlePlayStoreAppReleaseAar
                 //artifact("$buildDir/outputs/aar/app-playStoreApp-debug.aar")
                 pom.withXml {

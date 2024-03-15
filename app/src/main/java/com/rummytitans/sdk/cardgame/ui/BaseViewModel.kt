@@ -17,6 +17,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.rummytitans.sdk.cardgame.BuildConfig
 import com.rummytitans.sdk.cardgame.RummyTitanSDK
+import com.rummytitans.sdk.cardgame.data.SharedPreferenceStorageRummy
 import com.rummytitans.sdk.cardgame.ui.base.BaseNavigator
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -35,6 +36,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 abstract class BaseViewModel<N>(val conn: ConnectionDetector? = null) : ViewModel() {
 
@@ -62,6 +64,8 @@ abstract class BaseViewModel<N>(val conn: ConnectionDetector? = null) : ViewMode
 
     private var timerDisposable: Disposable? = null
 
+    @Inject
+    lateinit var preferences :SharedPreferenceStorageRummy
     companion object {
         var timerObserver: Disposable? = null
     }
@@ -316,7 +320,7 @@ abstract class BaseViewModel<N>(val conn: ConnectionDetector? = null) : ViewMode
             val requestBuilder =
                 request.newBuilder().url(url)
                     .addHeader("AppVersion", BuildConfig.VERSION_CODE.toString())
-                    .addHeader("AppType", "${RummyTitanSDK.getOption().currentAppType}")
+                    .addHeader("AppType", "${preferences.getRummySdkOption().currentAppType}")
                     .addHeader("GameType", "1")
                     .addHeader("IsPlayStore",BuildConfig.isPlayStoreApk.toString())
                     .addHeader("DeviceName", Build.MODEL)

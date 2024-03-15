@@ -9,6 +9,7 @@ import androidx.core.content.edit
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.rummytitans.sdk.cardgame.models.LoginResponseRummy
+import com.rummytitans.sdk.cardgame.sdk_callbacks.RummySdkOptions
 import com.rummytitans.sdk.cardgame.utils.MyConstants
 import com.rummytitans.sdk.cardgame.utils.MyConstants.FULL_TIME_TYPE
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -435,6 +436,10 @@ class SharedPreferenceStorageRummy @Inject constructor(@ApplicationContext conte
 
     fun registerOnPreferenceChangeListener(listener: OnSharedPreferenceChangeListener) {
         prefs.registerOnSharedPreferenceChangeListener(listener)
+    }
+
+    fun getRummySdkOption():RummySdkOptions{
+       return Gson().fromJson(sdkOptions, RummySdkOptions::class.java)
     }
 }
 
