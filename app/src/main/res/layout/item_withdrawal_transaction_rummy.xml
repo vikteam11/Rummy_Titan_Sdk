@@ -92,7 +92,7 @@
                         android:fontFamily="@font/rubik_regular"
                         android:text="@{viewModel.data.Title}"
                         android:textColor="@color/text_color8"
-                        android:textSize="10sp"
+                        android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/txtDateTime"
