@@ -56,7 +56,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/clView1"
@@ -135,7 +136,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/detailLayout"
                     android:padding="8dp"
-                    android:visibility="@{viewModel.data.showDetailView==1?View.VISIBLE:View.GONE}"
+                    android:visibility="@{viewModel.data.showDetailView==1?View.VISIBLE:View.GONE,default=gone}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
