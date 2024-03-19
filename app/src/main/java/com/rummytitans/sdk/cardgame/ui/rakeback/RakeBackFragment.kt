@@ -122,7 +122,7 @@ class RakeBackFragment :  BaseFragment(),RakeBackNavigator{
         val amountStr = "₹".plus(DecimalFormat("##.##")
             .format(viewModel.rakeBackDetail.value?.totalRakeBackAmount?:0.0))
         val desc = "Your earned rakeback amount $amountStr " +
-                "is redeemed into Rummy Ticket. To know more rakeback\nprogram, $clickAbleText"
+                "is redeemed into Rummy Ticket. To know more rakeback program, $clickAbleText"
         val indStart = desc.indexOf(clickAbleText)
         val indEnd = indStart+clickAbleText.length
         val span = SpannableString(desc)
